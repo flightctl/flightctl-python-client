@@ -1,12 +1,13 @@
 # DeviceConsole
 
+DeviceConsole represents the console connection information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**g_rpc_endpoint** | **str** |  | 
-**session_id** | **str** |  | 
+**g_rpc_endpoint** | **str** | The gRPC endpoint for the console connection. | 
+**session_id** | **str** | The session ID for the console connection. | 
 
 ## Example
 

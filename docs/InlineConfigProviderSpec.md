@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the config provider | 
-**inline** | [**List[FileSpec]**](FileSpec.md) |  | 
+**name** | **str** | The name of the config provider. | 
+**inline** | [**List[FileSpec]**](FileSpec.md) | A list of files to create on the device. | 
 
 ## Example
 

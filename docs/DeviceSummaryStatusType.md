@@ -1,5 +1,6 @@
 # DeviceSummaryStatusType
 
+Status of the device.
 
 ## Enum
 

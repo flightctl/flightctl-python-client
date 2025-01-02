@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The HTTP URL to call or clone from | 
+**url** | **str** | The HTTP URL to call or clone from. | 
 **type** | [**RepoSpecType**](RepoSpecType.md) |  | 
 **http_config** | [**HttpConfig**](HttpConfig.md) |  | 
 **validation_suffix** | **str** | URL suffix used only for validating access to the repository. Users might use the URL field as a root URL to be used by config sources adding suffixes. This will help with the validation of the http endpoint. | [optional] 

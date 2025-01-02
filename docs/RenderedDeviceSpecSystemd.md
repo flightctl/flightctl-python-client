@@ -1,11 +1,12 @@
 # RenderedDeviceSpecSystemd
 
+The systemd services to monitor.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**match_patterns** | **List[str]** |  | [optional] 
+**match_patterns** | **List[str]** | A list of match patterns. | [optional] 
 
 ## Example
 

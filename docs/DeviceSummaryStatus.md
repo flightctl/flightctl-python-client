@@ -1,5 +1,6 @@
 # DeviceSummaryStatus
 
+A summary of the health of the device hardware and operating system resources.
 
 ## Properties
 

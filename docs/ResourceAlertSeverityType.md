@@ -1,5 +1,6 @@
 # ResourceAlertSeverityType
 
+Severity of the alert.
 
 ## Enum
 

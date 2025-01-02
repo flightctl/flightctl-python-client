@@ -6,9 +6,9 @@ EnrollmentRequestSpec is a description of a EnrollmentRequest's target state.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**csr** | **str** | csr is a PEM-encoded PKCS#10 certificate signing request. | 
+**csr** | **str** | The PEM-encoded PKCS#10 certificate signing request. | 
 **device_status** | [**DeviceStatus**](DeviceStatus.md) |  | [optional] 
-**labels** | **Dict[str, str]** | A set of labels that the service will apply to this device when its enrollment is approved | [optional] 
+**labels** | **Dict[str, str]** | A set of labels that the service will apply to this device when its enrollment is approved. | [optional] 
 
 ## Example
 

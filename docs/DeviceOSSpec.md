@@ -1,11 +1,12 @@
 # DeviceOSSpec
 
+DeviceOSSpec describes the target OS for the device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | **str** | ostree image name or URL. | 
+**image** | **str** | The target OS image name or URL. | 
 
 ## Example
 

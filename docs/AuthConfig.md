@@ -6,8 +6,8 @@ Auth config.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_type** | **str** | Auth type | 
-**auth_url** | **str** | Auth URL | 
+**auth_type** | **str** | Auth type. | 
+**auth_url** | **str** | Auth URL. | 
 
 ## Example
 

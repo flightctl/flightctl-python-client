@@ -1,5 +1,6 @@
 # DeviceConfigStatus
 
+Current status of the device config.
 
 ## Properties
 

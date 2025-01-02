@@ -1,5 +1,6 @@
 # DeviceUpdatedStatus
 
+Current status of the device update.
 
 ## Properties
 

@@ -5,8 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**executable** | [**HookActionExecutableSpec**](HookActionExecutableSpec.md) |  | 
-**systemd** | [**HookActionSystemdSpec**](HookActionSystemdSpec.md) |  | 
+**var_if** | [**List[HookCondition]**](HookCondition.md) | Conditions that must be met for the action to be executed. | [optional] 
+**timeout** | **str** | The maximum duration allowed for the action to complete. The duration should be specified as a positive integer followed by a time unit. Supported time units are &#39;s&#39; for seconds, &#39;m&#39; for minutes, and &#39;h&#39; for hours. | [optional] 
+**run** | **str** | The command to be executed, including any arguments using standard shell syntax. This field supports multiple commands piped together, as if they were executed under a bash -c context. | 
+**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime. | [optional] 
+**work_dir** | **str** | The working directory to be used when running the command. | [optional] 
 
 ## Example
 

@@ -1,12 +1,13 @@
 # DeviceOSStatus
 
+Current status of the device OS.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image** | **str** | Version of the OS image. | 
-**image_digest** | **str** | The digest of the OS image (e.g. sha256:a0...) | 
+**image_digest** | **str** | The digest of the OS image (e.g. sha256:a0...). | 
 
 ## Example
 

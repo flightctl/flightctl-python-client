@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the config provider | 
+**name** | **str** | The name of the config provider. | 
 **git_ref** | [**GitConfigProviderSpecGitRef**](GitConfigProviderSpecGitRef.md) |  | 
 **secret_ref** | [**KubernetesSecretProviderSpecSecretRef**](KubernetesSecretProviderSpecSecretRef.md) |  | 
-**inline** | [**List[FileSpec]**](FileSpec.md) |  | 
+**inline** | [**List[FileSpec]**](FileSpec.md) | A list of files to create on the device. | 
 **http_ref** | [**HttpConfigProviderSpecHttpRef**](HttpConfigProviderSpecHttpRef.md) |  | 
 
 ## Example

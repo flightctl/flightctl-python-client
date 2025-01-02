@@ -1,5 +1,6 @@
 # DeviceIntegrityStatusSummaryType
 
+Status of the integrity of the device.
 
 ## Enum
 

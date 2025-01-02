@@ -1,13 +1,14 @@
 # SshConfig
 
+Configuration for SSH transport.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ssh_private_key** | **str** | Base64 encoded private SSH key | [optional] 
-**private_key_passphrase** | **str** | The passphrase for sshPrivateKey | [optional] 
-**skip_server_verification** | **bool** | Skip remote server verification | [optional] 
+**ssh_private_key** | **str** | Base64 encoded private SSH key. | [optional] 
+**private_key_passphrase** | **str** | The passphrase for sshPrivateKey. | [optional] 
+**skip_server_verification** | **bool** | Skip remote server verification. | [optional] 
 
 ## Example
 

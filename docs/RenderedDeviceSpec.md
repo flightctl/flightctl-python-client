@@ -1,18 +1,20 @@
 # RenderedDeviceSpec
 
+RenderedDeviceSpec describes the rendered and self-contained specification of a Device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rendered_version** | **str** |  | 
+**rendered_version** | **str** | Version of the rendered device spec. | 
+**update_policy** | [**DeviceUpdatePolicySpec**](DeviceUpdatePolicySpec.md) |  | [optional] 
 **os** | [**DeviceOSSpec**](DeviceOSSpec.md) |  | [optional] 
-**config** | **str** |  | [optional] 
-**applications** | [**List[RenderedApplicationSpec]**](RenderedApplicationSpec.md) |  | [optional] 
-**hooks** | [**DeviceHooksSpec**](DeviceHooksSpec.md) |  | [optional] 
+**config** | **str** | The configuration to apply, in Ignition format. | [optional] 
+**applications** | [**List[RenderedApplicationSpec]**](RenderedApplicationSpec.md) | The list of applications to deploy. | [optional] 
 **systemd** | [**RenderedDeviceSpecSystemd**](RenderedDeviceSpecSystemd.md) |  | [optional] 
 **resources** | [**List[ResourceMonitor]**](ResourceMonitor.md) | Array of resource monitor configurations. | [optional] 
 **console** | [**DeviceConsole**](DeviceConsole.md) |  | [optional] 
+**decommission** | [**DeviceDecommission**](DeviceDecommission.md) |  | [optional] 
 
 ## Example
 

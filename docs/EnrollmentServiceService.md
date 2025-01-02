@@ -1,12 +1,13 @@
 # EnrollmentServiceService
 
+EnrollmentServiceService contains information about connecting to a Flight Control enrollment service.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**certificate_authority_data** | **str** |  | 
-**server** | **str** |  | 
+**certificate_authority_data** | **str** | CertificateAuthorityData contains PEM-encoded certificate authority certificates. | 
+**server** | **str** | Server is the address of the Flight Control enrollment service (https://hostname:port). | 
 
 ## Example
 

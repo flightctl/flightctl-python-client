@@ -1,5 +1,6 @@
 # TemplateVersionSpec
 
+TemplateVersionSpec describes a version of a device template.
 
 ## Properties
 

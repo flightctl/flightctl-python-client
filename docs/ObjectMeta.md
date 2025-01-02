@@ -6,9 +6,9 @@ ObjectMeta is metadata that all persisted resources must have, which includes al
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**creation_timestamp** | **datetime** |  | [optional] 
-**deletion_timestamp** | **datetime** |  | [optional] 
-**name** | **str** | name of the object | [optional] 
+**creation_timestamp** | **datetime** | The time the object was created. | [optional] 
+**deletion_timestamp** | **datetime** | The time the object will be deleted. | [optional] 
+**name** | **str** | The name of the object. | [optional] 
 **labels** | **Dict[str, str]** | Map of string keys and values that can be used to organize and categorize (scope and select) objects. | [optional] 
 **generation** | **int** | A sequence number representing a specific generation of the desired state. Populated by the system. Read-only. | [optional] 
 **owner** | **str** | A resource that owns this resource, in \&quot;kind/name\&quot; format. | [optional] 
