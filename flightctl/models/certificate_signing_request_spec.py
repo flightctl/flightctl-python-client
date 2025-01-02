@@ -29,7 +29,7 @@ class CertificateSigningRequestSpec(BaseModel):
     """ # noqa: E501
     expiration_seconds: Optional[StrictInt] = Field(default=None, description="Requested duration of validity for the certificate.", alias="expirationSeconds")
     extra: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Extra attributes of the user that created the CSR, populated by the API server on creation and immutable.")
-    request: Union[StrictBytes, StrictStr] = Field(description="The base64-encoded PEM-encoded PKCS#10 CSR. Matches the spec.request field in a kubernetes CertificateSigningRequest resource.")
+    request: Optional[Union[StrictBytes, StrictStr]] = Field(default=None, description="The base64-encoded PEM-encoded PKCS#10 CSR. Matches the spec.request field in a kubernetes CertificateSigningRequest resource.")
     signer_name: StrictStr = Field(description="Indicates the requested signer, and is a qualified name.", alias="signerName")
     uid: Optional[StrictStr] = Field(default=None, description="UID of the user that created the CSR, populated by the API server on creation and immutable.")
     usages: Optional[List[StrictStr]] = Field(default=None, description="Usages specifies a set of key usages requested in the issued certificate.")

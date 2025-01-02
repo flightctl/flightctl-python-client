@@ -4822,7 +4822,6 @@ components:
           description: Name of the user that created the CSR, populated by the API server on creation and immutable.
           type: string
       required:
-        - request
         - signerName
       type: object
     CertificateSigningRequestStatus:
