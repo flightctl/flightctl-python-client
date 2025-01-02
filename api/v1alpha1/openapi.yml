@@ -3124,7 +3124,6 @@ components:
         - apiVersion
         - kind
         - metadata
-        - spec
       description: Repository represents a Git repository or an HTTP endpoint.
     HttpConfig:
       type: object
@@ -4467,9 +4466,6 @@ components:
       description: A summary of the devices in the fleet returned when fetching a single Fleet.
       required:
       - total
-      - applicationStatus
-      - summaryStatus
-      - updateStatus
       properties:
         total:
           type: integer
@@ -4713,12 +4709,10 @@ components:
       type: string
       description: Type of condition in CamelCase.
       enum:
-      - 'Approved'              # EnrollmentRequest
-      - 'Approved'              # CertificateSigningRequest
+      - 'Approved'              # EnrollmentRequest and CertificateSigningRequest
       - 'Denied'                # CertificateSigningRequest
       - 'Failed'                # CertificateSigningRequest
-      - 'Accessible'            # Repository
-      - 'Accessible'            # ResourceSync
+      - 'Accessible'            # Repository and ResourceSync
       - 'ResourceParsed'        # ResourceSync
       - 'Synced'                # ResourceSync
       - 'OverlappingSelectors'  # Fleet
@@ -4772,7 +4766,6 @@ components:
         - apiVersion
         - kind
         - metadata
-        - spec
       description: 'CertificateSigningRequest represents a request for a signed certificate from the CA.'
     CertificateSigningRequestList:
       type: object

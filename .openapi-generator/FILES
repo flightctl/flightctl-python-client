@@ -259,15 +259,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_authentication_api.py
-test/test_device_decommission.py
-test/test_device_decommission_target_type.py
-test/test_device_lifecycle_hook_type.py
-test/test_device_lifecycle_status.py
-test/test_device_lifecycle_status_type.py
-test/test_device_update_policy_spec.py
-test/test_hook_action_run.py
-test/test_hook_condition.py
-test/test_hook_condition_path_op.py
-test/test_update_schedule.py
 tox.ini

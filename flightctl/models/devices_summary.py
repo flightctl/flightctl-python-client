@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,9 +28,9 @@ class DevicesSummary(BaseModel):
     A summary of the devices in the fleet returned when fetching a single Fleet.
     """ # noqa: E501
     total: StrictInt = Field(description="The total number of devices in the fleet.")
-    application_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"application\" status.", alias="applicationStatus")
-    summary_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"summary\" status.", alias="summaryStatus")
-    update_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"updated\" status.", alias="updateStatus")
+    application_status: Optional[Dict[str, StrictInt]] = Field(default=None, description="A breakdown of the devices in the fleet by \"application\" status.", alias="applicationStatus")
+    summary_status: Optional[Dict[str, StrictInt]] = Field(default=None, description="A breakdown of the devices in the fleet by \"summary\" status.", alias="summaryStatus")
+    update_status: Optional[Dict[str, StrictInt]] = Field(default=None, description="A breakdown of the devices in the fleet by \"updated\" status.", alias="updateStatus")
     __properties: ClassVar[List[str]] = ["total", "applicationStatus", "summaryStatus", "updateStatus"]
 
     model_config = ConfigDict(
