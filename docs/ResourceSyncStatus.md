@@ -1,13 +1,13 @@
 # ResourceSyncStatus
 
-ResourceSyncStatus represents information about the status of a resourcesync
+ResourceSyncStatus represents information about the status of a ResourceSync.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**observed_commit** | **str** | The last commit hash that was synced  | [optional] 
-**observed_generation** | **int** | The last generation that was synced  | [optional] 
+**observed_commit** | **str** | The last commit hash that was synced. | [optional] 
+**observed_generation** | **int** | The last generation that was synced. | [optional] 
 **conditions** | [**List[Condition]**](Condition.md) | Current state of a resourcesync. | 
 
 ## Example

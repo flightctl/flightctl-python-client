@@ -1,5 +1,6 @@
 # ApplicationsSummaryStatusType
 
+Status of all applications on the device.
 
 ## Enum
 

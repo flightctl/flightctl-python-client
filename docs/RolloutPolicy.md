@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **disruption_allowance** | [**DisruptionAllowance**](DisruptionAllowance.md) |  | [optional] 
 **device_selection** | [**RolloutDeviceSelection**](RolloutDeviceSelection.md) |  | [optional] 
 **success_threshold** | **str** | Percentage is the string format representing percentage string. | [optional] 
-**default_update_timeout** | **str** | The maximum duration allowed for the action to complete. The duration should be specified as a positive integer followed by a time unit. Supported time units are: - &#39;s&#39; for seconds - &#39;m&#39; for minutes - &#39;h&#39; for hours - &#39;d&#39; for days  | [optional] 
+**default_update_timeout** | **str** | The maximum duration allowed for the action to complete. The duration should be specified as a positive integer followed by a time unit. Supported time units are: &#x60;s&#x60; for seconds, &#x60;m&#x60; for minutes, &#x60;h&#x60; for hours. | [optional] [default to '0s']
 
 ## Example
 

@@ -1,5 +1,6 @@
 # ConditionStatus
 
+Status of the condition, one of True, False, Unknown.
 
 ## Enum
 

@@ -1,13 +1,14 @@
 # RenderedApplicationSpec
 
+RenderedApplicationSpec describes the rendered and self-contained specification of an application.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime | [optional] 
-**name** | **str** |  | [optional] 
-**image** | **str** | Reference to the container image for the application package | 
+**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime. | [optional] 
+**name** | **str** | An application name. | [optional] 
+**image** | **str** | Reference to the container image for the application package. | 
 
 ## Example
 

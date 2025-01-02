@@ -6,7 +6,7 @@ BatchSequence defines the list of batches to be executed in sequence.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sequence** | [**List[Batch]**](Batch.md) |  | [optional] 
+**sequence** | [**List[Batch]**](Batch.md) | A list of batch definitions. | [optional] 
 
 ## Example
 

@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enrollment_service** | [**EnrollmentService**](EnrollmentService.md) |  | 
-**grpc_management_endpoint** | **str** |  | 
 
 ## Example
 

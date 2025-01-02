@@ -1,5 +1,6 @@
 # DeviceIntegrityStatusSummary
 
+Summary status of the integrity of the device.
 
 ## Properties
 

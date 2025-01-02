@@ -1,13 +1,14 @@
 # DeviceSpec
 
+DeviceSpec describes a device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**update_policy** | [**DeviceUpdatePolicySpec**](DeviceUpdatePolicySpec.md) |  | [optional] 
 **os** | [**DeviceOSSpec**](DeviceOSSpec.md) |  | [optional] 
 **config** | [**List[ConfigProviderSpec]**](ConfigProviderSpec.md) | List of config providers. | [optional] 
-**hooks** | [**DeviceHooksSpec**](DeviceHooksSpec.md) |  | [optional] 
 **applications** | [**List[ApplicationSpec]**](ApplicationSpec.md) | List of applications. | [optional] 
 **systemd** | [**DeviceSpecSystemd**](DeviceSpecSystemd.md) |  | [optional] 
 **resources** | [**List[ResourceMonitor]**](ResourceMonitor.md) | Array of resource monitor configurations. | [optional] 

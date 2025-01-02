@@ -1,12 +1,13 @@
 # DeviceApplicationsSummaryStatus
 
+A summary of the health of applications on the device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**ApplicationsSummaryStatusType**](ApplicationsSummaryStatusType.md) |  | 
-**info** | **str** | Human readable information detailing the last system application transition. | [optional] 
+**info** | **str** | Human readable information detailing the last application transition. | [optional] 
 
 ## Example
 

@@ -1,13 +1,13 @@
 # CertificateSigningRequestStatus
 
-Indicates approval/denial/failure status of the CSR, and contains the issued certifiate if any exists
+Indicates approval/denial/failure status of the CSR, and contains the issued certifiate if any exists.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**certificate** | **bytearray** | The issued signed certificate, immutable once populated | [optional] 
-**conditions** | [**List[Condition]**](Condition.md) | Conditions applied to the request. Known conditions are Approved, Denied, and Failed | 
+**certificate** | **bytearray** | The issued signed certificate, immutable once populated. | [optional] 
+**conditions** | [**List[Condition]**](Condition.md) | Conditions applied to the request. Known conditions are Approved, Denied, and Failed. | 
 
 ## Example
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the config provider | 
+**name** | **str** | The name of the config provider. | 
 **http_ref** | [**HttpConfigProviderSpecHttpRef**](HttpConfigProviderSpecHttpRef.md) |  | 
 
 ## Example

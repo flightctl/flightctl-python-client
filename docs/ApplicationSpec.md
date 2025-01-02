@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime | [optional] 
-**name** | **str** | The name of the application | [optional] 
-**image** | **str** | Reference to the container image for the application package | 
+**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime. | [optional] 
+**name** | **str** | The name of the application. | [optional] 
+**image** | **str** | Reference to the container image for the application package. | 
 
 ## Example
 
