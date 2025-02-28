@@ -1,6 +1,6 @@
 # RepoSpecType
 
-RepoSpecType is the type of the repository
+RepoSpecType is the type of the repository.
 
 ## Enum
 

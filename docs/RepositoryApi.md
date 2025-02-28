@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-create a repository
+Create a Repository resource.
 
 ### Example
 
@@ -79,7 +79,9 @@ No authorization required
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **409** | StatusConflict |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -88,7 +90,7 @@ No authorization required
 
 
 
-delete a collection of Repositories
+Delete Repository resources.
 
 ### Example
 
@@ -144,6 +146,8 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -152,7 +156,7 @@ No authorization required
 
 
 
-delete a repository
+Delete a Repository resource.
 
 ### Example
 
@@ -174,7 +178,7 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.RepositoryApi(api_client)
-    name = 'name_example' # str | name of the repository
+    name = 'name_example' # str | The name of the Repository resource to delete.
 
     try:
         api_response = api_instance.delete_repository(name)
@@ -191,7 +195,7 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the repository | 
+ **name** | **str**| The name of the Repository resource to delete. | 
 
 ### Return type
 
@@ -212,16 +216,18 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_repositories**
-> RepositoryList list_repositories(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, sort_by=sort_by, sort_order=sort_order)
+> RepositoryList list_repositories(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
 
 
 
-list repositories
+List Repository resources.
 
 ### Example
 
@@ -229,7 +235,6 @@ list repositories
 ```python
 import flightctl
 from flightctl.models.repository_list import RepositoryList
-from flightctl.models.sort_order import SortOrder
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -246,13 +251,11 @@ with flightctl.ApiClient(configuration) as api_client:
     api_instance = flightctl.RepositoryApi(api_client)
     var_continue = 'var_continue_example' # str | An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response. (optional)
     label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
-    field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields, supports '=', '==', and '!='.(e.g. key1=value1,key2!=value2). (optional)
+    field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\"). (optional)
     limit = 56 # int | The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. (optional)
-    sort_by = 'metadata.name' # str | Specifies the field to sort by. (optional)
-    sort_order = Asc # SortOrder | Specifies the sort order. (optional) (default to Asc)
 
     try:
-        api_response = api_instance.list_repositories(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, sort_by=sort_by, sort_order=sort_order)
+        api_response = api_instance.list_repositories(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
         print("The response of RepositoryApi->list_repositories:\n")
         pprint(api_response)
     except Exception as e:
@@ -268,10 +271,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **var_continue** | **str**| An optional parameter to query more results from the server. The value of the paramter must match the value of the &#39;continue&#39; field in the previous list response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
- **field_selector** | **str**| A selector to restrict the list of returned objects by their fields, supports &#39;&#x3D;&#39;, &#39;&#x3D;&#x3D;&#39;, and &#39;!&#x3D;&#39;.(e.g. key1&#x3D;value1,key2!&#x3D;value2). | [optional] 
+ **field_selector** | **str**| A selector to restrict the list of returned objects by their fields, supporting operators like &#39;&#x3D;&#39;, &#39;&#x3D;&#x3D;&#39;, and &#39;!&#x3D;&#39; (e.g., \&quot;key1&#x3D;value1,key2!&#x3D;value2\&quot;). | [optional] 
  **limit** | **int**| The maximum number of results returned in the list response. The server will set the &#39;continue&#39; field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. | [optional] 
- **sort_by** | **str**| Specifies the field to sort by. | [optional] 
- **sort_order** | [**SortOrder**](.md)| Specifies the sort order. | [optional] [default to Asc]
 
 ### Return type
 
@@ -293,15 +294,17 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_repository**
-> Repository patch_repository(name, patch_request_inner=patch_request_inner)
+> Repository patch_repository(name, patch_request_inner)
 
 
 
-Patches the specified repository
+Patch a Repository resource.
 
 ### Example
 
@@ -324,11 +327,11 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.RepositoryApi(api_client)
-    name = 'name_example' # str | name of the repository
-    patch_request_inner = [flightctl.PatchRequestInner()] # List[PatchRequestInner] |  (optional)
+    name = 'name_example' # str | The name of the Repository resource to patch.
+    patch_request_inner = [flightctl.PatchRequestInner()] # List[PatchRequestInner] | 
 
     try:
-        api_response = api_instance.patch_repository(name, patch_request_inner=patch_request_inner)
+        api_response = api_instance.patch_repository(name, patch_request_inner)
         print("The response of RepositoryApi->patch_repository:\n")
         pprint(api_response)
     except Exception as e:
@@ -342,8 +345,8 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the repository | 
- **patch_request_inner** | [**List[PatchRequestInner]**](PatchRequestInner.md)|  | [optional] 
+ **name** | **str**| The name of the Repository resource to patch. | 
+ **patch_request_inner** | [**List[PatchRequestInner]**](PatchRequestInner.md)|  | 
 
 ### Return type
 
@@ -365,8 +368,10 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -375,7 +380,7 @@ No authorization required
 
 
 
-read the specified repository
+Get a Repository resource.
 
 ### Example
 
@@ -397,7 +402,7 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.RepositoryApi(api_client)
-    name = 'name_example' # str | name of the repository
+    name = 'name_example' # str | The name of the Repository resource to get.
 
     try:
         api_response = api_instance.read_repository(name)
@@ -414,7 +419,7 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the repository | 
+ **name** | **str**| The name of the Repository resource to get. | 
 
 ### Return type
 
@@ -435,7 +440,9 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -444,7 +451,7 @@ No authorization required
 
 
 
-replace the specified repository
+Update a Repository resource.
 
 ### Example
 
@@ -466,7 +473,7 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.RepositoryApi(api_client)
-    name = 'name_example' # str | name of the repository
+    name = 'name_example' # str | The name of the Repository resource to update.
     repository = flightctl.Repository() # Repository | 
 
     try:
@@ -484,7 +491,7 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the repository | 
+ **name** | **str**| The name of the Repository resource to update. | 
  **repository** | [**Repository**](Repository.md)|  | 
 
 ### Return type
@@ -508,8 +515,10 @@ No authorization required
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

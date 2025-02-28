@@ -1,14 +1,13 @@
 # EnrollmentRequestApproval
 
+EnrollmentRequestApproval contains information about the approval of a device enrollment request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**labels** | **Dict[str, str]** | labels is a set of labels to apply to the device. | [optional] 
-**approved** | **bool** | approved indicates whether the request has been approved. | 
-**approved_by** | **str** | approvedBy is the name of the approver. | [optional] 
-**approved_at** | **datetime** | approvedAt is the time at which the request was approved. | [optional] 
+**labels** | **Dict[str, str]** | A set of labels to apply to the device. | [optional] 
+**approved** | **bool** | Indicates whether the request has been approved. | 
 
 ## Example
 

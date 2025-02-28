@@ -1,11 +1,12 @@
 # DeviceConfigStatus
 
+Current status of the device config.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rendered_version** | **str** | Version of the device rendered config. | 
+**rendered_version** | **str** | Rendered version of the device config. | 
 
 ## Example
 

@@ -1,6 +1,6 @@
 # RepositoryStatus
 
-RepositoryStatus represents information about the status of a repository. Status may trail the actual state of a repository.
+RepositoryStatus represents information about the status of a repository.
 
 ## Properties
 

@@ -1,12 +1,13 @@
 # EnrollmentServiceAuth
 
+EnrollmentServiceAuth contains the client authentication information for a Flight Control enrollment service.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_certificate_data** | **str** |  | 
-**client_key_data** | **str** |  | 
+**client_certificate_data** | **str** | ClientCertificateData contains PEM-encoded data from a client cert file for TLS. | 
+**client_key_data** | **str** | ClientKeyData contains PEM-encoded data from a client key file for TLS. | 
 
 ## Example
 

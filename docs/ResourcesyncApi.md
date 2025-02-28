@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-create a resourcesync
+Create a ResourceSync resource.
 
 ### Example
 
@@ -79,7 +79,9 @@ No authorization required
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **409** | StatusConflict |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -88,7 +90,7 @@ No authorization required
 
 
 
-delete a resourcesync
+Delete a ResourceSync resource.
 
 ### Example
 
@@ -110,7 +112,7 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.ResourcesyncApi(api_client)
-    name = 'name_example' # str | name of the resourcesync
+    name = 'name_example' # str | The name of the ResourceSync resource to delete.
 
     try:
         api_response = api_instance.delete_resource_sync(name)
@@ -127,7 +129,7 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the resourcesync | 
+ **name** | **str**| The name of the ResourceSync resource to delete. | 
 
 ### Return type
 
@@ -148,7 +150,9 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -157,7 +161,7 @@ No authorization required
 
 
 
-delete a collection of ResourceSync
+Delete ResourceSync resources.
 
 ### Example
 
@@ -213,15 +217,17 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_resource_sync**
-> ResourceSyncList list_resource_sync(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, repository=repository, sort_by=sort_by, sort_order=sort_order)
+> ResourceSyncList list_resource_sync(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
 
 
 
-list resourcesync
+List ResourceSync resources.
 
 ### Example
 
@@ -229,7 +235,6 @@ list resourcesync
 ```python
 import flightctl
 from flightctl.models.resource_sync_list import ResourceSyncList
-from flightctl.models.sort_order import SortOrder
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -246,14 +251,11 @@ with flightctl.ApiClient(configuration) as api_client:
     api_instance = flightctl.ResourcesyncApi(api_client)
     var_continue = 'var_continue_example' # str | An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response. (optional)
     label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. Defaults to everything. (optional)
-    field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\"). For a full list of operators and examples, refer to the documentation. (optional)
+    field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\"). (optional)
     limit = 56 # int | The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. (optional)
-    repository = 'repository_example' # str | The name of the repository to filter results by. (optional)
-    sort_by = 'metadata.name' # str | Specifies the field to sort by. (optional)
-    sort_order = Asc # SortOrder | Specifies the sort order. (optional) (default to Asc)
 
     try:
-        api_response = api_instance.list_resource_sync(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, repository=repository, sort_by=sort_by, sort_order=sort_order)
+        api_response = api_instance.list_resource_sync(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
         print("The response of ResourcesyncApi->list_resource_sync:\n")
         pprint(api_response)
     except Exception as e:
@@ -269,11 +271,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **var_continue** | **str**| An optional parameter to query more results from the server. The value of the paramter must match the value of the &#39;continue&#39; field in the previous list response. | [optional] 
  **label_selector** | **str**| A selector to restrict the list of returned objects by their labels. Defaults to everything. | [optional] 
- **field_selector** | **str**| A selector to restrict the list of returned objects by their fields, supporting operators like &#39;&#x3D;&#39;, &#39;&#x3D;&#x3D;&#39;, and &#39;!&#x3D;&#39; (e.g., \&quot;key1&#x3D;value1,key2!&#x3D;value2\&quot;). For a full list of operators and examples, refer to the documentation. | [optional] 
+ **field_selector** | **str**| A selector to restrict the list of returned objects by their fields, supporting operators like &#39;&#x3D;&#39;, &#39;&#x3D;&#x3D;&#39;, and &#39;!&#x3D;&#39; (e.g., \&quot;key1&#x3D;value1,key2!&#x3D;value2\&quot;). | [optional] 
  **limit** | **int**| The maximum number of results returned in the list response. The server will set the &#39;continue&#39; field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. | [optional] 
- **repository** | **str**| The name of the repository to filter results by. | [optional] 
- **sort_by** | **str**| Specifies the field to sort by. | [optional] 
- **sort_order** | [**SortOrder**](.md)| Specifies the sort order. | [optional] [default to Asc]
 
 ### Return type
 
@@ -295,15 +294,17 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_resource_sync**
-> ResourceSync patch_resource_sync(name, patch_request_inner=patch_request_inner)
+> ResourceSync patch_resource_sync(name, patch_request_inner)
 
 
 
-Patches the specified resourcesync
+Patch a ResourceSync resource.
 
 ### Example
 
@@ -326,11 +327,11 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.ResourcesyncApi(api_client)
-    name = 'name_example' # str | name of the resourcesync
-    patch_request_inner = [flightctl.PatchRequestInner()] # List[PatchRequestInner] |  (optional)
+    name = 'name_example' # str | The name of the ResourceSync resource to patch.
+    patch_request_inner = [flightctl.PatchRequestInner()] # List[PatchRequestInner] | 
 
     try:
-        api_response = api_instance.patch_resource_sync(name, patch_request_inner=patch_request_inner)
+        api_response = api_instance.patch_resource_sync(name, patch_request_inner)
         print("The response of ResourcesyncApi->patch_resource_sync:\n")
         pprint(api_response)
     except Exception as e:
@@ -344,8 +345,8 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the resourcesync | 
- **patch_request_inner** | [**List[PatchRequestInner]**](PatchRequestInner.md)|  | [optional] 
+ **name** | **str**| The name of the ResourceSync resource to patch. | 
+ **patch_request_inner** | [**List[PatchRequestInner]**](PatchRequestInner.md)|  | 
 
 ### Return type
 
@@ -367,8 +368,10 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -377,7 +380,7 @@ No authorization required
 
 
 
-read the specified resourcesync
+Get a ResourceSync resource.
 
 ### Example
 
@@ -399,7 +402,7 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.ResourcesyncApi(api_client)
-    name = 'name_example' # str | name of the resourcesync
+    name = 'name_example' # str | The name of the ResourceSync resource to get.
 
     try:
         api_response = api_instance.read_resource_sync(name)
@@ -416,7 +419,7 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the resourcesync | 
+ **name** | **str**| The name of the ResourceSync resource to get. | 
 
 ### Return type
 
@@ -437,7 +440,9 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -446,7 +451,7 @@ No authorization required
 
 
 
-replace the specified resourcesync
+Update a ResourceSync resource.
 
 ### Example
 
@@ -468,7 +473,7 @@ configuration = flightctl.Configuration(
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.ResourcesyncApi(api_client)
-    name = 'name_example' # str | name of the resourcesync
+    name = 'name_example' # str | The name of the ResourceSync resource to update.
     resource_sync = flightctl.ResourceSync() # ResourceSync | 
 
     try:
@@ -486,7 +491,7 @@ with flightctl.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| name of the resourcesync | 
+ **name** | **str**| The name of the ResourceSync resource to update. | 
  **resource_sync** | [**ResourceSync**](ResourceSync.md)|  | 
 
 ### Return type
@@ -510,8 +515,10 @@ No authorization required
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
+**503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,13 +1,14 @@
 # KubernetesSecretProviderSpecSecretRef
 
+The reference to a Kubernetes secret.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**namespace** | **str** |  | 
-**mount_path** | **str** |  | 
+**name** | **str** | The name of the secret. | 
+**namespace** | **str** | The namespace of the secret. | 
+**mount_path** | **str** | Path in the device&#39;s file system at which the secret should be mounted. | 
 
 ## Example
 

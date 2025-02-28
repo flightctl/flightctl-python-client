@@ -1,18 +1,21 @@
 # TemplateVersionStatus
 
+TemplateVersionStatus represents information about the status of a template version.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**os** | [**DeviceOSSpec**](DeviceOSSpec.md) |  | [optional] 
+**update_policy** | [**DeviceUpdatePolicySpec**](DeviceUpdatePolicySpec.md) |  | [optional] 
+**os** | [**DeviceOsSpec**](DeviceOsSpec.md) |  | [optional] 
 **config** | [**List[ConfigProviderSpec]**](ConfigProviderSpec.md) | List of config providers. | [optional] 
-**hooks** | [**DeviceHooksSpec**](DeviceHooksSpec.md) |  | [optional] 
-**applications** | [**List[ApplicationSpec]**](ApplicationSpec.md) | List of applications. | [optional] 
+**applications** | [**List[ApplicationProviderSpec]**](ApplicationProviderSpec.md) | List of application providers. | [optional] 
 **systemd** | [**DeviceSpecSystemd**](DeviceSpecSystemd.md) |  | [optional] 
 **resources** | [**List[ResourceMonitor]**](ResourceMonitor.md) | Array of resource monitor configurations. | [optional] 
-**updated_at** | **datetime** |  | [optional] 
-**conditions** | [**List[Condition]**](Condition.md) | Current state of the device. | [optional] 
+**consoles** | [**List[DeviceConsole]**](DeviceConsole.md) | The list of active console sessions. | [optional] 
+**decommissioning** | [**DeviceDecommission**](DeviceDecommission.md) |  | [optional] 
+**updated_at** | **datetime** | The time at which the template was last updated. | [optional] 
+**conditions** | [**List[Condition]**](Condition.md) | Current state of the device. | 
 
 ## Example
 

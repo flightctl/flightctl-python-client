@@ -1,5 +1,6 @@
 # EnrollmentService
 
+EnrollmentService contains information about how to communicate with a Flight Control enrollment service.
 
 ## Properties
 
@@ -7,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **authentication** | [**EnrollmentServiceAuth**](EnrollmentServiceAuth.md) |  | 
 **service** | [**EnrollmentServiceService**](EnrollmentServiceService.md) |  | 
-**enrollment_ui_endpoint** | **str** |  | 
+**enrollment_ui_endpoint** | **str** | The URL of the UI that the agent uses to print the QR code and link for enrolling the device. | 
 
 ## Example
 

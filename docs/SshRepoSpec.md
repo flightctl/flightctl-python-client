@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The SSH Git repository URL to clone from | 
+**url** | **str** | The SSH Git repository URL to clone from. | 
 **type** | [**RepoSpecType**](RepoSpecType.md) |  | 
 **ssh_config** | [**SshConfig**](SshConfig.md) |  | 
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **architecture** | **str** | The Architecture reported by the device. | 
 **boot_id** | **str** | Boot ID reported by the device. | 
 **operating_system** | **str** | The Operating System reported by the device. | 
+**agent_version** | **str** | The Agent version. | 
 
 ## Example
 

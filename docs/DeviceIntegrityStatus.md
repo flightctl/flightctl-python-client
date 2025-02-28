@@ -1,11 +1,13 @@
 # DeviceIntegrityStatus
 
+Summary status of the integrity of the device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**summary** | [**DeviceIntegrityStatusSummary**](DeviceIntegrityStatusSummary.md) |  | 
+**status** | [**DeviceIntegrityStatusSummaryType**](DeviceIntegrityStatusSummaryType.md) |  | 
+**info** | **str** | Human readable information about the last integrity transition. | [optional] 
 
 ## Example
 

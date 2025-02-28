@@ -1,5 +1,6 @@
 # FleetSpecTemplate
 
+The template for the devices in the fleet.
 
 ## Properties
 

@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** |  | 
-**operator** | **str** |  | 
-**values** | **List[str]** |  | [optional] 
+**key** | **str** | The label key that the selector applies to. | 
+**operator** | **str** | The operation to apply when matching. | 
+**values** | **List[str]** | The list of values to match. | [optional] 
 
 ## Example
 

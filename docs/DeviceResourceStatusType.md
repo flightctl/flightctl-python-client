@@ -1,5 +1,6 @@
 # DeviceResourceStatusType
 
+The types of resource statuses.
 
 ## Enum
 

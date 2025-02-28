@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **observed_generation** | **int** | The .metadata.generation that the condition was set based upon. | [optional] 
 **last_transition_time** | **datetime** | The last time the condition transitioned from one status to another. | 
 **message** | **str** | Human readable message indicating details about last transition. | 
-**reason** | **str** | (brief) reason for the condition&#39;s last transition. | 
+**reason** | **str** | A (brief) reason for the condition&#39;s last transition. | 
 
 ## Example
 
