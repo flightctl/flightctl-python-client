@@ -31,7 +31,6 @@ class ConditionType(str, Enum):
     DENIED = 'Denied'
     FAILED = 'Failed'
     ACCESSIBLE = 'Accessible'
-    ACCESSIBLE = 'Accessible'
     RESOURCEPARSED = 'ResourceParsed'
     SYNCED = 'Synced'
     OVERLAPPINGSELECTORS = 'OverlappingSelectors'
