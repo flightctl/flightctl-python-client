@@ -85,9 +85,9 @@ class DevicesSummary(BaseModel):
 
         _obj = cls.model_validate({
             "total": obj.get("total"),
-            "applicationStatus": obj.get("applicationStatus"),
-            "summaryStatus": obj.get("summaryStatus"),
-            "updateStatus": obj.get("updateStatus")
+            "applicationStatus": obj.get("applicationStatus") or {},
+            "summaryStatus": obj.get("summaryStatus") or {},
+            "updateStatus": obj.get("updateStatus") or {}
         })
         return _obj
 
