@@ -89,8 +89,8 @@ class CertificateSigningRequestSpec(BaseModel):
         _obj = cls.model_validate({
             "expirationSeconds": obj.get("expirationSeconds"),
             "extra": obj.get("extra"),
-            "request": obj.get("request") if isinstance(obj.get("request"), (bytes, str)) else b"",
-            "signerName": obj.get("signerName") or "",
+            "request": obj.get("request"),
+            "signerName": obj.get("signerName"),
             "uid": obj.get("uid"),
             "usages": obj.get("usages"),
             "username": obj.get("username")
