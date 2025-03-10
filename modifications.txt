@@ -15,3 +15,8 @@ This document outlines the required changes to the API specification to address 
 
     Problem: The request and signerName fields in the CertificateSigningRequestSpec are sometimes returned as null but are not marked as nullable.
     Solution: Add nullable: true to both fields to support null values.
+
+4. Nullable Fields in Repository (EDM-850)
+
+    Problem: The RepositorySpecfieldin the Repository is sometimes returned as null but are not marked as nullable.
+    Solution: Add nullable: true to both fields to support null values.

@@ -3306,6 +3306,9 @@ components:
         metadata:
           $ref: '#/components/schemas/ObjectMeta'
         spec:
+          type: object
+          nullable: true #EDM-850
+          description: 'Specification of the repository (nullable for deletion).'
           $ref: '#/components/schemas/RepositorySpec'
         status:
           $ref: '#/components/schemas/RepositoryStatus'
