@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,9 +28,9 @@ class DevicesSummary(BaseModel):
     A summary of the devices in the fleet returned when fetching a single Fleet.
     """ # noqa: E501
     total: StrictInt = Field(description="The total number of devices in the fleet.")
-    application_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"application\" status.", alias="applicationStatus")
-    summary_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"summary\" status.", alias="summaryStatus")
-    update_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"updated\" status.", alias="updateStatus")
+    application_status: Optional[Dict[str, StrictInt]] = Field(description="A breakdown of the devices in the fleet by \"application\" status.", alias="applicationStatus")
+    summary_status: Optional[Dict[str, StrictInt]] = Field(description="A breakdown of the devices in the fleet by \"summary\" status.", alias="summaryStatus")
+    update_status: Optional[Dict[str, StrictInt]] = Field(description="A breakdown of the devices in the fleet by \"updated\" status.", alias="updateStatus")
     __properties: ClassVar[List[str]] = ["total", "applicationStatus", "summaryStatus", "updateStatus"]
 
     model_config = ConfigDict(
@@ -72,6 +72,21 @@ class DevicesSummary(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if application_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.application_status is None and "application_status" in self.model_fields_set:
+            _dict['applicationStatus'] = None
+
+        # set to None if summary_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.summary_status is None and "summary_status" in self.model_fields_set:
+            _dict['summaryStatus'] = None
+
+        # set to None if update_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.update_status is None and "update_status" in self.model_fields_set:
+            _dict['updateStatus'] = None
+
         return _dict
 
     @classmethod
@@ -85,9 +100,9 @@ class DevicesSummary(BaseModel):
 
         _obj = cls.model_validate({
             "total": obj.get("total"),
-            "applicationStatus": obj.get("applicationStatus") or {},
-            "summaryStatus": obj.get("summaryStatus") or {},
-            "updateStatus": obj.get("updateStatus") or {}
+            "applicationStatus": obj.get("applicationStatus"),
+            "summaryStatus": obj.get("summaryStatus"),
+            "updateStatus": obj.get("updateStatus")
         })
         return _obj
 

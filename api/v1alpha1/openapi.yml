@@ -4623,6 +4623,7 @@ components:
         applicationStatus:
           type: object
           default: {}
+          nullable: true #EDM-851
           additionalProperties:
             type: integer
             format: int64
@@ -4630,6 +4631,7 @@ components:
         summaryStatus:
           type: object
           default: {}
+          nullable: true #EDM-851
           additionalProperties:
             type: integer
             format: int64
@@ -4637,6 +4639,7 @@ components:
         updateStatus:
           type: object
           default: {}
+          nullable: true #EDM-851
           additionalProperties:
             type: integer
             format: int64
@@ -4879,12 +4882,10 @@ components:
       type: string
       description: Type of condition in CamelCase.
       enum:
-      - 'Approved'              # EnrollmentRequest
-      - 'Approved'              # CertificateSigningRequest
+      - 'Approved'              # EnrollmentRequest and CertificateSigningRequest #EDM-1249
       - 'Denied'                # CertificateSigningRequest
       - 'Failed'                # CertificateSigningRequest
-      - 'Accessible'            # Repository
-      - 'Accessible'            # ResourceSync
+      - 'Accessible'            # Repository and ResourceSync #EDM-1249
       - 'ResourceParsed'        # ResourceSync
       - 'Synced'                # ResourceSync
       - 'OverlappingSelectors'  # Fleet
@@ -4982,9 +4983,11 @@ components:
           description: The base64-encoded PEM-encoded PKCS#10 CSR. Matches the spec.request field in a kubernetes CertificateSigningRequest resource.
           format: byte
           type: string
+          nullable: true #EDM-852
         signerName:
           description: Indicates the requested signer, and is a qualified name.
           type: string
+          nullable: true #EDM-852
         uid:
           description: UID of the user that created the CSR, populated by the API server on creation and immutable.
           type: string

@@ -47,6 +47,18 @@ import flightctl
 
 Execute `pytest` to run the tests.
 
+
+### Modifying OpenAPI Spec Before Generating Python Client
+1. **Get the Latest OpenAPI Spec**:  
+   Make sure you have the most up-to-date version of the OpenAPI spec from the FlightCTL repository.
+
+2. **Apply the Modifications**:  
+   Refer to the `modifications.txt` file and manually apply the listed changes to the OpenAPI spec.
+
+3. **Generate the Python Client**:  
+   Once you've made the necessary modifications, generate the Python client with the updated OpenAPI spec
+
+
 ## Getting Started
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
