@@ -30,7 +30,7 @@ class CertificateSigningRequestSpec(BaseModel):
     expiration_seconds: Optional[StrictInt] = Field(default=None, description="Requested duration of validity for the certificate.", alias="expirationSeconds")
     extra: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Extra attributes of the user that created the CSR, populated by the API server on creation and immutable.")
     request: Optional[Union[StrictBytes, StrictStr]] = Field(description="The base64-encoded PEM-encoded PKCS#10 CSR. Matches the spec.request field in a kubernetes CertificateSigningRequest resource.")
-    signer_name: Optional[StrictStr] = Field(description="Indicates the requested signer, and is a qualified name.", alias="signerName")
+    signer_name: StrictStr = Field(description="Indicates the requested signer, and is a qualified name.", alias="signerName")
     uid: Optional[StrictStr] = Field(default=None, description="UID of the user that created the CSR, populated by the API server on creation and immutable.")
     usages: Optional[List[StrictStr]] = Field(default=None, description="Usages specifies a set of key usages requested in the issued certificate.")
     username: Optional[StrictStr] = Field(default=None, description="Name of the user that created the CSR, populated by the API server on creation and immutable.")
@@ -79,11 +79,6 @@ class CertificateSigningRequestSpec(BaseModel):
         # and model_fields_set contains the field
         if self.request is None and "request" in self.model_fields_set:
             _dict['request'] = None
-
-        # set to None if signer_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.signer_name is None and "signer_name" in self.model_fields_set:
-            _dict['signerName'] = None
 
         return _dict
 

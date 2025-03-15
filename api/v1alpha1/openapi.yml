@@ -4990,7 +4990,6 @@ components:
         signerName:
           description: Indicates the requested signer, and is a qualified name.
           type: string
-          nullable: true #EDM-852
         uid:
           description: UID of the user that created the CSR, populated by the API server on creation and immutable.
           type: string
