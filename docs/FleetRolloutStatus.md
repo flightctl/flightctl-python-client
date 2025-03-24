@@ -1,11 +1,12 @@
 # FleetRolloutStatus
 
+FleetRolloutStatus represents information about the status of a fleet rollout.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**current_batch** | **int** |  | [optional] 
+**current_batch** | **int** | The batch number currently being rolled out. | [optional] 
 
 ## Example
 

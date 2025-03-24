@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The (possibly remote) repository URL | 
+**url** | **str** | The (possibly remote) repository URL. | 
 **type** | [**RepoSpecType**](RepoSpecType.md) |  | 
 
 ## Example

@@ -1,13 +1,14 @@
 # HttpConfigProviderSpecHttpRef
 
+The reference to an HTTP configuration server.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**repository** | **str** | The name of the repository resource to use as the sync source  | 
-**suffix** | **str** | Part of the URL that comes after the base URL. It can include query parameters such as: /path/to/endpoint?query&#x3D;param  | [optional] 
-**file_path** | **str** | The path of the file where the response is stored in the filesystem of the device.  | 
+**repository** | **str** | The name of the repository resource to use as the sync source. | 
+**suffix** | **str** | Part of the URL that comes after the base URL. It can include query parameters such as: \&quot;/path/to/endpoint?query&#x3D;param\&quot;. | [optional] 
+**file_path** | **str** | Path in the device&#39;s file system to which the content returned by the HTTP sever should be written. | 
 
 ## Example
 

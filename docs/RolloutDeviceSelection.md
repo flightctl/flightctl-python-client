@@ -1,12 +1,13 @@
 # RolloutDeviceSelection
 
+Describes how to select devices for rollout.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**strategy** | **str** |  | 
-**sequence** | [**List[Batch]**](Batch.md) |  | [optional] 
+**strategy** | [**RolloutStrategy**](RolloutStrategy.md) |  | 
+**sequence** | [**List[Batch]**](Batch.md) | A list of batch definitions. | [optional] 
 
 ## Example
 

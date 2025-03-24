@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | **str** | Reference to the container image for the application package | 
+**image** | **str** | Reference to the container image for the application package. | 
 
 ## Example
 

@@ -1,5 +1,6 @@
 # DeviceResourceStatus
 
+Current status of the resources of the device.
 
 ## Properties
 

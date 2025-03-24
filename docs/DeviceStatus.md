@@ -13,10 +13,11 @@ Name | Type | Description | Notes
 **resources** | [**DeviceResourceStatus**](DeviceResourceStatus.md) |  | 
 **integrity** | [**DeviceIntegrityStatus**](DeviceIntegrityStatus.md) |  | 
 **config** | [**DeviceConfigStatus**](DeviceConfigStatus.md) |  | 
-**os** | [**DeviceOSStatus**](DeviceOSStatus.md) |  | 
+**os** | [**DeviceOsStatus**](DeviceOsStatus.md) |  | 
 **updated** | [**DeviceUpdatedStatus**](DeviceUpdatedStatus.md) |  | 
 **summary** | [**DeviceSummaryStatus**](DeviceSummaryStatus.md) |  | 
-**last_seen** | **datetime** |  | 
+**last_seen** | **datetime** | The last time the device was seen by the service. | 
+**lifecycle** | [**DeviceLifecycleStatus**](DeviceLifecycleStatus.md) |  | 
 
 ## Example
 

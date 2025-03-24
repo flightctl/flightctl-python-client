@@ -1,5 +1,6 @@
 # ApplicationStatusType
 
+Status of a single application on the device.
 
 ## Enum
 

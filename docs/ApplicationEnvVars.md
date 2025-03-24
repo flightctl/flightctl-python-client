@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime | [optional] 
+**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime. The key and value each must be between 1 and 253 characters. | [optional] 
 
 ## Example
 

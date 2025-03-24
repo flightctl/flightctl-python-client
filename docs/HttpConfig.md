@@ -1,17 +1,18 @@
 # HttpConfig
 
+Configuration for HTTP transport.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**username** | **str** | The username for auth with HTTP transport | [optional] 
-**password** | **str** | The password for auth with HTTP transport | [optional] 
-**tls_crt** | **str** | Base64 encoded TLS cert data | [optional] 
-**tls_key** | **str** | Base64 encoded TLS cert key | [optional] 
-**ca_crt** | **str** | Base64 encoded root CA | [optional] 
-**skip_server_verification** | **bool** | Skip remote server verification | [optional] 
-**token** | **str** | The token for auth with HTTP transport | [optional] 
+**username** | **str** | The username for auth with HTTP transport. | [optional] 
+**password** | **str** | The password for auth with HTTP transport. | [optional] 
+**tls_crt** | **str** | Base64 encoded TLS cert data. | [optional] 
+**tls_key** | **str** | Base64 encoded TLS cert key. | [optional] 
+**ca_crt** | **str** | Base64 encoded root CA. | [optional] 
+**skip_server_verification** | **bool** | Skip remote server verification. | [optional] 
+**token** | **str** | The token for auth with HTTP transport. | [optional] 
 
 ## Example
 

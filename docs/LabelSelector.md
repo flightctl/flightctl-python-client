@@ -1,13 +1,13 @@
 # LabelSelector
 
-A map of key,value pairs that are ANDed. Empty/null label selectors match nothing.
+A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. Empty/null label selectors match nothing.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**match_labels** | **Dict[str, str]** |  | [optional] 
-**match_expressions** | [**List[MatchExpression]**](MatchExpression.md) |  | [optional] 
+**match_labels** | **Dict[str, str]** | A map of {key,value} pairs. | [optional] 
+**match_expressions** | [**List[MatchExpression]**](MatchExpression.md) | A list of match expressions. | [optional] 
 
 ## Example
 

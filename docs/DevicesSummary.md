@@ -7,9 +7,9 @@ A summary of the devices in the fleet returned when fetching a single Fleet.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total** | **int** | The total number of devices in the fleet. | 
-**application_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;application\&quot; status. | [optional] 
-**summary_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;summary\&quot; status. | [optional] 
-**update_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;updated\&quot; status. | [optional] 
+**application_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;application\&quot; status. | 
+**summary_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;summary\&quot; status. | 
+**update_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;updated\&quot; status. | 
 
 ## Example
 

@@ -6,9 +6,9 @@ EnrollmentRequestStatus represents information about the status of a EnrollmentR
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**certificate** | **str** | certificate is a PEM-encoded signed certificate. | [optional] 
+**certificate** | **str** | The PEM-encoded signed certificate. | [optional] 
 **conditions** | [**List[Condition]**](Condition.md) | Current state of the EnrollmentRequest. | 
-**approval** | [**EnrollmentRequestApproval**](EnrollmentRequestApproval.md) |  | [optional] 
+**approval** | [**EnrollmentRequestApprovalStatus**](EnrollmentRequestApprovalStatus.md) |  | [optional] 
 
 ## Example
 

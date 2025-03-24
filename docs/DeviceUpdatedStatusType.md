@@ -1,5 +1,6 @@
 # DeviceUpdatedStatusType
 
+Status type of the device update.
 
 ## Enum
 

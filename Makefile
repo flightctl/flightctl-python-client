@@ -1,5 +1,5 @@
 generate-client:
-	npx @openapitools/openapi-generator-cli version-manager set 7.10.0
+	npx @openapitools/openapi-generator-cli version-manager set 7.11.0
 	npx @openapitools/openapi-generator-cli generate \
 	-g python \
 	-i ./api/v1alpha1/openapi.yml \

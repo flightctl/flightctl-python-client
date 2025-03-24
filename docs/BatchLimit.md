@@ -1,5 +1,6 @@
 # BatchLimit
 
+The maximum number or percentage of devices to update in the batch.
 
 ## Properties
 
