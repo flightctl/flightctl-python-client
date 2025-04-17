@@ -20,9 +20,9 @@ Python 3.8+
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+pip install git+https://github.com/flightctl/python-client.git
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
+(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/flightctl/python-client.git`)
 
 Then import the package:
 ```python
@@ -90,21 +90,21 @@ Class | Method | HTTP request | Description
 *CertificatesigningrequestApi* | [**create_certificate_signing_request**](docs/CertificatesigningrequestApi.md#create_certificate_signing_request) | **POST** /api/v1/certificatesigningrequests | 
 *CertificatesigningrequestApi* | [**delete_certificate_signing_request**](docs/CertificatesigningrequestApi.md#delete_certificate_signing_request) | **DELETE** /api/v1/certificatesigningrequests/{name} | 
 *CertificatesigningrequestApi* | [**delete_certificate_signing_requests**](docs/CertificatesigningrequestApi.md#delete_certificate_signing_requests) | **DELETE** /api/v1/certificatesigningrequests | 
+*CertificatesigningrequestApi* | [**get_certificate_signing_request**](docs/CertificatesigningrequestApi.md#get_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
 *CertificatesigningrequestApi* | [**list_certificate_signing_requests**](docs/CertificatesigningrequestApi.md#list_certificate_signing_requests) | **GET** /api/v1/certificatesigningrequests | 
 *CertificatesigningrequestApi* | [**patch_certificate_signing_request**](docs/CertificatesigningrequestApi.md#patch_certificate_signing_request) | **PATCH** /api/v1/certificatesigningrequests/{name} | 
-*CertificatesigningrequestApi* | [**read_certificate_signing_request**](docs/CertificatesigningrequestApi.md#read_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
 *CertificatesigningrequestApi* | [**replace_certificate_signing_request**](docs/CertificatesigningrequestApi.md#replace_certificate_signing_request) | **PUT** /api/v1/certificatesigningrequests/{name} | 
 *CertificatesigningrequestApi* | [**update_certificate_signing_request_approval**](docs/CertificatesigningrequestApi.md#update_certificate_signing_request_approval) | **PUT** /api/v1/certificatesigningrequests/{name}/approval | 
 *DeviceApi* | [**create_device**](docs/DeviceApi.md#create_device) | **POST** /api/v1/devices | 
 *DeviceApi* | [**decommission_device**](docs/DeviceApi.md#decommission_device) | **PUT** /api/v1/devices/{name}/decommission | 
 *DeviceApi* | [**delete_device**](docs/DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{name} | 
 *DeviceApi* | [**delete_devices**](docs/DeviceApi.md#delete_devices) | **DELETE** /api/v1/devices | 
+*DeviceApi* | [**get_device**](docs/DeviceApi.md#get_device) | **GET** /api/v1/devices/{name} | 
+*DeviceApi* | [**get_device_status**](docs/DeviceApi.md#get_device_status) | **GET** /api/v1/devices/{name}/status | 
 *DeviceApi* | [**get_rendered_device**](docs/DeviceApi.md#get_rendered_device) | **GET** /api/v1/devices/{name}/rendered | 
 *DeviceApi* | [**list_devices**](docs/DeviceApi.md#list_devices) | **GET** /api/v1/devices | 
 *DeviceApi* | [**patch_device**](docs/DeviceApi.md#patch_device) | **PATCH** /api/v1/devices/{name} | 
 *DeviceApi* | [**patch_device_status**](docs/DeviceApi.md#patch_device_status) | **PATCH** /api/v1/devices/{name}/status | 
-*DeviceApi* | [**read_device**](docs/DeviceApi.md#read_device) | **GET** /api/v1/devices/{name} | 
-*DeviceApi* | [**read_device_status**](docs/DeviceApi.md#read_device_status) | **GET** /api/v1/devices/{name}/status | 
 *DeviceApi* | [**replace_device**](docs/DeviceApi.md#replace_device) | **PUT** /api/v1/devices/{name} | 
 *DeviceApi* | [**replace_device_status**](docs/DeviceApi.md#replace_device_status) | **PUT** /api/v1/devices/{name}/status | 
 *EnrollmentrequestApi* | [**approve_enrollment_request**](docs/EnrollmentrequestApi.md#approve_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name}/approval | 
@@ -112,11 +112,11 @@ Class | Method | HTTP request | Description
 *EnrollmentrequestApi* | [**delete_enrollment_request**](docs/EnrollmentrequestApi.md#delete_enrollment_request) | **DELETE** /api/v1/enrollmentrequests/{name} | 
 *EnrollmentrequestApi* | [**delete_enrollment_requests**](docs/EnrollmentrequestApi.md#delete_enrollment_requests) | **DELETE** /api/v1/enrollmentrequests | 
 *EnrollmentrequestApi* | [**get_enrollment_config**](docs/EnrollmentrequestApi.md#get_enrollment_config) | **GET** /api/v1/enrollmentconfig | 
+*EnrollmentrequestApi* | [**get_enrollment_request**](docs/EnrollmentrequestApi.md#get_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
+*EnrollmentrequestApi* | [**get_enrollment_request_status**](docs/EnrollmentrequestApi.md#get_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
 *EnrollmentrequestApi* | [**list_enrollment_requests**](docs/EnrollmentrequestApi.md#list_enrollment_requests) | **GET** /api/v1/enrollmentrequests | 
 *EnrollmentrequestApi* | [**patch_enrollment_request**](docs/EnrollmentrequestApi.md#patch_enrollment_request) | **PATCH** /api/v1/enrollmentrequests/{name} | 
 *EnrollmentrequestApi* | [**patch_enrollment_request_status**](docs/EnrollmentrequestApi.md#patch_enrollment_request_status) | **PATCH** /api/v1/enrollmentrequests/{name}/status | 
-*EnrollmentrequestApi* | [**read_enrollment_request**](docs/EnrollmentrequestApi.md#read_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
-*EnrollmentrequestApi* | [**read_enrollment_request_status**](docs/EnrollmentrequestApi.md#read_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
 *EnrollmentrequestApi* | [**replace_enrollment_request**](docs/EnrollmentrequestApi.md#replace_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name} | 
 *EnrollmentrequestApi* | [**replace_enrollment_request_status**](docs/EnrollmentrequestApi.md#replace_enrollment_request_status) | **PUT** /api/v1/enrollmentrequests/{name}/status | 
 *FleetApi* | [**create_fleet**](docs/FleetApi.md#create_fleet) | **POST** /api/v1/fleets | 
@@ -124,34 +124,38 @@ Class | Method | HTTP request | Description
 *FleetApi* | [**delete_fleets**](docs/FleetApi.md#delete_fleets) | **DELETE** /api/v1/fleets | 
 *FleetApi* | [**delete_template_version**](docs/FleetApi.md#delete_template_version) | **DELETE** /api/v1/fleets/{fleet}/templateversions/{name} | 
 *FleetApi* | [**delete_template_versions**](docs/FleetApi.md#delete_template_versions) | **DELETE** /api/v1/fleets/{fleet}/templateversions | 
+*FleetApi* | [**get_fleet**](docs/FleetApi.md#get_fleet) | **GET** /api/v1/fleets/{name} | 
+*FleetApi* | [**get_fleet_status**](docs/FleetApi.md#get_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
+*FleetApi* | [**get_template_version**](docs/FleetApi.md#get_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
 *FleetApi* | [**list_fleets**](docs/FleetApi.md#list_fleets) | **GET** /api/v1/fleets | 
 *FleetApi* | [**list_template_versions**](docs/FleetApi.md#list_template_versions) | **GET** /api/v1/fleets/{fleet}/templateversions | 
 *FleetApi* | [**patch_fleet**](docs/FleetApi.md#patch_fleet) | **PATCH** /api/v1/fleets/{name} | 
 *FleetApi* | [**patch_fleet_status**](docs/FleetApi.md#patch_fleet_status) | **PATCH** /api/v1/fleets/{name}/status | 
-*FleetApi* | [**read_fleet**](docs/FleetApi.md#read_fleet) | **GET** /api/v1/fleets/{name} | 
-*FleetApi* | [**read_fleet_status**](docs/FleetApi.md#read_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
-*FleetApi* | [**read_template_version**](docs/FleetApi.md#read_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
 *FleetApi* | [**replace_fleet**](docs/FleetApi.md#replace_fleet) | **PUT** /api/v1/fleets/{name} | 
 *FleetApi* | [**replace_fleet_status**](docs/FleetApi.md#replace_fleet_status) | **PUT** /api/v1/fleets/{name}/status | 
+*LabelsApi* | [**list_labels**](docs/LabelsApi.md#list_labels) | **GET** /api/v1/labels | 
 *RepositoryApi* | [**create_repository**](docs/RepositoryApi.md#create_repository) | **POST** /api/v1/repositories | 
 *RepositoryApi* | [**delete_repositories**](docs/RepositoryApi.md#delete_repositories) | **DELETE** /api/v1/repositories | 
 *RepositoryApi* | [**delete_repository**](docs/RepositoryApi.md#delete_repository) | **DELETE** /api/v1/repositories/{name} | 
+*RepositoryApi* | [**get_repository**](docs/RepositoryApi.md#get_repository) | **GET** /api/v1/repositories/{name} | 
 *RepositoryApi* | [**list_repositories**](docs/RepositoryApi.md#list_repositories) | **GET** /api/v1/repositories | 
 *RepositoryApi* | [**patch_repository**](docs/RepositoryApi.md#patch_repository) | **PATCH** /api/v1/repositories/{name} | 
-*RepositoryApi* | [**read_repository**](docs/RepositoryApi.md#read_repository) | **GET** /api/v1/repositories/{name} | 
 *RepositoryApi* | [**replace_repository**](docs/RepositoryApi.md#replace_repository) | **PUT** /api/v1/repositories/{name} | 
 *ResourcesyncApi* | [**create_resource_sync**](docs/ResourcesyncApi.md#create_resource_sync) | **POST** /api/v1/resourcesyncs | 
 *ResourcesyncApi* | [**delete_resource_sync**](docs/ResourcesyncApi.md#delete_resource_sync) | **DELETE** /api/v1/resourcesyncs/{name} | 
 *ResourcesyncApi* | [**delete_resource_syncs**](docs/ResourcesyncApi.md#delete_resource_syncs) | **DELETE** /api/v1/resourcesyncs | 
-*ResourcesyncApi* | [**list_resource_sync**](docs/ResourcesyncApi.md#list_resource_sync) | **GET** /api/v1/resourcesyncs | 
+*ResourcesyncApi* | [**get_resource_sync**](docs/ResourcesyncApi.md#get_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
+*ResourcesyncApi* | [**list_resource_syncs**](docs/ResourcesyncApi.md#list_resource_syncs) | **GET** /api/v1/resourcesyncs | 
 *ResourcesyncApi* | [**patch_resource_sync**](docs/ResourcesyncApi.md#patch_resource_sync) | **PATCH** /api/v1/resourcesyncs/{name} | 
-*ResourcesyncApi* | [**read_resource_sync**](docs/ResourcesyncApi.md#read_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
 *ResourcesyncApi* | [**replace_resource_sync**](docs/ResourcesyncApi.md#replace_resource_sync) | **PUT** /api/v1/resourcesyncs/{name} | 
 *VersionApi* | [**get_version**](docs/VersionApi.md#get_version) | **GET** /api/version | 
 
 
 ## Documentation For Models
 
+ - [AbsolutePath](docs/AbsolutePath.md)
+ - [AppType](docs/AppType.md)
+ - [ApplicationContent](docs/ApplicationContent.md)
  - [ApplicationEnvVars](docs/ApplicationEnvVars.md)
  - [ApplicationProviderSpec](docs/ApplicationProviderSpec.md)
  - [ApplicationStatusType](docs/ApplicationStatusType.md)
@@ -199,6 +203,7 @@ Class | Method | HTTP request | Description
  - [DevicesSummary](docs/DevicesSummary.md)
  - [DiskResourceMonitorSpec](docs/DiskResourceMonitorSpec.md)
  - [DisruptionBudget](docs/DisruptionBudget.md)
+ - [EncodingType](docs/EncodingType.md)
  - [EnrollmentConfig](docs/EnrollmentConfig.md)
  - [EnrollmentRequest](docs/EnrollmentRequest.md)
  - [EnrollmentRequestApproval](docs/EnrollmentRequestApproval.md)
@@ -209,6 +214,8 @@ Class | Method | HTTP request | Description
  - [EnrollmentService](docs/EnrollmentService.md)
  - [EnrollmentServiceAuth](docs/EnrollmentServiceAuth.md)
  - [EnrollmentServiceService](docs/EnrollmentServiceService.md)
+ - [FileContent](docs/FileContent.md)
+ - [FileMetadata](docs/FileMetadata.md)
  - [FileOperation](docs/FileOperation.md)
  - [FileSpec](docs/FileSpec.md)
  - [Fleet](docs/Fleet.md)
@@ -228,7 +235,8 @@ Class | Method | HTTP request | Description
  - [HttpConfigProviderSpec](docs/HttpConfigProviderSpec.md)
  - [HttpConfigProviderSpecHttpRef](docs/HttpConfigProviderSpecHttpRef.md)
  - [HttpRepoSpec](docs/HttpRepoSpec.md)
- - [ImageApplicationProvider](docs/ImageApplicationProvider.md)
+ - [ImageApplicationProviderSpec](docs/ImageApplicationProviderSpec.md)
+ - [InlineApplicationProviderSpec](docs/InlineApplicationProviderSpec.md)
  - [InlineConfigProviderSpec](docs/InlineConfigProviderSpec.md)
  - [KubernetesSecretProviderSpec](docs/KubernetesSecretProviderSpec.md)
  - [KubernetesSecretProviderSpecSecretRef](docs/KubernetesSecretProviderSpecSecretRef.md)
@@ -238,6 +246,7 @@ Class | Method | HTTP request | Description
  - [MemoryResourceMonitorSpec](docs/MemoryResourceMonitorSpec.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [PatchRequestInner](docs/PatchRequestInner.md)
+ - [RelativePath](docs/RelativePath.md)
  - [RepoSpecType](docs/RepoSpecType.md)
  - [Repository](docs/Repository.md)
  - [RepositoryList](docs/RepositoryList.md)

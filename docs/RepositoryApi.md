@@ -7,9 +7,9 @@ Method | HTTP request | Description
 [**create_repository**](RepositoryApi.md#create_repository) | **POST** /api/v1/repositories | 
 [**delete_repositories**](RepositoryApi.md#delete_repositories) | **DELETE** /api/v1/repositories | 
 [**delete_repository**](RepositoryApi.md#delete_repository) | **DELETE** /api/v1/repositories/{name} | 
+[**get_repository**](RepositoryApi.md#get_repository) | **GET** /api/v1/repositories/{name} | 
 [**list_repositories**](RepositoryApi.md#list_repositories) | **GET** /api/v1/repositories | 
 [**patch_repository**](RepositoryApi.md#patch_repository) | **PATCH** /api/v1/repositories/{name} | 
-[**read_repository**](RepositoryApi.md#read_repository) | **GET** /api/v1/repositories/{name} | 
 [**replace_repository**](RepositoryApi.md#replace_repository) | **PUT** /api/v1/repositories/{name} | 
 
 
@@ -152,7 +152,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_repository**
-> Repository delete_repository(name)
+> Status delete_repository(name)
 
 
 
@@ -163,7 +163,7 @@ Delete a Repository resource.
 
 ```python
 import flightctl
-from flightctl.models.repository import Repository
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -196,6 +196,77 @@ with flightctl.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| The name of the Repository resource to delete. | 
+
+### Return type
+
+[**Status**](Status.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_repository**
+> Repository get_repository(name)
+
+
+
+Get a Repository resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.repository import Repository
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.RepositoryApi(api_client)
+    name = 'name_example' # str | The name of the Repository resource to get.
+
+    try:
+        api_response = api_instance.get_repository(name)
+        print("The response of RepositoryApi->get_repository:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RepositoryApi->get_repository: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Repository resource to get. | 
 
 ### Return type
 
@@ -371,77 +442,6 @@ No authorization required
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_repository**
-> Repository read_repository(name)
-
-
-
-Get a Repository resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.repository import Repository
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.RepositoryApi(api_client)
-    name = 'name_example' # str | The name of the Repository resource to get.
-
-    try:
-        api_response = api_instance.read_repository(name)
-        print("The response of RepositoryApi->read_repository:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RepositoryApi->read_repository: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the Repository resource to get. | 
-
-### Return type
-
-[**Repository**](Repository.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

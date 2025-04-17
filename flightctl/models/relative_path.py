@@ -19,16 +19,16 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ImageApplicationProvider(BaseModel):
+class RelativePath(BaseModel):
     """
-    ImageApplicationProvider
+    Represents a relative file path.
     """ # noqa: E501
-    image: StrictStr = Field(description="Reference to the container image for the application package.")
-    __properties: ClassVar[List[str]] = ["image"]
+    path: Optional[StrictStr] = Field(default=None, description="A relative file path on the system. Note that any existing file will be overwritten.")
+    __properties: ClassVar[List[str]] = ["path"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class ImageApplicationProvider(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ImageApplicationProvider from a JSON string"""
+        """Create an instance of RelativePath from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class ImageApplicationProvider(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ImageApplicationProvider from a dict"""
+        """Create an instance of RelativePath from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +81,7 @@ class ImageApplicationProvider(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "image": obj.get("image")
+            "path": obj.get("path")
         })
         return _obj
 

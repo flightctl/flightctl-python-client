@@ -7,9 +7,9 @@ Method | HTTP request | Description
 [**create_certificate_signing_request**](CertificatesigningrequestApi.md#create_certificate_signing_request) | **POST** /api/v1/certificatesigningrequests | 
 [**delete_certificate_signing_request**](CertificatesigningrequestApi.md#delete_certificate_signing_request) | **DELETE** /api/v1/certificatesigningrequests/{name} | 
 [**delete_certificate_signing_requests**](CertificatesigningrequestApi.md#delete_certificate_signing_requests) | **DELETE** /api/v1/certificatesigningrequests | 
+[**get_certificate_signing_request**](CertificatesigningrequestApi.md#get_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
 [**list_certificate_signing_requests**](CertificatesigningrequestApi.md#list_certificate_signing_requests) | **GET** /api/v1/certificatesigningrequests | 
 [**patch_certificate_signing_request**](CertificatesigningrequestApi.md#patch_certificate_signing_request) | **PATCH** /api/v1/certificatesigningrequests/{name} | 
-[**read_certificate_signing_request**](CertificatesigningrequestApi.md#read_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
 [**replace_certificate_signing_request**](CertificatesigningrequestApi.md#replace_certificate_signing_request) | **PUT** /api/v1/certificatesigningrequests/{name} | 
 [**update_certificate_signing_request_approval**](CertificatesigningrequestApi.md#update_certificate_signing_request_approval) | **PUT** /api/v1/certificatesigningrequests/{name}/approval | 
 
@@ -87,7 +87,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_certificate_signing_request**
-> CertificateSigningRequest delete_certificate_signing_request(name)
+> Status delete_certificate_signing_request(name)
 
 
 
@@ -98,7 +98,7 @@ delete a Certificate Signing Request
 
 ```python
 import flightctl
-from flightctl.models.certificate_signing_request import CertificateSigningRequest
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CertificateSigningRequest**](CertificateSigningRequest.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -219,6 +219,77 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_certificate_signing_request**
+> CertificateSigningRequest get_certificate_signing_request(name)
+
+
+
+read the specified certificateSigningRequest
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.certificate_signing_request import CertificateSigningRequest
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.CertificatesigningrequestApi(api_client)
+    name = 'name_example' # str | The name of the CertificateSigningRequest resource to get.
+
+    try:
+        api_response = api_instance.get_certificate_signing_request(name)
+        print("The response of CertificatesigningrequestApi->get_certificate_signing_request:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CertificatesigningrequestApi->get_certificate_signing_request: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the CertificateSigningRequest resource to get. | 
+
+### Return type
+
+[**CertificateSigningRequest**](CertificateSigningRequest.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -372,77 +443,6 @@ No authorization required
 **404** | NotFound |  -  |
 **403** | Forbidden |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_certificate_signing_request**
-> CertificateSigningRequest read_certificate_signing_request(name)
-
-
-
-read the specified certificateSigningRequest
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.certificate_signing_request import CertificateSigningRequest
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.CertificatesigningrequestApi(api_client)
-    name = 'name_example' # str | The name of the CertificateSigningRequest resource to get.
-
-    try:
-        api_response = api_instance.read_certificate_signing_request(name)
-        print("The response of CertificatesigningrequestApi->read_certificate_signing_request:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling CertificatesigningrequestApi->read_certificate_signing_request: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the CertificateSigningRequest resource to get. | 
-
-### Return type
-
-[**CertificateSigningRequest**](CertificateSigningRequest.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

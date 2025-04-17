@@ -347,7 +347,7 @@ class ResourcesyncApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ResourceSync:
+    ) -> Status:
         """delete_resource_sync
 
         Delete a ResourceSync resource.
@@ -385,7 +385,7 @@ class ResourcesyncApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceSync",
+            '200': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -418,7 +418,7 @@ class ResourcesyncApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ResourceSync]:
+    ) -> ApiResponse[Status]:
         """delete_resource_sync
 
         Delete a ResourceSync resource.
@@ -456,7 +456,7 @@ class ResourcesyncApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceSync",
+            '200': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -527,7 +527,7 @@ class ResourcesyncApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceSync",
+            '200': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -858,7 +858,279 @@ class ResourcesyncApi:
 
 
     @validate_call
-    def list_resource_sync(
+    def get_resource_sync(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the ResourceSync resource to get.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ResourceSync:
+        """get_resource_sync
+
+        Get a ResourceSync resource.
+
+        :param name: The name of the ResourceSync resource to get. (required)
+        :type name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_resource_sync_serialize(
+            name=name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ResourceSync",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_resource_sync_with_http_info(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the ResourceSync resource to get.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ResourceSync]:
+        """get_resource_sync
+
+        Get a ResourceSync resource.
+
+        :param name: The name of the ResourceSync resource to get. (required)
+        :type name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_resource_sync_serialize(
+            name=name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ResourceSync",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_resource_sync_without_preload_content(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the ResourceSync resource to get.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_resource_sync
+
+        Get a ResourceSync resource.
+
+        :param name: The name of the ResourceSync resource to get. (required)
+        :type name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_resource_sync_serialize(
+            name=name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ResourceSync",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_resource_sync_serialize(
+        self,
+        name,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if name is not None:
+            _path_params['name'] = name
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/resourcesyncs/{name}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def list_resource_syncs(
         self,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
@@ -877,7 +1149,7 @@ class ResourcesyncApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSyncList:
-        """list_resource_sync
+        """list_resource_syncs
 
         List ResourceSync resources.
 
@@ -911,7 +1183,7 @@ class ResourcesyncApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_resource_sync_serialize(
+        _param = self._list_resource_syncs_serialize(
             var_continue=var_continue,
             label_selector=label_selector,
             field_selector=field_selector,
@@ -941,7 +1213,7 @@ class ResourcesyncApi:
 
 
     @validate_call
-    def list_resource_sync_with_http_info(
+    def list_resource_syncs_with_http_info(
         self,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
@@ -960,7 +1232,7 @@ class ResourcesyncApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ResourceSyncList]:
-        """list_resource_sync
+        """list_resource_syncs
 
         List ResourceSync resources.
 
@@ -994,7 +1266,7 @@ class ResourcesyncApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_resource_sync_serialize(
+        _param = self._list_resource_syncs_serialize(
             var_continue=var_continue,
             label_selector=label_selector,
             field_selector=field_selector,
@@ -1024,7 +1296,7 @@ class ResourcesyncApi:
 
 
     @validate_call
-    def list_resource_sync_without_preload_content(
+    def list_resource_syncs_without_preload_content(
         self,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
@@ -1043,7 +1315,7 @@ class ResourcesyncApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """list_resource_sync
+        """list_resource_syncs
 
         List ResourceSync resources.
 
@@ -1077,7 +1349,7 @@ class ResourcesyncApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_resource_sync_serialize(
+        _param = self._list_resource_syncs_serialize(
             var_continue=var_continue,
             label_selector=label_selector,
             field_selector=field_selector,
@@ -1102,7 +1374,7 @@ class ResourcesyncApi:
         return response_data.response
 
 
-    def _list_resource_sync_serialize(
+    def _list_resource_syncs_serialize(
         self,
         var_continue,
         label_selector,
@@ -1473,278 +1745,6 @@ class ResourcesyncApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/resourcesyncs/{name}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def read_resource_sync(
-        self,
-        name: Annotated[StrictStr, Field(description="The name of the ResourceSync resource to get.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ResourceSync:
-        """read_resource_sync
-
-        Get a ResourceSync resource.
-
-        :param name: The name of the ResourceSync resource to get. (required)
-        :type name: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._read_resource_sync_serialize(
-            name=name,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceSync",
-            '401': "Status",
-            '403': "Status",
-            '404': "Status",
-            '503': "Status",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def read_resource_sync_with_http_info(
-        self,
-        name: Annotated[StrictStr, Field(description="The name of the ResourceSync resource to get.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ResourceSync]:
-        """read_resource_sync
-
-        Get a ResourceSync resource.
-
-        :param name: The name of the ResourceSync resource to get. (required)
-        :type name: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._read_resource_sync_serialize(
-            name=name,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceSync",
-            '401': "Status",
-            '403': "Status",
-            '404': "Status",
-            '503': "Status",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def read_resource_sync_without_preload_content(
-        self,
-        name: Annotated[StrictStr, Field(description="The name of the ResourceSync resource to get.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """read_resource_sync
-
-        Get a ResourceSync resource.
-
-        :param name: The name of the ResourceSync resource to get. (required)
-        :type name: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._read_resource_sync_serialize(
-            name=name,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceSync",
-            '401': "Status",
-            '403': "Status",
-            '404': "Status",
-            '503': "Status",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _read_resource_sync_serialize(
-        self,
-        name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if name is not None:
-            _path_params['name'] = name
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
             resource_path='/api/v1/resourcesyncs/{name}',
             path_params=_path_params,
             query_params=_query_params,

@@ -8,12 +8,12 @@ Method | HTTP request | Description
 [**decommission_device**](DeviceApi.md#decommission_device) | **PUT** /api/v1/devices/{name}/decommission | 
 [**delete_device**](DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{name} | 
 [**delete_devices**](DeviceApi.md#delete_devices) | **DELETE** /api/v1/devices | 
+[**get_device**](DeviceApi.md#get_device) | **GET** /api/v1/devices/{name} | 
+[**get_device_status**](DeviceApi.md#get_device_status) | **GET** /api/v1/devices/{name}/status | 
 [**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /api/v1/devices/{name}/rendered | 
 [**list_devices**](DeviceApi.md#list_devices) | **GET** /api/v1/devices | 
 [**patch_device**](DeviceApi.md#patch_device) | **PATCH** /api/v1/devices/{name} | 
 [**patch_device_status**](DeviceApi.md#patch_device_status) | **PATCH** /api/v1/devices/{name}/status | 
-[**read_device**](DeviceApi.md#read_device) | **GET** /api/v1/devices/{name} | 
-[**read_device_status**](DeviceApi.md#read_device_status) | **GET** /api/v1/devices/{name}/status | 
 [**replace_device**](DeviceApi.md#replace_device) | **PUT** /api/v1/devices/{name} | 
 [**replace_device_status**](DeviceApi.md#replace_device_status) | **PUT** /api/v1/devices/{name}/status | 
 
@@ -166,7 +166,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_device**
-> Device delete_device(name)
+> Status delete_device(name)
 
 
 
@@ -177,7 +177,7 @@ Delete a Device resource.
 
 ```python
 import flightctl
-from flightctl.models.device import Device
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Device**](Device.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -298,6 +298,148 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_device**
+> Device get_device(name)
+
+
+
+Get a Device resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device import Device
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource to get.
+
+    try:
+        api_response = api_instance.get_device(name)
+        print("The response of DeviceApi->get_device:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource to get. | 
+
+### Return type
+
+[**Device**](Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_device_status**
+> Device get_device_status(name)
+
+
+
+Get the status of a Device resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device import Device
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource to get.
+
+    try:
+        api_response = api_instance.get_device_status(name)
+        print("The response of DeviceApi->get_device_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource to get. | 
+
+### Return type
+
+[**Device**](Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -600,148 +742,6 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_device**
-> Device read_device(name)
-
-
-
-Get a Device resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.device import Device
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.DeviceApi(api_client)
-    name = 'name_example' # str | The name of the Device resource to get.
-
-    try:
-        api_response = api_instance.read_device(name)
-        print("The response of DeviceApi->read_device:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->read_device: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the Device resource to get. | 
-
-### Return type
-
-[**Device**](Device.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_device_status**
-> Device read_device_status(name)
-
-
-
-Get the status of a Device resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.device import Device
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.DeviceApi(api_client)
-    name = 'name_example' # str | The name of the Device resource to get.
-
-    try:
-        api_response = api_instance.read_device_status(name)
-        print("The response of DeviceApi->read_device_status:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->read_device_status: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the Device resource to get. | 
-
-### Return type
-
-[**Device**](Device.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |

@@ -73,6 +73,10 @@ paths:
                 $ref: '#/components/schemas/AuthConfig'
         "418":
           description: Auth not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
   /api/v1/auth/validate:
     get:
       tags:
@@ -88,10 +92,28 @@ paths:
       responses:
         "200":
           description: Token valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         "401":
           description: Token invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         "418":
           description: Auth not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         "500":
           description: InternalServerError
           content:
@@ -103,7 +125,7 @@ paths:
       tags:
         - resourcesync
       description: List ResourceSync resources.
-      operationId: listResourceSync
+      operationId: listResourceSyncs
       parameters:
         - name: continue
           in: query
@@ -242,7 +264,7 @@ paths:
       tags:
         - resourcesync
       description: Get a ResourceSync resource.
-      operationId: readResourceSync
+      operationId: getResourceSync
       parameters:
         - name: name
           in: path
@@ -427,7 +449,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceSync'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -596,7 +618,7 @@ paths:
       tags:
         - repository
       description: Get a Repository resource.
-      operationId: readRepository
+      operationId: getRepository
       parameters:
         - name: name
           in: path
@@ -720,7 +742,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Repository'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -956,7 +978,7 @@ paths:
       tags:
         - device
       description: Get a Device resource.
-      operationId: readDevice
+      operationId: getDevice
       parameters:
         - name: name
           in: path
@@ -1080,7 +1102,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Device'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -1171,7 +1193,7 @@ paths:
       tags:
         - device
       description: Get the status of a Device resource.
-      operationId: readDeviceStatus
+      operationId: getDeviceStatus
       parameters:
         - name: name
           in: path
@@ -1629,7 +1651,7 @@ paths:
       tags:
         - enrollmentrequest
       description: Get an EnrollmentRequest resource.
-      operationId: readEnrollmentRequest
+      operationId: getEnrollmentRequest
       parameters:
         - name: name
           in: path
@@ -1814,7 +1836,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EnrollmentRequest'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -1844,7 +1866,7 @@ paths:
       tags:
         - enrollmentrequest
       description: Get the status of an EnrollmentRequest resource.
-      operationId: readEnrollmentRequestStatus
+      operationId: getEnrollmentRequestStatus
       parameters:
         - name: name
           in: path
@@ -2254,7 +2276,7 @@ paths:
       tags:
         - certificatesigningrequest
       description: read the specified certificateSigningRequest
-      operationId: readCertificateSigningRequest
+      operationId: getCertificateSigningRequest
       parameters:
         - name: name
           in: path
@@ -2379,7 +2401,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CertificateSigningRequest'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -2616,7 +2638,7 @@ paths:
       tags:
         - fleet
       description: Get a Fleet resource.
-      operationId: readFleet
+      operationId: getFleet
       parameters:
         - name: name
           in: path
@@ -2807,7 +2829,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Fleet'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -2837,7 +2859,7 @@ paths:
       tags:
         - fleet
       description: read status of the specified Fleet
-      operationId: readFleetStatus
+      operationId: getFleetStatus
       parameters:
         - name: name
           in: path
@@ -3089,7 +3111,7 @@ paths:
       tags:
         - fleet
       description: read the specified template version
-      operationId: readTemplateVersion
+      operationId: getTemplateVersion
       parameters:
         - name: fleet
           in: path
@@ -3158,7 +3180,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TemplateVersion'
+                $ref: '#/components/schemas/Status'
         "401":
           description: Unauthorized
           content:
@@ -3306,9 +3328,6 @@ components:
         metadata:
           $ref: '#/components/schemas/ObjectMeta'
         spec:
-          type: object
-          nullable: true #EDM-850
-          description: 'Specification of the repository (nullable for deletion).'
           $ref: '#/components/schemas/RepositorySpec'
         status:
           $ref: '#/components/schemas/RepositoryStatus'
@@ -3566,20 +3585,52 @@ components:
       - name
       - inline
     FileSpec:
+      allOf:
+        - $ref: "#/components/schemas/FileContent"
+        - $ref: "#/components/schemas/FileMetadata"
+        - $ref: "#/components/schemas/AbsolutePath"
+        - type: object
+          required:
+            - path
+            - content
+    FileContent:
+      description: The content of a file.
       type: object
       properties:
-        path:
-          type: string
-          description: The absolute path to the file on the device. Note that any existing file will be overwritten.
         content:
           type: string
           description: The plain text (UTF-8) or base64-encoded content of the file.
         contentEncoding:
+          $ref: "#/components/schemas/EncodingType"
+    AbsolutePath:
+      type: object
+      description: Represents an absolute file path.
+      properties:
+        path:
           type: string
-          description: How the contents are encoded. Must be either "plain" or "base64". Defaults to "plain".
-          enum:
-          - plain
-          - base64
+          description: The absolute path to a file on the system. Note that any existing file will be overwritten.
+          example: "/var/log/app.log"
+    RelativePath:
+      type: object
+      description: Represents a relative file path.
+      properties:
+        path:
+          type: string
+          description: A relative file path on the system. Note that any existing file will be overwritten.
+          example: "src/index.js"
+    EncodingType:
+      type: string
+      description: Specifies the encoding type used for data representation.
+      enum:
+        - plain
+        - base64
+      x-enum-varnames:
+        - "EncodingPlain"
+        - "EncodingBase64"
+    FileMetadata:
+      description: File metadata.
+      type: object
+      properties:
         mode:
           type: integer
           description: The file's permission mode. You may specify the more familiar octal with a leading zero (e.g., 0644) or as a decimal without a leading zero (e.g., 420). Setuid/setgid/sticky bits are supported. If not specified, the permission mode for files defaults to 0644.
@@ -3589,9 +3640,6 @@ components:
         group:
           type: string
           description: The file's group, specified either as a name or numeric ID. Defaults to "root".
-      required:
-      - path
-      - content
     HttpConfigProviderSpec:
       type: object
       properties:
@@ -3626,10 +3674,12 @@ components:
             name:
               type: string
               description: The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.
+            appType:
+              $ref: '#/components/schemas/AppType'
         - oneOf:
-            - $ref: '#/components/schemas/ImageApplicationProvider'
-            # extend application providers
-    ImageApplicationProvider:
+            - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+            - $ref: '#/components/schemas/InlineApplicationProviderSpec'
+    ImageApplicationProviderSpec:
       type: object
       properties:
         image:
@@ -3637,6 +3687,23 @@ components:
           description: Reference to the container image for the application package.
       required:
         - image
+    InlineApplicationProviderSpec:
+      type: object
+      properties:
+        inline:
+          type: array
+          description: A list of application content.
+          items:
+            $ref: "#/components/schemas/ApplicationContent"
+      required:
+        - inline
+    ApplicationContent:
+        allOf:
+          - $ref: '#/components/schemas/FileContent'
+          - $ref: '#/components/schemas/RelativePath'
+          - type: object
+            required:
+              - path
     ApplicationEnvVars:
       type: object
       properties:
@@ -3645,6 +3712,13 @@ components:
           description: Environment variable key-value pairs, injected during runtime. The key and value each must be between 1 and 253 characters.
           additionalProperties:
             type: string
+    AppType:
+      type: string
+      description: The type of the application.
+      enum:
+        - "compose"
+      x-enum-varnames:
+        - "AppTypeCompose"
     ResourceMonitor:
       oneOf:
         - $ref: '#/components/schemas/CpuResourceMonitorSpec'
@@ -4138,15 +4212,15 @@ components:
       type: object
       description: Current status of the resources of the device.
       required:
-        - cpu
-        - memory
-        - disk
+        - CPU
+        - Memory
+        - Disk
       properties:
-        cpu:
+        CPU:
           $ref: "#/components/schemas/DeviceResourceStatusType"
-        memory:
+        Memory:
           $ref: "#/components/schemas/DeviceResourceStatusType"
-        disk:
+        Disk:
           $ref: "#/components/schemas/DeviceResourceStatusType"
     DeviceResourceStatusType:
       type: string
@@ -4626,7 +4700,6 @@ components:
         applicationStatus:
           type: object
           default: {}
-          nullable: true #EDM-851
           additionalProperties:
             type: integer
             format: int64
@@ -4634,7 +4707,6 @@ components:
         summaryStatus:
           type: object
           default: {}
-          nullable: true #EDM-851
           additionalProperties:
             type: integer
             format: int64
@@ -4642,7 +4714,6 @@ components:
         updateStatus:
           type: object
           default: {}
-          nullable: true #EDM-851
           additionalProperties:
             type: integer
             format: int64
@@ -4885,10 +4956,12 @@ components:
       type: string
       description: Type of condition in CamelCase.
       enum:
-      - 'Approved'              # EnrollmentRequest and CertificateSigningRequest #EDM-1249
+      - 'Approved'              # EnrollmentRequest
+      - 'Approved'              # CertificateSigningRequest
       - 'Denied'                # CertificateSigningRequest
       - 'Failed'                # CertificateSigningRequest
-      - 'Accessible'            # Repository and ResourceSync #EDM-1249
+      - 'Accessible'            # Repository
+      - 'Accessible'            # ResourceSync
       - 'ResourceParsed'        # ResourceSync
       - 'Synced'                # ResourceSync
       - 'OverlappingSelectors'  # Fleet
@@ -4986,7 +5059,6 @@ components:
           description: The base64-encoded PEM-encoded PKCS#10 CSR. Matches the spec.request field in a kubernetes CertificateSigningRequest resource.
           format: byte
           type: string
-          nullable: true #EDM-852
         signerName:
           description: Indicates the requested signer, and is a qualified name.
           type: string

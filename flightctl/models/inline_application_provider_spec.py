@@ -18,23 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from flightctl.models.encoding_type import EncodingType
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from flightctl.models.application_content import ApplicationContent
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FileSpec(BaseModel):
+class InlineApplicationProviderSpec(BaseModel):
     """
-    FileSpec
+    InlineApplicationProviderSpec
     """ # noqa: E501
-    content: StrictStr = Field(description="The plain text (UTF-8) or base64-encoded content of the file.")
-    content_encoding: Optional[EncodingType] = Field(default=None, alias="contentEncoding")
-    mode: Optional[StrictInt] = Field(default=None, description="The file's permission mode. You may specify the more familiar octal with a leading zero (e.g., 0644) or as a decimal without a leading zero (e.g., 420). Setuid/setgid/sticky bits are supported. If not specified, the permission mode for files defaults to 0644.")
-    user: Optional[StrictStr] = Field(default=None, description="The file's owner, specified either as a name or numeric ID. Defaults to \"root\".")
-    group: Optional[StrictStr] = Field(default=None, description="The file's group, specified either as a name or numeric ID. Defaults to \"root\".")
-    path: StrictStr = Field(description="The absolute path to a file on the system. Note that any existing file will be overwritten.")
-    __properties: ClassVar[List[str]] = ["content", "contentEncoding", "mode", "user", "group", "path"]
+    inline: List[ApplicationContent] = Field(description="A list of application content.")
+    __properties: ClassVar[List[str]] = ["inline"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +49,7 @@ class FileSpec(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FileSpec from a JSON string"""
+        """Create an instance of InlineApplicationProviderSpec from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,11 +70,18 @@ class FileSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in inline (list)
+        _items = []
+        if self.inline:
+            for _item_inline in self.inline:
+                if _item_inline:
+                    _items.append(_item_inline.to_dict())
+            _dict['inline'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FileSpec from a dict"""
+        """Create an instance of InlineApplicationProviderSpec from a dict"""
         if obj is None:
             return None
 
@@ -87,12 +89,7 @@ class FileSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "content": obj.get("content"),
-            "contentEncoding": obj.get("contentEncoding"),
-            "mode": obj.get("mode"),
-            "user": obj.get("user"),
-            "group": obj.get("group"),
-            "path": obj.get("path")
+            "inline": [ApplicationContent.from_dict(_item) for _item in obj["inline"]] if obj.get("inline") is not None else None
         })
         return _obj
 
