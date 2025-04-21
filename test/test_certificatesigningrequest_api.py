@@ -45,6 +45,12 @@ class TestCertificatesigningrequestApi(unittest.TestCase):
         """
         pass
 
+    def test_get_certificate_signing_request(self) -> None:
+        """Test case for get_certificate_signing_request
+
+        """
+        pass
+
     def test_list_certificate_signing_requests(self) -> None:
         """Test case for list_certificate_signing_requests
 
@@ -53,12 +59,6 @@ class TestCertificatesigningrequestApi(unittest.TestCase):
 
     def test_patch_certificate_signing_request(self) -> None:
         """Test case for patch_certificate_signing_request
-
-        """
-        pass
-
-    def test_read_certificate_signing_request(self) -> None:
-        """Test case for read_certificate_signing_request
 
         """
         pass

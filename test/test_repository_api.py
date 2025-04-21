@@ -45,6 +45,12 @@ class TestRepositoryApi(unittest.TestCase):
         """
         pass
 
+    def test_get_repository(self) -> None:
+        """Test case for get_repository
+
+        """
+        pass
+
     def test_list_repositories(self) -> None:
         """Test case for list_repositories
 
@@ -53,12 +59,6 @@ class TestRepositoryApi(unittest.TestCase):
 
     def test_patch_repository(self) -> None:
         """Test case for patch_repository
-
-        """
-        pass
-
-    def test_read_repository(self) -> None:
-        """Test case for read_repository
 
         """
         pass

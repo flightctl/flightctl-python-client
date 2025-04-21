@@ -57,6 +57,18 @@ class TestEnrollmentrequestApi(unittest.TestCase):
         """
         pass
 
+    def test_get_enrollment_request(self) -> None:
+        """Test case for get_enrollment_request
+
+        """
+        pass
+
+    def test_get_enrollment_request_status(self) -> None:
+        """Test case for get_enrollment_request_status
+
+        """
+        pass
+
     def test_list_enrollment_requests(self) -> None:
         """Test case for list_enrollment_requests
 
@@ -71,18 +83,6 @@ class TestEnrollmentrequestApi(unittest.TestCase):
 
     def test_patch_enrollment_request_status(self) -> None:
         """Test case for patch_enrollment_request_status
-
-        """
-        pass
-
-    def test_read_enrollment_request(self) -> None:
-        """Test case for read_enrollment_request
-
-        """
-        pass
-
-    def test_read_enrollment_request_status(self) -> None:
-        """Test case for read_enrollment_request_status
 
         """
         pass

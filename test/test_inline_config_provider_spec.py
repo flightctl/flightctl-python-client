@@ -38,26 +38,14 @@ class TestInlineConfigProviderSpec(unittest.TestCase):
             return InlineConfigProviderSpec(
                 name = '',
                 inline = [
-                    flightctl.models.file_spec.FileSpec(
-                        path = '', 
-                        content = '', 
-                        content_encoding = 'plain', 
-                        mode = 56, 
-                        user = '', 
-                        group = '', )
+                    null
                     ]
             )
         else:
             return InlineConfigProviderSpec(
                 name = '',
                 inline = [
-                    flightctl.models.file_spec.FileSpec(
-                        path = '', 
-                        content = '', 
-                        content_encoding = 'plain', 
-                        mode = 56, 
-                        user = '', 
-                        group = '', )
+                    null
                     ],
         )
         """

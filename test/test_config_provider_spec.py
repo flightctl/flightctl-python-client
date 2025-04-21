@@ -47,13 +47,7 @@ class TestConfigProviderSpec(unittest.TestCase):
                     namespace = '', 
                     mount_path = '', ),
                 inline = [
-                    flightctl.models.file_spec.FileSpec(
-                        path = '', 
-                        content = '', 
-                        content_encoding = 'plain', 
-                        mode = 56, 
-                        user = '', 
-                        group = '', )
+                    null
                     ],
                 http_ref = flightctl.models.http_config_provider_spec_http_ref.HttpConfigProviderSpec_httpRef(
                     repository = '', 
@@ -73,13 +67,7 @@ class TestConfigProviderSpec(unittest.TestCase):
                     namespace = '', 
                     mount_path = '', ),
                 inline = [
-                    flightctl.models.file_spec.FileSpec(
-                        path = '', 
-                        content = '', 
-                        content_encoding = 'plain', 
-                        mode = 56, 
-                        user = '', 
-                        group = '', )
+                    null
                     ],
                 http_ref = flightctl.models.http_config_provider_spec_http_ref.HttpConfigProviderSpec_httpRef(
                     repository = '', 

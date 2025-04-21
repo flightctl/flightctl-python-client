@@ -36,17 +36,17 @@ class TestFileSpec(unittest.TestCase):
         model = FileSpec()
         if include_optional:
             return FileSpec(
-                path = '',
                 content = '',
                 content_encoding = 'plain',
                 mode = 56,
                 user = '',
-                group = ''
+                group = '',
+                path = '/var/log/app.log'
             )
         else:
             return FileSpec(
-                path = '',
                 content = '',
+                path = '/var/log/app.log',
         )
         """
 
