@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.encoding_type import EncodingType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,23 +28,13 @@ class FileSpec(BaseModel):
     """
     FileSpec
     """ # noqa: E501
-    path: StrictStr = Field(description="The absolute path to the file on the device. Note that any existing file will be overwritten.")
     content: StrictStr = Field(description="The plain text (UTF-8) or base64-encoded content of the file.")
-    content_encoding: Optional[StrictStr] = Field(default=None, description="How the contents are encoded. Must be either \"plain\" or \"base64\". Defaults to \"plain\".", alias="contentEncoding")
+    content_encoding: Optional[EncodingType] = Field(default=None, alias="contentEncoding")
     mode: Optional[StrictInt] = Field(default=None, description="The file's permission mode. You may specify the more familiar octal with a leading zero (e.g., 0644) or as a decimal without a leading zero (e.g., 420). Setuid/setgid/sticky bits are supported. If not specified, the permission mode for files defaults to 0644.")
     user: Optional[StrictStr] = Field(default=None, description="The file's owner, specified either as a name or numeric ID. Defaults to \"root\".")
     group: Optional[StrictStr] = Field(default=None, description="The file's group, specified either as a name or numeric ID. Defaults to \"root\".")
-    __properties: ClassVar[List[str]] = ["path", "content", "contentEncoding", "mode", "user", "group"]
-
-    @field_validator('content_encoding')
-    def content_encoding_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['plain', 'base64']):
-            raise ValueError("must be one of enum values ('plain', 'base64')")
-        return value
+    path: StrictStr = Field(description="The absolute path to a file on the system. Note that any existing file will be overwritten.")
+    __properties: ClassVar[List[str]] = ["content", "contentEncoding", "mode", "user", "group", "path"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,12 +87,12 @@ class FileSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "path": obj.get("path"),
             "content": obj.get("content"),
             "contentEncoding": obj.get("contentEncoding"),
             "mode": obj.get("mode"),
             "user": obj.get("user"),
-            "group": obj.get("group")
+            "group": obj.get("group"),
+            "path": obj.get("path")
         })
         return _obj
 

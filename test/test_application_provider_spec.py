@@ -40,11 +40,18 @@ class TestApplicationProviderSpec(unittest.TestCase):
                     'key' : ''
                     },
                 name = '',
-                image = ''
+                app_type = 'compose',
+                image = '',
+                inline = [
+                    null
+                    ]
             )
         else:
             return ApplicationProviderSpec(
                 image = '',
+                inline = [
+                    null
+                    ],
         )
         """
 

@@ -21,6 +21,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from flightctl.models.auth_config import AuthConfig
+from flightctl.models.status import Status
 
 from flightctl.api_client import ApiClient, RequestSerialized
 from flightctl.api_response import ApiResponse
@@ -91,7 +92,7 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthConfig",
-            '418': None,
+            '418': "Status",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -155,7 +156,7 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthConfig",
-            '418': None,
+            '418': "Status",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -219,7 +220,7 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuthConfig",
-            '418': None,
+            '418': "Status",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -304,7 +305,7 @@ class AuthenticationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Status:
         """auth_validate
 
         Validate an authentication token.
@@ -342,9 +343,10 @@ class AuthenticationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '418': None,
+            '200': "Status",
+            '400': "Status",
+            '401': "Status",
+            '418': "Status",
             '500': "Status",
         }
         response_data = self.api_client.call_api(
@@ -374,7 +376,7 @@ class AuthenticationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Status]:
         """auth_validate
 
         Validate an authentication token.
@@ -412,9 +414,10 @@ class AuthenticationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '418': None,
+            '200': "Status",
+            '400': "Status",
+            '401': "Status",
+            '418': "Status",
             '500': "Status",
         }
         response_data = self.api_client.call_api(
@@ -482,9 +485,10 @@ class AuthenticationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '418': None,
+            '200': "Status",
+            '400': "Status",
+            '401': "Status",
+            '418': "Status",
             '500': "Status",
         }
         response_data = self.api_client.call_api(

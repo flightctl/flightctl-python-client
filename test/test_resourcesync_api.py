@@ -45,20 +45,20 @@ class TestResourcesyncApi(unittest.TestCase):
         """
         pass
 
-    def test_list_resource_sync(self) -> None:
-        """Test case for list_resource_sync
+    def test_get_resource_sync(self) -> None:
+        """Test case for get_resource_sync
+
+        """
+        pass
+
+    def test_list_resource_syncs(self) -> None:
+        """Test case for list_resource_syncs
 
         """
         pass
 
     def test_patch_resource_sync(self) -> None:
         """Test case for patch_resource_sync
-
-        """
-        pass
-
-    def test_read_resource_sync(self) -> None:
-        """Test case for read_resource_sync
 
         """
         pass

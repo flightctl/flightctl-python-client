@@ -51,6 +51,18 @@ class TestDeviceApi(unittest.TestCase):
         """
         pass
 
+    def test_get_device(self) -> None:
+        """Test case for get_device
+
+        """
+        pass
+
+    def test_get_device_status(self) -> None:
+        """Test case for get_device_status
+
+        """
+        pass
+
     def test_get_rendered_device(self) -> None:
         """Test case for get_rendered_device
 
@@ -71,18 +83,6 @@ class TestDeviceApi(unittest.TestCase):
 
     def test_patch_device_status(self) -> None:
         """Test case for patch_device_status
-
-        """
-        pass
-
-    def test_read_device(self) -> None:
-        """Test case for read_device
-
-        """
-        pass
-
-    def test_read_device_status(self) -> None:
-        """Test case for read_device_status
 
         """
         pass

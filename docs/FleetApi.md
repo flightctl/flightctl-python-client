@@ -9,13 +9,13 @@ Method | HTTP request | Description
 [**delete_fleets**](FleetApi.md#delete_fleets) | **DELETE** /api/v1/fleets | 
 [**delete_template_version**](FleetApi.md#delete_template_version) | **DELETE** /api/v1/fleets/{fleet}/templateversions/{name} | 
 [**delete_template_versions**](FleetApi.md#delete_template_versions) | **DELETE** /api/v1/fleets/{fleet}/templateversions | 
+[**get_fleet**](FleetApi.md#get_fleet) | **GET** /api/v1/fleets/{name} | 
+[**get_fleet_status**](FleetApi.md#get_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
+[**get_template_version**](FleetApi.md#get_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
 [**list_fleets**](FleetApi.md#list_fleets) | **GET** /api/v1/fleets | 
 [**list_template_versions**](FleetApi.md#list_template_versions) | **GET** /api/v1/fleets/{fleet}/templateversions | 
 [**patch_fleet**](FleetApi.md#patch_fleet) | **PATCH** /api/v1/fleets/{name} | 
 [**patch_fleet_status**](FleetApi.md#patch_fleet_status) | **PATCH** /api/v1/fleets/{name}/status | 
-[**read_fleet**](FleetApi.md#read_fleet) | **GET** /api/v1/fleets/{name} | 
-[**read_fleet_status**](FleetApi.md#read_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
-[**read_template_version**](FleetApi.md#read_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
 [**replace_fleet**](FleetApi.md#replace_fleet) | **PUT** /api/v1/fleets/{name} | 
 [**replace_fleet_status**](FleetApi.md#replace_fleet_status) | **PUT** /api/v1/fleets/{name}/status | 
 
@@ -93,7 +93,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_fleet**
-> Fleet delete_fleet(name)
+> Status delete_fleet(name)
 
 
 
@@ -104,7 +104,7 @@ Delete a Fleet resource.
 
 ```python
 import flightctl
-from flightctl.models.fleet import Fleet
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Fleet**](Fleet.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -230,7 +230,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_template_version**
-> TemplateVersion delete_template_version(fleet, name)
+> Status delete_template_version(fleet, name)
 
 
 
@@ -241,7 +241,7 @@ delete a template version
 
 ```python
 import flightctl
-from flightctl.models.template_version import TemplateVersion
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TemplateVersion**](TemplateVersion.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -368,6 +368,223 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_fleet**
+> Fleet get_fleet(name, add_devices_summary=add_devices_summary)
+
+
+
+Get a Fleet resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.fleet import Fleet
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.FleetApi(api_client)
+    name = 'name_example' # str | The name of the Fleet resource to get.
+    add_devices_summary = True # bool | Include a summary of the devices in the fleet. (optional)
+
+    try:
+        api_response = api_instance.get_fleet(name, add_devices_summary=add_devices_summary)
+        print("The response of FleetApi->get_fleet:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FleetApi->get_fleet: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Fleet resource to get. | 
+ **add_devices_summary** | **bool**| Include a summary of the devices in the fleet. | [optional] 
+
+### Return type
+
+[**Fleet**](Fleet.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_fleet_status**
+> Fleet get_fleet_status(name)
+
+
+
+read status of the specified Fleet
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.fleet import Fleet
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.FleetApi(api_client)
+    name = 'name_example' # str | The name of the Fleet resource to get.
+
+    try:
+        api_response = api_instance.get_fleet_status(name)
+        print("The response of FleetApi->get_fleet_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FleetApi->get_fleet_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Fleet resource to get. | 
+
+### Return type
+
+[**Fleet**](Fleet.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_template_version**
+> TemplateVersion get_template_version(fleet, name)
+
+
+
+read the specified template version
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.template_version import TemplateVersion
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.FleetApi(api_client)
+    fleet = 'fleet_example' # str | The owner of the template version.
+    name = 'name_example' # str | The name of the template version.
+
+    try:
+        api_response = api_instance.get_template_version(fleet, name)
+        print("The response of FleetApi->get_template_version:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FleetApi->get_template_version: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fleet** | **str**| The owner of the template version. | 
+ **name** | **str**| The name of the template version. | 
+
+### Return type
+
+[**TemplateVersion**](TemplateVersion.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -674,223 +891,6 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_fleet**
-> Fleet read_fleet(name, add_devices_summary=add_devices_summary)
-
-
-
-Get a Fleet resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.fleet import Fleet
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-    name = 'name_example' # str | The name of the Fleet resource to get.
-    add_devices_summary = True # bool | Include a summary of the devices in the fleet. (optional)
-
-    try:
-        api_response = api_instance.read_fleet(name, add_devices_summary=add_devices_summary)
-        print("The response of FleetApi->read_fleet:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->read_fleet: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the Fleet resource to get. | 
- **add_devices_summary** | **bool**| Include a summary of the devices in the fleet. | [optional] 
-
-### Return type
-
-[**Fleet**](Fleet.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_fleet_status**
-> Fleet read_fleet_status(name)
-
-
-
-read status of the specified Fleet
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.fleet import Fleet
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-    name = 'name_example' # str | The name of the Fleet resource to get.
-
-    try:
-        api_response = api_instance.read_fleet_status(name)
-        print("The response of FleetApi->read_fleet_status:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->read_fleet_status: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the Fleet resource to get. | 
-
-### Return type
-
-[**Fleet**](Fleet.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_template_version**
-> TemplateVersion read_template_version(fleet, name)
-
-
-
-read the specified template version
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.template_version import TemplateVersion
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-    fleet = 'fleet_example' # str | The owner of the template version.
-    name = 'name_example' # str | The name of the template version.
-
-    try:
-        api_response = api_instance.read_template_version(fleet, name)
-        print("The response of FleetApi->read_template_version:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->read_template_version: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fleet** | **str**| The owner of the template version. | 
- **name** | **str**| The name of the template version. | 
-
-### Return type
-
-[**TemplateVersion**](TemplateVersion.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |

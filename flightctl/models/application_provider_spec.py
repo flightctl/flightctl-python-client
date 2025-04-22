@@ -20,6 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.app_type import AppType
+from flightctl.models.application_content import ApplicationContent
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,9 +30,11 @@ class ApplicationProviderSpec(BaseModel):
     ApplicationProviderSpec
     """ # noqa: E501
     env_vars: Optional[Dict[str, StrictStr]] = Field(default=None, description="Environment variable key-value pairs, injected during runtime. The key and value each must be between 1 and 253 characters.", alias="envVars")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the application must be between 1 and 253 characters and start with a letter or number.")
+    name: Optional[StrictStr] = Field(default=None, description="The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.")
+    app_type: Optional[AppType] = Field(default=None, alias="appType")
     image: StrictStr = Field(description="Reference to the container image for the application package.")
-    __properties: ClassVar[List[str]] = ["envVars", "name", "image"]
+    inline: List[ApplicationContent] = Field(description="A list of application content.")
+    __properties: ClassVar[List[str]] = ["envVars", "name", "appType", "image", "inline"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +75,13 @@ class ApplicationProviderSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in inline (list)
+        _items = []
+        if self.inline:
+            for _item_inline in self.inline:
+                if _item_inline:
+                    _items.append(_item_inline.to_dict())
+            _dict['inline'] = _items
         return _dict
 
     @classmethod
@@ -85,7 +96,9 @@ class ApplicationProviderSpec(BaseModel):
         _obj = cls.model_validate({
             "envVars": obj.get("envVars"),
             "name": obj.get("name"),
-            "image": obj.get("image")
+            "appType": obj.get("appType"),
+            "image": obj.get("image"),
+            "inline": [ApplicationContent.from_dict(_item) for _item in obj["inline"]] if obj.get("inline") is not None else None
         })
         return _obj
 

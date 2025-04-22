@@ -9,11 +9,11 @@ Method | HTTP request | Description
 [**delete_enrollment_request**](EnrollmentrequestApi.md#delete_enrollment_request) | **DELETE** /api/v1/enrollmentrequests/{name} | 
 [**delete_enrollment_requests**](EnrollmentrequestApi.md#delete_enrollment_requests) | **DELETE** /api/v1/enrollmentrequests | 
 [**get_enrollment_config**](EnrollmentrequestApi.md#get_enrollment_config) | **GET** /api/v1/enrollmentconfig | 
+[**get_enrollment_request**](EnrollmentrequestApi.md#get_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
+[**get_enrollment_request_status**](EnrollmentrequestApi.md#get_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
 [**list_enrollment_requests**](EnrollmentrequestApi.md#list_enrollment_requests) | **GET** /api/v1/enrollmentrequests | 
 [**patch_enrollment_request**](EnrollmentrequestApi.md#patch_enrollment_request) | **PATCH** /api/v1/enrollmentrequests/{name} | 
 [**patch_enrollment_request_status**](EnrollmentrequestApi.md#patch_enrollment_request_status) | **PATCH** /api/v1/enrollmentrequests/{name}/status | 
-[**read_enrollment_request**](EnrollmentrequestApi.md#read_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
-[**read_enrollment_request_status**](EnrollmentrequestApi.md#read_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
 [**replace_enrollment_request**](EnrollmentrequestApi.md#replace_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name} | 
 [**replace_enrollment_request_status**](EnrollmentrequestApi.md#replace_enrollment_request_status) | **PUT** /api/v1/enrollmentrequests/{name}/status | 
 
@@ -166,7 +166,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_enrollment_request**
-> EnrollmentRequest delete_enrollment_request(name)
+> Status delete_enrollment_request(name)
 
 
 
@@ -177,7 +177,7 @@ Delete an EnrollmentRequest resource.
 
 ```python
 import flightctl
-from flightctl.models.enrollment_request import EnrollmentRequest
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EnrollmentRequest**](EnrollmentRequest.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -370,6 +370,148 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_enrollment_request**
+> EnrollmentRequest get_enrollment_request(name)
+
+
+
+Get an EnrollmentRequest resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.enrollment_request import EnrollmentRequest
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.EnrollmentrequestApi(api_client)
+    name = 'name_example' # str | The name of the EnrollmentRequest resource to get.
+
+    try:
+        api_response = api_instance.get_enrollment_request(name)
+        print("The response of EnrollmentrequestApi->get_enrollment_request:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EnrollmentrequestApi->get_enrollment_request: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the EnrollmentRequest resource to get. | 
+
+### Return type
+
+[**EnrollmentRequest**](EnrollmentRequest.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_enrollment_request_status**
+> EnrollmentRequest get_enrollment_request_status(name)
+
+
+
+Get the status of an EnrollmentRequest resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.enrollment_request import EnrollmentRequest
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.EnrollmentrequestApi(api_client)
+    name = 'name_example' # str | The name of the EnrollmentRequest resource to get.
+
+    try:
+        api_response = api_instance.get_enrollment_request_status(name)
+        print("The response of EnrollmentrequestApi->get_enrollment_request_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EnrollmentrequestApi->get_enrollment_request_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the EnrollmentRequest resource to get. | 
+
+### Return type
+
+[**EnrollmentRequest**](EnrollmentRequest.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -599,148 +741,6 @@ No authorization required
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_enrollment_request**
-> EnrollmentRequest read_enrollment_request(name)
-
-
-
-Get an EnrollmentRequest resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.enrollment_request import EnrollmentRequest
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.EnrollmentrequestApi(api_client)
-    name = 'name_example' # str | The name of the EnrollmentRequest resource to get.
-
-    try:
-        api_response = api_instance.read_enrollment_request(name)
-        print("The response of EnrollmentrequestApi->read_enrollment_request:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EnrollmentrequestApi->read_enrollment_request: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the EnrollmentRequest resource to get. | 
-
-### Return type
-
-[**EnrollmentRequest**](EnrollmentRequest.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_enrollment_request_status**
-> EnrollmentRequest read_enrollment_request_status(name)
-
-
-
-Get the status of an EnrollmentRequest resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.enrollment_request import EnrollmentRequest
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.EnrollmentrequestApi(api_client)
-    name = 'name_example' # str | The name of the EnrollmentRequest resource to get.
-
-    try:
-        api_response = api_instance.read_enrollment_request_status(name)
-        print("The response of EnrollmentrequestApi->read_enrollment_request_status:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EnrollmentrequestApi->read_enrollment_request_status: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the EnrollmentRequest resource to get. | 
-
-### Return type
-
-[**EnrollmentRequest**](EnrollmentRequest.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

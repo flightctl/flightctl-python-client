@@ -73,7 +73,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **auth_validate**
-> auth_validate(authorization=authorization)
+> Status auth_validate(authorization=authorization)
 
 
 
@@ -84,6 +84,7 @@ Validate an authentication token.
 
 ```python
 import flightctl
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -101,7 +102,9 @@ with flightctl.ApiClient(configuration) as api_client:
     authorization = 'authorization_example' # str | The authentication token to validate. (optional)
 
     try:
-        api_instance.auth_validate(authorization=authorization)
+        api_response = api_instance.auth_validate(authorization=authorization)
+        print("The response of AuthenticationApi->auth_validate:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthenticationApi->auth_validate: %s\n" % e)
 ```
@@ -117,7 +120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -133,6 +136,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Token valid |  -  |
+**400** | Bad Request |  -  |
 **401** | Token invalid |  -  |
 **418** | Auth not configured |  -  |
 **500** | InternalServerError |  -  |

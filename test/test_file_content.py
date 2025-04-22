@@ -15,10 +15,10 @@
 
 import unittest
 
-from flightctl.models.image_application_provider import ImageApplicationProvider
+from flightctl.models.file_content import FileContent
 
-class TestImageApplicationProvider(unittest.TestCase):
-    """ImageApplicationProvider unit test stubs"""
+class TestFileContent(unittest.TestCase):
+    """FileContent unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,26 +26,26 @@ class TestImageApplicationProvider(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ImageApplicationProvider:
-        """Test ImageApplicationProvider
+    def make_instance(self, include_optional) -> FileContent:
+        """Test FileContent
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ImageApplicationProvider`
+        # uncomment below to create an instance of `FileContent`
         """
-        model = ImageApplicationProvider()
+        model = FileContent()
         if include_optional:
-            return ImageApplicationProvider(
-                image = ''
+            return FileContent(
+                content = '',
+                content_encoding = 'plain'
             )
         else:
-            return ImageApplicationProvider(
-                image = '',
+            return FileContent(
         )
         """
 
-    def testImageApplicationProvider(self):
-        """Test ImageApplicationProvider"""
+    def testFileContent(self):
+        """Test FileContent"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

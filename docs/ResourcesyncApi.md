@@ -7,9 +7,9 @@ Method | HTTP request | Description
 [**create_resource_sync**](ResourcesyncApi.md#create_resource_sync) | **POST** /api/v1/resourcesyncs | 
 [**delete_resource_sync**](ResourcesyncApi.md#delete_resource_sync) | **DELETE** /api/v1/resourcesyncs/{name} | 
 [**delete_resource_syncs**](ResourcesyncApi.md#delete_resource_syncs) | **DELETE** /api/v1/resourcesyncs | 
-[**list_resource_sync**](ResourcesyncApi.md#list_resource_sync) | **GET** /api/v1/resourcesyncs | 
+[**get_resource_sync**](ResourcesyncApi.md#get_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
+[**list_resource_syncs**](ResourcesyncApi.md#list_resource_syncs) | **GET** /api/v1/resourcesyncs | 
 [**patch_resource_sync**](ResourcesyncApi.md#patch_resource_sync) | **PATCH** /api/v1/resourcesyncs/{name} | 
-[**read_resource_sync**](ResourcesyncApi.md#read_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
 [**replace_resource_sync**](ResourcesyncApi.md#replace_resource_sync) | **PUT** /api/v1/resourcesyncs/{name} | 
 
 
@@ -86,7 +86,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_resource_sync**
-> ResourceSync delete_resource_sync(name)
+> Status delete_resource_sync(name)
 
 
 
@@ -97,7 +97,7 @@ Delete a ResourceSync resource.
 
 ```python
 import flightctl
-from flightctl.models.resource_sync import ResourceSync
+from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceSync**](ResourceSync.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -222,8 +222,79 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_resource_sync**
-> ResourceSyncList list_resource_sync(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
+# **get_resource_sync**
+> ResourceSync get_resource_sync(name)
+
+
+
+Get a ResourceSync resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.resource_sync import ResourceSync
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.ResourcesyncApi(api_client)
+    name = 'name_example' # str | The name of the ResourceSync resource to get.
+
+    try:
+        api_response = api_instance.get_resource_sync(name)
+        print("The response of ResourcesyncApi->get_resource_sync:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesyncApi->get_resource_sync: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the ResourceSync resource to get. | 
+
+### Return type
+
+[**ResourceSync**](ResourceSync.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**503** | ServiceUnavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_resource_syncs**
+> ResourceSyncList list_resource_syncs(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
 
 
 
@@ -255,11 +326,11 @@ with flightctl.ApiClient(configuration) as api_client:
     limit = 56 # int | The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. (optional)
 
     try:
-        api_response = api_instance.list_resource_sync(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
-        print("The response of ResourcesyncApi->list_resource_sync:\n")
+        api_response = api_instance.list_resource_syncs(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
+        print("The response of ResourcesyncApi->list_resource_syncs:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ResourcesyncApi->list_resource_sync: %s\n" % e)
+        print("Exception when calling ResourcesyncApi->list_resource_syncs: %s\n" % e)
 ```
 
 
@@ -371,77 +442,6 @@ No authorization required
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **read_resource_sync**
-> ResourceSync read_resource_sync(name)
-
-
-
-Get a ResourceSync resource.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.resource_sync import ResourceSync
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.ResourcesyncApi(api_client)
-    name = 'name_example' # str | The name of the ResourceSync resource to get.
-
-    try:
-        api_response = api_instance.read_resource_sync(name)
-        print("The response of ResourcesyncApi->read_resource_sync:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ResourcesyncApi->read_resource_sync: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| The name of the ResourceSync resource to get. | 
-
-### Return type
-
-[**ResourceSync**](ResourceSync.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

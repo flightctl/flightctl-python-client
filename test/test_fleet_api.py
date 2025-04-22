@@ -57,6 +57,24 @@ class TestFleetApi(unittest.TestCase):
         """
         pass
 
+    def test_get_fleet(self) -> None:
+        """Test case for get_fleet
+
+        """
+        pass
+
+    def test_get_fleet_status(self) -> None:
+        """Test case for get_fleet_status
+
+        """
+        pass
+
+    def test_get_template_version(self) -> None:
+        """Test case for get_template_version
+
+        """
+        pass
+
     def test_list_fleets(self) -> None:
         """Test case for list_fleets
 
@@ -77,24 +95,6 @@ class TestFleetApi(unittest.TestCase):
 
     def test_patch_fleet_status(self) -> None:
         """Test case for patch_fleet_status
-
-        """
-        pass
-
-    def test_read_fleet(self) -> None:
-        """Test case for read_fleet
-
-        """
-        pass
-
-    def test_read_fleet_status(self) -> None:
-        """Test case for read_fleet_status
-
-        """
-        pass
-
-    def test_read_template_version(self) -> None:
-        """Test case for read_template_version
 
         """
         pass

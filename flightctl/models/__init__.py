@@ -15,6 +15,9 @@
 
 
 # import models into model package
+from flightctl.models.absolute_path import AbsolutePath
+from flightctl.models.app_type import AppType
+from flightctl.models.application_content import ApplicationContent
 from flightctl.models.application_env_vars import ApplicationEnvVars
 from flightctl.models.application_provider_spec import ApplicationProviderSpec
 from flightctl.models.application_status_type import ApplicationStatusType
@@ -62,6 +65,7 @@ from flightctl.models.device_updated_status_type import DeviceUpdatedStatusType
 from flightctl.models.devices_summary import DevicesSummary
 from flightctl.models.disk_resource_monitor_spec import DiskResourceMonitorSpec
 from flightctl.models.disruption_budget import DisruptionBudget
+from flightctl.models.encoding_type import EncodingType
 from flightctl.models.enrollment_config import EnrollmentConfig
 from flightctl.models.enrollment_request import EnrollmentRequest
 from flightctl.models.enrollment_request_approval import EnrollmentRequestApproval
@@ -72,6 +76,8 @@ from flightctl.models.enrollment_request_status import EnrollmentRequestStatus
 from flightctl.models.enrollment_service import EnrollmentService
 from flightctl.models.enrollment_service_auth import EnrollmentServiceAuth
 from flightctl.models.enrollment_service_service import EnrollmentServiceService
+from flightctl.models.file_content import FileContent
+from flightctl.models.file_metadata import FileMetadata
 from flightctl.models.file_operation import FileOperation
 from flightctl.models.file_spec import FileSpec
 from flightctl.models.fleet import Fleet
@@ -91,7 +97,8 @@ from flightctl.models.http_config import HttpConfig
 from flightctl.models.http_config_provider_spec import HttpConfigProviderSpec
 from flightctl.models.http_config_provider_spec_http_ref import HttpConfigProviderSpecHttpRef
 from flightctl.models.http_repo_spec import HttpRepoSpec
-from flightctl.models.image_application_provider import ImageApplicationProvider
+from flightctl.models.image_application_provider_spec import ImageApplicationProviderSpec
+from flightctl.models.inline_application_provider_spec import InlineApplicationProviderSpec
 from flightctl.models.inline_config_provider_spec import InlineConfigProviderSpec
 from flightctl.models.kubernetes_secret_provider_spec import KubernetesSecretProviderSpec
 from flightctl.models.kubernetes_secret_provider_spec_secret_ref import KubernetesSecretProviderSpecSecretRef
@@ -101,6 +108,7 @@ from flightctl.models.match_expression import MatchExpression
 from flightctl.models.memory_resource_monitor_spec import MemoryResourceMonitorSpec
 from flightctl.models.object_meta import ObjectMeta
 from flightctl.models.patch_request_inner import PatchRequestInner
+from flightctl.models.relative_path import RelativePath
 from flightctl.models.repo_spec_type import RepoSpecType
 from flightctl.models.repository import Repository
 from flightctl.models.repository_list import RepositoryList
