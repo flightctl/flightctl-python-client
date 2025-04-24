@@ -99,6 +99,41 @@ class ResourceMonitor(BaseModel):
         error_messages = []
         match = 0
 
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("monitorType")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `monitorType` in the input.")
+
+        # check if data type is `CpuResourceMonitorSpec`
+        if _data_type == "CPU":
+            instance.actual_instance = CpuResourceMonitorSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `DiskResourceMonitorSpec`
+        if _data_type == "Disk":
+            instance.actual_instance = DiskResourceMonitorSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `MemoryResourceMonitorSpec`
+        if _data_type == "Memory":
+            instance.actual_instance = MemoryResourceMonitorSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `CpuResourceMonitorSpec`
+        if _data_type == "CpuResourceMonitorSpec":
+            instance.actual_instance = CpuResourceMonitorSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `DiskResourceMonitorSpec`
+        if _data_type == "DiskResourceMonitorSpec":
+            instance.actual_instance = DiskResourceMonitorSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `MemoryResourceMonitorSpec`
+        if _data_type == "MemoryResourceMonitorSpec":
+            instance.actual_instance = MemoryResourceMonitorSpec.from_json(json_str)
+            return instance
+
         # deserialize data into CpuResourceMonitorSpec
         try:
             instance.actual_instance = CpuResourceMonitorSpec.from_json(json_str)

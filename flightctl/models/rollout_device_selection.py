@@ -83,6 +83,16 @@ class RolloutDeviceSelection(BaseModel):
         error_messages = []
         match = 0
 
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("strategy")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `strategy` in the input.")
+
+        # check if data type is `BatchSequence`
+        if _data_type == "BatchSequence":
+            instance.actual_instance = BatchSequence.from_json(json_str)
+            return instance
+
         # deserialize data into BatchSequence
         try:
             instance.actual_instance = BatchSequence.from_json(json_str)

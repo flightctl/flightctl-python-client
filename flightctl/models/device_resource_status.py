@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
 from flightctl.models.device_resource_status_type import DeviceResourceStatusType
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class DeviceResourceStatus(BaseModel):
     """
     Current status of the resources of the device.
     """ # noqa: E501
-    cpu: DeviceResourceStatusType = Field(alias="CPU")
-    memory: DeviceResourceStatusType = Field(alias="Memory")
-    disk: DeviceResourceStatusType = Field(alias="Disk")
-    __properties: ClassVar[List[str]] = ["CPU", "Memory", "Disk"]
+    cpu: DeviceResourceStatusType
+    memory: DeviceResourceStatusType
+    disk: DeviceResourceStatusType
+    __properties: ClassVar[List[str]] = ["cpu", "memory", "disk"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,9 +84,9 @@ class DeviceResourceStatus(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "CPU": obj.get("CPU"),
-            "Memory": obj.get("Memory"),
-            "Disk": obj.get("Disk")
+            "cpu": obj.get("cpu"),
+            "memory": obj.get("memory"),
+            "disk": obj.get("disk")
         })
         return _obj
 

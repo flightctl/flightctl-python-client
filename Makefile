@@ -4,6 +4,6 @@ generate-client:
 	-g python \
 	-i ./api/v1alpha1/openapi.yml \
 	-o . \
-	--additional-properties=packageName=flightctl \
+	--additional-properties=packageName=flightctl,useOneOfDiscriminatorLookup=true \
 	--git-user-id flightctl \
 	--git-repo-id python-client
