@@ -15,10 +15,10 @@
 
 import unittest
 
-from flightctl.models.device_system_info import DeviceSystemInfo
+from flightctl.models.object_reference import ObjectReference
 
-class TestDeviceSystemInfo(unittest.TestCase):
-    """DeviceSystemInfo unit test stubs"""
+class TestObjectReference(unittest.TestCase):
+    """ObjectReference unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,35 +26,28 @@ class TestDeviceSystemInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DeviceSystemInfo:
-        """Test DeviceSystemInfo
+    def make_instance(self, include_optional) -> ObjectReference:
+        """Test ObjectReference
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DeviceSystemInfo`
+        # uncomment below to create an instance of `ObjectReference`
         """
-        model = DeviceSystemInfo()
+        model = ObjectReference()
         if include_optional:
-            return DeviceSystemInfo(
-                architecture = '',
-                boot_id = '',
-                operating_system = '',
-                agent_version = '',
-                custom_info = {
-                    'key' : ''
-                    }
+            return ObjectReference(
+                kind = '',
+                name = ''
             )
         else:
-            return DeviceSystemInfo(
-                architecture = '',
-                boot_id = '',
-                operating_system = '',
-                agent_version = '',
+            return ObjectReference(
+                kind = '',
+                name = '',
         )
         """
 
-    def testDeviceSystemInfo(self):
-        """Test DeviceSystemInfo"""
+    def testObjectReference(self):
+        """Test ObjectReference"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

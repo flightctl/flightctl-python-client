@@ -36,7 +36,6 @@ class TestResourceMonitorSpec(unittest.TestCase):
         model = ResourceMonitorSpec()
         if include_optional:
             return ResourceMonitorSpec(
-                monitor_type = '',
                 alert_rules = [
                     flightctl.models.resource_alert_rule.ResourceAlertRule(
                         severity = 'Warning', 
@@ -48,7 +47,6 @@ class TestResourceMonitorSpec(unittest.TestCase):
             )
         else:
             return ResourceMonitorSpec(
-                monitor_type = '',
                 alert_rules = [
                     flightctl.models.resource_alert_rule.ResourceAlertRule(
                         severity = 'Warning', 

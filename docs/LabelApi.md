@@ -1,10 +1,10 @@
-# flightctl.LabelsApi
+# flightctl.LabelApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_labels**](LabelsApi.md#list_labels) | **GET** /api/v1/labels | 
+[**list_labels**](LabelApi.md#list_labels) | **GET** /api/v1/labels | 
 
 
 # **list_labels**
@@ -32,7 +32,7 @@ configuration = flightctl.Configuration(
 # Enter a context with an instance of the API client
 with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = flightctl.LabelsApi(api_client)
+    api_instance = flightctl.LabelApi(api_client)
     kind = 'kind_example' # str | The type of resource to retrieve labels from.
     label_selector = 'label_selector_example' # str | A filter to retrieve labels only from resources that match the given label selector. (optional)
     field_selector = 'field_selector_example' # str | A filter to retrieve labels only from resources that match the given field selector. (optional)
@@ -40,10 +40,10 @@ with flightctl.ApiClient(configuration) as api_client:
 
     try:
         api_response = api_instance.list_labels(kind, label_selector=label_selector, field_selector=field_selector, limit=limit)
-        print("The response of LabelsApi->list_labels:\n")
+        print("The response of LabelApi->list_labels:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling LabelsApi->list_labels: %s\n" % e)
+        print("Exception when calling LabelApi->list_labels: %s\n" % e)
 ```
 
 

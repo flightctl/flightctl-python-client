@@ -15,10 +15,10 @@
 
 import unittest
 
-from flightctl.models.device_system_info import DeviceSystemInfo
+from flightctl.models.event_source import EventSource
 
-class TestDeviceSystemInfo(unittest.TestCase):
-    """DeviceSystemInfo unit test stubs"""
+class TestEventSource(unittest.TestCase):
+    """EventSource unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,35 +26,26 @@ class TestDeviceSystemInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DeviceSystemInfo:
-        """Test DeviceSystemInfo
+    def make_instance(self, include_optional) -> EventSource:
+        """Test EventSource
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DeviceSystemInfo`
+        # uncomment below to create an instance of `EventSource`
         """
-        model = DeviceSystemInfo()
+        model = EventSource()
         if include_optional:
-            return DeviceSystemInfo(
-                architecture = '',
-                boot_id = '',
-                operating_system = '',
-                agent_version = '',
-                custom_info = {
-                    'key' : ''
-                    }
+            return EventSource(
+                component = ''
             )
         else:
-            return DeviceSystemInfo(
-                architecture = '',
-                boot_id = '',
-                operating_system = '',
-                agent_version = '',
+            return EventSource(
+                component = '',
         )
         """
 
-    def testDeviceSystemInfo(self):
-        """Test DeviceSystemInfo"""
+    def testEventSource(self):
+        """Test EventSource"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

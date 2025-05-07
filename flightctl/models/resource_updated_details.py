@@ -19,26 +19,25 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
-from flightctl.models.resource_alert_rule import ResourceAlertRule
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomResourceMonitorSpec(BaseModel):
+class ResourceUpdatedDetails(BaseModel):
     """
-    CustomResourceMonitorSpec
+    ResourceUpdatedDetails
     """ # noqa: E501
-    monitor_type: StrictStr = Field(description="The type of resource to monitor.", alias="monitorType")
-    alert_rules: List[ResourceAlertRule] = Field(description="Array of alert rules. Only one alert per severity is allowed.", alias="alertRules")
-    sampling_interval: Annotated[str, Field(strict=True)] = Field(description="Duration between monitor samples. Format: positive integer followed by 's' for seconds, 'm' for minutes, 'h' for hours.", alias="samplingInterval")
-    __properties: ClassVar[List[str]] = ["monitorType", "alertRules", "samplingInterval"]
+    updated_fields: List[StrictStr] = Field(description="List of fields that were updated in the resource.", alias="updatedFields")
+    previous_owner: Optional[StrictStr] = Field(default=None, description="The previous owner (if applicable).", alias="previousOwner")
+    new_owner: Optional[StrictStr] = Field(default=None, description="The new owner (if applicable).", alias="newOwner")
+    __properties: ClassVar[List[str]] = ["updatedFields", "previousOwner", "newOwner"]
 
-    @field_validator('sampling_interval')
-    def sampling_interval_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[1-9]\d*[smh]$", value):
-            raise ValueError(r"must validate the regular expression /^[1-9]\d*[smh]$/")
+    @field_validator('updated_fields')
+    def updated_fields_validate_enum(cls, value):
+        """Validates the enum"""
+        for i in value:
+            if i not in set(['owner', 'labels', 'spec']):
+                raise ValueError("each list item must be one of ('owner', 'labels', 'spec')")
         return value
 
     model_config = ConfigDict(
@@ -59,7 +58,7 @@ class CustomResourceMonitorSpec(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomResourceMonitorSpec from a JSON string"""
+        """Create an instance of ResourceUpdatedDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,18 +79,21 @@ class CustomResourceMonitorSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in alert_rules (list)
-        _items = []
-        if self.alert_rules:
-            for _item_alert_rules in self.alert_rules:
-                if _item_alert_rules:
-                    _items.append(_item_alert_rules.to_dict())
-            _dict['alertRules'] = _items
+        # set to None if previous_owner (nullable) is None
+        # and model_fields_set contains the field
+        if self.previous_owner is None and "previous_owner" in self.model_fields_set:
+            _dict['previousOwner'] = None
+
+        # set to None if new_owner (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_owner is None and "new_owner" in self.model_fields_set:
+            _dict['newOwner'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomResourceMonitorSpec from a dict"""
+        """Create an instance of ResourceUpdatedDetails from a dict"""
         if obj is None:
             return None
 
@@ -99,9 +101,9 @@ class CustomResourceMonitorSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "monitorType": obj.get("monitorType"),
-            "alertRules": [ResourceAlertRule.from_dict(_item) for _item in obj["alertRules"]] if obj.get("alertRules") is not None else None,
-            "samplingInterval": obj.get("samplingInterval")
+            "updatedFields": obj.get("updatedFields"),
+            "previousOwner": obj.get("previousOwner"),
+            "newOwner": obj.get("newOwner")
         })
         return _obj
 

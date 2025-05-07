@@ -18,28 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
-from flightctl.models.resource_alert_rule import ResourceAlertRule
+from flightctl.models.event import Event
+from flightctl.models.list_meta import ListMeta
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CpuResourceMonitorSpec(BaseModel):
+class EventList(BaseModel):
     """
-    CpuResourceMonitorSpec
+    EventList is a list of Events.
     """ # noqa: E501
-    alert_rules: List[ResourceAlertRule] = Field(description="Array of alert rules. Only one alert per severity is allowed.", alias="alertRules")
-    sampling_interval: Annotated[str, Field(strict=True)] = Field(description="Duration between monitor samples. Format: positive integer followed by 's' for seconds, 'm' for minutes, 'h' for hours.", alias="samplingInterval")
-    monitor_type: StrictStr = Field(description="The type of resource to monitor.", alias="monitorType")
-    __properties: ClassVar[List[str]] = ["alertRules", "samplingInterval", "monitorType"]
-
-    @field_validator('sampling_interval')
-    def sampling_interval_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[1-9]\d*[smh]$", value):
-            raise ValueError(r"must validate the regular expression /^[1-9]\d*[smh]$/")
-        return value
+    api_version: StrictStr = Field(description="APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.", alias="apiVersion")
+    kind: StrictStr = Field(description="Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.")
+    metadata: ListMeta
+    items: List[Event] = Field(description="List of Events.")
+    __properties: ClassVar[List[str]] = ["apiVersion", "kind", "metadata", "items"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -59,7 +53,7 @@ class CpuResourceMonitorSpec(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CpuResourceMonitorSpec from a JSON string"""
+        """Create an instance of EventList from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,18 +74,21 @@ class CpuResourceMonitorSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in alert_rules (list)
+        # override the default output from pydantic by calling `to_dict()` of metadata
+        if self.metadata:
+            _dict['metadata'] = self.metadata.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
-        if self.alert_rules:
-            for _item_alert_rules in self.alert_rules:
-                if _item_alert_rules:
-                    _items.append(_item_alert_rules.to_dict())
-            _dict['alertRules'] = _items
+        if self.items:
+            for _item_items in self.items:
+                if _item_items:
+                    _items.append(_item_items.to_dict())
+            _dict['items'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CpuResourceMonitorSpec from a dict"""
+        """Create an instance of EventList from a dict"""
         if obj is None:
             return None
 
@@ -99,9 +96,10 @@ class CpuResourceMonitorSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "alertRules": [ResourceAlertRule.from_dict(_item) for _item in obj["alertRules"]] if obj.get("alertRules") is not None else None,
-            "samplingInterval": obj.get("samplingInterval"),
-            "monitorType": obj.get("monitorType")
+            "apiVersion": obj.get("apiVersion"),
+            "kind": obj.get("kind"),
+            "metadata": ListMeta.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
+            "items": [Event.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
         })
         return _obj
 

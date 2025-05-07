@@ -15,24 +15,20 @@
 
 import unittest
 
-from flightctl.api.labels_api import LabelsApi
+from flightctl.models.resource_kind import ResourceKind
 
+class TestResourceKind(unittest.TestCase):
+    """ResourceKind unit test stubs"""
 
-class TestLabelsApi(unittest.TestCase):
-    """LabelsApi unit test stubs"""
-
-    def setUp(self) -> None:
-        self.api = LabelsApi()
-
-    def tearDown(self) -> None:
+    def setUp(self):
         pass
 
-    def test_list_labels(self) -> None:
-        """Test case for list_labels
-
-        """
+    def tearDown(self):
         pass
 
+    def testResourceKind(self):
+        """Test ResourceKind"""
+        # inst = ResourceKind()
 
 if __name__ == '__main__':
     unittest.main()

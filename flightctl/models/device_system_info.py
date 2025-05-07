@@ -19,19 +19,21 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class DeviceSystemInfo(BaseModel):
     """
-    DeviceSystemInfo is a set of ids/uuids to uniquely identify the device.
+    System information collected from the device.
     """ # noqa: E501
     architecture: StrictStr = Field(description="The Architecture reported by the device.")
     boot_id: StrictStr = Field(description="Boot ID reported by the device.", alias="bootID")
     operating_system: StrictStr = Field(description="The Operating System reported by the device.", alias="operatingSystem")
     agent_version: StrictStr = Field(description="The Agent version.", alias="agentVersion")
-    __properties: ClassVar[List[str]] = ["architecture", "bootID", "operatingSystem", "agentVersion"]
+    custom_info: Optional[Dict[str, StrictStr]] = Field(default=None, description="User-defined information about the device.", alias="customInfo")
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["architecture", "bootID", "operatingSystem", "agentVersion", "customInfo"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,8 +65,10 @@ class DeviceSystemInfo(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -72,6 +76,11 @@ class DeviceSystemInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -87,8 +96,14 @@ class DeviceSystemInfo(BaseModel):
             "architecture": obj.get("architecture"),
             "bootID": obj.get("bootID"),
             "operatingSystem": obj.get("operatingSystem"),
-            "agentVersion": obj.get("agentVersion")
+            "agentVersion": obj.get("agentVersion"),
+            "customInfo": obj.get("customInfo")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

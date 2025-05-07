@@ -29,10 +29,10 @@ class MemoryResourceMonitorSpec(BaseModel):
     """
     MemoryResourceMonitorSpec
     """ # noqa: E501
-    monitor_type: StrictStr = Field(description="The type of resource to monitor.", alias="monitorType")
     alert_rules: List[ResourceAlertRule] = Field(description="Array of alert rules. Only one alert per severity is allowed.", alias="alertRules")
     sampling_interval: Annotated[str, Field(strict=True)] = Field(description="Duration between monitor samples. Format: positive integer followed by 's' for seconds, 'm' for minutes, 'h' for hours.", alias="samplingInterval")
-    __properties: ClassVar[List[str]] = ["monitorType", "alertRules", "samplingInterval"]
+    monitor_type: StrictStr = Field(description="The type of resource to monitor.", alias="monitorType")
+    __properties: ClassVar[List[str]] = ["alertRules", "samplingInterval", "monitorType"]
 
     @field_validator('sampling_interval')
     def sampling_interval_validate_regular_expression(cls, value):
@@ -99,9 +99,9 @@ class MemoryResourceMonitorSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "monitorType": obj.get("monitorType"),
             "alertRules": [ResourceAlertRule.from_dict(_item) for _item in obj["alertRules"]] if obj.get("alertRules") is not None else None,
-            "samplingInterval": obj.get("samplingInterval")
+            "samplingInterval": obj.get("samplingInterval"),
+            "monitorType": obj.get("monitorType")
         })
         return _obj
 
