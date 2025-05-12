@@ -119,6 +119,7 @@ Class | Method | HTTP request | Description
 *EnrollmentrequestApi* | [**patch_enrollment_request_status**](docs/EnrollmentrequestApi.md#patch_enrollment_request_status) | **PATCH** /api/v1/enrollmentrequests/{name}/status | 
 *EnrollmentrequestApi* | [**replace_enrollment_request**](docs/EnrollmentrequestApi.md#replace_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name} | 
 *EnrollmentrequestApi* | [**replace_enrollment_request_status**](docs/EnrollmentrequestApi.md#replace_enrollment_request_status) | **PUT** /api/v1/enrollmentrequests/{name}/status | 
+*EventApi* | [**list_events**](docs/EventApi.md#list_events) | **GET** /api/v1/events | 
 *FleetApi* | [**create_fleet**](docs/FleetApi.md#create_fleet) | **POST** /api/v1/fleets | 
 *FleetApi* | [**delete_fleet**](docs/FleetApi.md#delete_fleet) | **DELETE** /api/v1/fleets/{name} | 
 *FleetApi* | [**delete_fleets**](docs/FleetApi.md#delete_fleets) | **DELETE** /api/v1/fleets | 
@@ -133,7 +134,7 @@ Class | Method | HTTP request | Description
 *FleetApi* | [**patch_fleet_status**](docs/FleetApi.md#patch_fleet_status) | **PATCH** /api/v1/fleets/{name}/status | 
 *FleetApi* | [**replace_fleet**](docs/FleetApi.md#replace_fleet) | **PUT** /api/v1/fleets/{name} | 
 *FleetApi* | [**replace_fleet_status**](docs/FleetApi.md#replace_fleet_status) | **PUT** /api/v1/fleets/{name}/status | 
-*LabelsApi* | [**list_labels**](docs/LabelsApi.md#list_labels) | **GET** /api/v1/labels | 
+*LabelApi* | [**list_labels**](docs/LabelApi.md#list_labels) | **GET** /api/v1/labels | 
 *RepositoryApi* | [**create_repository**](docs/RepositoryApi.md#create_repository) | **POST** /api/v1/repositories | 
 *RepositoryApi* | [**delete_repositories**](docs/RepositoryApi.md#delete_repositories) | **DELETE** /api/v1/repositories | 
 *RepositoryApi* | [**delete_repository**](docs/RepositoryApi.md#delete_repository) | **DELETE** /api/v1/repositories/{name} | 
@@ -173,7 +174,6 @@ Class | Method | HTTP request | Description
  - [ConditionType](docs/ConditionType.md)
  - [ConfigProviderSpec](docs/ConfigProviderSpec.md)
  - [CpuResourceMonitorSpec](docs/CpuResourceMonitorSpec.md)
- - [CustomResourceMonitorSpec](docs/CustomResourceMonitorSpec.md)
  - [Device](docs/Device.md)
  - [DeviceApplicationStatus](docs/DeviceApplicationStatus.md)
  - [DeviceApplicationsSummaryStatus](docs/DeviceApplicationsSummaryStatus.md)
@@ -214,6 +214,10 @@ Class | Method | HTTP request | Description
  - [EnrollmentService](docs/EnrollmentService.md)
  - [EnrollmentServiceAuth](docs/EnrollmentServiceAuth.md)
  - [EnrollmentServiceService](docs/EnrollmentServiceService.md)
+ - [Event](docs/Event.md)
+ - [EventDetails](docs/EventDetails.md)
+ - [EventList](docs/EventList.md)
+ - [EventSource](docs/EventSource.md)
  - [FileContent](docs/FileContent.md)
  - [FileMetadata](docs/FileMetadata.md)
  - [FileOperation](docs/FileOperation.md)
@@ -245,6 +249,7 @@ Class | Method | HTTP request | Description
  - [MatchExpression](docs/MatchExpression.md)
  - [MemoryResourceMonitorSpec](docs/MemoryResourceMonitorSpec.md)
  - [ObjectMeta](docs/ObjectMeta.md)
+ - [ObjectReference](docs/ObjectReference.md)
  - [PatchRequestInner](docs/PatchRequestInner.md)
  - [RelativePath](docs/RelativePath.md)
  - [RepoSpecType](docs/RepoSpecType.md)
@@ -254,12 +259,14 @@ Class | Method | HTTP request | Description
  - [RepositoryStatus](docs/RepositoryStatus.md)
  - [ResourceAlertRule](docs/ResourceAlertRule.md)
  - [ResourceAlertSeverityType](docs/ResourceAlertSeverityType.md)
+ - [ResourceKind](docs/ResourceKind.md)
  - [ResourceMonitor](docs/ResourceMonitor.md)
  - [ResourceMonitorSpec](docs/ResourceMonitorSpec.md)
  - [ResourceSync](docs/ResourceSync.md)
  - [ResourceSyncList](docs/ResourceSyncList.md)
  - [ResourceSyncSpec](docs/ResourceSyncSpec.md)
  - [ResourceSyncStatus](docs/ResourceSyncStatus.md)
+ - [ResourceUpdatedDetails](docs/ResourceUpdatedDetails.md)
  - [RolloutDeviceSelection](docs/RolloutDeviceSelection.md)
  - [RolloutPolicy](docs/RolloutPolicy.md)
  - [RolloutStrategy](docs/RolloutStrategy.md)

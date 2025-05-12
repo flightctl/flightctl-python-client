@@ -36,7 +36,6 @@ class TestDiskResourceMonitorSpec(unittest.TestCase):
         model = DiskResourceMonitorSpec()
         if include_optional:
             return DiskResourceMonitorSpec(
-                monitor_type = '',
                 alert_rules = [
                     flightctl.models.resource_alert_rule.ResourceAlertRule(
                         severity = 'Warning', 
@@ -45,11 +44,11 @@ class TestDiskResourceMonitorSpec(unittest.TestCase):
                         description = '', )
                     ],
                 sampling_interval = '68072888001528021798096225500h',
+                monitor_type = '',
                 path = ''
             )
         else:
             return DiskResourceMonitorSpec(
-                monitor_type = '',
                 alert_rules = [
                     flightctl.models.resource_alert_rule.ResourceAlertRule(
                         severity = 'Warning', 
@@ -58,6 +57,7 @@ class TestDiskResourceMonitorSpec(unittest.TestCase):
                         description = '', )
                     ],
                 sampling_interval = '68072888001528021798096225500h',
+                monitor_type = '',
                 path = '',
         )
         """

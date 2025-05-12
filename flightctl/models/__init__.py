@@ -35,7 +35,6 @@ from flightctl.models.condition_status import ConditionStatus
 from flightctl.models.condition_type import ConditionType
 from flightctl.models.config_provider_spec import ConfigProviderSpec
 from flightctl.models.cpu_resource_monitor_spec import CpuResourceMonitorSpec
-from flightctl.models.custom_resource_monitor_spec import CustomResourceMonitorSpec
 from flightctl.models.device import Device
 from flightctl.models.device_application_status import DeviceApplicationStatus
 from flightctl.models.device_applications_summary_status import DeviceApplicationsSummaryStatus
@@ -76,6 +75,10 @@ from flightctl.models.enrollment_request_status import EnrollmentRequestStatus
 from flightctl.models.enrollment_service import EnrollmentService
 from flightctl.models.enrollment_service_auth import EnrollmentServiceAuth
 from flightctl.models.enrollment_service_service import EnrollmentServiceService
+from flightctl.models.event import Event
+from flightctl.models.event_details import EventDetails
+from flightctl.models.event_list import EventList
+from flightctl.models.event_source import EventSource
 from flightctl.models.file_content import FileContent
 from flightctl.models.file_metadata import FileMetadata
 from flightctl.models.file_operation import FileOperation
@@ -107,6 +110,7 @@ from flightctl.models.list_meta import ListMeta
 from flightctl.models.match_expression import MatchExpression
 from flightctl.models.memory_resource_monitor_spec import MemoryResourceMonitorSpec
 from flightctl.models.object_meta import ObjectMeta
+from flightctl.models.object_reference import ObjectReference
 from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.models.relative_path import RelativePath
 from flightctl.models.repo_spec_type import RepoSpecType
@@ -116,12 +120,14 @@ from flightctl.models.repository_spec import RepositorySpec
 from flightctl.models.repository_status import RepositoryStatus
 from flightctl.models.resource_alert_rule import ResourceAlertRule
 from flightctl.models.resource_alert_severity_type import ResourceAlertSeverityType
+from flightctl.models.resource_kind import ResourceKind
 from flightctl.models.resource_monitor import ResourceMonitor
 from flightctl.models.resource_monitor_spec import ResourceMonitorSpec
 from flightctl.models.resource_sync import ResourceSync
 from flightctl.models.resource_sync_list import ResourceSyncList
 from flightctl.models.resource_sync_spec import ResourceSyncSpec
 from flightctl.models.resource_sync_status import ResourceSyncStatus
+from flightctl.models.resource_updated_details import ResourceUpdatedDetails
 from flightctl.models.rollout_device_selection import RolloutDeviceSelection
 from flightctl.models.rollout_policy import RolloutPolicy
 from flightctl.models.rollout_strategy import RolloutStrategy

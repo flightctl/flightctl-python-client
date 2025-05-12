@@ -6,7 +6,6 @@ Specification for monitoring a resource.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**monitor_type** | **str** | The type of resource to monitor. | 
 **alert_rules** | [**List[ResourceAlertRule]**](ResourceAlertRule.md) | Array of alert rules. Only one alert per severity is allowed. | 
 **sampling_interval** | **str** | Duration between monitor samples. Format: positive integer followed by &#39;s&#39; for seconds, &#39;m&#39; for minutes, &#39;h&#39; for hours. | 
 

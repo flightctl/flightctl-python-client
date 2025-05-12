@@ -36,19 +36,6 @@ class TestCpuResourceMonitorSpec(unittest.TestCase):
         model = CpuResourceMonitorSpec()
         if include_optional:
             return CpuResourceMonitorSpec(
-                monitor_type = '',
-                alert_rules = [
-                    flightctl.models.resource_alert_rule.ResourceAlertRule(
-                        severity = 'Warning', 
-                        duration = '4s', 
-                        percentage = 1.337, 
-                        description = '', )
-                    ],
-                sampling_interval = '68072888001528021798096225500h'
-            )
-        else:
-            return CpuResourceMonitorSpec(
-                monitor_type = '',
                 alert_rules = [
                     flightctl.models.resource_alert_rule.ResourceAlertRule(
                         severity = 'Warning', 
@@ -57,6 +44,19 @@ class TestCpuResourceMonitorSpec(unittest.TestCase):
                         description = '', )
                     ],
                 sampling_interval = '68072888001528021798096225500h',
+                monitor_type = ''
+            )
+        else:
+            return CpuResourceMonitorSpec(
+                alert_rules = [
+                    flightctl.models.resource_alert_rule.ResourceAlertRule(
+                        severity = 'Warning', 
+                        duration = '4s', 
+                        percentage = 1.337, 
+                        description = '', )
+                    ],
+                sampling_interval = '68072888001528021798096225500h',
+                monitor_type = '',
         )
         """
 

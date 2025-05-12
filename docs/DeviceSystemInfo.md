@@ -1,6 +1,6 @@
 # DeviceSystemInfo
 
-DeviceSystemInfo is a set of ids/uuids to uniquely identify the device.
+System information collected from the device.
 
 ## Properties
 
@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **boot_id** | **str** | Boot ID reported by the device. | 
 **operating_system** | **str** | The Operating System reported by the device. | 
 **agent_version** | **str** | The Agent version. | 
+**custom_info** | **Dict[str, str]** | User-defined information about the device. | [optional] 
 
 ## Example
 

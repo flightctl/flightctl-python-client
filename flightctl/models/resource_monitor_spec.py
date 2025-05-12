@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from flightctl.models.resource_alert_rule import ResourceAlertRule
@@ -29,10 +29,9 @@ class ResourceMonitorSpec(BaseModel):
     """
     Specification for monitoring a resource.
     """ # noqa: E501
-    monitor_type: StrictStr = Field(description="The type of resource to monitor.", alias="monitorType")
     alert_rules: List[ResourceAlertRule] = Field(description="Array of alert rules. Only one alert per severity is allowed.", alias="alertRules")
     sampling_interval: Annotated[str, Field(strict=True)] = Field(description="Duration between monitor samples. Format: positive integer followed by 's' for seconds, 'm' for minutes, 'h' for hours.", alias="samplingInterval")
-    __properties: ClassVar[List[str]] = ["monitorType", "alertRules", "samplingInterval"]
+    __properties: ClassVar[List[str]] = ["alertRules", "samplingInterval"]
 
     @field_validator('sampling_interval')
     def sampling_interval_validate_regular_expression(cls, value):
@@ -99,7 +98,6 @@ class ResourceMonitorSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "monitorType": obj.get("monitorType"),
             "alertRules": [ResourceAlertRule.from_dict(_item) for _item in obj["alertRules"]] if obj.get("alertRules") is not None else None,
             "samplingInterval": obj.get("samplingInterval")
         })

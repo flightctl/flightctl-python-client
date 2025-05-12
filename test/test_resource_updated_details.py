@@ -15,10 +15,10 @@
 
 import unittest
 
-from flightctl.models.device_system_info import DeviceSystemInfo
+from flightctl.models.resource_updated_details import ResourceUpdatedDetails
 
-class TestDeviceSystemInfo(unittest.TestCase):
-    """DeviceSystemInfo unit test stubs"""
+class TestResourceUpdatedDetails(unittest.TestCase):
+    """ResourceUpdatedDetails unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,35 +26,32 @@ class TestDeviceSystemInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DeviceSystemInfo:
-        """Test DeviceSystemInfo
+    def make_instance(self, include_optional) -> ResourceUpdatedDetails:
+        """Test ResourceUpdatedDetails
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DeviceSystemInfo`
+        # uncomment below to create an instance of `ResourceUpdatedDetails`
         """
-        model = DeviceSystemInfo()
+        model = ResourceUpdatedDetails()
         if include_optional:
-            return DeviceSystemInfo(
-                architecture = '',
-                boot_id = '',
-                operating_system = '',
-                agent_version = '',
-                custom_info = {
-                    'key' : ''
-                    }
+            return ResourceUpdatedDetails(
+                updated_fields = [
+                    'owner'
+                    ],
+                previous_owner = '',
+                new_owner = ''
             )
         else:
-            return DeviceSystemInfo(
-                architecture = '',
-                boot_id = '',
-                operating_system = '',
-                agent_version = '',
+            return ResourceUpdatedDetails(
+                updated_fields = [
+                    'owner'
+                    ],
         )
         """
 
-    def testDeviceSystemInfo(self):
-        """Test DeviceSystemInfo"""
+    def testResourceUpdatedDetails(self):
+        """Test ResourceUpdatedDetails"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

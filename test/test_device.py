@@ -91,11 +91,9 @@ class TestDevice(unittest.TestCase):
                             message = '', 
                             reason = '', )
                         ], 
-                    system_info = flightctl.models.device_system_info.DeviceSystemInfo(
-                        architecture = '', 
-                        boot_id = '', 
-                        operating_system = '', 
-                        agent_version = '', ), 
+                    system_info = {
+                        'key' : ''
+                        }, 
                     applications = [
                         flightctl.models.device_application_status.DeviceApplicationStatus(
                             name = '', 
