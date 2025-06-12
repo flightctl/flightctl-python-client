@@ -6,9 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_fleet**](FleetApi.md#create_fleet) | **POST** /api/v1/fleets | 
 [**delete_fleet**](FleetApi.md#delete_fleet) | **DELETE** /api/v1/fleets/{name} | 
-[**delete_fleets**](FleetApi.md#delete_fleets) | **DELETE** /api/v1/fleets | 
 [**delete_template_version**](FleetApi.md#delete_template_version) | **DELETE** /api/v1/fleets/{fleet}/templateversions/{name} | 
-[**delete_template_versions**](FleetApi.md#delete_template_versions) | **DELETE** /api/v1/fleets/{fleet}/templateversions | 
 [**get_fleet**](FleetApi.md#get_fleet) | **GET** /api/v1/fleets/{name} | 
 [**get_fleet_status**](FleetApi.md#get_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
 [**get_template_version**](FleetApi.md#get_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
@@ -163,72 +161,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_fleets**
-> Status delete_fleets()
-
-
-
-Delete Fleet resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-
-    try:
-        api_response = api_instance.delete_fleets()
-        print("The response of FleetApi->delete_fleets:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->delete_fleets: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_template_version**
 > Status delete_template_version(fleet, name)
 
@@ -298,76 +230,6 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_template_versions**
-> Status delete_template_versions(fleet)
-
-
-
-delete a collection of template versions
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-    fleet = 'fleet_example' # str | The owner of the template versions.
-
-    try:
-        api_response = api_instance.delete_template_versions(fleet)
-        print("The response of FleetApi->delete_template_versions:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->delete_template_versions: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fleet** | **str**| The owner of the template versions. | 
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
