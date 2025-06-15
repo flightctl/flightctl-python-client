@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.application_volume import ApplicationVolume
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +28,9 @@ class ImageApplicationProviderSpec(BaseModel):
     """
     ImageApplicationProviderSpec
     """ # noqa: E501
+    volumes: Optional[List[ApplicationVolume]] = Field(default=None, description="List of application volumes.")
     image: StrictStr = Field(description="Reference to the container image for the application package.")
-    __properties: ClassVar[List[str]] = ["image"]
+    __properties: ClassVar[List[str]] = ["volumes", "image"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +71,13 @@ class ImageApplicationProviderSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in volumes (list)
+        _items = []
+        if self.volumes:
+            for _item_volumes in self.volumes:
+                if _item_volumes:
+                    _items.append(_item_volumes.to_dict())
+            _dict['volumes'] = _items
         return _dict
 
     @classmethod
@@ -81,6 +90,7 @@ class ImageApplicationProviderSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "volumes": [ApplicationVolume.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None,
             "image": obj.get("image")
         })
         return _obj

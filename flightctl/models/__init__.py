@@ -21,6 +21,9 @@ from flightctl.models.application_content import ApplicationContent
 from flightctl.models.application_env_vars import ApplicationEnvVars
 from flightctl.models.application_provider_spec import ApplicationProviderSpec
 from flightctl.models.application_status_type import ApplicationStatusType
+from flightctl.models.application_volume import ApplicationVolume
+from flightctl.models.application_volume_provider_spec import ApplicationVolumeProviderSpec
+from flightctl.models.application_volume_status import ApplicationVolumeStatus
 from flightctl.models.applications_summary_status_type import ApplicationsSummaryStatusType
 from flightctl.models.auth_config import AuthConfig
 from flightctl.models.batch import Batch
@@ -101,6 +104,9 @@ from flightctl.models.http_config_provider_spec import HttpConfigProviderSpec
 from flightctl.models.http_config_provider_spec_http_ref import HttpConfigProviderSpecHttpRef
 from flightctl.models.http_repo_spec import HttpRepoSpec
 from flightctl.models.image_application_provider_spec import ImageApplicationProviderSpec
+from flightctl.models.image_pull_policy import ImagePullPolicy
+from flightctl.models.image_volume_provider_spec import ImageVolumeProviderSpec
+from flightctl.models.image_volume_source import ImageVolumeSource
 from flightctl.models.inline_application_provider_spec import InlineApplicationProviderSpec
 from flightctl.models.inline_config_provider_spec import InlineConfigProviderSpec
 from flightctl.models.kubernetes_secret_provider_spec import KubernetesSecretProviderSpec

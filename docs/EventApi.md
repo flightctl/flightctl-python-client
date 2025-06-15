@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **list_events**
-> EventList list_events(field_selector=field_selector, limit=limit, var_continue=var_continue)
+> EventList list_events(field_selector=field_selector, order=order, limit=limit, var_continue=var_continue)
 
 
 
@@ -35,11 +35,12 @@ with flightctl.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.EventApi(api_client)
     field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\"). (optional)
+    order = desc # str | Sort order for the results by timestamp. Defaults to 'desc' (newest first). (optional) (default to desc)
     limit = 56 # int | The maximum number of events to return in the response. (optional)
     var_continue = 'var_continue_example' # str | An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response. (optional)
 
     try:
-        api_response = api_instance.list_events(field_selector=field_selector, limit=limit, var_continue=var_continue)
+        api_response = api_instance.list_events(field_selector=field_selector, order=order, limit=limit, var_continue=var_continue)
         print("The response of EventApi->list_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -54,6 +55,7 @@ with flightctl.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields, supporting operators like &#39;&#x3D;&#39;, &#39;&#x3D;&#x3D;&#39;, and &#39;!&#x3D;&#39; (e.g., \&quot;key1&#x3D;value1,key2!&#x3D;value2\&quot;). | [optional] 
+ **order** | **str**| Sort order for the results by timestamp. Defaults to &#39;desc&#39; (newest first). | [optional] [default to desc]
  **limit** | **int**| The maximum number of events to return in the response. | [optional] 
  **var_continue** | **str**| An optional parameter to query more results from the server. The value of the paramter must match the value of the &#39;continue&#39; field in the previous list response. | [optional] 
 

@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_resource_sync**](ResourcesyncApi.md#create_resource_sync) | **POST** /api/v1/resourcesyncs | 
 [**delete_resource_sync**](ResourcesyncApi.md#delete_resource_sync) | **DELETE** /api/v1/resourcesyncs/{name} | 
-[**delete_resource_syncs**](ResourcesyncApi.md#delete_resource_syncs) | **DELETE** /api/v1/resourcesyncs | 
 [**get_resource_sync**](ResourcesyncApi.md#get_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
 [**list_resource_syncs**](ResourcesyncApi.md#list_resource_syncs) | **GET** /api/v1/resourcesyncs | 
 [**patch_resource_sync**](ResourcesyncApi.md#patch_resource_sync) | **PATCH** /api/v1/resourcesyncs/{name} | 
@@ -152,72 +151,6 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_resource_syncs**
-> Status delete_resource_syncs()
-
-
-
-Delete ResourceSync resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.ResourcesyncApi(api_client)
-
-    try:
-        api_response = api_instance.delete_resource_syncs()
-        print("The response of ResourcesyncApi->delete_resource_syncs:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ResourcesyncApi->delete_resource_syncs: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

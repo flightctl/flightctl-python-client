@@ -18,23 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from flightctl.models.application_status_type import ApplicationStatusType
-from flightctl.models.application_volume_status import ApplicationVolumeStatus
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeviceApplicationStatus(BaseModel):
+class ApplicationVolumeStatus(BaseModel):
     """
-    DeviceApplicationStatus
+    Status of a volume used by an application.
     """ # noqa: E501
-    name: StrictStr = Field(description="Human readable name of the application.")
-    ready: StrictStr = Field(description="The number of containers which are ready in the application.")
-    restarts: StrictInt = Field(description="Number of restarts observed for the application.")
-    status: ApplicationStatusType
-    volumes: Optional[List[ApplicationVolumeStatus]] = Field(default=None, description="Status of volumes used by this application.")
-    __properties: ClassVar[List[str]] = ["name", "ready", "restarts", "status", "volumes"]
+    name: StrictStr = Field(description="Name of the volume.")
+    reference: StrictStr = Field(description="Reference to the deployed OCI-compliant image or artifact backing the volume.")
+    __properties: ClassVar[List[str]] = ["name", "reference"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +49,7 @@ class DeviceApplicationStatus(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeviceApplicationStatus from a JSON string"""
+        """Create an instance of ApplicationVolumeStatus from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,18 +70,11 @@ class DeviceApplicationStatus(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in volumes (list)
-        _items = []
-        if self.volumes:
-            for _item_volumes in self.volumes:
-                if _item_volumes:
-                    _items.append(_item_volumes.to_dict())
-            _dict['volumes'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeviceApplicationStatus from a dict"""
+        """Create an instance of ApplicationVolumeStatus from a dict"""
         if obj is None:
             return None
 
@@ -95,10 +83,7 @@ class DeviceApplicationStatus(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "ready": obj.get("ready"),
-            "restarts": obj.get("restarts"),
-            "status": obj.get("status"),
-            "volumes": [ApplicationVolumeStatus.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None
+            "reference": obj.get("reference")
         })
         return _obj
 

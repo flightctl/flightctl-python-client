@@ -19,8 +19,9 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.application_content import ApplicationContent
+from flightctl.models.application_volume import ApplicationVolume
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +29,9 @@ class InlineApplicationProviderSpec(BaseModel):
     """
     InlineApplicationProviderSpec
     """ # noqa: E501
+    volumes: Optional[List[ApplicationVolume]] = Field(default=None, description="List of application volumes.")
     inline: List[ApplicationContent] = Field(description="A list of application content.")
-    __properties: ClassVar[List[str]] = ["inline"]
+    __properties: ClassVar[List[str]] = ["volumes", "inline"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,6 +72,13 @@ class InlineApplicationProviderSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in volumes (list)
+        _items = []
+        if self.volumes:
+            for _item_volumes in self.volumes:
+                if _item_volumes:
+                    _items.append(_item_volumes.to_dict())
+            _dict['volumes'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in inline (list)
         _items = []
         if self.inline:
@@ -89,6 +98,7 @@ class InlineApplicationProviderSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "volumes": [ApplicationVolume.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None,
             "inline": [ApplicationContent.from_dict(_item) for _item in obj["inline"]] if obj.get("inline") is not None else None
         })
         return _obj
