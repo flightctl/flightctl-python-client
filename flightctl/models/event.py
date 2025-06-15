@@ -46,8 +46,8 @@ class Event(BaseModel):
     @field_validator('reason')
     def reason_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['ResourceCreated', 'ResourceCreationFailed', 'ResourceUpdated', 'ResourceUpdateFailed', 'ResourceDeleted', 'ResourceDeletionFailed']):
-            raise ValueError("must be one of enum values ('ResourceCreated', 'ResourceCreationFailed', 'ResourceUpdated', 'ResourceUpdateFailed', 'ResourceDeleted', 'ResourceDeletionFailed')")
+        if value not in set(['ResourceCreated', 'ResourceCreationFailed', 'ResourceUpdated', 'ResourceUpdateFailed', 'ResourceDeleted', 'ResourceDeletionFailed', 'DeviceDecommissioned', 'DeviceDecommissionFailed', 'DeviceCPUCritical', 'DeviceCPUWarning', 'DeviceCPUNormal', 'DeviceMemoryCritical', 'DeviceMemoryWarning', 'DeviceMemoryNormal', 'DeviceDiskCritical', 'DeviceDiskWarning', 'DeviceDiskNormal', 'DeviceApplicationError', 'DeviceApplicationDegraded', 'DeviceApplicationHealthy', 'DeviceDisconnected', 'DeviceConnected', 'DeviceContentUpToDate', 'DeviceContentOutOfDate', 'DeviceContentUpdating']):
+            raise ValueError("must be one of enum values ('ResourceCreated', 'ResourceCreationFailed', 'ResourceUpdated', 'ResourceUpdateFailed', 'ResourceDeleted', 'ResourceDeletionFailed', 'DeviceDecommissioned', 'DeviceDecommissionFailed', 'DeviceCPUCritical', 'DeviceCPUWarning', 'DeviceCPUNormal', 'DeviceMemoryCritical', 'DeviceMemoryWarning', 'DeviceMemoryNormal', 'DeviceDiskCritical', 'DeviceDiskWarning', 'DeviceDiskNormal', 'DeviceApplicationError', 'DeviceApplicationDegraded', 'DeviceApplicationHealthy', 'DeviceDisconnected', 'DeviceConnected', 'DeviceContentUpToDate', 'DeviceContentOutOfDate', 'DeviceContentUpdating')")
         return value
 
     @field_validator('type')

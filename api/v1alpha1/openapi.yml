@@ -231,36 +231,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - resourcesync
-      description: Delete ResourceSync resources.
-      operationId: deleteResourceSyncs
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
   /api/v1/resourcesyncs/{name}:
     get:
       tags:
@@ -575,36 +545,6 @@ paths:
                 $ref: '#/components/schemas/Status'
         "409":
           description: StatusConflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - repository
-      description: Delete Repository resources.
-      operationId: deleteRepositories
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
           content:
             application/json:
               schema:
@@ -935,36 +875,6 @@ paths:
                 $ref: '#/components/schemas/Status'
         "409":
           description: StatusConflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - device
-      description: Delete Device resources.
-      operationId: deleteDevices
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
           content:
             application/json:
               schema:
@@ -1618,36 +1528,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - enrollmentrequest
-      description: Delete EnrollmentRequest resources.
-      operationId: deleteEnrollmentRequests
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
   /api/v1/enrollmentrequests/{name}:
     get:
       tags:
@@ -2182,36 +2062,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - certificatesigningrequest
-      description: Delete CertificateSigningRequest resources.
-      operationId: deleteCertificateSigningRequests
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
   /api/v1/certificatesigningrequests/{name}:
     patch:
       tags:
@@ -2595,36 +2445,6 @@ paths:
                 $ref: '#/components/schemas/Status'
         "409":
           description: StatusConflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - fleet
-      description: Delete Fleet resources.
-      operationId: deleteFleets
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
           content:
             application/json:
               schema:
@@ -3071,43 +2891,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-    delete:
-      tags:
-        - fleet
-      description: delete a collection of template versions
-      operationId: deleteTemplateVersions
-      parameters:
-        - name: fleet
-          in: path
-          description: The owner of the template versions.
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
-        "503":
-          description: ServiceUnavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
   /api/v1/fleets/{fleet}/templateversions/{name}:
     get:
       tags:
@@ -3291,6 +3074,15 @@ paths:
           description: A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., "key1=value1,key2!=value2").
           schema:
             type: string
+        - name: order
+          in: query
+          description: Sort order for the results by timestamp. Defaults to 'desc' (newest first).
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
         - name: limit
           in: query
           description: The maximum number of events to return in the response.
@@ -3742,22 +3534,66 @@ components:
             - $ref: '#/components/schemas/InlineApplicationProviderSpec'
     ImageApplicationProviderSpec:
       type: object
-      properties:
-        image:
-          type: string
-          description: Reference to the container image for the application package.
-      required:
-        - image
+      allOf:
+        - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
+        - type: object
+          properties:
+            image:
+              type: string
+              description: Reference to the container image for the application package.
+          required:
+            - image
     InlineApplicationProviderSpec:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
+        - type: object
+          properties:
+            inline:
+              type: array
+              description: A list of application content.
+              items:
+                $ref: "#/components/schemas/ApplicationContent"
+          required:
+            - inline
+    ApplicationVolumeProviderSpec:
+      type: object
       properties:
-        inline:
+        volumes:
           type: array
-          description: A list of application content.
+          description: List of application volumes.
           items:
-            $ref: "#/components/schemas/ApplicationContent"
+            $ref: "#/components/schemas/ApplicationVolume"
+    ApplicationVolume:
+      allOf:
+        - type: object
+          description: Defines a named volume used by an application.
+          properties:
+            name:
+              type: string
+              description: Unique name of the volume used within the application.
+          required:
+            - name
+        - oneOf:
+            - $ref: "#/components/schemas/ImageVolumeProviderSpec"
+    ImageVolumeProviderSpec:
+      type: object
+      properties:
+        image:
+          $ref: '#/components/schemas/ImageVolumeSource'
       required:
-        - inline
+        - image
+    ImageVolumeSource:
+      type: object
+      description: Describes the source of an OCI-compliant image or artifact.
+      properties:
+        reference:
+          type: string
+          description: Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification.
+        pullPolicy:
+          $ref: '#/components/schemas/ImagePullPolicy'
+      required:
+        - reference
     ApplicationContent:
         allOf:
           - $ref: '#/components/schemas/FileContent'
@@ -3996,6 +3832,18 @@ components:
         - Single value (e.g., `8` matches the 8th minute).
 
         Example: `* 0-8,16-23 * * *`.'
+    ImagePullPolicy:
+      type: string
+      description: Optional. Defaults to 'IfNotPresent'. When set to 'Always', the image is pulled every time. When set to 'Never', the image must already exist on the device.
+      enum:
+        - "Always"
+        - "IfNotPresent"
+        - "Never"
+      x-enum-varnames:
+        - "PullAlways"
+        - "PullIfNotPresent"
+        - "PullNever"
+      default: IfNotPresent
     DeviceList:
       type: object
       properties:
@@ -4131,6 +3979,24 @@ components:
           description: Number of restarts observed for the application.
         status:
           $ref: "#/components/schemas/ApplicationStatusType"
+        volumes:
+          type: array
+          description: Status of volumes used by this application.
+          items:
+            $ref: "#/components/schemas/ApplicationVolumeStatus"
+    ApplicationVolumeStatus:
+      type: object
+      description: Status of a volume used by an application.
+      required:
+        - name
+        - reference
+      properties:
+        name:
+          type: string
+          description: Name of the volume.
+        reference:
+          type: string
+          description: Reference to the deployed OCI-compliant image or artifact backing the volume.
     DeviceApplicationsSummaryStatus:
       type: object
       description: A summary of the health of applications on the device.
@@ -5218,6 +5084,25 @@ components:
             - ResourceUpdateFailed
             - ResourceDeleted
             - ResourceDeletionFailed
+            - DeviceDecommissioned
+            - DeviceDecommissionFailed
+            - DeviceCPUCritical
+            - DeviceCPUWarning
+            - DeviceCPUNormal
+            - DeviceMemoryCritical
+            - DeviceMemoryWarning
+            - DeviceMemoryNormal
+            - DeviceDiskCritical
+            - DeviceDiskWarning
+            - DeviceDiskNormal
+            - DeviceApplicationError
+            - DeviceApplicationDegraded
+            - DeviceApplicationHealthy
+            - DeviceDisconnected
+            - DeviceConnected
+            - DeviceContentUpToDate
+            - DeviceContentOutOfDate
+            - DeviceContentUpdating
         message:
           type: string
           description: A human-readable description of the status of this operation.

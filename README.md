@@ -89,7 +89,6 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**auth_validate**](docs/AuthenticationApi.md#auth_validate) | **GET** /api/v1/auth/validate | 
 *CertificatesigningrequestApi* | [**create_certificate_signing_request**](docs/CertificatesigningrequestApi.md#create_certificate_signing_request) | **POST** /api/v1/certificatesigningrequests | 
 *CertificatesigningrequestApi* | [**delete_certificate_signing_request**](docs/CertificatesigningrequestApi.md#delete_certificate_signing_request) | **DELETE** /api/v1/certificatesigningrequests/{name} | 
-*CertificatesigningrequestApi* | [**delete_certificate_signing_requests**](docs/CertificatesigningrequestApi.md#delete_certificate_signing_requests) | **DELETE** /api/v1/certificatesigningrequests | 
 *CertificatesigningrequestApi* | [**get_certificate_signing_request**](docs/CertificatesigningrequestApi.md#get_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
 *CertificatesigningrequestApi* | [**list_certificate_signing_requests**](docs/CertificatesigningrequestApi.md#list_certificate_signing_requests) | **GET** /api/v1/certificatesigningrequests | 
 *CertificatesigningrequestApi* | [**patch_certificate_signing_request**](docs/CertificatesigningrequestApi.md#patch_certificate_signing_request) | **PATCH** /api/v1/certificatesigningrequests/{name} | 
@@ -98,7 +97,6 @@ Class | Method | HTTP request | Description
 *DeviceApi* | [**create_device**](docs/DeviceApi.md#create_device) | **POST** /api/v1/devices | 
 *DeviceApi* | [**decommission_device**](docs/DeviceApi.md#decommission_device) | **PUT** /api/v1/devices/{name}/decommission | 
 *DeviceApi* | [**delete_device**](docs/DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{name} | 
-*DeviceApi* | [**delete_devices**](docs/DeviceApi.md#delete_devices) | **DELETE** /api/v1/devices | 
 *DeviceApi* | [**get_device**](docs/DeviceApi.md#get_device) | **GET** /api/v1/devices/{name} | 
 *DeviceApi* | [**get_device_status**](docs/DeviceApi.md#get_device_status) | **GET** /api/v1/devices/{name}/status | 
 *DeviceApi* | [**get_rendered_device**](docs/DeviceApi.md#get_rendered_device) | **GET** /api/v1/devices/{name}/rendered | 
@@ -110,7 +108,6 @@ Class | Method | HTTP request | Description
 *EnrollmentrequestApi* | [**approve_enrollment_request**](docs/EnrollmentrequestApi.md#approve_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name}/approval | 
 *EnrollmentrequestApi* | [**create_enrollment_request**](docs/EnrollmentrequestApi.md#create_enrollment_request) | **POST** /api/v1/enrollmentrequests | 
 *EnrollmentrequestApi* | [**delete_enrollment_request**](docs/EnrollmentrequestApi.md#delete_enrollment_request) | **DELETE** /api/v1/enrollmentrequests/{name} | 
-*EnrollmentrequestApi* | [**delete_enrollment_requests**](docs/EnrollmentrequestApi.md#delete_enrollment_requests) | **DELETE** /api/v1/enrollmentrequests | 
 *EnrollmentrequestApi* | [**get_enrollment_config**](docs/EnrollmentrequestApi.md#get_enrollment_config) | **GET** /api/v1/enrollmentconfig | 
 *EnrollmentrequestApi* | [**get_enrollment_request**](docs/EnrollmentrequestApi.md#get_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
 *EnrollmentrequestApi* | [**get_enrollment_request_status**](docs/EnrollmentrequestApi.md#get_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
@@ -122,9 +119,7 @@ Class | Method | HTTP request | Description
 *EventApi* | [**list_events**](docs/EventApi.md#list_events) | **GET** /api/v1/events | 
 *FleetApi* | [**create_fleet**](docs/FleetApi.md#create_fleet) | **POST** /api/v1/fleets | 
 *FleetApi* | [**delete_fleet**](docs/FleetApi.md#delete_fleet) | **DELETE** /api/v1/fleets/{name} | 
-*FleetApi* | [**delete_fleets**](docs/FleetApi.md#delete_fleets) | **DELETE** /api/v1/fleets | 
 *FleetApi* | [**delete_template_version**](docs/FleetApi.md#delete_template_version) | **DELETE** /api/v1/fleets/{fleet}/templateversions/{name} | 
-*FleetApi* | [**delete_template_versions**](docs/FleetApi.md#delete_template_versions) | **DELETE** /api/v1/fleets/{fleet}/templateversions | 
 *FleetApi* | [**get_fleet**](docs/FleetApi.md#get_fleet) | **GET** /api/v1/fleets/{name} | 
 *FleetApi* | [**get_fleet_status**](docs/FleetApi.md#get_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
 *FleetApi* | [**get_template_version**](docs/FleetApi.md#get_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
@@ -136,7 +131,6 @@ Class | Method | HTTP request | Description
 *FleetApi* | [**replace_fleet_status**](docs/FleetApi.md#replace_fleet_status) | **PUT** /api/v1/fleets/{name}/status | 
 *LabelApi* | [**list_labels**](docs/LabelApi.md#list_labels) | **GET** /api/v1/labels | 
 *RepositoryApi* | [**create_repository**](docs/RepositoryApi.md#create_repository) | **POST** /api/v1/repositories | 
-*RepositoryApi* | [**delete_repositories**](docs/RepositoryApi.md#delete_repositories) | **DELETE** /api/v1/repositories | 
 *RepositoryApi* | [**delete_repository**](docs/RepositoryApi.md#delete_repository) | **DELETE** /api/v1/repositories/{name} | 
 *RepositoryApi* | [**get_repository**](docs/RepositoryApi.md#get_repository) | **GET** /api/v1/repositories/{name} | 
 *RepositoryApi* | [**list_repositories**](docs/RepositoryApi.md#list_repositories) | **GET** /api/v1/repositories | 
@@ -144,7 +138,6 @@ Class | Method | HTTP request | Description
 *RepositoryApi* | [**replace_repository**](docs/RepositoryApi.md#replace_repository) | **PUT** /api/v1/repositories/{name} | 
 *ResourcesyncApi* | [**create_resource_sync**](docs/ResourcesyncApi.md#create_resource_sync) | **POST** /api/v1/resourcesyncs | 
 *ResourcesyncApi* | [**delete_resource_sync**](docs/ResourcesyncApi.md#delete_resource_sync) | **DELETE** /api/v1/resourcesyncs/{name} | 
-*ResourcesyncApi* | [**delete_resource_syncs**](docs/ResourcesyncApi.md#delete_resource_syncs) | **DELETE** /api/v1/resourcesyncs | 
 *ResourcesyncApi* | [**get_resource_sync**](docs/ResourcesyncApi.md#get_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
 *ResourcesyncApi* | [**list_resource_syncs**](docs/ResourcesyncApi.md#list_resource_syncs) | **GET** /api/v1/resourcesyncs | 
 *ResourcesyncApi* | [**patch_resource_sync**](docs/ResourcesyncApi.md#patch_resource_sync) | **PATCH** /api/v1/resourcesyncs/{name} | 
@@ -160,6 +153,9 @@ Class | Method | HTTP request | Description
  - [ApplicationEnvVars](docs/ApplicationEnvVars.md)
  - [ApplicationProviderSpec](docs/ApplicationProviderSpec.md)
  - [ApplicationStatusType](docs/ApplicationStatusType.md)
+ - [ApplicationVolume](docs/ApplicationVolume.md)
+ - [ApplicationVolumeProviderSpec](docs/ApplicationVolumeProviderSpec.md)
+ - [ApplicationVolumeStatus](docs/ApplicationVolumeStatus.md)
  - [ApplicationsSummaryStatusType](docs/ApplicationsSummaryStatusType.md)
  - [AuthConfig](docs/AuthConfig.md)
  - [Batch](docs/Batch.md)
@@ -240,6 +236,9 @@ Class | Method | HTTP request | Description
  - [HttpConfigProviderSpecHttpRef](docs/HttpConfigProviderSpecHttpRef.md)
  - [HttpRepoSpec](docs/HttpRepoSpec.md)
  - [ImageApplicationProviderSpec](docs/ImageApplicationProviderSpec.md)
+ - [ImagePullPolicy](docs/ImagePullPolicy.md)
+ - [ImageVolumeProviderSpec](docs/ImageVolumeProviderSpec.md)
+ - [ImageVolumeSource](docs/ImageVolumeSource.md)
  - [InlineApplicationProviderSpec](docs/InlineApplicationProviderSpec.md)
  - [InlineConfigProviderSpec](docs/InlineConfigProviderSpec.md)
  - [KubernetesSecretProviderSpec](docs/KubernetesSecretProviderSpec.md)

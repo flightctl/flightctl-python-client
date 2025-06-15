@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**create_device**](DeviceApi.md#create_device) | **POST** /api/v1/devices | 
 [**decommission_device**](DeviceApi.md#decommission_device) | **PUT** /api/v1/devices/{name}/decommission | 
 [**delete_device**](DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{name} | 
-[**delete_devices**](DeviceApi.md#delete_devices) | **DELETE** /api/v1/devices | 
 [**get_device**](DeviceApi.md#get_device) | **GET** /api/v1/devices/{name} | 
 [**get_device_status**](DeviceApi.md#get_device_status) | **GET** /api/v1/devices/{name}/status | 
 [**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /api/v1/devices/{name}/rendered | 
@@ -232,72 +231,6 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_devices**
-> Status delete_devices()
-
-
-
-Delete Device resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.DeviceApi(api_client)
-
-    try:
-        api_response = api_instance.delete_devices()
-        print("The response of DeviceApi->delete_devices:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->delete_devices: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

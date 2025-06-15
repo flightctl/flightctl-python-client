@@ -5,7 +5,6 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_repository**](RepositoryApi.md#create_repository) | **POST** /api/v1/repositories | 
-[**delete_repositories**](RepositoryApi.md#delete_repositories) | **DELETE** /api/v1/repositories | 
 [**delete_repository**](RepositoryApi.md#delete_repository) | **DELETE** /api/v1/repositories/{name} | 
 [**get_repository**](RepositoryApi.md#get_repository) | **GET** /api/v1/repositories/{name} | 
 [**list_repositories**](RepositoryApi.md#list_repositories) | **GET** /api/v1/repositories | 
@@ -81,72 +80,6 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_repositories**
-> Status delete_repositories()
-
-
-
-Delete Repository resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.RepositoryApi(api_client)
-
-    try:
-        api_response = api_instance.delete_repositories()
-        print("The response of RepositoryApi->delete_repositories:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RepositoryApi->delete_repositories: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
 **503** | ServiceUnavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

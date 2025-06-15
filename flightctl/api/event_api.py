@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from flightctl.models.event_list import EventList
@@ -44,6 +44,7 @@ class EventApi:
     def list_events(
         self,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort order for the results by timestamp. Defaults to 'desc' (newest first).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of events to return in the response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         _request_timeout: Union[
@@ -65,6 +66,8 @@ class EventApi:
 
         :param field_selector: A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").
         :type field_selector: str
+        :param order: Sort order for the results by timestamp. Defaults to 'desc' (newest first).
+        :type order: str
         :param limit: The maximum number of events to return in the response.
         :type limit: int
         :param var_continue: An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.
@@ -93,6 +96,7 @@ class EventApi:
 
         _param = self._list_events_serialize(
             field_selector=field_selector,
+            order=order,
             limit=limit,
             var_continue=var_continue,
             _request_auth=_request_auth,
@@ -123,6 +127,7 @@ class EventApi:
     def list_events_with_http_info(
         self,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort order for the results by timestamp. Defaults to 'desc' (newest first).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of events to return in the response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         _request_timeout: Union[
@@ -144,6 +149,8 @@ class EventApi:
 
         :param field_selector: A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").
         :type field_selector: str
+        :param order: Sort order for the results by timestamp. Defaults to 'desc' (newest first).
+        :type order: str
         :param limit: The maximum number of events to return in the response.
         :type limit: int
         :param var_continue: An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.
@@ -172,6 +179,7 @@ class EventApi:
 
         _param = self._list_events_serialize(
             field_selector=field_selector,
+            order=order,
             limit=limit,
             var_continue=var_continue,
             _request_auth=_request_auth,
@@ -202,6 +210,7 @@ class EventApi:
     def list_events_without_preload_content(
         self,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort order for the results by timestamp. Defaults to 'desc' (newest first).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of events to return in the response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         _request_timeout: Union[
@@ -223,6 +232,8 @@ class EventApi:
 
         :param field_selector: A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").
         :type field_selector: str
+        :param order: Sort order for the results by timestamp. Defaults to 'desc' (newest first).
+        :type order: str
         :param limit: The maximum number of events to return in the response.
         :type limit: int
         :param var_continue: An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.
@@ -251,6 +262,7 @@ class EventApi:
 
         _param = self._list_events_serialize(
             field_selector=field_selector,
+            order=order,
             limit=limit,
             var_continue=var_continue,
             _request_auth=_request_auth,
@@ -276,6 +288,7 @@ class EventApi:
     def _list_events_serialize(
         self,
         field_selector,
+        order,
         limit,
         var_continue,
         _request_auth,
@@ -303,6 +316,10 @@ class EventApi:
         if field_selector is not None:
             
             _query_params.append(('fieldSelector', field_selector))
+            
+        if order is not None:
+            
+            _query_params.append(('order', order))
             
         if limit is not None:
             
