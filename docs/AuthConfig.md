@@ -1,13 +1,14 @@
 # AuthConfig
 
-Auth config.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_type** | **str** | Auth type. | 
-**auth_url** | **str** | Auth URL. | 
+**api_version** | **str** | APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources. | 
+**providers** | [**List[AuthProvider]**](AuthProvider.md) | List of all available authentication providers. | [optional] 
+**default_provider** | **str** | Name of the default authentication provider. | [optional] 
+**organizations_enabled** | **bool** | Whether organizations are enabled for authentication. | [optional] 
 
 ## Example
 

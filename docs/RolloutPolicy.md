@@ -7,9 +7,9 @@ RolloutPolicy is the rollout policy of the fleet.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **disruption_budget** | [**DisruptionBudget**](DisruptionBudget.md) |  | [optional] 
-**device_selection** | [**RolloutDeviceSelection**](RolloutDeviceSelection.md) |  | [optional] 
+**device_selection** | [**BatchSequence**](BatchSequence.md) |  | [optional] 
 **success_threshold** | **str** | Percentage is the string format representing percentage string. | [optional] 
-**default_update_timeout** | **str** | The maximum duration allowed for the action to complete. The duration should be specified as a positive integer followed by a time unit. Supported time units are: &#x60;s&#x60; for seconds, &#x60;m&#x60; for minutes, &#x60;h&#x60; for hours. | [optional] [default to '0s']
+**default_update_timeout** | **str** | The maximum duration allowed for the action to complete. The duration should be specified as a positive integer followed by a time unit. Supported time units are: &#x60;s&#x60; for seconds, &#x60;m&#x60; for minutes, &#x60;h&#x60; for hours. | [optional] 
 
 ## Example
 

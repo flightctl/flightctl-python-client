@@ -6,9 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_fleet**](FleetApi.md#create_fleet) | **POST** /api/v1/fleets | 
 [**delete_fleet**](FleetApi.md#delete_fleet) | **DELETE** /api/v1/fleets/{name} | 
-[**delete_fleets**](FleetApi.md#delete_fleets) | **DELETE** /api/v1/fleets | 
 [**delete_template_version**](FleetApi.md#delete_template_version) | **DELETE** /api/v1/fleets/{fleet}/templateversions/{name} | 
-[**delete_template_versions**](FleetApi.md#delete_template_versions) | **DELETE** /api/v1/fleets/{fleet}/templateversions | 
 [**get_fleet**](FleetApi.md#get_fleet) | **GET** /api/v1/fleets/{name} | 
 [**get_fleet_status**](FleetApi.md#get_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
 [**get_template_version**](FleetApi.md#get_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
@@ -22,8 +20,6 @@ Method | HTTP request | Description
 
 # **create_fleet**
 > Fleet create_fleet(fleet)
-
-
 
 Create a Fleet resource.
 
@@ -87,15 +83,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_fleet**
 > Status delete_fleet(name)
-
-
 
 Delete a Fleet resource.
 
@@ -158,81 +153,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_fleets**
-> Status delete_fleets()
-
-
-
-Delete Fleet resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-
-    try:
-        api_response = api_instance.delete_fleets()
-        print("The response of FleetApi->delete_fleets:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->delete_fleets: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_template_version**
 > Status delete_template_version(fleet, name)
-
-
 
 delete a template version
 
@@ -297,85 +225,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_template_versions**
-> Status delete_template_versions(fleet)
-
-
-
-delete a collection of template versions
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.FleetApi(api_client)
-    fleet = 'fleet_example' # str | The owner of the template versions.
-
-    try:
-        api_response = api_instance.delete_template_versions(fleet)
-        print("The response of FleetApi->delete_template_versions:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FleetApi->delete_template_versions: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fleet** | **str**| The owner of the template versions. | 
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_fleet**
 > Fleet get_fleet(name, add_devices_summary=add_devices_summary)
-
-
 
 Get a Fleet resource.
 
@@ -440,15 +297,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_fleet_status**
 > Fleet get_fleet_status(name)
-
-
 
 read status of the specified Fleet
 
@@ -511,15 +367,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_template_version**
 > TemplateVersion get_template_version(fleet, name)
-
-
 
 read the specified template version
 
@@ -584,15 +439,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_fleets**
 > FleetList list_fleets(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, add_devices_summary=add_devices_summary)
-
-
 
 List Fleet resources.
 
@@ -664,14 +518,13 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_template_versions**
 > TemplateVersionList list_template_versions(fleet, var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
-
-
 
 list template versions
 
@@ -743,14 +596,13 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_fleet**
 > Fleet patch_fleet(name, patch_request_inner)
-
-
 
 Patch a Fleet resource.
 
@@ -817,16 +669,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_fleet_status**
 > Fleet patch_fleet_status(name, patch_request_inner)
-
-
 
 Patch the status of a Fleet resource.
 
@@ -893,15 +744,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_fleet**
 > Fleet replace_fleet(name, fleet)
-
-
 
 Update a Fleet resource.
 
@@ -967,17 +817,16 @@ No authorization required
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**404** | NotFound |  -  |
+**404** | Not Found |  -  |
 **403** | Forbidden |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_fleet_status**
 > Fleet replace_fleet_status(name, fleet)
-
-
 
 replace status of the specified Fleet
 
@@ -1042,8 +891,9 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

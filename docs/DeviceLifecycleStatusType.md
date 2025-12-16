@@ -4,13 +4,13 @@ Status type of the device lifecycle.
 
 ## Enum
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `DeviceLifecycleStatusUnknown` (value: `'Unknown'`)
 
-* `ENROLLED` (value: `'Enrolled'`)
+* `DeviceLifecycleStatusEnrolled` (value: `'Enrolled'`)
 
-* `DECOMMISSIONING` (value: `'Decommissioning'`)
+* `DeviceLifecycleStatusDecommissioning` (value: `'Decommissioning'`)
 
-* `DECOMMISSIONED` (value: `'Decommissioned'`)
+* `DeviceLifecycleStatusDecommissioned` (value: `'Decommissioned'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

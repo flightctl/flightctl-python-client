@@ -4,13 +4,13 @@ Status of the integrity of the device.
 
 ## Enum
 
-* `PASSED` (value: `'Passed'`)
+* `DeviceIntegrityStatusVerified` (value: `'Verified'`)
 
-* `FAILED` (value: `'Failed'`)
+* `DeviceIntegrityStatusFailed` (value: `'Failed'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `DeviceIntegrityStatusUnknown` (value: `'Unknown'`)
 
-* `UNSUPPORTED` (value: `'Unsupported'`)
+* `DeviceIntegrityStatusUnsupported` (value: `'Unsupported'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

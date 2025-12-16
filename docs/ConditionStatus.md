@@ -4,11 +4,11 @@ Status of the condition, one of True, False, Unknown.
 
 ## Enum
 
-* `TRUE` (value: `'True'`)
+* `ConditionStatusTrue` (value: `'True'`)
 
-* `FALSE` (value: `'False'`)
+* `ConditionStatusFalse` (value: `'False'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `ConditionStatusUnknown` (value: `'Unknown'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

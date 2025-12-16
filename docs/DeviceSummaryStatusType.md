@@ -4,17 +4,21 @@ Status of the device.
 
 ## Enum
 
-* `ONLINE` (value: `'Online'`)
+* `DeviceSummaryStatusOnline` (value: `'Online'`)
 
-* `DEGRADED` (value: `'Degraded'`)
+* `DeviceSummaryStatusDegraded` (value: `'Degraded'`)
 
-* `ERROR` (value: `'Error'`)
+* `DeviceSummaryStatusError` (value: `'Error'`)
 
-* `REBOOTING` (value: `'Rebooting'`)
+* `DeviceSummaryStatusRebooting` (value: `'Rebooting'`)
 
-* `POWEREDOFF` (value: `'PoweredOff'`)
+* `DeviceSummaryStatusPoweredOff` (value: `'PoweredOff'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `DeviceSummaryStatusUnknown` (value: `'Unknown'`)
+
+* `DeviceSummaryStatusAwaitingReconnect` (value: `'AwaitingReconnect'`)
+
+* `DeviceSummaryStatusConflictPaused` (value: `'ConflictPaused'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

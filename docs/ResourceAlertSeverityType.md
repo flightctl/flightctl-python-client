@@ -4,11 +4,11 @@ Severity of the alert.
 
 ## Enum
 
-* `WARNING` (value: `'Warning'`)
+* `ResourceAlertSeverityTypeWarning` (value: `'Warning'`)
 
-* `CRITICAL` (value: `'Critical'`)
+* `ResourceAlertSeverityTypeCritical` (value: `'Critical'`)
 
-* `INFO` (value: `'Info'`)
+* `ResourceAlertSeverityTypeInfo` (value: `'Info'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

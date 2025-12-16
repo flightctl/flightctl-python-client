@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**detail_type** | **str** | The type of detail for discriminator purposes. | 
 **updated_fields** | **List[str]** | List of fields that were updated in the resource. | 
 **previous_owner** | **str** | The previous owner (if applicable). | [optional] 
 **new_owner** | **str** | The new owner (if applicable). | [optional] 

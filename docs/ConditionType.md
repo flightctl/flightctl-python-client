@@ -4,35 +4,37 @@ Type of condition in CamelCase.
 
 ## Enum
 
-* `APPROVED` (value: `'Approved'`)
+* `EnrollmentRequestApproved` (value: `'Approved'`)
 
-* `APPROVED` (value: `'Approved'`)
+* `EnrollmentRequestTPMVerified` (value: `'TPMVerified'`)
 
-* `DENIED` (value: `'Denied'`)
+* `CertificateSigningRequestApproved` (value: `'Approved'`)
 
-* `FAILED` (value: `'Failed'`)
+* `CertificateSigningRequestDenied` (value: `'Denied'`)
 
-* `ACCESSIBLE` (value: `'Accessible'`)
+* `CertificateSigningRequestFailed` (value: `'Failed'`)
 
-* `ACCESSIBLE` (value: `'Accessible'`)
+* `CertificateSigningRequestTPMVerified` (value: `'TPMVerified'`)
 
-* `RESOURCEPARSED` (value: `'ResourceParsed'`)
+* `RepositoryAccessible` (value: `'Accessible'`)
 
-* `SYNCED` (value: `'Synced'`)
+* `ResourceSyncAccessible` (value: `'Accessible'`)
 
-* `OVERLAPPINGSELECTORS` (value: `'OverlappingSelectors'`)
+* `ResourceSyncResourceParsed` (value: `'ResourceParsed'`)
 
-* `VALID` (value: `'Valid'`)
+* `ResourceSyncSynced` (value: `'Synced'`)
 
-* `ROLLOUTINPROGRESS` (value: `'RolloutInProgress'`)
+* `FleetValid` (value: `'Valid'`)
 
-* `UPDATING` (value: `'Updating'`)
+* `FleetRolloutInProgress` (value: `'RolloutInProgress'`)
 
-* `SPECVALID` (value: `'SpecValid'`)
+* `DeviceUpdating` (value: `'Updating'`)
 
-* `MULTIPLEOWNERS` (value: `'MultipleOwners'`)
+* `DeviceSpecValid` (value: `'SpecValid'`)
 
-* `DEVICEDECOMMISSIONING` (value: `'DeviceDecommissioning'`)
+* `DeviceMultipleOwners` (value: `'MultipleOwners'`)
+
+* `DeviceDecommissioning` (value: `'DeviceDecommissioning'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,13 +4,15 @@ Status of all applications on the device.
 
 ## Enum
 
-* `HEALTHY` (value: `'Healthy'`)
+* `ApplicationsSummaryStatusHealthy` (value: `'Healthy'`)
 
-* `DEGRADED` (value: `'Degraded'`)
+* `ApplicationsSummaryStatusDegraded` (value: `'Degraded'`)
 
-* `ERROR` (value: `'Error'`)
+* `ApplicationsSummaryStatusError` (value: `'Error'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `ApplicationsSummaryStatusUnknown` (value: `'Unknown'`)
+
+* `ApplicationsSummaryStatusNoApplications` (value: `'NoApplications'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

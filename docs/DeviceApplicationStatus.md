@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **ready** | **str** | The number of containers which are ready in the application. | 
 **restarts** | **int** | Number of restarts observed for the application. | 
 **status** | [**ApplicationStatusType**](ApplicationStatusType.md) |  | 
+**embedded** | **bool** | Whether the application is embedded in the bootc image. | 
+**app_type** | [**AppType**](AppType.md) |  | 
+**volumes** | [**List[ApplicationVolumeStatus]**](ApplicationVolumeStatus.md) | Status of volumes used by this application. | [optional] 
 
 ## Example
 

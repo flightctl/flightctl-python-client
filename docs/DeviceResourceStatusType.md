@@ -4,15 +4,15 @@ The types of resource statuses.
 
 ## Enum
 
-* `HEALTHY` (value: `'Healthy'`)
+* `DeviceResourceStatusHealthy` (value: `'Healthy'`)
 
-* `WARNING` (value: `'Warning'`)
+* `DeviceResourceStatusWarning` (value: `'Warning'`)
 
-* `CRITICAL` (value: `'Critical'`)
+* `DeviceResourceStatusCritical` (value: `'Critical'`)
 
-* `ERROR` (value: `'Error'`)
+* `DeviceResourceStatusError` (value: `'Error'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `DeviceResourceStatusUnknown` (value: `'Unknown'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

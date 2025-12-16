@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**approve_enrollment_request**](EnrollmentrequestApi.md#approve_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name}/approval | 
 [**create_enrollment_request**](EnrollmentrequestApi.md#create_enrollment_request) | **POST** /api/v1/enrollmentrequests | 
 [**delete_enrollment_request**](EnrollmentrequestApi.md#delete_enrollment_request) | **DELETE** /api/v1/enrollmentrequests/{name} | 
-[**delete_enrollment_requests**](EnrollmentrequestApi.md#delete_enrollment_requests) | **DELETE** /api/v1/enrollmentrequests | 
 [**get_enrollment_config**](EnrollmentrequestApi.md#get_enrollment_config) | **GET** /api/v1/enrollmentconfig | 
 [**get_enrollment_request**](EnrollmentrequestApi.md#get_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
 [**get_enrollment_request_status**](EnrollmentrequestApi.md#get_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
@@ -20,8 +19,6 @@ Method | HTTP request | Description
 
 # **approve_enrollment_request**
 > EnrollmentRequestApprovalStatus approve_enrollment_request(name, enrollment_request_approval)
-
-
 
 Approve or deny an EnrollmentRequest.
 
@@ -88,15 +85,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_enrollment_request**
 > EnrollmentRequest create_enrollment_request(enrollment_request)
-
-
 
 Create an EnrollmentRequest resource.
 
@@ -160,15 +156,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_enrollment_request**
 > Status delete_enrollment_request(name)
-
-
 
 Delete an EnrollmentRequest resource.
 
@@ -231,81 +226,15 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_enrollment_requests**
-> Status delete_enrollment_requests()
-
-
-
-Delete EnrollmentRequest resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.EnrollmentrequestApi(api_client)
-
-    try:
-        api_response = api_instance.delete_enrollment_requests()
-        print("The response of EnrollmentrequestApi->delete_enrollment_requests:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EnrollmentrequestApi->delete_enrollment_requests: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_enrollment_config**
 > EnrollmentConfig get_enrollment_config(csr=csr)
-
-
 
 Get enrollment information.
 
@@ -370,14 +299,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_enrollment_request**
 > EnrollmentRequest get_enrollment_request(name)
-
-
 
 Get an EnrollmentRequest resource.
 
@@ -440,15 +368,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_enrollment_request_status**
 > EnrollmentRequest get_enrollment_request_status(name)
-
-
 
 Get the status of an EnrollmentRequest resource.
 
@@ -511,15 +438,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_enrollment_requests**
 > EnrollmentRequestList list_enrollment_requests(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
-
-
 
 List EnrollmentRequest resources.
 
@@ -589,14 +515,13 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_enrollment_request**
 > EnrollmentRequest patch_enrollment_request(name, patch_request_inner)
-
-
 
 Patch an EnrollmentRequest resource.
 
@@ -663,16 +588,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
+**404** | Not Found |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_enrollment_request_status**
 > EnrollmentRequest patch_enrollment_request_status(name, patch_request_inner)
-
-
 
 Patch the status of an EnrollmentRequest resource.
 
@@ -739,16 +663,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
+**404** | Not Found |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_enrollment_request**
 > EnrollmentRequest replace_enrollment_request(name, enrollment_request)
-
-
 
 Update an EnrollmentRequest resource.
 
@@ -815,16 +738,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_enrollment_request_status**
 > EnrollmentRequest replace_enrollment_request_status(name, enrollment_request)
-
-
 
 Update the status of an EnrollmentRequest resource.
 
@@ -889,8 +811,9 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

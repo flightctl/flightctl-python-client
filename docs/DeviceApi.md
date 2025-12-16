@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**create_device**](DeviceApi.md#create_device) | **POST** /api/v1/devices | 
 [**decommission_device**](DeviceApi.md#decommission_device) | **PUT** /api/v1/devices/{name}/decommission | 
 [**delete_device**](DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{name} | 
-[**delete_devices**](DeviceApi.md#delete_devices) | **DELETE** /api/v1/devices | 
 [**get_device**](DeviceApi.md#get_device) | **GET** /api/v1/devices/{name} | 
+[**get_device_last_seen**](DeviceApi.md#get_device_last_seen) | **GET** /api/v1/devices/{name}/lastseen | 
 [**get_device_status**](DeviceApi.md#get_device_status) | **GET** /api/v1/devices/{name}/status | 
 [**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /api/v1/devices/{name}/rendered | 
 [**list_devices**](DeviceApi.md#list_devices) | **GET** /api/v1/devices | 
@@ -20,8 +20,6 @@ Method | HTTP request | Description
 
 # **create_device**
 > Device create_device(device)
-
-
 
 Create a Device resource.
 
@@ -85,15 +83,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **decommission_device**
 > Device decommission_device(name, device_decommission)
-
-
 
 schedule the device to decommission
 
@@ -160,15 +157,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_device**
 > Status delete_device(name)
-
-
 
 Delete a Device resource.
 
@@ -231,81 +227,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_devices**
-> Status delete_devices()
-
-
-
-Delete Device resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.DeviceApi(api_client)
-
-    try:
-        api_response = api_instance.delete_devices()
-        print("The response of DeviceApi->delete_devices:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->delete_devices: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_device**
 > Device get_device(name)
-
-
 
 Get a Device resource.
 
@@ -368,15 +297,85 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_device_last_seen**
+> DeviceLastSeen get_device_last_seen(name)
+
+Get the last seen timestamp of the Device resource.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device_last_seen import DeviceLastSeen
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource to get the last seen timestamp for.
+
+    try:
+        api_response = api_instance.get_device_last_seen(name)
+        print("The response of DeviceApi->get_device_last_seen:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_last_seen: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource to get the last seen timestamp for. | 
+
+### Return type
+
+[**DeviceLastSeen**](DeviceLastSeen.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**204** | No Content |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_device_status**
 > Device get_device_status(name)
-
-
 
 Get the status of a Device resource.
 
@@ -439,15 +438,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_rendered_device**
 > Device get_rendered_device(name, known_rendered_version=known_rendered_version)
-
-
 
 Get the rendered device.
 
@@ -510,19 +508,18 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
-**204** | No content |  -  |
+**204** | No Content |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_devices**
 > DeviceList list_devices(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, summary_only=summary_only)
-
-
 
 List Device resources.
 
@@ -593,15 +590,14 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**403** | Not allowed |  -  |
-**503** | ServiceUnavailable |  -  |
+**403** | Forbidden |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_device**
 > Device patch_device(name, patch_request_inner)
-
-
 
 Patch a Device resource.
 
@@ -668,16 +664,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_device_status**
 > Device patch_device_status(name, patch_request_inner)
-
-
 
 Patch the status of a Device resource.
 
@@ -744,15 +739,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_device**
 > Device replace_device(name, device)
-
-
 
 Update a Device resource.
 
@@ -819,16 +813,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_device_status**
 > Device replace_device_status(name, device)
-
-
 
 Update the status of a Device resource.
 
@@ -894,8 +887,10 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

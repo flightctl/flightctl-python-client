@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **repository** | **str** | The name of the Repository resource. | 
 **target_revision** | **str** | The revision to use from the Repository. | 
 **path** | **str** | The path to the config in the Repository. | 
-**mount_path** | **str** | Path in the device&#39;s file system at which the repository&#39;s path should be mounted. | [optional] [default to '/']
 
 ## Example
 

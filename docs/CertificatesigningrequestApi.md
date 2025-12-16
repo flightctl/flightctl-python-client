@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_certificate_signing_request**](CertificatesigningrequestApi.md#create_certificate_signing_request) | **POST** /api/v1/certificatesigningrequests | 
 [**delete_certificate_signing_request**](CertificatesigningrequestApi.md#delete_certificate_signing_request) | **DELETE** /api/v1/certificatesigningrequests/{name} | 
-[**delete_certificate_signing_requests**](CertificatesigningrequestApi.md#delete_certificate_signing_requests) | **DELETE** /api/v1/certificatesigningrequests | 
 [**get_certificate_signing_request**](CertificatesigningrequestApi.md#get_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
 [**list_certificate_signing_requests**](CertificatesigningrequestApi.md#list_certificate_signing_requests) | **GET** /api/v1/certificatesigningrequests | 
 [**patch_certificate_signing_request**](CertificatesigningrequestApi.md#patch_certificate_signing_request) | **PATCH** /api/v1/certificatesigningrequests/{name} | 
@@ -16,8 +15,6 @@ Method | HTTP request | Description
 
 # **create_certificate_signing_request**
 > CertificateSigningRequest create_certificate_signing_request(certificate_signing_request)
-
-
 
 Create a CertificateSigningRequest resource.
 
@@ -81,15 +78,14 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_certificate_signing_request**
 > Status delete_certificate_signing_request(name)
-
-
 
 delete a Certificate Signing Request
 
@@ -152,81 +148,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_certificate_signing_requests**
-> Status delete_certificate_signing_requests()
-
-
-
-Delete CertificateSigningRequest resources.
-
-### Example
-
-
-```python
-import flightctl
-from flightctl.models.status import Status
-from flightctl.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = flightctl.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with flightctl.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = flightctl.CertificatesigningrequestApi(api_client)
-
-    try:
-        api_response = api_instance.delete_certificate_signing_requests()
-        print("The response of CertificatesigningrequestApi->delete_certificate_signing_requests:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling CertificatesigningrequestApi->delete_certificate_signing_requests: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_certificate_signing_request**
 > CertificateSigningRequest get_certificate_signing_request(name)
-
-
 
 read the specified certificateSigningRequest
 
@@ -289,15 +218,14 @@ No authorization required
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_certificate_signing_requests**
 > CertificateSigningRequestList list_certificate_signing_requests(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit)
-
-
 
 List CertificateSigningRequest resources.
 
@@ -367,14 +295,13 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_certificate_signing_request**
 > CertificateSigningRequest patch_certificate_signing_request(name, patch_request_inner)
-
-
 
 Patch a CertificateSigningRequest resource.
 
@@ -440,17 +367,16 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**404** | NotFound |  -  |
+**404** | Not Found |  -  |
 **403** | Forbidden |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_certificate_signing_request**
 > CertificateSigningRequest replace_certificate_signing_request(name, certificate_signing_request)
-
-
 
 replace the specified CertificateSigningRequest
 
@@ -517,16 +443,15 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
+**404** | Not Found |  -  |
 **409** | Conflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_certificate_signing_request_approval**
 > CertificateSigningRequest update_certificate_signing_request_approval(name, certificate_signing_request)
-
-
 
 Approve or deny a CertificateSigningRequest.
 
@@ -592,9 +517,10 @@ No authorization required
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**409** | StatusConflict |  -  |
-**503** | ServiceUnavailable |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

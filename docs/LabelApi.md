@@ -10,9 +10,8 @@ Method | HTTP request | Description
 # **list_labels**
 > List[str] list_labels(kind, label_selector=label_selector, field_selector=field_selector, limit=limit)
 
+Retrieves a distinct list of labels for the specified resource type.
 
-
-Retrieves a distinct list of labels for the specified resource type. 
 
 ### Example
 
@@ -78,8 +77,9 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**403** | Not allowed |  -  |
-**503** | ServiceUnavailable |  -  |
+**403** | Forbidden |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -10,8 +10,6 @@ Method | HTTP request | Description
 # **get_version**
 > Version get_version()
 
-
-
 Get service version.
 
 ### Example
@@ -68,7 +66,8 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **403** | Forbidden |  -  |
-**503** | ServiceUnavailable |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

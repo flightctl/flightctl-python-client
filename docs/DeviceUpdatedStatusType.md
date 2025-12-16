@@ -4,13 +4,13 @@ Status type of the device update.
 
 ## Enum
 
-* `UPTODATE` (value: `'UpToDate'`)
+* `DeviceUpdatedStatusUpToDate` (value: `'UpToDate'`)
 
-* `OUTOFDATE` (value: `'OutOfDate'`)
+* `DeviceUpdatedStatusOutOfDate` (value: `'OutOfDate'`)
 
-* `UPDATING` (value: `'Updating'`)
+* `DeviceUpdatedStatusUpdating` (value: `'Updating'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `DeviceUpdatedStatusUnknown` (value: `'Unknown'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

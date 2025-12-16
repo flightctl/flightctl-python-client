@@ -5,7 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | **str** | Reference to the container image for the application package. | 
+**volumes** | [**List[ApplicationVolume]**](ApplicationVolume.md) | List of application volumes. | [optional] 
+**image** | **str** | Reference to the OCI image or artifact for the application package. | 
+**ports** | **List[str]** | Port mappings. | [optional] 
+**resources** | [**ApplicationResources**](ApplicationResources.md) |  | [optional] 
 
 ## Example
 

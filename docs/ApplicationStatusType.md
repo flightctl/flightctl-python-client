@@ -4,17 +4,17 @@ Status of a single application on the device.
 
 ## Enum
 
-* `PREPARING` (value: `'Preparing'`)
+* `ApplicationStatusPreparing` (value: `'Preparing'`)
 
-* `STARTING` (value: `'Starting'`)
+* `ApplicationStatusStarting` (value: `'Starting'`)
 
-* `RUNNING` (value: `'Running'`)
+* `ApplicationStatusRunning` (value: `'Running'`)
 
-* `ERROR` (value: `'Error'`)
+* `ApplicationStatusError` (value: `'Error'`)
 
-* `UNKNOWN` (value: `'Unknown'`)
+* `ApplicationStatusUnknown` (value: `'Unknown'`)
 
-* `COMPLETED` (value: `'Completed'`)
+* `ApplicationStatusCompleted` (value: `'Completed'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

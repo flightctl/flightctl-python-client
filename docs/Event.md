@@ -1,5 +1,6 @@
 # Event
 
+Event represents a single event that occurred in the system.
 
 ## Properties
 

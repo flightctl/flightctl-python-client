@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **csr** | **str** | The PEM-encoded PKCS#10 certificate signing request. | 
 **device_status** | [**DeviceStatus**](DeviceStatus.md) |  | [optional] 
 **labels** | **Dict[str, str]** | A set of labels that the service will apply to this device when its enrollment is approved. | [optional] 
+**known_rendered_version** | **str** | The rendered version of the device from desired.json (optional). | [optional] 
 
 ## Example
 

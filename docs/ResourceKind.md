@@ -18,6 +18,8 @@ Resource types exposed via the API.
 
 * `TEMPLATEVERSION` (value: `'TemplateVersion'`)
 
+* `AUTHPROVIDER` (value: `'AuthProvider'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

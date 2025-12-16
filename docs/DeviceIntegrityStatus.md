@@ -6,8 +6,11 @@ Summary status of the integrity of the device.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**device_identity** | [**DeviceIntegrityCheckStatus**](DeviceIntegrityCheckStatus.md) |  | [optional] 
+**tpm** | [**DeviceIntegrityCheckStatus**](DeviceIntegrityCheckStatus.md) |  | [optional] 
 **status** | [**DeviceIntegrityStatusSummaryType**](DeviceIntegrityStatusSummaryType.md) |  | 
 **info** | **str** | Human readable information about the last integrity transition. | [optional] 
+**last_verified** | **datetime** | Timestamp of the last integrity verification. | [optional] 
 
 ## Example
 
