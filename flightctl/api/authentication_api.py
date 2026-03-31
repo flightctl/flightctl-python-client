@@ -280,7 +280,7 @@ class AuthenticationApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/auth/config',
+            resource_path='/auth/config',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -537,7 +537,7 @@ class AuthenticationApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/auth/permissions',
+            resource_path='/auth/permissions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -829,7 +829,7 @@ class AuthenticationApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/auth/{providername}/token',
+            resource_path='/auth/{providername}/token',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1086,7 +1086,7 @@ class AuthenticationApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/auth/userinfo',
+            resource_path='/auth/userinfo',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1361,7 +1361,7 @@ class AuthenticationApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/auth/validate',
+            resource_path='/auth/validate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

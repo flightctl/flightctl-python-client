@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.resource_sync_type import ResourceSyncType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +28,11 @@ class ResourceSyncSpec(BaseModel):
     """
     ResourceSyncSpec describes the file(s) to sync from a repository.
     """ # noqa: E501
+    type: Optional[ResourceSyncType] = ResourceSyncType.ResourceSyncTypeFleet
     repository: StrictStr = Field(description="The name of the repository resource to use as the sync source.")
     target_revision: StrictStr = Field(description="The desired revision in the repository.", alias="targetRevision")
     path: StrictStr = Field(description="The path of a file or directory in the repository. If a directory, the directory should contain only resource definitions with no subdirectories. Each file should contain the definition of one or more resources.")
-    __properties: ClassVar[List[str]] = ["repository", "targetRevision", "path"]
+    __properties: ClassVar[List[str]] = ["type", "repository", "targetRevision", "path"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +85,7 @@ class ResourceSyncSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "type": obj.get("type") if obj.get("type") is not None else ResourceSyncType.ResourceSyncTypeFleet,
             "repository": obj.get("repository"),
             "targetRevision": obj.get("targetRevision"),
             "path": obj.get("path")

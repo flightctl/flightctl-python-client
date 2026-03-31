@@ -1,20 +1,20 @@
 # flightctl.EnrollmentrequestApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**approve_enrollment_request**](EnrollmentrequestApi.md#approve_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name}/approval | 
-[**create_enrollment_request**](EnrollmentrequestApi.md#create_enrollment_request) | **POST** /api/v1/enrollmentrequests | 
-[**delete_enrollment_request**](EnrollmentrequestApi.md#delete_enrollment_request) | **DELETE** /api/v1/enrollmentrequests/{name} | 
-[**get_enrollment_config**](EnrollmentrequestApi.md#get_enrollment_config) | **GET** /api/v1/enrollmentconfig | 
-[**get_enrollment_request**](EnrollmentrequestApi.md#get_enrollment_request) | **GET** /api/v1/enrollmentrequests/{name} | 
-[**get_enrollment_request_status**](EnrollmentrequestApi.md#get_enrollment_request_status) | **GET** /api/v1/enrollmentrequests/{name}/status | 
-[**list_enrollment_requests**](EnrollmentrequestApi.md#list_enrollment_requests) | **GET** /api/v1/enrollmentrequests | 
-[**patch_enrollment_request**](EnrollmentrequestApi.md#patch_enrollment_request) | **PATCH** /api/v1/enrollmentrequests/{name} | 
-[**patch_enrollment_request_status**](EnrollmentrequestApi.md#patch_enrollment_request_status) | **PATCH** /api/v1/enrollmentrequests/{name}/status | 
-[**replace_enrollment_request**](EnrollmentrequestApi.md#replace_enrollment_request) | **PUT** /api/v1/enrollmentrequests/{name} | 
-[**replace_enrollment_request_status**](EnrollmentrequestApi.md#replace_enrollment_request_status) | **PUT** /api/v1/enrollmentrequests/{name}/status | 
+[**approve_enrollment_request**](EnrollmentrequestApi.md#approve_enrollment_request) | **PUT** /enrollmentrequests/{name}/approval | 
+[**create_enrollment_request**](EnrollmentrequestApi.md#create_enrollment_request) | **POST** /enrollmentrequests | 
+[**delete_enrollment_request**](EnrollmentrequestApi.md#delete_enrollment_request) | **DELETE** /enrollmentrequests/{name} | 
+[**get_enrollment_config**](EnrollmentrequestApi.md#get_enrollment_config) | **GET** /enrollmentconfig | 
+[**get_enrollment_request**](EnrollmentrequestApi.md#get_enrollment_request) | **GET** /enrollmentrequests/{name} | 
+[**get_enrollment_request_status**](EnrollmentrequestApi.md#get_enrollment_request_status) | **GET** /enrollmentrequests/{name}/status | 
+[**list_enrollment_requests**](EnrollmentrequestApi.md#list_enrollment_requests) | **GET** /enrollmentrequests | 
+[**patch_enrollment_request**](EnrollmentrequestApi.md#patch_enrollment_request) | **PATCH** /enrollmentrequests/{name} | 
+[**patch_enrollment_request_status**](EnrollmentrequestApi.md#patch_enrollment_request_status) | **PATCH** /enrollmentrequests/{name}/status | 
+[**replace_enrollment_request**](EnrollmentrequestApi.md#replace_enrollment_request) | **PUT** /enrollmentrequests/{name} | 
+[**replace_enrollment_request_status**](EnrollmentrequestApi.md#replace_enrollment_request_status) | **PUT** /enrollmentrequests/{name}/status | 
 
 
 # **approve_enrollment_request**
@@ -32,10 +32,10 @@ from flightctl.models.enrollment_request_approval_status import EnrollmentReques
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -105,10 +105,10 @@ from flightctl.models.enrollment_request import EnrollmentRequest
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -176,10 +176,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -247,10 +247,10 @@ from flightctl.models.enrollment_config import EnrollmentConfig
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -318,10 +318,10 @@ from flightctl.models.enrollment_request import EnrollmentRequest
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -388,10 +388,10 @@ from flightctl.models.enrollment_request import EnrollmentRequest
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -458,10 +458,10 @@ from flightctl.models.enrollment_request_list import EnrollmentRequestList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -535,10 +535,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -610,10 +610,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -684,10 +684,10 @@ from flightctl.models.enrollment_request import EnrollmentRequest
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -759,10 +759,10 @@ from flightctl.models.enrollment_request import EnrollmentRequest
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

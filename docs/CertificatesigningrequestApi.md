@@ -1,16 +1,16 @@
 # flightctl.CertificatesigningrequestApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_certificate_signing_request**](CertificatesigningrequestApi.md#create_certificate_signing_request) | **POST** /api/v1/certificatesigningrequests | 
-[**delete_certificate_signing_request**](CertificatesigningrequestApi.md#delete_certificate_signing_request) | **DELETE** /api/v1/certificatesigningrequests/{name} | 
-[**get_certificate_signing_request**](CertificatesigningrequestApi.md#get_certificate_signing_request) | **GET** /api/v1/certificatesigningrequests/{name} | 
-[**list_certificate_signing_requests**](CertificatesigningrequestApi.md#list_certificate_signing_requests) | **GET** /api/v1/certificatesigningrequests | 
-[**patch_certificate_signing_request**](CertificatesigningrequestApi.md#patch_certificate_signing_request) | **PATCH** /api/v1/certificatesigningrequests/{name} | 
-[**replace_certificate_signing_request**](CertificatesigningrequestApi.md#replace_certificate_signing_request) | **PUT** /api/v1/certificatesigningrequests/{name} | 
-[**update_certificate_signing_request_approval**](CertificatesigningrequestApi.md#update_certificate_signing_request_approval) | **PUT** /api/v1/certificatesigningrequests/{name}/approval | 
+[**create_certificate_signing_request**](CertificatesigningrequestApi.md#create_certificate_signing_request) | **POST** /certificatesigningrequests | 
+[**delete_certificate_signing_request**](CertificatesigningrequestApi.md#delete_certificate_signing_request) | **DELETE** /certificatesigningrequests/{name} | 
+[**get_certificate_signing_request**](CertificatesigningrequestApi.md#get_certificate_signing_request) | **GET** /certificatesigningrequests/{name} | 
+[**list_certificate_signing_requests**](CertificatesigningrequestApi.md#list_certificate_signing_requests) | **GET** /certificatesigningrequests | 
+[**patch_certificate_signing_request**](CertificatesigningrequestApi.md#patch_certificate_signing_request) | **PATCH** /certificatesigningrequests/{name} | 
+[**replace_certificate_signing_request**](CertificatesigningrequestApi.md#replace_certificate_signing_request) | **PUT** /certificatesigningrequests/{name} | 
+[**update_certificate_signing_request_approval**](CertificatesigningrequestApi.md#update_certificate_signing_request_approval) | **PUT** /certificatesigningrequests/{name}/approval | 
 
 
 # **create_certificate_signing_request**
@@ -27,10 +27,10 @@ from flightctl.models.certificate_signing_request import CertificateSigningReque
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -98,10 +98,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -168,10 +168,10 @@ from flightctl.models.certificate_signing_request import CertificateSigningReque
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -238,10 +238,10 @@ from flightctl.models.certificate_signing_request_list import CertificateSigning
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -315,10 +315,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -367,8 +367,8 @@ No authorization required
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**404** | Not Found |  -  |
 **403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 **409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |
@@ -389,10 +389,10 @@ from flightctl.models.certificate_signing_request import CertificateSigningReque
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -464,10 +464,10 @@ from flightctl.models.certificate_signing_request import CertificateSigningReque
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

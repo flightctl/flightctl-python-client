@@ -30,6 +30,7 @@ class AppType(str, Enum):
     AppTypeCompose = 'compose'
     AppTypeQuadlet = 'quadlet'
     AppTypeContainer = 'container'
+    AppTypeHelm = 'helm'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

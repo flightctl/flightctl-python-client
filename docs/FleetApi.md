@@ -1,21 +1,21 @@
 # flightctl.FleetApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_fleet**](FleetApi.md#create_fleet) | **POST** /api/v1/fleets | 
-[**delete_fleet**](FleetApi.md#delete_fleet) | **DELETE** /api/v1/fleets/{name} | 
-[**delete_template_version**](FleetApi.md#delete_template_version) | **DELETE** /api/v1/fleets/{fleet}/templateversions/{name} | 
-[**get_fleet**](FleetApi.md#get_fleet) | **GET** /api/v1/fleets/{name} | 
-[**get_fleet_status**](FleetApi.md#get_fleet_status) | **GET** /api/v1/fleets/{name}/status | 
-[**get_template_version**](FleetApi.md#get_template_version) | **GET** /api/v1/fleets/{fleet}/templateversions/{name} | 
-[**list_fleets**](FleetApi.md#list_fleets) | **GET** /api/v1/fleets | 
-[**list_template_versions**](FleetApi.md#list_template_versions) | **GET** /api/v1/fleets/{fleet}/templateversions | 
-[**patch_fleet**](FleetApi.md#patch_fleet) | **PATCH** /api/v1/fleets/{name} | 
-[**patch_fleet_status**](FleetApi.md#patch_fleet_status) | **PATCH** /api/v1/fleets/{name}/status | 
-[**replace_fleet**](FleetApi.md#replace_fleet) | **PUT** /api/v1/fleets/{name} | 
-[**replace_fleet_status**](FleetApi.md#replace_fleet_status) | **PUT** /api/v1/fleets/{name}/status | 
+[**create_fleet**](FleetApi.md#create_fleet) | **POST** /fleets | 
+[**delete_fleet**](FleetApi.md#delete_fleet) | **DELETE** /fleets/{name} | 
+[**delete_template_version**](FleetApi.md#delete_template_version) | **DELETE** /fleets/{fleet}/templateversions/{name} | 
+[**get_fleet**](FleetApi.md#get_fleet) | **GET** /fleets/{name} | 
+[**get_fleet_status**](FleetApi.md#get_fleet_status) | **GET** /fleets/{name}/status | 
+[**get_template_version**](FleetApi.md#get_template_version) | **GET** /fleets/{fleet}/templateversions/{name} | 
+[**list_fleets**](FleetApi.md#list_fleets) | **GET** /fleets | 
+[**list_template_versions**](FleetApi.md#list_template_versions) | **GET** /fleets/{fleet}/templateversions | 
+[**patch_fleet**](FleetApi.md#patch_fleet) | **PATCH** /fleets/{name} | 
+[**patch_fleet_status**](FleetApi.md#patch_fleet_status) | **PATCH** /fleets/{name}/status | 
+[**replace_fleet**](FleetApi.md#replace_fleet) | **PUT** /fleets/{name} | 
+[**replace_fleet_status**](FleetApi.md#replace_fleet_status) | **PUT** /fleets/{name}/status | 
 
 
 # **create_fleet**
@@ -32,10 +32,10 @@ from flightctl.models.fleet import Fleet
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -103,10 +103,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -173,10 +173,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -245,10 +245,10 @@ from flightctl.models.fleet import Fleet
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -317,10 +317,10 @@ from flightctl.models.fleet import Fleet
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -387,10 +387,10 @@ from flightctl.models.template_version import TemplateVersion
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -459,10 +459,10 @@ from flightctl.models.fleet_list import FleetList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -537,10 +537,10 @@ from flightctl.models.template_version_list import TemplateVersionList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -616,10 +616,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -691,10 +691,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -764,10 +764,10 @@ from flightctl.models.fleet import Fleet
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -817,8 +817,8 @@ No authorization required
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**404** | Not Found |  -  |
 **403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 **409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |
@@ -839,10 +839,10 @@ from flightctl.models.fleet import Fleet
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

@@ -318,7 +318,7 @@ class RepositoryApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/repositories',
+            resource_path='/repositories',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -593,7 +593,7 @@ class RepositoryApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/v1/repositories/{name}',
+            resource_path='/repositories/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -868,7 +868,7 @@ class RepositoryApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/repositories/{name}',
+            resource_path='/repositories/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1196,7 +1196,7 @@ class RepositoryApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/repositories',
+            resource_path='/repositories',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1506,7 +1506,7 @@ class RepositoryApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/repositories/{name}',
+            resource_path='/repositories/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1818,7 +1818,7 @@ class RepositoryApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/repositories/{name}',
+            resource_path='/repositories/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

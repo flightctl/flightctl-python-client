@@ -5,14 +5,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime. The key and value each must be between 1 and 253 characters. | [optional] 
 **name** | **str** | The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace. | [optional] 
 **app_type** | [**AppType**](AppType.md) |  | 
+**env_vars** | **Dict[str, str]** | Environment variable key-value pairs, injected during runtime. The key and value each must be between 1 and 253 characters. | [optional] 
 **volumes** | [**List[ApplicationVolume]**](ApplicationVolume.md) | List of application volumes. | [optional] 
-**image** | **str** | Reference to the OCI image or artifact for the application package. | 
+**image** | **str** | Reference to the chart for this helm application. | 
+**inline** | [**List[ApplicationContent]**](ApplicationContent.md) | A list of application content. | 
+**run_as** | **str** | The username of the system user this application should be run under. This is not the same as the user within any containers of the application (if applicable). Defaults to the user that the agent runs as (generally root) if not specified. | [optional] 
 **ports** | **List[str]** | Port mappings. | [optional] 
 **resources** | [**ApplicationResources**](ApplicationResources.md) |  | [optional] 
-**inline** | [**List[ApplicationContent]**](ApplicationContent.md) | A list of application content. | 
+**namespace** | **str** | The target namespace for the application deployment. | [optional] 
+**values** | **Dict[str, object]** | Configuration values for the application. Supports arbitrarily nested structures. | [optional] 
+**values_files** | **List[str]** | List of values files to apply during deployment. Files are relative paths and applied in array order before user-provided values. | [optional] 
 
 ## Example
 

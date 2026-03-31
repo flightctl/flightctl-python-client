@@ -6,7 +6,7 @@ Status is a return value for calls that don't return other objects.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_version** | **str** | APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources. | 
+**api_version** | [**ApiVersion**](ApiVersion.md) |  | 
 **kind** | **str** | Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds. | 
 **code** | **int** | Suggested HTTP return code for this status, 0 if not set. | 
 **message** | **str** | A human-readable description of the status of this operation. | 

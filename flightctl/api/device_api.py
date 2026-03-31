@@ -320,7 +320,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/devices',
+            resource_path='/devices',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -626,7 +626,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/devices/{name}/decommission',
+            resource_path='/devices/{name}/decommission',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -901,7 +901,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/v1/devices/{name}',
+            resource_path='/devices/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1176,7 +1176,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/devices/{name}',
+            resource_path='/devices/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1454,7 +1454,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/devices/{name}/lastseen',
+            resource_path='/devices/{name}/lastseen',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1729,7 +1729,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/devices/{name}/status',
+            resource_path='/devices/{name}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2027,7 +2027,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/devices/{name}/rendered',
+            resource_path='/devices/{name}/rendered',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2372,7 +2372,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/devices',
+            resource_path='/devices',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2682,7 +2682,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/devices/{name}',
+            resource_path='/devices/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2989,7 +2989,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/devices/{name}/status',
+            resource_path='/devices/{name}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3301,7 +3301,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/devices/{name}',
+            resource_path='/devices/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3610,7 +3610,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/devices/{name}/status',
+            resource_path='/devices/{name}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

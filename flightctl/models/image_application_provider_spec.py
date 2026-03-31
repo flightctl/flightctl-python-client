@@ -18,11 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from flightctl.models.application_resources import ApplicationResources
-from flightctl.models.application_volume import ApplicationVolume
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,11 +27,8 @@ class ImageApplicationProviderSpec(BaseModel):
     """
     ImageApplicationProviderSpec
     """ # noqa: E501
-    volumes: Optional[List[ApplicationVolume]] = Field(default=None, description="List of application volumes.")
     image: StrictStr = Field(description="Reference to the OCI image or artifact for the application package.")
-    ports: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, description="Port mappings.")
-    resources: Optional[ApplicationResources] = None
-    __properties: ClassVar[List[str]] = ["volumes", "image", "ports", "resources"]
+    __properties: ClassVar[List[str]] = ["image"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,16 +69,6 @@ class ImageApplicationProviderSpec(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in volumes (list)
-        _items = []
-        if self.volumes:
-            for _item_volumes in self.volumes:
-                if _item_volumes:
-                    _items.append(_item_volumes.to_dict())
-            _dict['volumes'] = _items
-        # override the default output from pydantic by calling `to_dict()` of resources
-        if self.resources:
-            _dict['resources'] = self.resources.to_dict()
         return _dict
 
     @classmethod
@@ -97,10 +81,7 @@ class ImageApplicationProviderSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "volumes": [ApplicationVolume.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None,
-            "image": obj.get("image"),
-            "ports": obj.get("ports"),
-            "resources": ApplicationResources.from_dict(obj["resources"]) if obj.get("resources") is not None else None
+            "image": obj.get("image")
         })
         return _obj
 

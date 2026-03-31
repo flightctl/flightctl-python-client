@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.api_version import ApiVersion
 from flightctl.models.auth_provider import AuthProvider
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class AuthConfig(BaseModel):
     """
     AuthConfig
     """ # noqa: E501
-    api_version: StrictStr = Field(description="APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.", alias="apiVersion")
+    api_version: ApiVersion = Field(alias="apiVersion")
     providers: Optional[List[AuthProvider]] = Field(default=None, description="List of all available authentication providers.")
     default_provider: Optional[StrictStr] = Field(default=None, description="Name of the default authentication provider.", alias="defaultProvider")
     organizations_enabled: Optional[StrictBool] = Field(default=None, description="Whether organizations are enabled for authentication.", alias="organizationsEnabled")

@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.api_version import ApiVersion
 from flightctl.models.certificate_signing_request_spec import CertificateSigningRequestSpec
 from flightctl.models.certificate_signing_request_status import CertificateSigningRequestStatus
 from flightctl.models.object_meta import ObjectMeta
@@ -30,7 +31,7 @@ class CertificateSigningRequest(BaseModel):
     """
     CertificateSigningRequest represents a request for a signed certificate from the CA.
     """ # noqa: E501
-    api_version: StrictStr = Field(description="APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.", alias="apiVersion")
+    api_version: ApiVersion = Field(alias="apiVersion")
     kind: StrictStr = Field(description="Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.")
     metadata: ObjectMeta
     spec: CertificateSigningRequestSpec

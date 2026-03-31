@@ -1,14 +1,14 @@
 # flightctl.AuthenticationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**auth_config**](AuthenticationApi.md#auth_config) | **GET** /api/v1/auth/config | 
-[**auth_get_permissions**](AuthenticationApi.md#auth_get_permissions) | **GET** /api/v1/auth/permissions | 
-[**auth_token**](AuthenticationApi.md#auth_token) | **POST** /api/v1/auth/{providername}/token | 
-[**auth_user_info**](AuthenticationApi.md#auth_user_info) | **GET** /api/v1/auth/userinfo | 
-[**auth_validate**](AuthenticationApi.md#auth_validate) | **GET** /api/v1/auth/validate | 
+[**auth_config**](AuthenticationApi.md#auth_config) | **GET** /auth/config | 
+[**auth_get_permissions**](AuthenticationApi.md#auth_get_permissions) | **GET** /auth/permissions | 
+[**auth_token**](AuthenticationApi.md#auth_token) | **POST** /auth/{providername}/token | 
+[**auth_user_info**](AuthenticationApi.md#auth_user_info) | **GET** /auth/userinfo | 
+[**auth_validate**](AuthenticationApi.md#auth_validate) | **GET** /auth/validate | 
 
 
 # **auth_config**
@@ -25,10 +25,10 @@ from flightctl.models.auth_config import AuthConfig
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -88,10 +88,10 @@ from flightctl.models.permission_list import PermissionList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -154,10 +154,10 @@ from flightctl.models.token_response import TokenResponse
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -222,10 +222,10 @@ from flightctl.models.user_info_response import UserInfoResponse
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -287,10 +287,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

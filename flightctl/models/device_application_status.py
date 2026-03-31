@@ -36,8 +36,9 @@ class DeviceApplicationStatus(BaseModel):
     status: ApplicationStatusType
     embedded: StrictBool = Field(description="Whether the application is embedded in the bootc image.")
     app_type: AppType = Field(alias="appType")
+    run_as: Optional[StrictStr] = Field(default=None, description="The username of the system user this application is runing under. If blank, the application is run as the same user as the agent (generally root).", alias="runAs")
     volumes: Optional[List[ApplicationVolumeStatus]] = Field(default=None, description="Status of volumes used by this application.")
-    __properties: ClassVar[List[str]] = ["name", "ready", "restarts", "status", "embedded", "appType", "volumes"]
+    __properties: ClassVar[List[str]] = ["name", "ready", "restarts", "status", "embedded", "appType", "runAs", "volumes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +104,7 @@ class DeviceApplicationStatus(BaseModel):
             "status": obj.get("status"),
             "embedded": obj.get("embedded"),
             "appType": obj.get("appType"),
+            "runAs": obj.get("runAs"),
             "volumes": [ApplicationVolumeStatus.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None
         })
         return _obj

@@ -1,13 +1,14 @@
 # HttpRepoSpec
 
+HTTP endpoint specification for fetching configuration.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The HTTP URL to call or clone from. | 
-**type** | [**RepoSpecType**](RepoSpecType.md) |  | 
-**http_config** | [**HttpConfig**](HttpConfig.md) |  | 
+**url** | **str** | The HTTP URL to call. | 
+**type** | **str** | The repository type discriminator. | 
+**http_config** | [**HttpConfig**](HttpConfig.md) |  | [optional] 
 **validation_suffix** | **str** | URL suffix used only for validating access to the repository. Users might use the URL field as a root URL to be used by config sources adding suffixes. This will help with the validation of the http endpoint. | [optional] 
 
 ## Example

@@ -1,6 +1,6 @@
 [project]
 name = "flightctl"
-version = "1.0.0"
+version = "1.1.0"
 description = "Flight Control API"
 authors = [
   {name = "The Flight Control Team",email = "team@flightctl.io"},
@@ -76,6 +76,13 @@ disallow_any_generics = true
 #
 ### This one can be tricky to get passing if you use a lot of untyped libraries
 #warn_return_any = true
+
+[[tool.mypy.overrides]]
+module = [
+  "flightctl.v1alpha1.test.*",
+  "flightctl.imagebuilder.test.*",
+]
+ignore_errors = true
 
 [[tool.mypy.overrides]]
 module = [

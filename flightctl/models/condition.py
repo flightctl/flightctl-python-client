@@ -30,13 +30,13 @@ class Condition(BaseModel):
     """
     Condition contains details for one aspect of the current state of this API Resource.
     """ # noqa: E501
-    type: ConditionType
     status: ConditionStatus
     observed_generation: Optional[StrictInt] = Field(default=None, description="The .metadata.generation that the condition was set based upon.", alias="observedGeneration")
     last_transition_time: datetime = Field(description="The last time the condition transitioned from one status to another.", alias="lastTransitionTime")
     message: StrictStr = Field(description="Human readable message indicating details about last transition.")
     reason: StrictStr = Field(description="A (brief) reason for the condition's last transition.")
-    __properties: ClassVar[List[str]] = ["type", "status", "observedGeneration", "lastTransitionTime", "message", "reason"]
+    type: ConditionType
+    __properties: ClassVar[List[str]] = ["status", "observedGeneration", "lastTransitionTime", "message", "reason", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,12 +89,12 @@ class Condition(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
             "status": obj.get("status"),
             "observedGeneration": obj.get("observedGeneration"),
             "lastTransitionTime": obj.get("lastTransitionTime"),
             "message": obj.get("message"),
-            "reason": obj.get("reason")
+            "reason": obj.get("reason"),
+            "type": obj.get("type")
         })
         return _obj
 

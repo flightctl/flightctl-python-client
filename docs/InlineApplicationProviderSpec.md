@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**volumes** | [**List[ApplicationVolume]**](ApplicationVolume.md) | List of application volumes. | [optional] 
 **inline** | [**List[ApplicationContent]**](ApplicationContent.md) | A list of application content. | 
 
 ## Example

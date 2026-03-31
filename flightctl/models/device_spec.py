@@ -91,7 +91,7 @@ class DeviceSpec(BaseModel):
         if self.os:
             _dict['os'] = self.os.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in config (list)
-        _items = []
+        _items: list[Any] = []
         if self.config:
             for _item_config in self.config:
                 if _item_config:

@@ -18,33 +18,36 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from flightctl.models.generic_repo_spec import GenericRepoSpec
+from flightctl.models.git_repo_spec import GitRepoSpec
 from flightctl.models.http_repo_spec import HttpRepoSpec
-from flightctl.models.ssh_repo_spec import SshRepoSpec
+from flightctl.models.oci_repo_spec import OciRepoSpec
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-REPOSITORYSPEC_ONE_OF_SCHEMAS = ["GenericRepoSpec", "HttpRepoSpec", "SshRepoSpec"]
+REPOSITORYSPEC_ONE_OF_SCHEMAS = ["GitRepoSpec", "HttpRepoSpec", "OciRepoSpec"]
 
 class RepositorySpec(BaseModel):
     """
     RepositorySpec describes a configuration repository.
     """
-    # data type: GenericRepoSpec
-    oneof_schema_1_validator: Optional[GenericRepoSpec] = None
+    # data type: GitRepoSpec
+    oneof_schema_1_validator: Optional[GitRepoSpec] = None
     # data type: HttpRepoSpec
     oneof_schema_2_validator: Optional[HttpRepoSpec] = None
-    # data type: SshRepoSpec
-    oneof_schema_3_validator: Optional[SshRepoSpec] = None
-    actual_instance: Optional[Union[GenericRepoSpec, HttpRepoSpec, SshRepoSpec]] = None
-    one_of_schemas: Set[str] = { "GenericRepoSpec", "HttpRepoSpec", "SshRepoSpec" }
+    # data type: OciRepoSpec
+    oneof_schema_3_validator: Optional[OciRepoSpec] = None
+    actual_instance: Optional[Union[GitRepoSpec, HttpRepoSpec, OciRepoSpec]] = None
+    one_of_schemas: Set[str] = { "GitRepoSpec", "HttpRepoSpec", "OciRepoSpec" }
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
 
+
+    discriminator_value_class_map: Dict[str, str] = {
+    }
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -61,9 +64,9 @@ class RepositorySpec(BaseModel):
         instance = RepositorySpec.model_construct()
         error_messages = []
         match = 0
-        # validate data type: GenericRepoSpec
-        if not isinstance(v, GenericRepoSpec):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `GenericRepoSpec`")
+        # validate data type: GitRepoSpec
+        if not isinstance(v, GitRepoSpec):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GitRepoSpec`")
         else:
             match += 1
         # validate data type: HttpRepoSpec
@@ -71,17 +74,17 @@ class RepositorySpec(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `HttpRepoSpec`")
         else:
             match += 1
-        # validate data type: SshRepoSpec
-        if not isinstance(v, SshRepoSpec):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `SshRepoSpec`")
+        # validate data type: OciRepoSpec
+        if not isinstance(v, OciRepoSpec):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `OciRepoSpec`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in RepositorySpec with oneOf schemas: GenericRepoSpec, HttpRepoSpec, SshRepoSpec. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in RepositorySpec with oneOf schemas: GitRepoSpec, HttpRepoSpec, OciRepoSpec. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in RepositorySpec with oneOf schemas: GenericRepoSpec, HttpRepoSpec, SshRepoSpec. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in RepositorySpec with oneOf schemas: GitRepoSpec, HttpRepoSpec, OciRepoSpec. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -96,9 +99,29 @@ class RepositorySpec(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into GenericRepoSpec
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("type")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `type` in the input.")
+
+        # check if data type is `GitRepoSpec`
+        if _data_type == "git":
+            instance.actual_instance = GitRepoSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `HttpRepoSpec`
+        if _data_type == "http":
+            instance.actual_instance = HttpRepoSpec.from_json(json_str)
+            return instance
+
+        # check if data type is `OciRepoSpec`
+        if _data_type == "oci":
+            instance.actual_instance = OciRepoSpec.from_json(json_str)
+            return instance
+
+        # deserialize data into GitRepoSpec
         try:
-            instance.actual_instance = GenericRepoSpec.from_json(json_str)
+            instance.actual_instance = GitRepoSpec.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -108,19 +131,19 @@ class RepositorySpec(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into SshRepoSpec
+        # deserialize data into OciRepoSpec
         try:
-            instance.actual_instance = SshRepoSpec.from_json(json_str)
+            instance.actual_instance = OciRepoSpec.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into RepositorySpec with oneOf schemas: GenericRepoSpec, HttpRepoSpec, SshRepoSpec. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into RepositorySpec with oneOf schemas: GitRepoSpec, HttpRepoSpec, OciRepoSpec. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into RepositorySpec with oneOf schemas: GenericRepoSpec, HttpRepoSpec, SshRepoSpec. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into RepositorySpec with oneOf schemas: GitRepoSpec, HttpRepoSpec, OciRepoSpec. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -134,7 +157,7 @@ class RepositorySpec(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], GenericRepoSpec, HttpRepoSpec, SshRepoSpec]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], GitRepoSpec, HttpRepoSpec, OciRepoSpec]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
