@@ -1,10 +1,10 @@
 # flightctl.OrganizationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_organizations**](OrganizationApi.md#list_organizations) | **GET** /api/v1/organizations | List organizations
+[**list_organizations**](OrganizationApi.md#list_organizations) | **GET** /organizations | List organizations
 
 
 # **list_organizations**
@@ -23,10 +23,10 @@ from flightctl.models.organization_list import OrganizationList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

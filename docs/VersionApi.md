@@ -1,10 +1,10 @@
 # flightctl.VersionApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_version**](VersionApi.md#get_version) | **GET** /api/version | 
+[**get_version**](VersionApi.md#get_version) | **GET** /version | 
 
 
 # **get_version**
@@ -21,10 +21,10 @@ from flightctl.models.version import Version
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -65,6 +65,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |

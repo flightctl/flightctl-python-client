@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.api_version import ApiVersion
 from flightctl.models.device_spec import DeviceSpec
 from flightctl.models.device_status import DeviceStatus
 from flightctl.models.object_meta import ObjectMeta
@@ -30,7 +31,7 @@ class Device(BaseModel):
     """
     Device represents a physical device.
     """ # noqa: E501
-    api_version: StrictStr = Field(description="APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.", alias="apiVersion")
+    api_version: ApiVersion = Field(alias="apiVersion")
     kind: StrictStr = Field(description="Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.")
     metadata: ObjectMeta
     spec: Optional[DeviceSpec] = None

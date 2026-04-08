@@ -1,15 +1,15 @@
 # flightctl.ResourcesyncApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_resource_sync**](ResourcesyncApi.md#create_resource_sync) | **POST** /api/v1/resourcesyncs | 
-[**delete_resource_sync**](ResourcesyncApi.md#delete_resource_sync) | **DELETE** /api/v1/resourcesyncs/{name} | 
-[**get_resource_sync**](ResourcesyncApi.md#get_resource_sync) | **GET** /api/v1/resourcesyncs/{name} | 
-[**list_resource_syncs**](ResourcesyncApi.md#list_resource_syncs) | **GET** /api/v1/resourcesyncs | 
-[**patch_resource_sync**](ResourcesyncApi.md#patch_resource_sync) | **PATCH** /api/v1/resourcesyncs/{name} | 
-[**replace_resource_sync**](ResourcesyncApi.md#replace_resource_sync) | **PUT** /api/v1/resourcesyncs/{name} | 
+[**create_resource_sync**](ResourcesyncApi.md#create_resource_sync) | **POST** /resourcesyncs | 
+[**delete_resource_sync**](ResourcesyncApi.md#delete_resource_sync) | **DELETE** /resourcesyncs/{name} | 
+[**get_resource_sync**](ResourcesyncApi.md#get_resource_sync) | **GET** /resourcesyncs/{name} | 
+[**list_resource_syncs**](ResourcesyncApi.md#list_resource_syncs) | **GET** /resourcesyncs | 
+[**patch_resource_sync**](ResourcesyncApi.md#patch_resource_sync) | **PATCH** /resourcesyncs/{name} | 
+[**replace_resource_sync**](ResourcesyncApi.md#replace_resource_sync) | **PUT** /resourcesyncs/{name} | 
 
 
 # **create_resource_sync**
@@ -26,10 +26,10 @@ from flightctl.models.resource_sync import ResourceSync
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -97,10 +97,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -167,10 +167,10 @@ from flightctl.models.resource_sync import ResourceSync
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -237,10 +237,10 @@ from flightctl.models.resource_sync_list import ResourceSyncList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -314,10 +314,10 @@ from flightctl.models.resource_sync import ResourceSync
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -388,10 +388,10 @@ from flightctl.models.resource_sync import ResourceSync
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

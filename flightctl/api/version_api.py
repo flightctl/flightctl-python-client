@@ -88,6 +88,7 @@ class VersionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Version",
+            '401': "Status",
             '403': "Status",
             '429': "Status",
             '503': "Status",
@@ -154,6 +155,7 @@ class VersionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Version",
+            '401': "Status",
             '403': "Status",
             '429': "Status",
             '503': "Status",
@@ -220,6 +222,7 @@ class VersionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Version",
+            '401': "Status",
             '403': "Status",
             '429': "Status",
             '503': "Status",
@@ -275,7 +278,7 @@ class VersionApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/version',
+            resource_path='/version',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

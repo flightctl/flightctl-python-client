@@ -4,9 +4,11 @@ RepoSpecType is the type of the repository.
 
 ## Enum
 
-* `GIT` (value: `'git'`)
+* `RepoSpecTypeGit` (value: `'git'`)
 
-* `HTTP` (value: `'http'`)
+* `RepoSpecTypeHttp` (value: `'http'`)
+
+* `RepoSpecTypeOci` (value: `'oci'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

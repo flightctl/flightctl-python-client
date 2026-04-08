@@ -18,22 +18,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.http_config import HttpConfig
-from flightctl.models.repo_spec_type import RepoSpecType
 from typing import Optional, Set
 from typing_extensions import Self
 
 class HttpRepoSpec(BaseModel):
     """
-    HttpRepoSpec
+    HTTP endpoint specification for fetching configuration.
     """ # noqa: E501
-    url: StrictStr = Field(description="The HTTP URL to call or clone from.")
-    type: RepoSpecType
-    http_config: HttpConfig = Field(alias="httpConfig")
+    url: StrictStr = Field(description="The HTTP URL to call.")
+    type: StrictStr = Field(description="The repository type discriminator.")
+    http_config: Optional[HttpConfig] = Field(default=None, alias="httpConfig")
     validation_suffix: Optional[StrictStr] = Field(default=None, description="URL suffix used only for validating access to the repository. Users might use the URL field as a root URL to be used by config sources adding suffixes. This will help with the validation of the http endpoint.", alias="validationSuffix")
     __properties: ClassVar[List[str]] = ["url", "type", "httpConfig", "validationSuffix"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['http']):
+            raise ValueError("must be one of enum values ('http')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

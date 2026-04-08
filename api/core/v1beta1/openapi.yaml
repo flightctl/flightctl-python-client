@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: /
+  - url: /api/v1
 tags:
   - name: authentication
     description: Operations for authentication.
@@ -41,7 +41,7 @@ tags:
   - name: version
     description: Operations for receiving service version.
 paths:
-  /api/version:
+  /version:
     get:
       tags:
         - version
@@ -54,6 +54,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Version'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         "403":
           description: Forbidden
           content:
@@ -72,7 +78,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/auth/config:
+  /auth/config:
     get:
       tags:
         - authentication
@@ -97,7 +103,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/auth/validate:
+  /auth/validate:
     get:
       tags:
         - authentication
@@ -146,7 +152,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/auth/permissions:
+  /auth/permissions:
     get:
       tags:
         - authentication
@@ -183,7 +189,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/auth/{providername}/token:
+  /auth/{providername}/token:
     post:
       tags:
         - authentication
@@ -218,7 +224,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenResponse'
-  /api/v1/auth/userinfo:
+  /auth/userinfo:
     get:
       tags:
         - authentication
@@ -255,7 +261,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/resourcesyncs:
+  /resourcesyncs:
+    x-resource: resourcesyncs
     get:
       tags:
         - resourcesync
@@ -376,7 +383,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/resourcesyncs/{name}:
+  /resourcesyncs/{name}:
+    x-resource: resourcesyncs
     get:
       tags:
         - resourcesync
@@ -615,7 +623,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/repositories:
+  /repositories:
+    x-resource: repositories
     get:
       tags:
         - repository
@@ -736,7 +745,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/repositories/{name}:
+  /repositories/{name}:
+    x-resource: repositories
     get:
       tags:
         - repository
@@ -975,7 +985,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/devices:
+  /devices:
+    x-resource: devices
     get:
       tags:
         - device
@@ -1102,7 +1113,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/devices/{name}:
+  /devices/{name}:
+    x-resource: devices
     get:
       tags:
         - device
@@ -1341,7 +1353,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/devices/{name}/status:
+  /devices/{name}/status:
+    x-resource: devices/status
     get:
       tags:
         - device
@@ -1519,7 +1532,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/devices/{name}/decommission:
+  /devices/{name}/decommission:
+    x-resource: devices/decommission
     put:
       tags:
         - device
@@ -1581,7 +1595,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/devices/{name}/rendered:
+  /devices/{name}/rendered:
+    x-resource: devices/rendered
     get:
       tags:
         - device
@@ -1646,7 +1661,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/devices/{name}/lastseen:
+  /devices/{name}/lastseen:
+    x-resource: devices/lastseen
     get:
       tags:
         - device
@@ -1699,7 +1715,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/deviceactions/resume:
+  /deviceactions/resume:
+    x-resource: devices/resume
     post:
       tags:
         - deviceactions
@@ -1751,7 +1768,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/enrollmentconfig:
+  /enrollmentconfig:
     get:
       tags:
         - enrollmentrequest
@@ -1808,7 +1825,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Status'
 
-  /api/v1/enrollmentrequests:
+  /enrollmentrequests:
+    x-resource: enrollmentrequests
     get:
       tags:
         - enrollmentrequest
@@ -1929,7 +1947,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/enrollmentrequests/{name}:
+  /enrollmentrequests/{name}:
+    x-resource: enrollmentrequests
     get:
       tags:
         - enrollmentrequest
@@ -2174,7 +2193,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/enrollmentrequests/{name}/status:
+  /enrollmentrequests/{name}/status:
+    x-resource: enrollmentrequests/status
     get:
       tags:
         - enrollmentrequest
@@ -2346,7 +2366,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/enrollmentrequests/{name}/approval:
+  /enrollmentrequests/{name}/approval:
+    x-resource: enrollmentrequests/approval
     put:
       tags:
         - enrollmentrequest
@@ -2408,7 +2429,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/certificatesigningrequests:
+  /certificatesigningrequests:
+    x-resource: certificatesigningrequests
     get:
       tags:
         - certificatesigningrequest
@@ -2529,7 +2551,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/certificatesigningrequests/{name}:
+  /certificatesigningrequests/{name}:
+    x-resource: certificatesigningrequests
     patch:
       tags:
         - certificatesigningrequest
@@ -2769,7 +2792,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/certificatesigningrequests/{name}/approval:
+  /certificatesigningrequests/{name}/approval:
+    x-resource: certificatesigningrequests/approval
     put:
       tags:
         - certificatesigningrequest
@@ -2837,7 +2861,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/fleets:
+  /fleets:
+    x-resource: fleets
     get:
       tags:
         - fleet
@@ -2964,7 +2989,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/fleets/{name}:
+  /fleets/{name}:
+    x-resource: fleets
     get:
       tags:
         - fleet
@@ -3209,7 +3235,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/fleets/{name}/status:
+  /fleets/{name}/status:
+    x-resource: fleets/status
     get:
       tags:
         - fleet
@@ -3375,7 +3402,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/fleets/{fleet}/templateversions:
+  /fleets/{fleet}/templateversions:
+    x-resource: fleets/templateversions
     get:
       tags:
         - fleet
@@ -3448,7 +3476,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/fleets/{fleet}/templateversions/{name}:
+  /fleets/{fleet}/templateversions/{name}:
+    x-resource: fleets/templateversions
     get:
       tags:
         - fleet
@@ -3559,7 +3588,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/labels:
+  /labels:
+    x-resource: labels
     get:
       tags:
         - label
@@ -3636,7 +3666,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/events:
+  /events:
+    x-resource: events
     get:
       tags:
         - event
@@ -3706,7 +3737,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/organizations:
+  /organizations:
+    x-resource: organizations
     get:
       tags:
         - organization
@@ -3756,7 +3788,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/authproviders:
+  /authproviders:
+    x-resource: authproviders
     get:
       tags:
         - authprovider
@@ -3877,7 +3910,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-  /api/v1/authproviders/{name}:
+  /authproviders/{name}:
+    x-resource: authproviders
     get:
       tags:
         - authprovider
@@ -4128,6 +4162,18 @@ components:
       name: org_id
       description: The UUID of the organization that owns the resource.  Maps to an organizations metadata.name.
   schemas:
+    ApiVersion:
+      type: string
+      x-go-type: string
+      description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+      enum:
+        - v1beta1
+        - flightctl.io/v1beta1
+        - "" # to provide backward compatibility for older clients that are not setting the apiVersion field
+      x-enum-varnames:
+        - ApiVersionV1beta1
+        - ApiVersionFlightctlIoV1beta1
+        - ApiVersionEmpty
     ResourceKind:
       type: string
       enum: [CertificateSigningRequest, EnrollmentRequest, Device, Fleet, Repository, ResourceSync, TemplateVersion, AuthProvider]
@@ -4209,8 +4255,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -4258,13 +4303,19 @@ components:
           format: password
     HttpRepoSpec:
       type: object
+      description: HTTP endpoint specification for fetching configuration.
       additionalProperties: false
       properties:
         url:
           type: string
-          description: 'The HTTP URL to call or clone from.'
+          description: 'The HTTP URL to call.'
         type:
-          $ref: "#/components/schemas/RepoSpecType"
+          type: string
+          description: The repository type discriminator.
+          enum:
+            - http
+          x-enum-varnames:
+            - HttpRepoSpecTypeHttp
         httpConfig:
           $ref: "#/components/schemas/HttpConfig"
         validationSuffix:
@@ -4273,7 +4324,6 @@ components:
       required:
         - url
         - type
-        - httpConfig
     SshConfig:
       type: object
       description: Configuration for SSH transport.
@@ -4290,40 +4340,117 @@ components:
         skipServerVerification:
           type: boolean
           description: 'Skip remote server verification.'
-    SshRepoSpec:
+    GitRepoSpec:
       type: object
+      description: Git repository specification. Supports no auth (public repos), HTTP/HTTPS auth, or SSH auth.
       additionalProperties: false
       properties:
         url:
           type: string
-          description: 'The SSH Git repository URL to clone from.'
+          description: 'The Git repository URL to clone from.'
         type:
-          $ref: "#/components/schemas/RepoSpecType"
+          type: string
+          description: The repository type discriminator.
+          enum:
+            - git
+          x-enum-varnames:
+            - GitRepoSpecTypeGit
+        httpConfig:
+          $ref: "#/components/schemas/HttpConfig"
         sshConfig:
           $ref: "#/components/schemas/SshConfig"
       required:
         - url
         - type
-        - sshConfig
-    GenericRepoSpec:
+      not:
+        required:
+          - httpConfig
+          - sshConfig
+    OciAuthType:
+      type: string
+      description: The type of authentication for OCI registries.
+      enum:
+        - docker
+    DockerAuth:
       type: object
+      description: Docker-style authentication for OCI registries.
       additionalProperties: false
       properties:
-        url:
+        authType:
+          $ref: "#/components/schemas/OciAuthType"
+        username:
           type: string
-          description: 'The (possibly remote) repository URL.'
-        type:
-          $ref: "#/components/schemas/RepoSpecType"
+          description: The username for registry authentication.
+        password:
+          type: string
+          description: The password or token for registry authentication.
+          format: password
       required:
-        - url
+        - authType
+        - username
+        - password
+    OciAuth:
+      type: object
+      description: Authentication for OCI registries.
+      discriminator:
+        propertyName: authType
+        mapping:
+          docker: "#/components/schemas/DockerAuth"
+      oneOf:
+        - $ref: "#/components/schemas/DockerAuth"
+    OciRepoSpec:
+      type: object
+      description: OCI container registry specification.
+      additionalProperties: false
+      properties:
+        registry:
+          type: string
+          description: 'The OCI registry hostname, FQDN, or IP address with optional port (e.g., quay.io, registry.redhat.io, myregistry.com:5000, 192.168.1.1:5000, [::1]:5000).'
+        scheme:
+          type: string
+          description: 'URL scheme for connecting to the registry.'
+          enum:
+            - http
+            - https
+          default: https
+        type:
+          type: string
+          description: The repository type discriminator.
+          enum:
+            - oci
+          x-enum-varnames:
+            - OciRepoSpecTypeOci
+        accessMode:
+          type: string
+          description: 'Access mode for the registry: "Read" for read-only (pull), "ReadWrite" for read-write (pull and push).'
+          enum:
+            - Read
+            - ReadWrite
+          default: Read
+        ociAuth:
+          $ref: "#/components/schemas/OciAuth"
+        ca.crt:
+          type: string
+          description: Base64 encoded root CA.
+        skipServerVerification:
+          type: boolean
+          description: Skip remote server verification.
+      required:
+        - registry
         - type
     RepositorySpec:
       type: object
       description: RepositorySpec describes a configuration repository.
       oneOf:
-        - $ref: "#/components/schemas/GenericRepoSpec"
+        - $ref: "#/components/schemas/GitRepoSpec"
         - $ref: "#/components/schemas/HttpRepoSpec"
-        - $ref: "#/components/schemas/SshRepoSpec"
+        - $ref: "#/components/schemas/OciRepoSpec"
+      discriminator:
+        propertyName: type
+        mapping:
+          git: '#/components/schemas/GitRepoSpec'
+          http: '#/components/schemas/HttpRepoSpec'
+          oci: '#/components/schemas/OciRepoSpec'
     RepositoryStatus:
       type: object
       description: RepositoryStatus represents information about the status of a repository.
@@ -4339,8 +4466,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -4363,12 +4489,16 @@ components:
       enum:
         - git
         - http
+        - oci
+      x-enum-varnames:
+        - RepoSpecTypeGit
+        - RepoSpecTypeHttp
+        - RepoSpecTypeOci
     Device:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -4448,6 +4578,15 @@ components:
             mountPath:
               type: string
               description: Path in the device's file system at which the secret should be mounted.
+            user:
+              type: string
+              description: The file's owner, specified either as a name or numeric ID. Defaults to "root".
+              x-go-type: Username
+              x-go-type-skip-optional-pointer: true
+            group:
+              type: string
+              description: The file's group, specified either as a name or numeric ID. Defaults to "root".
+              x-go-type-skip-optional-pointer: true
           required:
             - name
             - namespace
@@ -4522,9 +4661,12 @@ components:
         user:
           type: string
           description: The file's owner, specified either as a name or numeric ID. Defaults to "root".
+          x-go-type: Username
+          x-go-type-skip-optional-pointer: true
         group:
           type: string
           description: The file's group, specified either as a name or numeric ID. Defaults to "root".
+          x-go-type-skip-optional-pointer: true
     HttpConfigProviderSpec:
       type: object
       properties:
@@ -4551,30 +4693,64 @@ components:
       - name
       - httpRef
     ApplicationProviderSpec:
+      oneOf:
+        - $ref: '#/components/schemas/ComposeApplication'
+        - $ref: '#/components/schemas/QuadletApplication'
+        - $ref: '#/components/schemas/ContainerApplication'
+        - $ref: '#/components/schemas/HelmApplication'
+      discriminator:
+        propertyName: appType
+        mapping:
+          compose: '#/components/schemas/ComposeApplication'
+          quadlet: '#/components/schemas/QuadletApplication'
+          container: '#/components/schemas/ContainerApplication'
+          helm: '#/components/schemas/HelmApplication'
+
+    ApplicationProviderBase:
+      type: object
+      description: Common properties for all application types.
+      properties:
+        name:
+          type: string
+          description: The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.
+        appType:
+          $ref: '#/components/schemas/AppType'
+      required:
+        - appType
+
+    ComposeApplication:
       type: object
       allOf:
+        - $ref: '#/components/schemas/ApplicationProviderBase'
         - $ref: '#/components/schemas/ApplicationEnvVars'
-        - type: object
-          properties:
-            name:
-              type: string
-              description: The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.
-            appType:
-              $ref: '#/components/schemas/AppType'
-          required: 
-            - appType
+        - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
         - oneOf:
             - $ref: '#/components/schemas/ImageApplicationProviderSpec'
             - $ref: '#/components/schemas/InlineApplicationProviderSpec'
-    ImageApplicationProviderSpec:
+
+    QuadletApplication:
       type: object
       allOf:
+        - $ref: '#/components/schemas/ApplicationProviderBase'
+        - $ref: '#/components/schemas/ApplicationEnvVars'
+        - $ref: '#/components/schemas/ApplicationUser'
+        - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
+        - oneOf:
+            - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+            - $ref: '#/components/schemas/InlineApplicationProviderSpec'
+
+    ContainerApplication:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ApplicationProviderBase'
+        - $ref: '#/components/schemas/ApplicationEnvVars'
+        - $ref: '#/components/schemas/ApplicationUser'
         - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
         - type: object
           properties:
             image:
               type: string
-              description: Reference to the OCI image or artifact for the application package.
+              description: Reference to the image for this container.
             ports:
               type: array
               description: Port mappings.
@@ -4584,10 +4760,81 @@ components:
               $ref: '#/components/schemas/ApplicationResources'
           required:
             - image
+
+    HelmApplication:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ApplicationProviderBase'
+        - type: object
+          properties:
+            image:
+              type: string
+              description: Reference to the chart for this helm application.
+            namespace:
+              type: string
+              description: The target namespace for the application deployment.
+              example: "my-app-namespace"
+            values:
+              type: object
+              additionalProperties: true
+              description: Configuration values for the application. Supports arbitrarily nested structures.
+              example:
+                replicaCount: 3
+                image:
+                  repository: nginx
+                  tag: "1.21"
+                service:
+                  type: ClusterIP
+                  port: 80
+                ingress:
+                  enabled: true
+                  hosts:
+                    - host: example.com
+                      paths:
+                        - path: /
+                          pathType: Prefix
+            valuesFiles:
+              type: array
+              description: List of values files to apply during deployment. Files are relative paths and applied in array order before user-provided values.
+              items:
+                type: string
+              example:
+                - "values-production.yaml"
+                - "values-overrides.yml"
+          required:
+            - image
+    ApplicationUser:
+      type: object
+      properties:
+        runAs:
+          type: string
+          description: The username of the system user this application should be run under. This is not the same as the user within any containers of the application (if applicable). Defaults to the user that the agent runs as (generally root) if not specified.
+          x-go-type: Username
+          x-go-type-skip-optional-pointer: true
+    ContainerApplicationProperties:
+      type: object
+      description: Properties for container application deployments.
+      properties:
+        ports:
+          type: array
+          description: Port mappings.
+          items:
+            $ref: '#/components/schemas/ApplicationPort'
+        resources:
+          $ref: '#/components/schemas/ApplicationResources'
+    ImageApplicationProviderSpec:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            image:
+              type: string
+              description: Reference to the OCI image or artifact for the application package.
+          required:
+            - image
     InlineApplicationProviderSpec:
       type: object
       allOf:
-        - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
         - type: object
           properties:
             inline:
@@ -4723,10 +4970,12 @@ components:
         - "compose"
         - "quadlet"
         - "container"
+        - "helm"
       x-enum-varnames:
         - "AppTypeCompose"
         - "AppTypeQuadlet"
         - "AppTypeContainer"
+        - "AppTypeHelm"
     ResourceMonitor:
       oneOf:
         - $ref: '#/components/schemas/CpuResourceMonitorSpec'
@@ -4960,8 +5209,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5223,6 +5471,11 @@ components:
           description: Whether the application is embedded in the bootc image.
         appType:
           $ref: "#/components/schemas/AppType"
+        runAs:
+          type: string
+          description: The username of the system user this application is runing under. If blank, the application is run as the same user as the agent (generally root).
+          x-go-type: Username
+          x-go-type-skip-optional-pointer: true
         volumes:
           type: array
           description: Status of volumes used by this application.
@@ -5555,8 +5808,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5576,8 +5828,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5635,8 +5886,7 @@ components:
       description: ResourceSync represents a reference to one or more files in a repository to sync to resource definitions.
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5655,6 +5905,8 @@ components:
       type: object
       description: ResourceSyncSpec describes the file(s) to sync from a repository.
       properties:
+        type:
+          $ref: '#/components/schemas/ResourceSyncType'
         repository:
           type: string
           description: The name of the repository resource to use as the sync source.
@@ -5668,6 +5920,16 @@ components:
       - repository
       - targetRevision
       - path
+    ResourceSyncType:
+      type: string
+      description: 'The type of resources this ResourceSync manages. Defaults to fleet if not specified.'
+      default: fleet
+      enum:
+        - fleet
+        - catalog
+      x-enum-varnames:
+        - ResourceSyncTypeFleet
+        - ResourceSyncTypeCatalog
     ResourceSyncStatus:
       type: object
       properties:
@@ -5690,8 +5952,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5711,8 +5972,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5732,8 +5992,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -5958,8 +6217,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6005,8 +6263,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6027,8 +6284,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         providers:
           type: array
           description: List of all available authentication providers.
@@ -6235,8 +6491,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6261,17 +6516,15 @@ components:
         - code
         - reason
         - message
-    Condition:
+    ConditionBase:
+      type: object
+      description: Base condition structure following Kubernetes API conventions. Use with allOf to add a specific type enum.
       required:
-        - type
         - status
         - lastTransitionTime
         - reason
         - message
-      type: object
       properties:
-        type:
-          $ref: '#/components/schemas/ConditionType'
         status:
           $ref: '#/components/schemas/ConditionStatus'
         observedGeneration:
@@ -6288,7 +6541,16 @@ components:
         reason:
           type: string
           description: A (brief) reason for the condition's last transition.
+    Condition:
       description: Condition contains details for one aspect of the current state of this API Resource.
+      allOf:
+        - $ref: '#/components/schemas/ConditionBase'
+        - type: object
+          required:
+            - type
+          properties:
+            type:
+              $ref: '#/components/schemas/ConditionType'
     ConditionType:
       type: string
       description: Type of condition in CamelCase.
@@ -6341,8 +6603,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6362,8 +6623,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6453,8 +6713,7 @@ components:
         - actor
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6565,8 +6824,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6900,8 +7158,7 @@ components:
         - metadata
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6928,8 +7185,7 @@ components:
         - items
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -6945,8 +7201,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'
@@ -7391,8 +7646,7 @@ components:
       type: object
       properties:
         apiVersion:
-          type: string
-          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.'
+          $ref: '#/components/schemas/ApiVersion'
         kind:
           type: string
           description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds.'

@@ -1,21 +1,21 @@
 # flightctl.DeviceApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_device**](DeviceApi.md#create_device) | **POST** /api/v1/devices | 
-[**decommission_device**](DeviceApi.md#decommission_device) | **PUT** /api/v1/devices/{name}/decommission | 
-[**delete_device**](DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{name} | 
-[**get_device**](DeviceApi.md#get_device) | **GET** /api/v1/devices/{name} | 
-[**get_device_last_seen**](DeviceApi.md#get_device_last_seen) | **GET** /api/v1/devices/{name}/lastseen | 
-[**get_device_status**](DeviceApi.md#get_device_status) | **GET** /api/v1/devices/{name}/status | 
-[**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /api/v1/devices/{name}/rendered | 
-[**list_devices**](DeviceApi.md#list_devices) | **GET** /api/v1/devices | 
-[**patch_device**](DeviceApi.md#patch_device) | **PATCH** /api/v1/devices/{name} | 
-[**patch_device_status**](DeviceApi.md#patch_device_status) | **PATCH** /api/v1/devices/{name}/status | 
-[**replace_device**](DeviceApi.md#replace_device) | **PUT** /api/v1/devices/{name} | 
-[**replace_device_status**](DeviceApi.md#replace_device_status) | **PUT** /api/v1/devices/{name}/status | 
+[**create_device**](DeviceApi.md#create_device) | **POST** /devices | 
+[**decommission_device**](DeviceApi.md#decommission_device) | **PUT** /devices/{name}/decommission | 
+[**delete_device**](DeviceApi.md#delete_device) | **DELETE** /devices/{name} | 
+[**get_device**](DeviceApi.md#get_device) | **GET** /devices/{name} | 
+[**get_device_last_seen**](DeviceApi.md#get_device_last_seen) | **GET** /devices/{name}/lastseen | 
+[**get_device_status**](DeviceApi.md#get_device_status) | **GET** /devices/{name}/status | 
+[**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /devices/{name}/rendered | 
+[**list_devices**](DeviceApi.md#list_devices) | **GET** /devices | 
+[**patch_device**](DeviceApi.md#patch_device) | **PATCH** /devices/{name} | 
+[**patch_device_status**](DeviceApi.md#patch_device_status) | **PATCH** /devices/{name}/status | 
+[**replace_device**](DeviceApi.md#replace_device) | **PUT** /devices/{name} | 
+[**replace_device_status**](DeviceApi.md#replace_device_status) | **PUT** /devices/{name}/status | 
 
 
 # **create_device**
@@ -32,10 +32,10 @@ from flightctl.models.device import Device
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -104,10 +104,10 @@ from flightctl.models.device_decommission import DeviceDecommission
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -177,10 +177,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -247,10 +247,10 @@ from flightctl.models.device import Device
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -317,10 +317,10 @@ from flightctl.models.device_last_seen import DeviceLastSeen
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -388,10 +388,10 @@ from flightctl.models.device import Device
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -458,10 +458,10 @@ from flightctl.models.device import Device
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -532,10 +532,10 @@ from flightctl.models.device_list import DeviceList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -611,10 +611,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -686,10 +686,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -759,10 +759,10 @@ from flightctl.models.device import Device
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -834,10 +834,10 @@ from flightctl.models.device import Device
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

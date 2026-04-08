@@ -27,8 +27,9 @@ class RepoSpecType(str, Enum):
     """
     allowed enum values
     """
-    GIT = 'git'
-    HTTP = 'http'
+    RepoSpecTypeGit = 'git'
+    RepoSpecTypeHttp = 'http'
+    RepoSpecTypeOci = 'oci'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -6,6 +6,7 @@ ResourceSyncSpec describes the file(s) to sync from a repository.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | [**ResourceSyncType**](ResourceSyncType.md) |  | [optional] [default to ResourceSyncType.NUMBER_ResourceSyncTypeFleet]
 **repository** | **str** | The name of the repository resource to use as the sync source. | 
 **target_revision** | **str** | The desired revision in the repository. | 
 **path** | **str** | The path of a file or directory in the repository. If a directory, the directory should contain only resource definitions with no subdirectories. Each file should contain the definition of one or more resources. | 

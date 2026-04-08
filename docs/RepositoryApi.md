@@ -1,15 +1,15 @@
 # flightctl.RepositoryApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_repository**](RepositoryApi.md#create_repository) | **POST** /api/v1/repositories | 
-[**delete_repository**](RepositoryApi.md#delete_repository) | **DELETE** /api/v1/repositories/{name} | 
-[**get_repository**](RepositoryApi.md#get_repository) | **GET** /api/v1/repositories/{name} | 
-[**list_repositories**](RepositoryApi.md#list_repositories) | **GET** /api/v1/repositories | 
-[**patch_repository**](RepositoryApi.md#patch_repository) | **PATCH** /api/v1/repositories/{name} | 
-[**replace_repository**](RepositoryApi.md#replace_repository) | **PUT** /api/v1/repositories/{name} | 
+[**create_repository**](RepositoryApi.md#create_repository) | **POST** /repositories | 
+[**delete_repository**](RepositoryApi.md#delete_repository) | **DELETE** /repositories/{name} | 
+[**get_repository**](RepositoryApi.md#get_repository) | **GET** /repositories/{name} | 
+[**list_repositories**](RepositoryApi.md#list_repositories) | **GET** /repositories | 
+[**patch_repository**](RepositoryApi.md#patch_repository) | **PATCH** /repositories/{name} | 
+[**replace_repository**](RepositoryApi.md#replace_repository) | **PUT** /repositories/{name} | 
 
 
 # **create_repository**
@@ -26,10 +26,10 @@ from flightctl.models.repository import Repository
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -97,10 +97,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -167,10 +167,10 @@ from flightctl.models.repository import Repository
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -237,10 +237,10 @@ from flightctl.models.repository_list import RepositoryList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -314,10 +314,10 @@ from flightctl.models.repository import Repository
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -388,10 +388,10 @@ from flightctl.models.repository import Repository
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

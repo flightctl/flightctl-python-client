@@ -1,10 +1,10 @@
 # flightctl.EventApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_events**](EventApi.md#list_events) | **GET** /api/v1/events | 
+[**list_events**](EventApi.md#list_events) | **GET** /events | 
 
 
 # **list_events**
@@ -22,10 +22,10 @@ from flightctl.models.event_list import EventList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

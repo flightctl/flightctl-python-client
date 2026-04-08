@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **status** | [**ApplicationStatusType**](ApplicationStatusType.md) |  | 
 **embedded** | **bool** | Whether the application is embedded in the bootc image. | 
 **app_type** | [**AppType**](AppType.md) |  | 
+**run_as** | **str** | The username of the system user this application is runing under. If blank, the application is run as the same user as the agent (generally root). | [optional] 
 **volumes** | [**List[ApplicationVolumeStatus]**](ApplicationVolumeStatus.md) | Status of volumes used by this application. | [optional] 
 
 ## Example

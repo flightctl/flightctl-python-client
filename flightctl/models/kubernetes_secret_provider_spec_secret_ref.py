@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,9 @@ class KubernetesSecretProviderSpecSecretRef(BaseModel):
     name: StrictStr = Field(description="The name of the secret.")
     namespace: StrictStr = Field(description="The namespace of the secret.")
     mount_path: StrictStr = Field(description="Path in the device's file system at which the secret should be mounted.", alias="mountPath")
-    __properties: ClassVar[List[str]] = ["name", "namespace", "mountPath"]
+    user: Optional[StrictStr] = Field(default=None, description="The file's owner, specified either as a name or numeric ID. Defaults to \"root\".")
+    group: Optional[StrictStr] = Field(default=None, description="The file's group, specified either as a name or numeric ID. Defaults to \"root\".")
+    __properties: ClassVar[List[str]] = ["name", "namespace", "mountPath", "user", "group"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +87,9 @@ class KubernetesSecretProviderSpecSecretRef(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "namespace": obj.get("namespace"),
-            "mountPath": obj.get("mountPath")
+            "mountPath": obj.get("mountPath"),
+            "user": obj.get("user"),
+            "group": obj.get("group")
         })
         return _obj
 

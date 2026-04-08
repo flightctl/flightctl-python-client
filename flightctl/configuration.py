@@ -215,7 +215,7 @@ conf = flightctl.Configuration(
     ) -> None:
         """Constructor
         """
-        self._base_path = "http://localhost" if host is None else host
+        self._base_path = "/api/v1" if host is None else host.rstrip("/") + "/api/v1"
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -545,7 +545,7 @@ conf = flightctl.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: v1beta1\n"\
-               "SDK Package Version: 1.0.0".\
+               "SDK Package Version: 1.1.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:
@@ -555,7 +555,7 @@ conf = flightctl.Configuration(
         """
         return [
             {
-                'url': "",
+                'url': "/api/v1",
                 'description': "No description provided",
             }
         ]

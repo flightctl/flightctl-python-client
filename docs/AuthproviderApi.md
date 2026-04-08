@@ -1,15 +1,15 @@
 # flightctl.AuthproviderApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_auth_provider**](AuthproviderApi.md#create_auth_provider) | **POST** /api/v1/authproviders | 
-[**delete_auth_provider**](AuthproviderApi.md#delete_auth_provider) | **DELETE** /api/v1/authproviders/{name} | 
-[**get_auth_provider**](AuthproviderApi.md#get_auth_provider) | **GET** /api/v1/authproviders/{name} | 
-[**list_auth_providers**](AuthproviderApi.md#list_auth_providers) | **GET** /api/v1/authproviders | 
-[**patch_auth_provider**](AuthproviderApi.md#patch_auth_provider) | **PATCH** /api/v1/authproviders/{name} | 
-[**replace_auth_provider**](AuthproviderApi.md#replace_auth_provider) | **PUT** /api/v1/authproviders/{name} | 
+[**create_auth_provider**](AuthproviderApi.md#create_auth_provider) | **POST** /authproviders | 
+[**delete_auth_provider**](AuthproviderApi.md#delete_auth_provider) | **DELETE** /authproviders/{name} | 
+[**get_auth_provider**](AuthproviderApi.md#get_auth_provider) | **GET** /authproviders/{name} | 
+[**list_auth_providers**](AuthproviderApi.md#list_auth_providers) | **GET** /authproviders | 
+[**patch_auth_provider**](AuthproviderApi.md#patch_auth_provider) | **PATCH** /authproviders/{name} | 
+[**replace_auth_provider**](AuthproviderApi.md#replace_auth_provider) | **PUT** /authproviders/{name} | 
 
 
 # **create_auth_provider**
@@ -26,10 +26,10 @@ from flightctl.models.auth_provider import AuthProvider
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -97,10 +97,10 @@ from flightctl.models.status import Status
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -167,10 +167,10 @@ from flightctl.models.auth_provider import AuthProvider
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -237,10 +237,10 @@ from flightctl.models.auth_provider_list import AuthProviderList
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -314,10 +314,10 @@ from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 
@@ -388,10 +388,10 @@ from flightctl.models.auth_provider import AuthProvider
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

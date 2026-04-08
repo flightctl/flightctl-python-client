@@ -1,10 +1,10 @@
 # flightctl.DeviceactionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**resume_devices**](DeviceactionsApi.md#resume_devices) | **POST** /api/v1/deviceactions/resume | 
+[**resume_devices**](DeviceactionsApi.md#resume_devices) | **POST** /deviceactions/resume | 
 
 
 # **resume_devices**
@@ -22,10 +22,10 @@ from flightctl.models.device_resume_response import DeviceResumeResponse
 from flightctl.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = flightctl.Configuration(
-    host = "http://localhost"
+    host = "/api/v1"
 )
 
 

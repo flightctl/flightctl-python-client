@@ -318,7 +318,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/certificatesigningrequests',
+            resource_path='/certificatesigningrequests',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -593,7 +593,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/v1/certificatesigningrequests/{name}',
+            resource_path='/certificatesigningrequests/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -868,7 +868,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/certificatesigningrequests/{name}',
+            resource_path='/certificatesigningrequests/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1196,7 +1196,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/certificatesigningrequests',
+            resource_path='/certificatesigningrequests',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1273,8 +1273,8 @@ class CertificatesigningrequestApi:
             '200': "CertificateSigningRequest",
             '400': "Status",
             '401': "Status",
-            '404': "Status",
             '403': "Status",
+            '404': "Status",
             '409': "Status",
             '429': "Status",
             '503': "Status",
@@ -1351,8 +1351,8 @@ class CertificatesigningrequestApi:
             '200': "CertificateSigningRequest",
             '400': "Status",
             '401': "Status",
-            '404': "Status",
             '403': "Status",
+            '404': "Status",
             '409': "Status",
             '429': "Status",
             '503': "Status",
@@ -1429,8 +1429,8 @@ class CertificatesigningrequestApi:
             '200': "CertificateSigningRequest",
             '400': "Status",
             '401': "Status",
-            '404': "Status",
             '403': "Status",
+            '404': "Status",
             '409': "Status",
             '429': "Status",
             '503': "Status",
@@ -1506,7 +1506,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/certificatesigningrequests/{name}',
+            resource_path='/certificatesigningrequests/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1818,7 +1818,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/certificatesigningrequests/{name}',
+            resource_path='/certificatesigningrequests/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2127,7 +2127,7 @@ class CertificatesigningrequestApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/certificatesigningrequests/{name}/approval',
+            resource_path='/certificatesigningrequests/{name}/approval',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

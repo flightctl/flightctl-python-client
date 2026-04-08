@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **name** | **str** | The name of the secret. | 
 **namespace** | **str** | The namespace of the secret. | 
 **mount_path** | **str** | Path in the device&#39;s file system at which the secret should be mounted. | 
+**user** | **str** | The file&#39;s owner, specified either as a name or numeric ID. Defaults to \&quot;root\&quot;. | [optional] 
+**group** | **str** | The file&#39;s group, specified either as a name or numeric ID. Defaults to \&quot;root\&quot;. | [optional] 
 
 ## Example
 

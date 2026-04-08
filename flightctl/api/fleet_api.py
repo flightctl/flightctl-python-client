@@ -320,7 +320,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/fleets',
+            resource_path='/fleets',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -595,7 +595,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/v1/fleets/{name}',
+            resource_path='/fleets/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -885,7 +885,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/api/v1/fleets/{fleet}/templateversions/{name}',
+            resource_path='/fleets/{fleet}/templateversions/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1177,7 +1177,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/fleets/{name}',
+            resource_path='/fleets/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1452,7 +1452,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/fleets/{name}/status',
+            resource_path='/fleets/{name}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1742,7 +1742,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/fleets/{fleet}/templateversions/{name}',
+            resource_path='/fleets/{fleet}/templateversions/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2087,7 +2087,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/fleets',
+            resource_path='/fleets',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2430,7 +2430,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/fleets/{fleet}/templateversions',
+            resource_path='/fleets/{fleet}/templateversions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2740,7 +2740,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/fleets/{name}',
+            resource_path='/fleets/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3047,7 +3047,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/api/v1/fleets/{name}/status',
+            resource_path='/fleets/{name}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3125,8 +3125,8 @@ class FleetApi:
             '201': "Fleet",
             '400': "Status",
             '401': "Status",
-            '404': "Status",
             '403': "Status",
+            '404': "Status",
             '409': "Status",
             '429': "Status",
             '503': "Status",
@@ -3204,8 +3204,8 @@ class FleetApi:
             '201': "Fleet",
             '400': "Status",
             '401': "Status",
-            '404': "Status",
             '403': "Status",
+            '404': "Status",
             '409': "Status",
             '429': "Status",
             '503': "Status",
@@ -3283,8 +3283,8 @@ class FleetApi:
             '201': "Fleet",
             '400': "Status",
             '401': "Status",
-            '404': "Status",
             '403': "Status",
+            '404': "Status",
             '409': "Status",
             '429': "Status",
             '503': "Status",
@@ -3359,7 +3359,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/fleets/{name}',
+            resource_path='/fleets/{name}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3662,7 +3662,7 @@ class FleetApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/fleets/{name}/status',
+            resource_path='/fleets/{name}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
