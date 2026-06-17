@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,8 @@ class CatalogItemMeta(BaseModel):
     """ # noqa: E501
     creation_timestamp: Optional[datetime] = Field(default=None, description="The time the object was created.", alias="creationTimestamp")
     deletion_timestamp: Optional[datetime] = Field(default=None, description="The time the object will be deleted.", alias="deletionTimestamp")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the object.")
-    labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map of string keys and values that can be used to organize and categorize (scope and select) objects.")
+    name: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="The name of the object.")
+    labels: Optional[Dict[str, Annotated[str, Field(strict=True, max_length=63)]]] = Field(default=None, description="Map of string keys and values that can be used to organize and categorize (scope and select) objects.")
     generation: Optional[StrictInt] = Field(default=None, description="A sequence number representing a specific generation of the desired state. Populated by the system. Read-only.")
     owner: Optional[StrictStr] = Field(default=None, description="A resource that owns this resource, in \"kind/name\" format.")
     annotations: Optional[Dict[str, StrictStr]] = Field(default=None, description="Properties set by the service.")

@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,7 @@ class ImageBuildRefSource(BaseModel):
     ImageBuildRefSource specifies a source image from an ImageBuild resource.
     """ # noqa: E501
     type: StrictStr = Field(description="The type of source.")
-    image_build_ref: StrictStr = Field(description="The name of the ImageBuild resource to use as source.", alias="imageBuildRef")
+    image_build_ref: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The name of the ImageBuild resource to use as source.", alias="imageBuildRef")
     __properties: ClassVar[List[str]] = ["type", "imageBuildRef"]
 
     @field_validator('type')

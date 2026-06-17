@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **config** | **Dict[str, object]** | Configuration values (envVars, ports, volumes, resources, etc.). | [optional] 
 **config_schema** | **Dict[str, object]** | JSON Schema defining configurable parameters and their validation. | [optional] 
 **readme** | **str** | Detailed documentation, preferably in markdown format. | [optional] 
-**version** | **str** | Semantic version identifier (e.g., 1.2.3, v2.0.0-rc1). Required for version ordering and upgrade graph. | 
+**version** | **str** | Semantic version identifier (e.g., 1.2.3, 2.0.0-rc1). Required for version ordering and upgrade graph. | 
 **references** | **Dict[str, str]** | Map of artifact type to image tag or digest. Keys must match a type in spec.artifacts. Only keyed artifacts are available for this version. | 
 **channels** | **List[str]** | Channels this version belongs to. | 
 **replaces** | **str** | The single version this one replaces, defining the primary upgrade edge. | [optional] 

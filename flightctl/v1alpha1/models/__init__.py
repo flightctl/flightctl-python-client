@@ -14,6 +14,7 @@
 """  # noqa: E501
 
 # import models into model package
+from flightctl.v1alpha1.models.affected_fleet import AffectedFleet
 from flightctl.v1alpha1.models.api_version import ApiVersion
 from flightctl.v1alpha1.models.catalog import Catalog
 from flightctl.v1alpha1.models.catalog_item import CatalogItem
@@ -34,10 +35,22 @@ from flightctl.v1alpha1.models.condition import Condition
 from flightctl.v1alpha1.models.condition_base import ConditionBase
 from flightctl.v1alpha1.models.condition_status import ConditionStatus
 from flightctl.v1alpha1.models.condition_type import ConditionType
+from flightctl.v1alpha1.models.cve_counts_by_severity import CveCountsBySeverity
+from flightctl.v1alpha1.models.device_counts_by_severity import DeviceCountsBySeverity
+from flightctl.v1alpha1.models.device_vulnerability_summary_response import DeviceVulnerabilitySummaryResponse
+from flightctl.v1alpha1.models.fleet_vulnerability_summary import FleetVulnerabilitySummary
+from flightctl.v1alpha1.models.fleet_vulnerability_summary_response import FleetVulnerabilitySummaryResponse
 from flightctl.v1alpha1.models.list_meta import ListMeta
 from flightctl.v1alpha1.models.object_meta import ObjectMeta
 from flightctl.v1alpha1.models.patch_request_inner import PatchRequestInner
-from flightctl.v1alpha1.models.schemas_api_version import SchemasApiVersion
-from flightctl.v1alpha1.models.schemas_status import SchemasStatus
 from flightctl.v1alpha1.models.status import Status
+from flightctl.v1alpha1.models.vulnerability import Vulnerability
+from flightctl.v1alpha1.models.vulnerability_group import VulnerabilityGroup
+from flightctl.v1alpha1.models.vulnerability_group_item import VulnerabilityGroupItem
+from flightctl.v1alpha1.models.vulnerability_group_list import VulnerabilityGroupList
+from flightctl.v1alpha1.models.vulnerability_image_ref import VulnerabilityImageRef
+from flightctl.v1alpha1.models.vulnerability_impact import VulnerabilityImpact
+from flightctl.v1alpha1.models.vulnerability_list import VulnerabilityList
+from flightctl.v1alpha1.models.vulnerability_severity_summary import VulnerabilitySeveritySummary
+from flightctl.v1alpha1.models.vulnerability_summary_response import VulnerabilitySummaryResponse
 

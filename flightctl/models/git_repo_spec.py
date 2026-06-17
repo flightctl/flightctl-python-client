@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from flightctl.models.http_config import HttpConfig
 from flightctl.models.ssh_config import SshConfig
 from typing import Optional, Set
@@ -29,7 +30,7 @@ class GitRepoSpec(BaseModel):
     """
     Git repository specification. Supports no auth (public repos), HTTP/HTTPS auth, or SSH auth.
     """ # noqa: E501
-    url: StrictStr = Field(description="The Git repository URL to clone from.")
+    url: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The Git repository URL to clone from.")
     type: StrictStr = Field(description="The repository type discriminator.")
     http_config: Optional[HttpConfig] = Field(default=None, alias="httpConfig")
     ssh_config: Optional[SshConfig] = Field(default=None, alias="sshConfig")

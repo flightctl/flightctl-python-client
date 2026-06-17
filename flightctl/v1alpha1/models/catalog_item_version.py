@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from flightctl.v1alpha1.models.catalog_item_deprecation import CatalogItemDeprecation
@@ -32,14 +32,41 @@ class CatalogItemVersion(BaseModel):
     config: Optional[Dict[str, Any]] = Field(default=None, description="Configuration values (envVars, ports, volumes, resources, etc.).")
     config_schema: Optional[Dict[str, Any]] = Field(default=None, description="JSON Schema defining configurable parameters and their validation.", alias="configSchema")
     readme: Optional[StrictStr] = Field(default=None, description="Detailed documentation, preferably in markdown format.")
-    version: StrictStr = Field(description="Semantic version identifier (e.g., 1.2.3, v2.0.0-rc1). Required for version ordering and upgrade graph.")
+    version: Annotated[str, Field(strict=True)] = Field(description="Semantic version identifier (e.g., 1.2.3, 2.0.0-rc1). Required for version ordering and upgrade graph.")
     references: Dict[str, Annotated[str, Field(min_length=1, strict=True)]] = Field(description="Map of artifact type to image tag or digest. Keys must match a type in spec.artifacts. Only keyed artifacts are available for this version.")
-    channels: List[StrictStr] = Field(description="Channels this version belongs to.")
-    replaces: Optional[StrictStr] = Field(default=None, description="The single version this one replaces, defining the primary upgrade edge.")
-    skips: Optional[List[StrictStr]] = Field(default=None, description="Additional versions that can upgrade directly to this one. Use when stable channel skips intermediate fast-only versions.")
-    skip_range: Optional[StrictStr] = Field(default=None, description="Semver range of versions that can upgrade directly to this one. Use for z-stream updates or hotfixes.", alias="skipRange")
+    channels: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="Channels this version belongs to.")
+    replaces: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The single version this one replaces, defining the primary upgrade edge.")
+    skips: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, description="Additional versions that can upgrade directly to this one. Use when stable channel skips intermediate fast-only versions.")
+    skip_range: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Semver range of versions that can upgrade directly to this one. Use for z-stream updates or hotfixes.", alias="skipRange")
     deprecation: Optional[CatalogItemDeprecation] = None
     __properties: ClassVar[List[str]] = ["config", "configSchema", "readme", "version", "references", "channels", "replaces", "skips", "skipRange", "deprecation"]
+
+    @field_validator('version')
+    def version_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$", value):
+            raise ValueError(r"must validate the regular expression /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/")
+        return value
+
+    @field_validator('replaces')
+    def replaces_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$", value):
+            raise ValueError(r"must validate the regular expression /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/")
+        return value
+
+    @field_validator('skip_range')
+    def skip_range_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*$", value):
+            raise ValueError(r"must validate the regular expression /^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

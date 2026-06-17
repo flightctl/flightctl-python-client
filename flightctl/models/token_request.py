@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,7 @@ class TokenRequest(BaseModel):
     OAuth2 token request
     """ # noqa: E501
     grant_type: StrictStr = Field(description="OAuth2 grant type.")
-    client_id: StrictStr = Field(description="OAuth2 client identifier.")
+    client_id: Annotated[str, Field(min_length=1, strict=True)] = Field(description="OAuth2 client identifier.")
     refresh_token: Optional[StrictStr] = Field(default=None, description="Refresh token for refresh_token grant.")
     code: Optional[StrictStr] = Field(default=None, description="Authorization code for authorization_code grant.")
     scope: Optional[StrictStr] = Field(default=None, description="OAuth2 scope.")

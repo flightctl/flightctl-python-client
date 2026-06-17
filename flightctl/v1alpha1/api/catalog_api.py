@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from flightctl.v1alpha1.models.catalog import Catalog
@@ -697,9 +697,11 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
+            '409': "Status",
             '429': "Status",
             '503': "Status",
         }
@@ -769,9 +771,11 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
+            '409': "Status",
             '429': "Status",
             '503': "Status",
         }
@@ -841,9 +845,11 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
+            '409': "Status",
             '429': "Status",
             '503': "Status",
         }
@@ -976,6 +982,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1051,6 +1058,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1126,6 +1134,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1259,6 +1268,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1331,6 +1341,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1403,6 +1414,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1538,6 +1550,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CatalogItem",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1613,6 +1626,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CatalogItem",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1688,6 +1702,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CatalogItem",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1821,6 +1836,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1893,6 +1909,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1965,6 +1982,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -2047,7 +2065,7 @@ class CatalogApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the parameter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2108,11 +2126,11 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CatalogItemList",
-            '400': "SchemasStatus",
-            '401': "SchemasStatus",
-            '403': "SchemasStatus",
-            '429': "SchemasStatus",
-            '503': "SchemasStatus",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '429': "Status",
+            '503': "Status",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2131,7 +2149,7 @@ class CatalogApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the parameter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2192,11 +2210,11 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CatalogItemList",
-            '400': "SchemasStatus",
-            '401': "SchemasStatus",
-            '403': "SchemasStatus",
-            '429': "SchemasStatus",
-            '503': "SchemasStatus",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '429': "Status",
+            '503': "Status",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2215,7 +2233,7 @@ class CatalogApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the parameter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2276,11 +2294,11 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CatalogItemList",
-            '400': "SchemasStatus",
-            '401': "SchemasStatus",
-            '403': "SchemasStatus",
-            '429': "SchemasStatus",
-            '503': "SchemasStatus",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '429': "Status",
+            '503': "Status",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2375,7 +2393,7 @@ class CatalogApi:
         catalog: Annotated[StrictStr, Field(description="The name of the Catalog resource.")],
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2460,7 +2478,7 @@ class CatalogApi:
         catalog: Annotated[StrictStr, Field(description="The name of the Catalog resource.")],
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2545,7 +2563,7 @@ class CatalogApi:
         catalog: Annotated[StrictStr, Field(description="The name of the Catalog resource.")],
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2704,7 +2722,7 @@ class CatalogApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2788,7 +2806,7 @@ class CatalogApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2872,7 +2890,7 @@ class CatalogApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4660,6 +4678,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -4737,6 +4756,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -4814,6 +4834,7 @@ class CatalogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Catalog",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",

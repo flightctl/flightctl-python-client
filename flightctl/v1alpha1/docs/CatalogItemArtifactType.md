@@ -22,6 +22,8 @@ Artifact format discriminator. Must be unique within the artifacts list. Include
 
 * `CatalogItemArtifactTypeGce` (value: `'gce'`)
 
+* `CatalogItemArtifactTypeQcow2DiskContainer` (value: `'qcow2-disk-container'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

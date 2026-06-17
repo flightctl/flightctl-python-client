@@ -17,9 +17,12 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from flightctl.models.check_repository_oci_image_request import CheckRepositoryOciImageRequest
+from flightctl.models.check_repository_oci_result import CheckRepositoryOciResult
+from flightctl.models.check_repository_oci_tag_request import CheckRepositoryOciTagRequest
 from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.models.repository import Repository
 from flightctl.models.repository_list import RepositoryList
@@ -41,6 +44,618 @@ class RepositoryApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    def check_repository_oci_image(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the Repository resource to use for registry connection.")],
+        check_repository_oci_image_request: CheckRepositoryOciImageRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CheckRepositoryOciResult:
+        """check_repository_oci_image
+
+        Check if a specific OCI image is accessible in a registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource. 
+
+        :param name: The name of the Repository resource to use for registry connection. (required)
+        :type name: str
+        :param check_repository_oci_image_request: (required)
+        :type check_repository_oci_image_request: CheckRepositoryOciImageRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_repository_oci_image_serialize(
+            name=name,
+            check_repository_oci_image_request=check_repository_oci_image_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckRepositoryOciResult",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '429': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def check_repository_oci_image_with_http_info(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the Repository resource to use for registry connection.")],
+        check_repository_oci_image_request: CheckRepositoryOciImageRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CheckRepositoryOciResult]:
+        """check_repository_oci_image
+
+        Check if a specific OCI image is accessible in a registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource. 
+
+        :param name: The name of the Repository resource to use for registry connection. (required)
+        :type name: str
+        :param check_repository_oci_image_request: (required)
+        :type check_repository_oci_image_request: CheckRepositoryOciImageRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_repository_oci_image_serialize(
+            name=name,
+            check_repository_oci_image_request=check_repository_oci_image_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckRepositoryOciResult",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '429': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def check_repository_oci_image_without_preload_content(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the Repository resource to use for registry connection.")],
+        check_repository_oci_image_request: CheckRepositoryOciImageRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """check_repository_oci_image
+
+        Check if a specific OCI image is accessible in a registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource. 
+
+        :param name: The name of the Repository resource to use for registry connection. (required)
+        :type name: str
+        :param check_repository_oci_image_request: (required)
+        :type check_repository_oci_image_request: CheckRepositoryOciImageRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_repository_oci_image_serialize(
+            name=name,
+            check_repository_oci_image_request=check_repository_oci_image_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckRepositoryOciResult",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '429': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _check_repository_oci_image_serialize(
+        self,
+        name,
+        check_repository_oci_image_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if name is not None:
+            _path_params['name'] = name
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if check_repository_oci_image_request is not None:
+            _body_params = check_repository_oci_image_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/repositories/{name}/check-oci-image',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def check_repository_oci_tag(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the Repository resource to use for registry connection.")],
+        check_repository_oci_tag_request: CheckRepositoryOciTagRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CheckRepositoryOciResult:
+        """check_repository_oci_tag
+
+        Check if a specific image tag exists in an OCI registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource. 
+
+        :param name: The name of the Repository resource to use for registry connection. (required)
+        :type name: str
+        :param check_repository_oci_tag_request: (required)
+        :type check_repository_oci_tag_request: CheckRepositoryOciTagRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_repository_oci_tag_serialize(
+            name=name,
+            check_repository_oci_tag_request=check_repository_oci_tag_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckRepositoryOciResult",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '429': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def check_repository_oci_tag_with_http_info(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the Repository resource to use for registry connection.")],
+        check_repository_oci_tag_request: CheckRepositoryOciTagRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CheckRepositoryOciResult]:
+        """check_repository_oci_tag
+
+        Check if a specific image tag exists in an OCI registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource. 
+
+        :param name: The name of the Repository resource to use for registry connection. (required)
+        :type name: str
+        :param check_repository_oci_tag_request: (required)
+        :type check_repository_oci_tag_request: CheckRepositoryOciTagRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_repository_oci_tag_serialize(
+            name=name,
+            check_repository_oci_tag_request=check_repository_oci_tag_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckRepositoryOciResult",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '429': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def check_repository_oci_tag_without_preload_content(
+        self,
+        name: Annotated[StrictStr, Field(description="The name of the Repository resource to use for registry connection.")],
+        check_repository_oci_tag_request: CheckRepositoryOciTagRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """check_repository_oci_tag
+
+        Check if a specific image tag exists in an OCI registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource. 
+
+        :param name: The name of the Repository resource to use for registry connection. (required)
+        :type name: str
+        :param check_repository_oci_tag_request: (required)
+        :type check_repository_oci_tag_request: CheckRepositoryOciTagRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._check_repository_oci_tag_serialize(
+            name=name,
+            check_repository_oci_tag_request=check_repository_oci_tag_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CheckRepositoryOciResult",
+            '400': "Status",
+            '401': "Status",
+            '403': "Status",
+            '404': "Status",
+            '429': "Status",
+            '503': "Status",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _check_repository_oci_tag_serialize(
+        self,
+        name,
+        check_repository_oci_tag_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if name is not None:
+            _path_params['name'] = name
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if check_repository_oci_tag_request is not None:
+            _body_params = check_repository_oci_tag_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/repositories/{name}/check-oci-tag',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -389,6 +1004,7 @@ class RepositoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -461,6 +1077,7 @@ class RepositoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -533,6 +1150,7 @@ class RepositoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -664,6 +1282,7 @@ class RepositoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Repository",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -736,6 +1355,7 @@ class RepositoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Repository",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -808,6 +1428,7 @@ class RepositoryApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Repository",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -890,7 +1511,7 @@ class RepositoryApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -974,7 +1595,7 @@ class RepositoryApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1058,7 +1679,7 @@ class RepositoryApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

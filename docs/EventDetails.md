@@ -30,6 +30,12 @@ Name | Type | Description | Notes
 **failed** | **int** | The number of failed devices in the batch. | 
 **timed_out** | **int** | The number of timed out devices in the batch. | 
 **fleet_name** | **str** | The name of the fleet that the device is being selected for. | 
+**cve_id** | **str** | CVE identifier (e.g. CVE-2024-1234). MITRE-style CVE-YYYY-sequence identifier, matching device list filter validation. | 
+**first_image_ref** | **str** | Human-readable OS image reference when the CVE was first detected on this device (historical/audit field). | [optional] 
+**first_image_digest** | **str** | Image digest when the CVE was first detected on this device (historical/audit field, e.g. sha256:...). | [optional] 
+**resource_key** | **str** | The resource key identifying the dependency that failed (e.g. \&quot;git:my-repo/main\&quot;). | 
+**fingerprint** | **str** | The new fingerprint (e.g. commit SHA) of the changed dependency. | 
+**error** | **str** | The error message from the failed probe. | 
 
 ## Example
 

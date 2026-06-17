@@ -27,8 +27,8 @@ class ApiVersion(str, Enum):
     """
     allowed enum values
     """
-    V1ALPHA1 = 'v1alpha1'
-    FLIGHTCTL_DOT_IO_SLASH_V1ALPHA1 = 'flightctl.io/v1alpha1'
+    ApiVersionV1alpha1 = 'v1alpha1'
+    ApiVersionFlightctlIoV1alpha1 = 'flightctl.io/v1alpha1'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

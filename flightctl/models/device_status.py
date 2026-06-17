@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.condition import Condition
+from flightctl.models.dependency_sync_status import DependencySyncStatus
 from flightctl.models.device_application_status import DeviceApplicationStatus
 from flightctl.models.device_applications_summary_status import DeviceApplicationsSummaryStatus
 from flightctl.models.device_config_status import DeviceConfigStatus
@@ -53,7 +54,8 @@ class DeviceStatus(BaseModel):
     summary: DeviceSummaryStatus
     last_seen: Optional[datetime] = Field(default=None, description="The last time the device was seen by the service (NOTE: this property is not returned by the API).", alias="lastSeen")
     lifecycle: DeviceLifecycleStatus
-    __properties: ClassVar[List[str]] = ["conditions", "systemInfo", "systemd", "applications", "applicationsSummary", "resources", "integrity", "config", "os", "updated", "summary", "lastSeen", "lifecycle"]
+    dependency_sync: Optional[DependencySyncStatus] = Field(default=None, alias="dependencySync")
+    __properties: ClassVar[List[str]] = ["conditions", "systemInfo", "systemd", "applications", "applicationsSummary", "resources", "integrity", "config", "os", "updated", "summary", "lastSeen", "lifecycle", "dependencySync"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -142,6 +144,9 @@ class DeviceStatus(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of lifecycle
         if self.lifecycle:
             _dict['lifecycle'] = self.lifecycle.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of dependency_sync
+        if self.dependency_sync:
+            _dict['dependencySync'] = self.dependency_sync.to_dict()
         return _dict
 
     @classmethod
@@ -166,7 +171,8 @@ class DeviceStatus(BaseModel):
             "updated": DeviceUpdatedStatus.from_dict(obj["updated"]) if obj.get("updated") is not None else None,
             "summary": DeviceSummaryStatus.from_dict(obj["summary"]) if obj.get("summary") is not None else None,
             "lastSeen": obj.get("lastSeen"),
-            "lifecycle": DeviceLifecycleStatus.from_dict(obj["lifecycle"]) if obj.get("lifecycle") is not None else None
+            "lifecycle": DeviceLifecycleStatus.from_dict(obj["lifecycle"]) if obj.get("lifecycle") is not None else None,
+            "dependencySync": DependencySyncStatus.from_dict(obj["dependencySync"]) if obj.get("dependencySync") is not None else None
         })
         return _obj
 

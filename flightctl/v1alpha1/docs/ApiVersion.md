@@ -4,9 +4,9 @@ APIVersion defines the versioned schema of this representation of an object. Ser
 
 ## Enum
 
-* `V1ALPHA1` (value: `'v1alpha1'`)
+* `ApiVersionV1alpha1` (value: `'v1alpha1'`)
 
-* `FLIGHTCTL_DOT_IO_SLASH_V1ALPHA1` (value: `'flightctl.io/v1alpha1'`)
+* `ApiVersionFlightctlIoV1alpha1` (value: `'flightctl.io/v1alpha1'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

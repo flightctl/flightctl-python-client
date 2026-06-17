@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +28,17 @@ class ImageBuildSource(BaseModel):
     """
     ImageBuildSource specifies the source image for the build.
     """ # noqa: E501
-    repository: StrictStr = Field(description="The name of the Repository resource of type OCI containing the source image.")
-    image_name: StrictStr = Field(description="The name of the source image.", alias="imageName")
-    image_tag: StrictStr = Field(description="The tag of the source image.", alias="imageTag")
+    repository: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The name of the Repository resource of type OCI containing the source image.")
+    image_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The name of the source image.", alias="imageName")
+    image_tag: Annotated[str, Field(min_length=1, strict=True, max_length=128)] = Field(description="The tag of the source image.", alias="imageTag")
     __properties: ClassVar[List[str]] = ["repository", "imageName", "imageTag"]
+
+    @field_validator('image_tag')
+    def image_tag_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[\w][\w.-]{0,127}$", value):
+            raise ValueError(r"must validate the regular expression /^[\w][\w.-]{0,127}$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

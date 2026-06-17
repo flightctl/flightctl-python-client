@@ -36,7 +36,8 @@ class AapProviderSpec(BaseModel):
     client_secret: StrictStr = Field(description="The OAuth2 client secret.", alias="clientSecret")
     enabled: Optional[StrictBool] = Field(default=True, description="Whether this AAP provider is enabled.")
     scopes: List[StrictStr] = Field(description="List of OAuth2 scopes to request.")
-    __properties: ClassVar[List[str]] = ["providerType", "displayName", "apiUrl", "authorizationUrl", "tokenUrl", "clientId", "clientSecret", "enabled", "scopes"]
+    organization_name_prefix: Optional[StrictStr] = Field(default=None, description="Optional prefix for AAP organization names. Incoming names are exposed as prefix + name.", alias="organizationNamePrefix")
+    __properties: ClassVar[List[str]] = ["providerType", "displayName", "apiUrl", "authorizationUrl", "tokenUrl", "clientId", "clientSecret", "enabled", "scopes", "organizationNamePrefix"]
 
     @field_validator('provider_type')
     def provider_type_validate_enum(cls, value):
@@ -104,7 +105,8 @@ class AapProviderSpec(BaseModel):
             "clientId": obj.get("clientId"),
             "clientSecret": obj.get("clientSecret"),
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
-            "scopes": obj.get("scopes")
+            "scopes": obj.get("scopes"),
+            "organizationNamePrefix": obj.get("organizationNamePrefix")
         })
         return _obj
 

@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from flightctl.models.fleet import Fleet
@@ -391,6 +391,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -463,6 +464,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -535,6 +537,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -670,6 +673,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -746,6 +750,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -822,6 +827,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -960,6 +966,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1036,6 +1043,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1112,6 +1120,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1248,6 +1257,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1320,6 +1330,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1392,6 +1403,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1527,6 +1539,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TemplateVersion",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1603,6 +1616,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TemplateVersion",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1679,6 +1693,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TemplateVersion",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1764,7 +1779,7 @@ class FleetApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         add_devices_summary: Annotated[Optional[StrictBool], Field(description="Include a summary of the devices in the fleet.")] = None,
         _request_timeout: Union[
             None,
@@ -1852,7 +1867,7 @@ class FleetApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         add_devices_summary: Annotated[Optional[StrictBool], Field(description="Include a summary of the devices in the fleet.")] = None,
         _request_timeout: Union[
             None,
@@ -1940,7 +1955,7 @@ class FleetApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         add_devices_summary: Annotated[Optional[StrictBool], Field(description="Include a summary of the devices in the fleet.")] = None,
         _request_timeout: Union[
             None,
@@ -2110,7 +2125,7 @@ class FleetApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2198,7 +2213,7 @@ class FleetApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2286,7 +2301,7 @@ class FleetApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3434,6 +3449,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -3510,6 +3526,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -3586,6 +3603,7 @@ class FleetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Fleet",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",

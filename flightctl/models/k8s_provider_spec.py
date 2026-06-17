@@ -34,10 +34,11 @@ class K8sProviderSpec(BaseModel):
     api_url: StrictStr = Field(description="The internal Kubernetes API URL.", alias="apiUrl")
     rbac_ns: Optional[StrictStr] = Field(default=None, description="The RBAC namespace for permissions.", alias="rbacNs")
     enabled: Optional[StrictBool] = Field(default=True, description="Whether this K8s provider is enabled.")
-    organization_assignment: AuthOrganizationAssignment = Field(alias="organizationAssignment")
-    role_assignment: AuthRoleAssignment = Field(alias="roleAssignment")
+    organization_assignment: Optional[AuthOrganizationAssignment] = Field(default=None, alias="organizationAssignment")
+    role_assignment: Optional[AuthRoleAssignment] = Field(default=None, alias="roleAssignment")
     role_suffix: Optional[StrictStr] = Field(default=None, description="Optional suffix to strip from ClusterRole names when normalizing role names. Used for multi-release deployments where ClusterRoles have namespace-specific names (e.g., flightctl-admin-<namespace>).", alias="roleSuffix")
-    __properties: ClassVar[List[str]] = ["providerType", "displayName", "apiUrl", "rbacNs", "enabled", "organizationAssignment", "roleAssignment", "roleSuffix"]
+    organization_name_prefix: Optional[StrictStr] = Field(default=None, description="Optional prefix for the organization name. The default org name is exposed as prefix + 'default' when set.", alias="organizationNamePrefix")
+    __properties: ClassVar[List[str]] = ["providerType", "displayName", "apiUrl", "rbacNs", "enabled", "organizationAssignment", "roleAssignment", "roleSuffix", "organizationNamePrefix"]
 
     @field_validator('provider_type')
     def provider_type_validate_enum(cls, value):
@@ -110,7 +111,8 @@ class K8sProviderSpec(BaseModel):
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
             "organizationAssignment": AuthOrganizationAssignment.from_dict(obj["organizationAssignment"]) if obj.get("organizationAssignment") is not None else None,
             "roleAssignment": AuthRoleAssignment.from_dict(obj["roleAssignment"]) if obj.get("roleAssignment") is not None else None,
-            "roleSuffix": obj.get("roleSuffix")
+            "roleSuffix": obj.get("roleSuffix"),
+            "organizationNamePrefix": obj.get("organizationNamePrefix")
         })
         return _obj
 

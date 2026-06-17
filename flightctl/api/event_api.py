@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr, field_validator
+from pydantic import Field, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from flightctl.models.event_list import EventList
@@ -45,7 +45,7 @@ class EventApi:
         self,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
         order: Annotated[Optional[StrictStr], Field(description="Sort order for the results by timestamp. Defaults to 'desc' (newest first).")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of events to return in the response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of events to return in the response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         _request_timeout: Union[
             None,
@@ -129,7 +129,7 @@ class EventApi:
         self,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
         order: Annotated[Optional[StrictStr], Field(description="Sort order for the results by timestamp. Defaults to 'desc' (newest first).")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of events to return in the response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of events to return in the response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         _request_timeout: Union[
             None,
@@ -213,7 +213,7 @@ class EventApi:
         self,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
         order: Annotated[Optional[StrictStr], Field(description="Sort order for the results by timestamp. Defaults to 'desc' (newest first).")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of events to return in the response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of events to return in the response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         _request_timeout: Union[
             None,

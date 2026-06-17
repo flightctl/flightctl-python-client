@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancel_image_build**](ImagebuildApi.md#cancel_image_build) | **POST** /api/v1/imagebuilds/{name}/cancel | 
 [**create_image_build**](ImagebuildApi.md#create_image_build) | **POST** /api/v1/imagebuilds | 
+[**create_image_build_new_version**](ImagebuildApi.md#create_image_build_new_version) | **POST** /api/v1/imagebuilds/{name}/newversion | 
 [**delete_image_build**](ImagebuildApi.md#delete_image_build) | **DELETE** /api/v1/imagebuilds/{name} | 
 [**get_image_build**](ImagebuildApi.md#get_image_build) | **GET** /api/v1/imagebuilds/{name} | 
 [**get_image_build_log**](ImagebuildApi.md#get_image_build_log) | **GET** /api/v1/imagebuilds/{name}/log | 
@@ -155,8 +156,83 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_image_build_new_version**
+> ImageBuild create_image_build_new_version(name, image_build_new_version_request)
+
+Create a new ImageBuild derived from an existing one, copying its spec with optional tag overrides. Sets flightctl.io/new-version-from annotation to record lineage.
+
+### Example
+
+
+```python
+import flightctl.imagebuilder
+from flightctl.imagebuilder.models.image_build import ImageBuild
+from flightctl.imagebuilder.models.image_build_new_version_request import ImageBuildNewVersionRequest
+from flightctl.imagebuilder.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.imagebuilder.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.imagebuilder.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.imagebuilder.ImagebuildApi(api_client)
+    name = 'name_example' # str | The name of the parent ImageBuild resource.
+    image_build_new_version_request = flightctl.imagebuilder.ImageBuildNewVersionRequest() # ImageBuildNewVersionRequest | 
+
+    try:
+        api_response = api_instance.create_image_build_new_version(name, image_build_new_version_request)
+        print("The response of ImagebuildApi->create_image_build_new_version:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ImagebuildApi->create_image_build_new_version: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the parent ImageBuild resource. | 
+ **image_build_new_version_request** | [**ImageBuildNewVersionRequest**](ImageBuildNewVersionRequest.md)|  | 
+
+### Return type
+
+[**ImageBuild**](ImageBuild.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found - parent ImageBuild does not exist |  -  |
+**409** | Conflict - ImageBuild with given name already exists |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_image_build**
-> ImageBuild delete_image_build(name)
+> Status delete_image_build(name)
 
 Delete an ImageBuild resource.
 
@@ -165,7 +241,7 @@ Delete an ImageBuild resource.
 
 ```python
 import flightctl.imagebuilder
-from flightctl.imagebuilder.models.image_build import ImageBuild
+from flightctl.imagebuilder.models.status import Status
 from flightctl.imagebuilder.rest import ApiException
 from pprint import pprint
 
@@ -201,7 +277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ImageBuild**](ImageBuild.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -217,6 +293,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request. |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -289,6 +366,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request. |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -360,6 +438,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request. |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |

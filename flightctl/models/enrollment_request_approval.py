@@ -27,9 +27,10 @@ class EnrollmentRequestApproval(BaseModel):
     """
     EnrollmentRequestApproval contains information about the approval of a device enrollment request.
     """ # noqa: E501
-    labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="A set of labels to apply to the device.")
+    labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="Labels to set on the device. If replaceLabels is false (default), labels are merged with agent-provided labels from the enrollment request. If replaceLabels is true, labels are used as the complete final set ignoring agent-provided labels.")
+    replace_labels: Optional[StrictBool] = Field(default=False, description="Controls whether labels are merged or replaced during approval. If false (default), labels are merged with agent-provided labels from the enrollment request. If true, labels are used as the complete final set and agent-provided labels are ignored.", alias="replaceLabels")
     approved: StrictBool = Field(description="Indicates whether the request has been approved.")
-    __properties: ClassVar[List[str]] = ["labels", "approved"]
+    __properties: ClassVar[List[str]] = ["labels", "replaceLabels", "approved"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +84,7 @@ class EnrollmentRequestApproval(BaseModel):
 
         _obj = cls.model_validate({
             "labels": obj.get("labels"),
+            "replaceLabels": obj.get("replaceLabels") if obj.get("replaceLabels") is not None else False,
             "approved": obj.get("approved")
         })
         return _obj

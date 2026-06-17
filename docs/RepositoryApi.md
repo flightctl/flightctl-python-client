@@ -4,6 +4,8 @@ All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**check_repository_oci_image**](RepositoryApi.md#check_repository_oci_image) | **POST** /repositories/{name}/check-oci-image | 
+[**check_repository_oci_tag**](RepositoryApi.md#check_repository_oci_tag) | **POST** /repositories/{name}/check-oci-tag | 
 [**create_repository**](RepositoryApi.md#create_repository) | **POST** /repositories | 
 [**delete_repository**](RepositoryApi.md#delete_repository) | **DELETE** /repositories/{name} | 
 [**get_repository**](RepositoryApi.md#get_repository) | **GET** /repositories/{name} | 
@@ -11,6 +13,156 @@ Method | HTTP request | Description
 [**patch_repository**](RepositoryApi.md#patch_repository) | **PATCH** /repositories/{name} | 
 [**replace_repository**](RepositoryApi.md#replace_repository) | **PUT** /repositories/{name} | 
 
+
+# **check_repository_oci_image**
+> CheckRepositoryOciResult check_repository_oci_image(name, check_repository_oci_image_request)
+
+Check if a specific OCI image is accessible in a registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.check_repository_oci_image_request import CheckRepositoryOciImageRequest
+from flightctl.models.check_repository_oci_result import CheckRepositoryOciResult
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.RepositoryApi(api_client)
+    name = 'name_example' # str | The name of the Repository resource to use for registry connection.
+    check_repository_oci_image_request = flightctl.CheckRepositoryOciImageRequest() # CheckRepositoryOciImageRequest | 
+
+    try:
+        api_response = api_instance.check_repository_oci_image(name, check_repository_oci_image_request)
+        print("The response of RepositoryApi->check_repository_oci_image:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RepositoryApi->check_repository_oci_image: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Repository resource to use for registry connection. | 
+ **check_repository_oci_image_request** | [**CheckRepositoryOciImageRequest**](CheckRepositoryOciImageRequest.md)|  | 
+
+### Return type
+
+[**CheckRepositoryOciResult**](CheckRepositoryOciResult.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found - Repository resource does not exist |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **check_repository_oci_tag**
+> CheckRepositoryOciResult check_repository_oci_tag(name, check_repository_oci_tag_request)
+
+Check if a specific image tag exists in an OCI registry configured as a Repository resource. The registry credentials and connection settings are read from the named Repository resource.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.check_repository_oci_result import CheckRepositoryOciResult
+from flightctl.models.check_repository_oci_tag_request import CheckRepositoryOciTagRequest
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.RepositoryApi(api_client)
+    name = 'name_example' # str | The name of the Repository resource to use for registry connection.
+    check_repository_oci_tag_request = flightctl.CheckRepositoryOciTagRequest() # CheckRepositoryOciTagRequest | 
+
+    try:
+        api_response = api_instance.check_repository_oci_tag(name, check_repository_oci_tag_request)
+        print("The response of RepositoryApi->check_repository_oci_tag:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RepositoryApi->check_repository_oci_tag: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Repository resource to use for registry connection. | 
+ **check_repository_oci_tag_request** | [**CheckRepositoryOciTagRequest**](CheckRepositoryOciTagRequest.md)|  | 
+
+### Return type
+
+[**CheckRepositoryOciResult**](CheckRepositoryOciResult.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found - Repository resource does not exist |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_repository**
 > Repository create_repository(repository)
@@ -145,6 +297,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -215,6 +368,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |

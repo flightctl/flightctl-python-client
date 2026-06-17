@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **oci_auth** | [**DockerAuth**](DockerAuth.md) |  | [optional] 
 **ca_crt** | **str** | Base64 encoded root CA. | [optional] 
 **skip_server_verification** | **bool** | Skip remote server verification. | [optional] 
+**base_images** | [**List[BaseImageEntry]**](BaseImageEntry.md) | Curated list of trusted base images available in this registry. When present, the Image Builder source picker surfaces these entries as selectable options. | [optional] 
 
 ## Example
 

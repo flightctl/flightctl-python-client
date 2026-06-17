@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from flightctl.models.device import Device
@@ -399,6 +399,7 @@ class DeviceApi:
             '401': "Status",
             '403': "Status",
             '404': "Status",
+            '409': "Status",
             '429': "Status",
             '503': "Status",
         }
@@ -476,6 +477,7 @@ class DeviceApi:
             '401': "Status",
             '403': "Status",
             '404': "Status",
+            '409': "Status",
             '429': "Status",
             '503': "Status",
         }
@@ -553,6 +555,7 @@ class DeviceApi:
             '401': "Status",
             '403': "Status",
             '404': "Status",
+            '409': "Status",
             '429': "Status",
             '503': "Status",
         }
@@ -697,6 +700,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -769,6 +773,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -841,6 +846,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -972,6 +978,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1044,6 +1051,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1116,6 +1124,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1248,6 +1257,7 @@ class DeviceApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DeviceLastSeen",
             '204': None,
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1321,6 +1331,7 @@ class DeviceApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DeviceLastSeen",
             '204': None,
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1394,6 +1405,7 @@ class DeviceApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DeviceLastSeen",
             '204': None,
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1525,6 +1537,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1597,6 +1610,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1669,6 +1683,7 @@ class DeviceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1805,6 +1820,7 @@ class DeviceApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
             '204': None,
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1883,6 +1899,7 @@ class DeviceApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
             '204': None,
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1961,6 +1978,7 @@ class DeviceApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Device",
             '204': None,
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -2049,8 +2067,9 @@ class DeviceApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         summary_only: Annotated[Optional[StrictBool], Field(description="A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true.")] = None,
+        cve_id: Annotated[Optional[Annotated[str, Field(strict=True, max_length=64)]], Field(description="Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2078,6 +2097,8 @@ class DeviceApi:
         :type limit: int
         :param summary_only: A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true.
         :type summary_only: bool
+        :param cve_id: Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345).
+        :type cve_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2106,6 +2127,7 @@ class DeviceApi:
             field_selector=field_selector,
             limit=limit,
             summary_only=summary_only,
+            cve_id=cve_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2137,8 +2159,9 @@ class DeviceApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         summary_only: Annotated[Optional[StrictBool], Field(description="A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true.")] = None,
+        cve_id: Annotated[Optional[Annotated[str, Field(strict=True, max_length=64)]], Field(description="Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2166,6 +2189,8 @@ class DeviceApi:
         :type limit: int
         :param summary_only: A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true.
         :type summary_only: bool
+        :param cve_id: Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345).
+        :type cve_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2194,6 +2219,7 @@ class DeviceApi:
             field_selector=field_selector,
             limit=limit,
             summary_only=summary_only,
+            cve_id=cve_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2225,8 +2251,9 @@ class DeviceApi:
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.")] = None,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels. Defaults to everything.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\").")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.")] = None,
         summary_only: Annotated[Optional[StrictBool], Field(description="A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true.")] = None,
+        cve_id: Annotated[Optional[Annotated[str, Field(strict=True, max_length=64)]], Field(description="Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2254,6 +2281,8 @@ class DeviceApi:
         :type limit: int
         :param summary_only: A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true.
         :type summary_only: bool
+        :param cve_id: Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345).
+        :type cve_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2282,6 +2311,7 @@ class DeviceApi:
             field_selector=field_selector,
             limit=limit,
             summary_only=summary_only,
+            cve_id=cve_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2310,6 +2340,7 @@ class DeviceApi:
         field_selector,
         limit,
         summary_only,
+        cve_id,
         _request_auth,
         _content_type,
         _headers,
@@ -2351,6 +2382,10 @@ class DeviceApi:
         if summary_only is not None:
             
             _query_params.append(('summaryOnly', summary_only))
+            
+        if cve_id is not None:
+            
+            _query_params.append(('cveId', cve_id))
             
         # process the header parameters
         # process the form parameters

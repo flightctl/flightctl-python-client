@@ -10,6 +10,8 @@ Reason for the ImageBuild Ready condition.
 
 * `ImageBuildConditionReasonPushing` (value: `'Pushing'`)
 
+* `ImageBuildConditionReasonGeneratingSBOM` (value: `'GeneratingSBOM'`)
+
 * `ImageBuildConditionReasonCompleted` (value: `'Completed'`)
 
 * `ImageBuildConditionReasonFailed` (value: `'Failed'`)

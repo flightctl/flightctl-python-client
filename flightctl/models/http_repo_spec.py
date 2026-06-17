@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from flightctl.models.http_config import HttpConfig
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class HttpRepoSpec(BaseModel):
     """
     HTTP endpoint specification for fetching configuration.
     """ # noqa: E501
-    url: StrictStr = Field(description="The HTTP URL to call.")
+    url: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The HTTP URL to call.")
     type: StrictStr = Field(description="The repository type discriminator.")
     http_config: Optional[HttpConfig] = Field(default=None, alias="httpConfig")
     validation_suffix: Optional[StrictStr] = Field(default=None, description="URL suffix used only for validating access to the repository. Users might use the URL field as a root URL to be used by config sources adding suffixes. This will help with the validation of the http endpoint.", alias="validationSuffix")
