@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **cluster_control_plane_url** | **str** | The OpenShift cluster control plane URL. | [optional] 
 **project_label_filter** | **str** | If specified, only projects with this label will be considered. The label selector should be in the format &#39;key&#39; or &#39;key&#x3D;value&#39;. If only the key is provided, any project with that label (regardless of value) will be included. This enables server-side filtering for better performance. | [optional] 
 **role_suffix** | **str** | Optional suffix to strip from ClusterRole names when normalizing role names. Used for multi-release deployments where ClusterRoles have namespace-specific names (e.g., flightctl-admin-&lt;namespace&gt;). | [optional] 
+**organization_name_prefix** | **str** | Optional prefix for the organization name. The default org name is exposed as prefix + &#39;default&#39; when set. | [optional] 
 **api_url** | **str** | The internal Kubernetes API URL. | 
 **rbac_ns** | **str** | The RBAC namespace for permissions. | [optional] 
 

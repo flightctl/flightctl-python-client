@@ -15,12 +15,13 @@
 """  # noqa: E501
 
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 # Define package exports
 __all__ = [
     "ImagebuildApi",
     "ImageexportApi",
+    "ImagepromotionApi",
     "ApiResponse",
     "ApiClient",
     "Configuration",
@@ -31,10 +32,12 @@ __all__ = [
     "ApiAttributeError",
     "ApiException",
     "ApiVersion",
+    "ArtifactPromotionStatus",
     "BindingType",
     "ConditionBase",
     "ConditionStatus",
     "EarlyBinding",
+    "ExistingCatalogItemTarget",
     "ExportFormatType",
     "ImageBuild",
     "ImageBuildBinding",
@@ -43,6 +46,7 @@ __all__ = [
     "ImageBuildConditionType",
     "ImageBuildDestination",
     "ImageBuildList",
+    "ImageBuildNewVersionRequest",
     "ImageBuildRefSource",
     "ImageBuildSource",
     "ImageBuildSpec",
@@ -57,9 +61,22 @@ __all__ = [
     "ImageExportSourceType",
     "ImageExportSpec",
     "ImageExportStatus",
+    "ImagePromotion",
+    "ImagePromotionCondition",
+    "ImagePromotionConditionReason",
+    "ImagePromotionConditionType",
+    "ImagePromotionList",
+    "ImagePromotionSource",
+    "ImagePromotionSpec",
+    "ImagePromotionStatus",
+    "ImagePromotionTarget",
+    "ImagePromotionTargetBase",
+    "ImagePromotionTargetType",
     "LateBinding",
     "ListMeta",
+    "NewCatalogItemTarget",
     "ObjectMeta",
+    "PatchRequestInner",
     "ResourceKind",
     "Status",
 ]
@@ -67,6 +84,7 @@ __all__ = [
 # import apis into sdk package
 from flightctl.imagebuilder.api.imagebuild_api import ImagebuildApi as ImagebuildApi
 from flightctl.imagebuilder.api.imageexport_api import ImageexportApi as ImageexportApi
+from flightctl.imagebuilder.api.imagepromotion_api import ImagepromotionApi as ImagepromotionApi
 
 # import ApiClient
 from flightctl.imagebuilder.api_response import ApiResponse as ApiResponse
@@ -81,10 +99,12 @@ from flightctl.imagebuilder.exceptions import ApiException as ApiException
 
 # import models into sdk package
 from flightctl.imagebuilder.models.api_version import ApiVersion as ApiVersion
+from flightctl.imagebuilder.models.artifact_promotion_status import ArtifactPromotionStatus as ArtifactPromotionStatus
 from flightctl.imagebuilder.models.binding_type import BindingType as BindingType
 from flightctl.imagebuilder.models.condition_base import ConditionBase as ConditionBase
 from flightctl.imagebuilder.models.condition_status import ConditionStatus as ConditionStatus
 from flightctl.imagebuilder.models.early_binding import EarlyBinding as EarlyBinding
+from flightctl.imagebuilder.models.existing_catalog_item_target import ExistingCatalogItemTarget as ExistingCatalogItemTarget
 from flightctl.imagebuilder.models.export_format_type import ExportFormatType as ExportFormatType
 from flightctl.imagebuilder.models.image_build import ImageBuild as ImageBuild
 from flightctl.imagebuilder.models.image_build_binding import ImageBuildBinding as ImageBuildBinding
@@ -93,6 +113,7 @@ from flightctl.imagebuilder.models.image_build_condition_reason import ImageBuil
 from flightctl.imagebuilder.models.image_build_condition_type import ImageBuildConditionType as ImageBuildConditionType
 from flightctl.imagebuilder.models.image_build_destination import ImageBuildDestination as ImageBuildDestination
 from flightctl.imagebuilder.models.image_build_list import ImageBuildList as ImageBuildList
+from flightctl.imagebuilder.models.image_build_new_version_request import ImageBuildNewVersionRequest as ImageBuildNewVersionRequest
 from flightctl.imagebuilder.models.image_build_ref_source import ImageBuildRefSource as ImageBuildRefSource
 from flightctl.imagebuilder.models.image_build_source import ImageBuildSource as ImageBuildSource
 from flightctl.imagebuilder.models.image_build_spec import ImageBuildSpec as ImageBuildSpec
@@ -107,9 +128,22 @@ from flightctl.imagebuilder.models.image_export_list import ImageExportList as I
 from flightctl.imagebuilder.models.image_export_source_type import ImageExportSourceType as ImageExportSourceType
 from flightctl.imagebuilder.models.image_export_spec import ImageExportSpec as ImageExportSpec
 from flightctl.imagebuilder.models.image_export_status import ImageExportStatus as ImageExportStatus
+from flightctl.imagebuilder.models.image_promotion import ImagePromotion as ImagePromotion
+from flightctl.imagebuilder.models.image_promotion_condition import ImagePromotionCondition as ImagePromotionCondition
+from flightctl.imagebuilder.models.image_promotion_condition_reason import ImagePromotionConditionReason as ImagePromotionConditionReason
+from flightctl.imagebuilder.models.image_promotion_condition_type import ImagePromotionConditionType as ImagePromotionConditionType
+from flightctl.imagebuilder.models.image_promotion_list import ImagePromotionList as ImagePromotionList
+from flightctl.imagebuilder.models.image_promotion_source import ImagePromotionSource as ImagePromotionSource
+from flightctl.imagebuilder.models.image_promotion_spec import ImagePromotionSpec as ImagePromotionSpec
+from flightctl.imagebuilder.models.image_promotion_status import ImagePromotionStatus as ImagePromotionStatus
+from flightctl.imagebuilder.models.image_promotion_target import ImagePromotionTarget as ImagePromotionTarget
+from flightctl.imagebuilder.models.image_promotion_target_base import ImagePromotionTargetBase as ImagePromotionTargetBase
+from flightctl.imagebuilder.models.image_promotion_target_type import ImagePromotionTargetType as ImagePromotionTargetType
 from flightctl.imagebuilder.models.late_binding import LateBinding as LateBinding
 from flightctl.imagebuilder.models.list_meta import ListMeta as ListMeta
+from flightctl.imagebuilder.models.new_catalog_item_target import NewCatalogItemTarget as NewCatalogItemTarget
 from flightctl.imagebuilder.models.object_meta import ObjectMeta as ObjectMeta
+from flightctl.imagebuilder.models.patch_request_inner import PatchRequestInner as PatchRequestInner
 from flightctl.imagebuilder.models.resource_kind import ResourceKind as ResourceKind
 from flightctl.imagebuilder.models.status import Status as Status
 

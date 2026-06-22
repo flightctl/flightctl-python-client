@@ -29,6 +29,7 @@ class ResourceKind(str, Enum):
     """
     IMAGEBUILD = 'ImageBuild'
     IMAGEEXPORT = 'ImageExport'
+    IMAGEPROMOTION = 'ImagePromotion'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

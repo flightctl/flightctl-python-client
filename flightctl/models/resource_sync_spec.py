@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from flightctl.models.resource_sync_type import ResourceSyncType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +30,9 @@ class ResourceSyncSpec(BaseModel):
     ResourceSyncSpec describes the file(s) to sync from a repository.
     """ # noqa: E501
     type: Optional[ResourceSyncType] = ResourceSyncType.ResourceSyncTypeFleet
-    repository: StrictStr = Field(description="The name of the repository resource to use as the sync source.")
-    target_revision: StrictStr = Field(description="The desired revision in the repository.", alias="targetRevision")
-    path: StrictStr = Field(description="The path of a file or directory in the repository. If a directory, the directory should contain only resource definitions with no subdirectories. Each file should contain the definition of one or more resources.")
+    repository: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The name of the repository resource to use as the sync source.")
+    target_revision: Annotated[str, Field(min_length=1, strict=True, max_length=244)] = Field(description="The desired revision in the repository.", alias="targetRevision")
+    path: Annotated[str, Field(min_length=0, strict=True, max_length=2048)] = Field(description="The path of a file or directory in the repository. If a directory, the directory should contain only resource definitions with no subdirectories. Each file should contain the definition of one or more resources.")
     __properties: ClassVar[List[str]] = ["type", "repository", "targetRevision", "path"]
 
     model_config = ConfigDict(

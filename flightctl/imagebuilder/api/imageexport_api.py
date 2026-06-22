@@ -17,11 +17,12 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictBytes, StrictStr
 from typing import Optional, Tuple, Union
 from typing_extensions import Annotated
 from flightctl.imagebuilder.models.image_export import ImageExport
 from flightctl.imagebuilder.models.image_export_list import ImageExportList
+from flightctl.imagebuilder.models.status import Status
 
 from flightctl.imagebuilder.api_client import ApiClient, RequestSerialized
 from flightctl.imagebuilder.api_response import ApiResponse
@@ -629,7 +630,7 @@ class ImageexportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ImageExport:
+    ) -> Status:
         """delete_image_export
 
         Delete an ImageExport resource.
@@ -667,7 +668,8 @@ class ImageexportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ImageExport",
+            '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -701,7 +703,7 @@ class ImageexportApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ImageExport]:
+    ) -> ApiResponse[Status]:
         """delete_image_export
 
         Delete an ImageExport resource.
@@ -739,7 +741,8 @@ class ImageexportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ImageExport",
+            '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -811,7 +814,8 @@ class ImageexportApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ImageExport",
+            '200': "Status",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1231,6 +1235,7 @@ class ImageexportApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageExport",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1303,6 +1308,7 @@ class ImageexportApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageExport",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1375,6 +1381,7 @@ class ImageexportApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageExport",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1510,6 +1517,7 @@ class ImageexportApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1586,6 +1594,7 @@ class ImageexportApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1662,6 +1671,7 @@ class ImageexportApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '400': "Status",
             '401': "Status",
             '403': "Status",
             '404': "Status",
@@ -1750,7 +1760,7 @@ class ImageexportApi:
         self,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server.")] = None,
         _request_timeout: Union[
             None,
@@ -1834,7 +1844,7 @@ class ImageexportApi:
         self,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server.")] = None,
         _request_timeout: Union[
             None,
@@ -1918,7 +1928,7 @@ class ImageexportApi:
         self,
         label_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their labels.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A selector to restrict the list of returned objects by their fields.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of results returned in the list response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of results returned in the list response.")] = None,
         var_continue: Annotated[Optional[StrictStr], Field(description="An optional parameter to query more results from the server.")] = None,
         _request_timeout: Union[
             None,

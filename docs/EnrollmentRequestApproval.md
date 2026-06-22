@@ -6,7 +6,8 @@ EnrollmentRequestApproval contains information about the approval of a device en
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**labels** | **Dict[str, str]** | A set of labels to apply to the device. | [optional] 
+**labels** | **Dict[str, str]** | Labels to set on the device. If replaceLabels is false (default), labels are merged with agent-provided labels from the enrollment request. If replaceLabels is true, labels are used as the complete final set ignoring agent-provided labels. | [optional] 
+**replace_labels** | **bool** | Controls whether labels are merged or replaced during approval. If false (default), labels are merged with agent-provided labels from the enrollment request. If true, labels are used as the complete final set and agent-provided labels are ignored. | [optional] [default to False]
 **approved** | **bool** | Indicates whether the request has been approved. | 
 
 ## Example

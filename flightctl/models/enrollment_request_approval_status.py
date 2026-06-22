@@ -28,11 +28,12 @@ class EnrollmentRequestApprovalStatus(BaseModel):
     """
     EnrollmentRequestApprovalStatus represents information about the status of a device enrollment request approval.
     """ # noqa: E501
-    labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="A set of labels to apply to the device.")
+    labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="Labels to set on the device. If replaceLabels is false (default), labels are merged with agent-provided labels from the enrollment request. If replaceLabels is true, labels are used as the complete final set ignoring agent-provided labels.")
+    replace_labels: Optional[StrictBool] = Field(default=False, description="Controls whether labels are merged or replaced during approval. If false (default), labels are merged with agent-provided labels from the enrollment request. If true, labels are used as the complete final set and agent-provided labels are ignored.", alias="replaceLabels")
     approved: StrictBool = Field(description="Indicates whether the request has been approved.")
     approved_by: StrictStr = Field(description="The name of the approver.", alias="approvedBy")
     approved_at: datetime = Field(description="The time at which the request was approved.", alias="approvedAt")
-    __properties: ClassVar[List[str]] = ["labels", "approved", "approvedBy", "approvedAt"]
+    __properties: ClassVar[List[str]] = ["labels", "replaceLabels", "approved", "approvedBy", "approvedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class EnrollmentRequestApprovalStatus(BaseModel):
 
         _obj = cls.model_validate({
             "labels": obj.get("labels"),
+            "replaceLabels": obj.get("replaceLabels") if obj.get("replaceLabels") is not None else False,
             "approved": obj.get("approved"),
             "approvedBy": obj.get("approvedBy"),
             "approvedAt": obj.get("approvedAt")

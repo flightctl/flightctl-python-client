@@ -157,7 +157,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_image_export**
-> ImageExport delete_image_export(name)
+> Status delete_image_export(name)
 
 Delete an ImageExport resource.
 
@@ -166,7 +166,7 @@ Delete an ImageExport resource.
 
 ```python
 import flightctl.imagebuilder
-from flightctl.imagebuilder.models.image_export import ImageExport
+from flightctl.imagebuilder.models.status import Status
 from flightctl.imagebuilder.rest import ApiException
 from pprint import pprint
 
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ImageExport**](ImageExport.md)
+[**Status**](Status.md)
 
 ### Authorization
 
@@ -218,6 +218,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request. |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -361,6 +362,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request. |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -432,6 +434,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request. |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |

@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.base_image_entry import BaseImageEntry
 from flightctl.models.docker_auth import DockerAuth
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +36,8 @@ class OciRepoSpec(BaseModel):
     oci_auth: Optional[DockerAuth] = Field(default=None, alias="ociAuth")
     ca_crt: Optional[StrictStr] = Field(default=None, description="Base64 encoded root CA.", alias="ca.crt")
     skip_server_verification: Optional[StrictBool] = Field(default=None, description="Skip remote server verification.", alias="skipServerVerification")
-    __properties: ClassVar[List[str]] = ["registry", "scheme", "type", "accessMode", "ociAuth", "ca.crt", "skipServerVerification"]
+    base_images: Optional[List[BaseImageEntry]] = Field(default=None, description="Curated list of trusted base images available in this registry. When present, the Image Builder source picker surfaces these entries as selectable options.", alias="baseImages")
+    __properties: ClassVar[List[str]] = ["registry", "scheme", "type", "accessMode", "ociAuth", "ca.crt", "skipServerVerification", "baseImages"]
 
     @field_validator('scheme')
     def scheme_validate_enum(cls, value):
@@ -106,6 +108,13 @@ class OciRepoSpec(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of oci_auth
         if self.oci_auth:
             _dict['ociAuth'] = self.oci_auth.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in base_images (list)
+        _items = []
+        if self.base_images:
+            for _item_base_images in self.base_images:
+                if _item_base_images:
+                    _items.append(_item_base_images.to_dict())
+            _dict['baseImages'] = _items
         return _dict
 
     @classmethod
@@ -124,7 +133,8 @@ class OciRepoSpec(BaseModel):
             "accessMode": obj.get("accessMode") if obj.get("accessMode") is not None else 'Read',
             "ociAuth": DockerAuth.from_dict(obj["ociAuth"]) if obj.get("ociAuth") is not None else None,
             "ca.crt": obj.get("ca.crt"),
-            "skipServerVerification": obj.get("skipServerVerification")
+            "skipServerVerification": obj.get("skipServerVerification"),
+            "baseImages": [BaseImageEntry.from_dict(_item) for _item in obj["baseImages"]] if obj.get("baseImages") is not None else None
         })
         return _obj
 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **client_secret** | **str** | The OAuth2 client secret. | 
 **enabled** | **bool** | Whether this AAP provider is enabled. | [optional] [default to True]
 **scopes** | **List[str]** | List of OAuth2 scopes to request. | 
+**organization_name_prefix** | **str** | Optional prefix for AAP organization names. Incoming names are exposed as prefix + name. | [optional] 
 
 ## Example
 

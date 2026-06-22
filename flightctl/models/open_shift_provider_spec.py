@@ -39,7 +39,8 @@ class OpenShiftProviderSpec(BaseModel):
     cluster_control_plane_url: Optional[StrictStr] = Field(default=None, description="The OpenShift cluster control plane URL.", alias="clusterControlPlaneUrl")
     project_label_filter: Optional[StrictStr] = Field(default=None, description="If specified, only projects with this label will be considered. The label selector should be in the format 'key' or 'key=value'. If only the key is provided, any project with that label (regardless of value) will be included. This enables server-side filtering for better performance.", alias="projectLabelFilter")
     role_suffix: Optional[StrictStr] = Field(default=None, description="Optional suffix to strip from ClusterRole names when normalizing role names. Used for multi-release deployments where ClusterRoles have namespace-specific names (e.g., flightctl-admin-<namespace>).", alias="roleSuffix")
-    __properties: ClassVar[List[str]] = ["providerType", "displayName", "issuer", "authorizationUrl", "tokenUrl", "clientId", "clientSecret", "enabled", "scopes", "clusterControlPlaneUrl", "projectLabelFilter", "roleSuffix"]
+    organization_name_prefix: Optional[StrictStr] = Field(default=None, description="Optional prefix for organization (project) names. Incoming names are exposed as prefix + name (e.g. 'ocp-' + project).", alias="organizationNamePrefix")
+    __properties: ClassVar[List[str]] = ["providerType", "displayName", "issuer", "authorizationUrl", "tokenUrl", "clientId", "clientSecret", "enabled", "scopes", "clusterControlPlaneUrl", "projectLabelFilter", "roleSuffix", "organizationNamePrefix"]
 
     @field_validator('provider_type')
     def provider_type_validate_enum(cls, value):
@@ -110,7 +111,8 @@ class OpenShiftProviderSpec(BaseModel):
             "scopes": obj.get("scopes"),
             "clusterControlPlaneUrl": obj.get("clusterControlPlaneUrl"),
             "projectLabelFilter": obj.get("projectLabelFilter"),
-            "roleSuffix": obj.get("roleSuffix")
+            "roleSuffix": obj.get("roleSuffix"),
+            "organizationNamePrefix": obj.get("organizationNamePrefix")
         })
         return _obj
 

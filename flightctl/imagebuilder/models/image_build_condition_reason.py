@@ -30,6 +30,7 @@ class ImageBuildConditionReason(str, Enum):
     ImageBuildConditionReasonPending = 'Pending'
     ImageBuildConditionReasonBuilding = 'Building'
     ImageBuildConditionReasonPushing = 'Pushing'
+    ImageBuildConditionReasonGeneratingSBOM = 'GeneratingSBOM'
     ImageBuildConditionReasonCompleted = 'Completed'
     ImageBuildConditionReasonFailed = 'Failed'
     ImageBuildConditionReasonCanceling = 'Canceling'

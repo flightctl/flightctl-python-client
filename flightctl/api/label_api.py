@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr, field_validator
+from pydantic import Field, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 
@@ -45,7 +45,7 @@ class LabelApi:
         kind: Annotated[StrictStr, Field(description="The type of resource to retrieve labels from.")],
         label_selector: Annotated[Optional[StrictStr], Field(description="A filter to retrieve labels only from resources that match the given label selector.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A filter to retrieve labels only from resources that match the given field selector.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of distinct labels to return in the response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of distinct labels to return in the response.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -129,7 +129,7 @@ class LabelApi:
         kind: Annotated[StrictStr, Field(description="The type of resource to retrieve labels from.")],
         label_selector: Annotated[Optional[StrictStr], Field(description="A filter to retrieve labels only from resources that match the given label selector.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A filter to retrieve labels only from resources that match the given field selector.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of distinct labels to return in the response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of distinct labels to return in the response.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -213,7 +213,7 @@ class LabelApi:
         kind: Annotated[StrictStr, Field(description="The type of resource to retrieve labels from.")],
         label_selector: Annotated[Optional[StrictStr], Field(description="A filter to retrieve labels only from resources that match the given label selector.")] = None,
         field_selector: Annotated[Optional[StrictStr], Field(description="A filter to retrieve labels only from resources that match the given field selector.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of distinct labels to return in the response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]], Field(description="The maximum number of distinct labels to return in the response.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

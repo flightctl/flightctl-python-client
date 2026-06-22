@@ -11,9 +11,10 @@ Name | Type | Description | Notes
 **api_url** | **str** | The internal Kubernetes API URL. | 
 **rbac_ns** | **str** | The RBAC namespace for permissions. | [optional] 
 **enabled** | **bool** | Whether this K8s provider is enabled. | [optional] [default to True]
-**organization_assignment** | [**AuthOrganizationAssignment**](AuthOrganizationAssignment.md) |  | 
-**role_assignment** | [**AuthRoleAssignment**](AuthRoleAssignment.md) |  | 
+**organization_assignment** | [**AuthOrganizationAssignment**](AuthOrganizationAssignment.md) |  | [optional] 
+**role_assignment** | [**AuthRoleAssignment**](AuthRoleAssignment.md) |  | [optional] 
 **role_suffix** | **str** | Optional suffix to strip from ClusterRole names when normalizing role names. Used for multi-release deployments where ClusterRoles have namespace-specific names (e.g., flightctl-admin-&lt;namespace&gt;). | [optional] 
+**organization_name_prefix** | **str** | Optional prefix for the organization name. The default org name is exposed as prefix + &#39;default&#39; when set. | [optional] 
 
 ## Example
 

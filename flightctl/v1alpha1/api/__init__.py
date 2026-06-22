@@ -2,4 +2,5 @@
 
 # import apis into api package
 from flightctl.v1alpha1.api.catalog_api import CatalogApi
+from flightctl.v1alpha1.api.vulnerability_api import VulnerabilityApi
 

@@ -42,6 +42,7 @@ from flightctl.models.auth_provider_spec import AuthProviderSpec
 from flightctl.models.auth_role_assignment import AuthRoleAssignment
 from flightctl.models.auth_static_organization_assignment import AuthStaticOrganizationAssignment
 from flightctl.models.auth_static_role_assignment import AuthStaticRoleAssignment
+from flightctl.models.base_image_entry import BaseImageEntry
 from flightctl.models.batch import Batch
 from flightctl.models.batch_limit import BatchLimit
 from flightctl.models.batch_sequence import BatchSequence
@@ -49,6 +50,9 @@ from flightctl.models.certificate_signing_request import CertificateSigningReque
 from flightctl.models.certificate_signing_request_list import CertificateSigningRequestList
 from flightctl.models.certificate_signing_request_spec import CertificateSigningRequestSpec
 from flightctl.models.certificate_signing_request_status import CertificateSigningRequestStatus
+from flightctl.models.check_repository_oci_image_request import CheckRepositoryOciImageRequest
+from flightctl.models.check_repository_oci_result import CheckRepositoryOciResult
+from flightctl.models.check_repository_oci_tag_request import CheckRepositoryOciTagRequest
 from flightctl.models.compose_application import ComposeApplication
 from flightctl.models.condition import Condition
 from flightctl.models.condition_base import ConditionBase
@@ -58,6 +62,10 @@ from flightctl.models.config_provider_spec import ConfigProviderSpec
 from flightctl.models.container_application import ContainerApplication
 from flightctl.models.container_application_properties import ContainerApplicationProperties
 from flightctl.models.cpu_resource_monitor_spec import CpuResourceMonitorSpec
+from flightctl.models.dependency_change_detected_details import DependencyChangeDetectedDetails
+from flightctl.models.dependency_sync_config_ref_status import DependencySyncConfigRefStatus
+from flightctl.models.dependency_sync_probe_failed_details import DependencySyncProbeFailedDetails
+from flightctl.models.dependency_sync_status import DependencySyncStatus
 from flightctl.models.device import Device
 from flightctl.models.device_application_status import DeviceApplicationStatus
 from flightctl.models.device_applications_summary_status import DeviceApplicationsSummaryStatus
@@ -92,6 +100,7 @@ from flightctl.models.device_system_info import DeviceSystemInfo
 from flightctl.models.device_update_policy_spec import DeviceUpdatePolicySpec
 from flightctl.models.device_updated_status import DeviceUpdatedStatus
 from flightctl.models.device_updated_status_type import DeviceUpdatedStatusType
+from flightctl.models.device_vulnerability_cve_details import DeviceVulnerabilityCveDetails
 from flightctl.models.devices_summary import DevicesSummary
 from flightctl.models.disk_resource_monitor_spec import DiskResourceMonitorSpec
 from flightctl.models.disruption_budget import DisruptionBudget

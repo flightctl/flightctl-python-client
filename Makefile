@@ -1,4 +1,4 @@
-VERSION = 1.1.0
+VERSION = 1.2.0
 GENERATOR_VERSION = 7.17.0
 COMMON_PROPS = packageName=flightctl,useOneOfDiscriminatorLookup=true,packageVersion=$(VERSION)
 GIT_USER = flightctl
@@ -20,6 +20,7 @@ generate-core: bundle-specs
 		-g python \
 		-i api/bundled/core-v1beta1.yaml \
 		-o . \
+		--skip-validate-spec \
 		--additional-properties=$(COMMON_PROPS) \
 		--git-user-id $(GIT_USER) \
 		--git-repo-id $(GIT_REPO)
@@ -31,6 +32,7 @@ generate-v1alpha1: bundle-specs
 		-g python \
 		-i api/bundled/core-v1alpha1.yaml \
 		-o . \
+		--skip-validate-spec \
 		--additional-properties=packageName=flightctl.v1alpha1,useOneOfDiscriminatorLookup=true,generateSourceCodeOnly=true,packageVersion=$(VERSION) \
 		--git-user-id $(GIT_USER) \
 		--git-repo-id $(GIT_REPO)
@@ -42,6 +44,7 @@ generate-imagebuilder: bundle-specs
 		-g python \
 		-i api/bundled/imagebuilder-v1alpha1.yaml \
 		-o . \
+		--skip-validate-spec \
 		--additional-properties=packageName=flightctl.imagebuilder,useOneOfDiscriminatorLookup=true,generateSourceCodeOnly=true,packageVersion=$(VERSION) \
 		--git-user-id $(GIT_USER) \
 		--git-repo-id $(GIT_REPO)

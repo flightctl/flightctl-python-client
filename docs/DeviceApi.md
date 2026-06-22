@@ -158,6 +158,7 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |
 
@@ -225,6 +226,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -295,6 +297,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -366,6 +369,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **204** | No Content |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -436,6 +440,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -509,6 +514,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **204** | No Content |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -519,7 +525,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_devices**
-> DeviceList list_devices(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, summary_only=summary_only)
+> DeviceList list_devices(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, summary_only=summary_only, cve_id=cve_id)
 
 List Device resources.
 
@@ -548,9 +554,10 @@ with flightctl.ApiClient(configuration) as api_client:
     field_selector = 'field_selector_example' # str | A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., \"key1=value1,key2!=value2\"). (optional)
     limit = 56 # int | The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. (optional)
     summary_only = True # bool | A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the 'owner' and 'labelSelector' parameters are supported when 'summaryOnly' is true. (optional)
+    cve_id = 'cve_id_example' # str | Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345). (optional)
 
     try:
-        api_response = api_instance.list_devices(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, summary_only=summary_only)
+        api_response = api_instance.list_devices(var_continue=var_continue, label_selector=label_selector, field_selector=field_selector, limit=limit, summary_only=summary_only, cve_id=cve_id)
         print("The response of DeviceApi->list_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -569,6 +576,7 @@ Name | Type | Description  | Notes
  **field_selector** | **str**| A selector to restrict the list of returned objects by their fields, supporting operators like &#39;&#x3D;&#39;, &#39;&#x3D;&#x3D;&#39;, and &#39;!&#x3D;&#39; (e.g., \&quot;key1&#x3D;value1,key2!&#x3D;value2\&quot;). | [optional] 
  **limit** | **int**| The maximum number of results returned in the list response. The server will set the &#39;continue&#39; field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. | [optional] 
  **summary_only** | **bool**| A boolean flag to include only a summary of the devices. When set to true, the response will contain only the summary information. Only the &#39;owner&#39; and &#39;labelSelector&#39; parameters are supported when &#39;summaryOnly&#39; is true. | [optional] 
+ **cve_id** | **str**| Filter devices by CVE ID. Only returns devices whose OS image digest has the specified vulnerability. Must be a MITRE-style identifier (CVE-YYYY-sequence, e.g. CVE-2024-12345). | [optional] 
 
 ### Return type
 

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **summary** | [**DeviceSummaryStatus**](DeviceSummaryStatus.md) |  | 
 **last_seen** | **datetime** | The last time the device was seen by the service (NOTE: this property is not returned by the API). | [optional] 
 **lifecycle** | [**DeviceLifecycleStatus**](DeviceLifecycleStatus.md) |  | 
+**dependency_sync** | [**DependencySyncStatus**](DependencySyncStatus.md) |  | [optional] 
 
 ## Example
 

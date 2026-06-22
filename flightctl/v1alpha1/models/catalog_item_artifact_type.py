@@ -36,6 +36,7 @@ class CatalogItemArtifactType(str, Enum):
     CatalogItemArtifactTypeVhd = 'vhd'
     CatalogItemArtifactTypeRaw = 'raw'
     CatalogItemArtifactTypeGce = 'gce'
+    CatalogItemArtifactTypeQcow2DiskContainer = 'qcow2-disk-container'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

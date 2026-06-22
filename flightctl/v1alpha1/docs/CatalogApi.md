@@ -118,7 +118,7 @@ configuration = flightctl.v1alpha1.Configuration(
 with flightctl.v1alpha1.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.v1alpha1.CatalogApi(api_client)
-    catalog = 'catalog_example' # str | The name of the Catalog resource.
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
     catalog_item = flightctl.v1alpha1.CatalogItem() # CatalogItem | The CatalogItem resource to create.
 
     try:
@@ -228,9 +228,11 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |
 
@@ -261,7 +263,7 @@ configuration = flightctl.v1alpha1.Configuration(
 with flightctl.v1alpha1.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.v1alpha1.CatalogApi(api_client)
-    catalog = 'catalog_example' # str | The name of the Catalog resource.
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
     name = 'name_example' # str | The name of the CatalogItem resource.
 
     try:
@@ -300,6 +302,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -369,6 +372,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -402,7 +406,7 @@ configuration = flightctl.v1alpha1.Configuration(
 with flightctl.v1alpha1.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.v1alpha1.CatalogApi(api_client)
-    catalog = 'catalog_example' # str | The name of the Catalog resource.
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
     name = 'name_example' # str | The name of the CatalogItem resource.
 
     try:
@@ -441,6 +445,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -510,6 +515,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -619,7 +625,7 @@ configuration = flightctl.v1alpha1.Configuration(
 with flightctl.v1alpha1.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.v1alpha1.CatalogApi(api_client)
-    catalog = 'catalog_example' # str | The name of the Catalog resource.
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
     var_continue = 'var_continue_example' # str | An optional parameter to query more results from the server. (optional)
     label_selector = 'label_selector_example' # str | A selector to restrict the list of returned objects by their labels. (optional)
     limit = 56 # int | The maximum number of results returned in the list response. (optional)
@@ -848,7 +854,7 @@ configuration = flightctl.v1alpha1.Configuration(
 with flightctl.v1alpha1.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.v1alpha1.CatalogApi(api_client)
-    catalog = 'catalog_example' # str | The name of the Catalog resource.
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
     name = 'name_example' # str | The name of the CatalogItem resource to patch.
     patch_request_inner = [flightctl.v1alpha1.PatchRequestInner()] # List[PatchRequestInner] | 
 
@@ -1072,7 +1078,7 @@ configuration = flightctl.v1alpha1.Configuration(
 with flightctl.v1alpha1.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = flightctl.v1alpha1.CatalogApi(api_client)
-    catalog = 'catalog_example' # str | The name of the Catalog resource.
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
     name = 'name_example' # str | The name of the CatalogItem resource.
     catalog_item = flightctl.v1alpha1.CatalogItem() # CatalogItem | The CatalogItem resource to replace.
 
@@ -1187,6 +1193,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
