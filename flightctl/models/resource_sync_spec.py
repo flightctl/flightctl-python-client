@@ -29,7 +29,7 @@ class ResourceSyncSpec(BaseModel):
     """
     ResourceSyncSpec describes the file(s) to sync from a repository.
     """ # noqa: E501
-    type: Optional[ResourceSyncType] = ResourceSyncType.ResourceSyncTypeFleet
+    type: Optional[ResourceSyncType] = ResourceSyncType.NUMBER_ResourceSyncTypeFleet
     repository: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The name of the repository resource to use as the sync source.")
     target_revision: Annotated[str, Field(min_length=1, strict=True, max_length=244)] = Field(description="The desired revision in the repository.", alias="targetRevision")
     path: Annotated[str, Field(min_length=0, strict=True, max_length=2048)] = Field(description="The path of a file or directory in the repository. If a directory, the directory should contain only resource definitions with no subdirectories. Each file should contain the definition of one or more resources.")
@@ -86,7 +86,7 @@ class ResourceSyncSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type") if obj.get("type") is not None else ResourceSyncType.ResourceSyncTypeFleet,
+            "type": obj.get("type") if obj.get("type") is not None else ResourceSyncType.NUMBER_ResourceSyncTypeFleet,
             "repository": obj.get("repository"),
             "targetRevision": obj.get("targetRevision"),
             "path": obj.get("path")

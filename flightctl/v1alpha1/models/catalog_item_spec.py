@@ -34,7 +34,7 @@ class CatalogItemSpec(BaseModel):
     """
     CatalogItemSpec defines the configuration for a catalog item.
     """ # noqa: E501
-    category: Optional[CatalogItemCategory] = CatalogItemCategory.CatalogItemCategoryApplication
+    category: Optional[CatalogItemCategory] = CatalogItemCategory.NUMBER_CatalogItemCategoryApplication
     type: CatalogItemType
     artifacts: Annotated[List[CatalogItemArtifact], Field(min_length=1)] = Field(description="Artifact definitions for this catalog item. Defined once; version references resolve each artifact independently. Type must be unique within the list.")
     versions: List[CatalogItemVersion] = Field(description="Available versions using Cincinnati model. Use replaces for primary edge, skips when stable channel skips intermediate versions.")
@@ -120,7 +120,7 @@ class CatalogItemSpec(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "category": obj.get("category") if obj.get("category") is not None else CatalogItemCategory.CatalogItemCategoryApplication,
+            "category": obj.get("category") if obj.get("category") is not None else CatalogItemCategory.NUMBER_CatalogItemCategoryApplication,
             "type": obj.get("type"),
             "artifacts": [CatalogItemArtifact.from_dict(_item) for _item in obj["artifacts"]] if obj.get("artifacts") is not None else None,
             "versions": [CatalogItemVersion.from_dict(_item) for _item in obj["versions"]] if obj.get("versions") is not None else None,

@@ -29,7 +29,7 @@ class ImageVolumeSource(BaseModel):
     Describes the source of an OCI-compliant image or artifact.
     """ # noqa: E501
     reference: StrictStr = Field(description="Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification.")
-    pull_policy: Optional[ImagePullPolicy] = Field(default=ImagePullPolicy.PullIfNotPresent, alias="pullPolicy")
+    pull_policy: Optional[ImagePullPolicy] = Field(default=ImagePullPolicy.NUMBER_PullIfNotPresent, alias="pullPolicy")
     __properties: ClassVar[List[str]] = ["reference", "pullPolicy"]
 
     model_config = ConfigDict(
@@ -84,7 +84,7 @@ class ImageVolumeSource(BaseModel):
 
         _obj = cls.model_validate({
             "reference": obj.get("reference"),
-            "pullPolicy": obj.get("pullPolicy") if obj.get("pullPolicy") is not None else ImagePullPolicy.PullIfNotPresent
+            "pullPolicy": obj.get("pullPolicy") if obj.get("pullPolicy") is not None else ImagePullPolicy.NUMBER_PullIfNotPresent
         })
         return _obj
 
