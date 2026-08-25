@@ -19,7 +19,9 @@ from flightctl.models.absolute_path import AbsolutePath
 from flightctl.models.api_version import ApiVersion
 from flightctl.models.app_type import AppType
 from flightctl.models.application_content import ApplicationContent
+from flightctl.models.application_desired_state import ApplicationDesiredState
 from flightctl.models.application_env_vars import ApplicationEnvVars
+from flightctl.models.application_lifecycle_changed_details import ApplicationLifecycleChangedDetails
 from flightctl.models.application_provider_base import ApplicationProviderBase
 from flightctl.models.application_provider_spec import ApplicationProviderSpec
 from flightctl.models.application_resource_limits import ApplicationResourceLimits
@@ -46,6 +48,8 @@ from flightctl.models.base_image_entry import BaseImageEntry
 from flightctl.models.batch import Batch
 from flightctl.models.batch_limit import BatchLimit
 from flightctl.models.batch_sequence import BatchSequence
+from flightctl.models.catalog_item_ref_application_provider_spec import CatalogItemRefApplicationProviderSpec
+from flightctl.models.catalog_item_ref_spec import CatalogItemRefSpec
 from flightctl.models.certificate_signing_request import CertificateSigningRequest
 from flightctl.models.certificate_signing_request_list import CertificateSigningRequestList
 from flightctl.models.certificate_signing_request_spec import CertificateSigningRequestSpec
@@ -69,6 +73,7 @@ from flightctl.models.dependency_sync_status import DependencySyncStatus
 from flightctl.models.device import Device
 from flightctl.models.device_application_status import DeviceApplicationStatus
 from flightctl.models.device_applications_summary_status import DeviceApplicationsSummaryStatus
+from flightctl.models.device_capabilities import DeviceCapabilities
 from flightctl.models.device_config_status import DeviceConfigStatus
 from flightctl.models.device_console import DeviceConsole
 from flightctl.models.device_decommission import DeviceDecommission
@@ -84,7 +89,6 @@ from flightctl.models.device_lifecycle_status_type import DeviceLifecycleStatusT
 from flightctl.models.device_list import DeviceList
 from flightctl.models.device_multiple_owners_detected_details import DeviceMultipleOwnersDetectedDetails
 from flightctl.models.device_multiple_owners_resolved_details import DeviceMultipleOwnersResolvedDetails
-from flightctl.models.device_os_spec import DeviceOsSpec
 from flightctl.models.device_os_status import DeviceOsStatus
 from flightctl.models.device_ownership_changed_details import DeviceOwnershipChangedDetails
 from flightctl.models.device_resource_status import DeviceResourceStatus
@@ -102,6 +106,7 @@ from flightctl.models.device_updated_status import DeviceUpdatedStatus
 from flightctl.models.device_updated_status_type import DeviceUpdatedStatusType
 from flightctl.models.device_vulnerability_cve_details import DeviceVulnerabilityCveDetails
 from flightctl.models.devices_summary import DevicesSummary
+from flightctl.models.devices_summary_capabilities import DevicesSummaryCapabilities
 from flightctl.models.disk_resource_monitor_spec import DiskResourceMonitorSpec
 from flightctl.models.disruption_budget import DisruptionBudget
 from flightctl.models.docker_auth import DockerAuth
@@ -149,9 +154,10 @@ from flightctl.models.http_config import HttpConfig
 from flightctl.models.http_config_provider_spec import HttpConfigProviderSpec
 from flightctl.models.http_config_provider_spec_http_ref import HttpConfigProviderSpecHttpRef
 from flightctl.models.http_repo_spec import HttpRepoSpec
-from flightctl.models.image_application_provider_spec import ImageApplicationProviderSpec
 from flightctl.models.image_mount_volume_provider_spec import ImageMountVolumeProviderSpec
+from flightctl.models.image_or_catalog_item_ref_spec import ImageOrCatalogItemRefSpec
 from flightctl.models.image_pull_policy import ImagePullPolicy
+from flightctl.models.image_spec import ImageSpec
 from flightctl.models.image_volume_provider_spec import ImageVolumeProviderSpec
 from flightctl.models.image_volume_source import ImageVolumeSource
 from flightctl.models.inline_application_provider_spec import InlineApplicationProviderSpec
@@ -178,6 +184,7 @@ from flightctl.models.open_shift_provider_spec import OpenShiftProviderSpec
 from flightctl.models.organization import Organization
 from flightctl.models.organization_list import OrganizationList
 from flightctl.models.organization_spec import OrganizationSpec
+from flightctl.models.os_mode_type import OsModeType
 from flightctl.models.patch_request_inner import PatchRequestInner
 from flightctl.models.permission import Permission
 from flightctl.models.permission_list import PermissionList
@@ -219,5 +226,6 @@ from flightctl.models.token_response import TokenResponse
 from flightctl.models.update_schedule import UpdateSchedule
 from flightctl.models.user_info_response import UserInfoResponse
 from flightctl.models.version import Version
+from flightctl.models.vm_application import VmApplication
 from flightctl.models.volume_mount import VolumeMount
 

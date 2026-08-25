@@ -36,6 +36,8 @@ Name | Type | Description | Notes
 **resource_key** | **str** | The resource key identifying the dependency that failed (e.g. \&quot;git:my-repo/main\&quot;). | 
 **fingerprint** | **str** | The new fingerprint (e.g. commit SHA) of the changed dependency. | 
 **error** | **str** | The error message from the failed probe. | 
+**app_name** | **str** | The name of the application whose device-level lifecycle override changed. | 
+**action** | **str** | The lifecycle action that was requested. | 
 
 ## Example
 

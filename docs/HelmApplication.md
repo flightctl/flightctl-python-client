@@ -7,7 +7,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace. | [optional] 
 **app_type** | [**AppType**](AppType.md) |  | 
-**image** | **str** | Reference to the chart for this helm application. | 
+**annotations** | **Dict[str, str]** | Arbitrary metadata annotations. Used internally by the control plane (e.g., flightctl.io/workload-type) when transforming application types at render time. | [optional] [readonly] 
+**desired_state** | [**ApplicationDesiredState**](ApplicationDesiredState.md) | Desired lifecycle state for this application, as most recently set by the stop/start device APIs. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent. | [optional] [readonly] 
+**restart_generation** | **int** | Counter incremented by the restart device API each time the application is restarted. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent. | [optional] [readonly] 
+**image** | **str** | Reference to an OCI image or artifact with tag. | 
+**catalog_item_ref** | [**CatalogItemRefSpec**](CatalogItemRefSpec.md) |  | 
 **namespace** | **str** | The target namespace for the application deployment. | [optional] 
 **values** | **Dict[str, object]** | Configuration values for the application. Supports arbitrarily nested structures. | [optional] 
 **values_files** | **List[str]** | List of values files to apply during deployment. Files are relative paths and applied in array order before user-provided values. | [optional] 

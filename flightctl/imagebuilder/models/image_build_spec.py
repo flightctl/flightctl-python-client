@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.imagebuilder.models.image_build_binding import ImageBuildBinding
 from flightctl.imagebuilder.models.image_build_destination import ImageBuildDestination
@@ -35,7 +35,8 @@ class ImageBuildSpec(BaseModel):
     destination: ImageBuildDestination
     binding: ImageBuildBinding
     user_configuration: Optional[ImageBuildUserConfiguration] = Field(default=None, alias="userConfiguration")
-    __properties: ClassVar[List[str]] = ["source", "destination", "binding", "userConfiguration"]
+    onboarding: Optional[StrictBool] = Field(default=None, description="When true, installs the flightctl-onboarding RPM and enables flightctl-onboarding-setup.service for first-boot device configuration via a Cockpit-based onboarding wizard. Compatible with both early and late binding. Defaults to false.")
+    __properties: ClassVar[List[str]] = ["source", "destination", "binding", "userConfiguration", "onboarding"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +104,8 @@ class ImageBuildSpec(BaseModel):
             "source": ImageBuildSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "destination": ImageBuildDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
             "binding": ImageBuildBinding.from_dict(obj["binding"]) if obj.get("binding") is not None else None,
-            "userConfiguration": ImageBuildUserConfiguration.from_dict(obj["userConfiguration"]) if obj.get("userConfiguration") is not None else None
+            "userConfiguration": ImageBuildUserConfiguration.from_dict(obj["userConfiguration"]) if obj.get("userConfiguration") is not None else None,
+            "onboarding": obj.get("onboarding")
         })
         return _obj
 

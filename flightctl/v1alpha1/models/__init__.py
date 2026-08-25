@@ -22,6 +22,9 @@ from flightctl.v1alpha1.models.catalog_item_artifact import CatalogItemArtifact
 from flightctl.v1alpha1.models.catalog_item_artifact_type import CatalogItemArtifactType
 from flightctl.v1alpha1.models.catalog_item_category import CatalogItemCategory
 from flightctl.v1alpha1.models.catalog_item_configurable import CatalogItemConfigurable
+from flightctl.v1alpha1.models.catalog_item_deployment import CatalogItemDeployment
+from flightctl.v1alpha1.models.catalog_item_deployment_deployed_to import CatalogItemDeploymentDeployedTo
+from flightctl.v1alpha1.models.catalog_item_deployment_list import CatalogItemDeploymentList
 from flightctl.v1alpha1.models.catalog_item_deprecation import CatalogItemDeprecation
 from flightctl.v1alpha1.models.catalog_item_list import CatalogItemList
 from flightctl.v1alpha1.models.catalog_item_meta import CatalogItemMeta
