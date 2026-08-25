@@ -22,11 +22,12 @@ from flightctl.models.compose_application import ComposeApplication
 from flightctl.models.container_application import ContainerApplication
 from flightctl.models.helm_application import HelmApplication
 from flightctl.models.quadlet_application import QuadletApplication
+from flightctl.models.vm_application import VmApplication
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-APPLICATIONPROVIDERSPEC_ONE_OF_SCHEMAS = ["ComposeApplication", "ContainerApplication", "HelmApplication", "QuadletApplication"]
+APPLICATIONPROVIDERSPEC_ONE_OF_SCHEMAS = ["ComposeApplication", "ContainerApplication", "HelmApplication", "QuadletApplication", "VmApplication"]
 
 class ApplicationProviderSpec(BaseModel):
     """
@@ -40,8 +41,10 @@ class ApplicationProviderSpec(BaseModel):
     oneof_schema_3_validator: Optional[ContainerApplication] = None
     # data type: HelmApplication
     oneof_schema_4_validator: Optional[HelmApplication] = None
-    actual_instance: Optional[Union[ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication]] = None
-    one_of_schemas: Set[str] = { "ComposeApplication", "ContainerApplication", "HelmApplication", "QuadletApplication" }
+    # data type: VmApplication
+    oneof_schema_5_validator: Optional[VmApplication] = None
+    actual_instance: Optional[Union[ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication, VmApplication]] = None
+    one_of_schemas: Set[str] = { "ComposeApplication", "ContainerApplication", "HelmApplication", "QuadletApplication", "VmApplication" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -87,12 +90,17 @@ class ApplicationProviderSpec(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `HelmApplication`")
         else:
             match += 1
+        # validate data type: VmApplication
+        if not isinstance(v, VmApplication):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `VmApplication`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication, VmApplication. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication, VmApplication. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -132,6 +140,11 @@ class ApplicationProviderSpec(BaseModel):
             instance.actual_instance = QuadletApplication.from_json(json_str)
             return instance
 
+        # check if data type is `VmApplication`
+        if _data_type == "vm":
+            instance.actual_instance = VmApplication.from_json(json_str)
+            return instance
+
         # deserialize data into ComposeApplication
         try:
             instance.actual_instance = ComposeApplication.from_json(json_str)
@@ -156,13 +169,19 @@ class ApplicationProviderSpec(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into VmApplication
+        try:
+            instance.actual_instance = VmApplication.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication, VmApplication. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ApplicationProviderSpec with oneOf schemas: ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication, VmApplication. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -176,7 +195,7 @@ class ApplicationProviderSpec(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ComposeApplication, ContainerApplication, HelmApplication, QuadletApplication, VmApplication]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

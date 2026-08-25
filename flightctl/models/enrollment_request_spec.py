@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.device_status import DeviceStatus
+from flightctl.models.os_mode_type import OsModeType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +33,8 @@ class EnrollmentRequestSpec(BaseModel):
     device_status: Optional[DeviceStatus] = Field(default=None, alias="deviceStatus")
     labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="A set of labels that the service will apply to this device when its enrollment is approved.")
     known_rendered_version: Optional[StrictStr] = Field(default=None, description="The rendered version of the device from desired.json (optional).", alias="knownRenderedVersion")
-    __properties: ClassVar[List[str]] = ["csr", "deviceStatus", "labels", "knownRenderedVersion"]
+    os_mode: Optional[OsModeType] = Field(default=None, alias="osMode")
+    __properties: ClassVar[List[str]] = ["csr", "deviceStatus", "labels", "knownRenderedVersion", "osMode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +93,8 @@ class EnrollmentRequestSpec(BaseModel):
             "csr": obj.get("csr"),
             "deviceStatus": DeviceStatus.from_dict(obj["deviceStatus"]) if obj.get("deviceStatus") is not None else None,
             "labels": obj.get("labels"),
-            "knownRenderedVersion": obj.get("knownRenderedVersion")
+            "knownRenderedVersion": obj.get("knownRenderedVersion"),
+            "osMode": obj.get("osMode")
         })
         return _obj
 

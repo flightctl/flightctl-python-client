@@ -1,6 +1,6 @@
 [project]
 name = "flightctl"
-version = "1.2.1"
+version = "1.3.0"
 description = "Flight Control API"
 authors = [
   {name = "The Flight Control Team",email = "team@flightctl.io"},

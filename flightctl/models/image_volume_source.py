@@ -20,17 +20,19 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.catalog_item_ref_spec import CatalogItemRefSpec
 from flightctl.models.image_pull_policy import ImagePullPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ImageVolumeSource(BaseModel):
     """
-    Describes the source of an OCI-compliant image or artifact.
+    Describes the source of an OCI-compliant image or artifact. Exactly one of 'reference' or 'catalogItemRef' must be specified.
     """ # noqa: E501
-    reference: StrictStr = Field(description="Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification.")
+    reference: Optional[StrictStr] = Field(default=None, description="Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification.")
+    catalog_item_ref: Optional[CatalogItemRefSpec] = Field(default=None, alias="catalogItemRef")
     pull_policy: Optional[ImagePullPolicy] = Field(default=ImagePullPolicy.NUMBER_PullIfNotPresent, alias="pullPolicy")
-    __properties: ClassVar[List[str]] = ["reference", "pullPolicy"]
+    __properties: ClassVar[List[str]] = ["reference", "catalogItemRef", "pullPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +73,9 @@ class ImageVolumeSource(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of catalog_item_ref
+        if self.catalog_item_ref:
+            _dict['catalogItemRef'] = self.catalog_item_ref.to_dict()
         return _dict
 
     @classmethod
@@ -84,6 +89,7 @@ class ImageVolumeSource(BaseModel):
 
         _obj = cls.model_validate({
             "reference": obj.get("reference"),
+            "catalogItemRef": CatalogItemRefSpec.from_dict(obj["catalogItemRef"]) if obj.get("catalogItemRef") is not None else None,
             "pullPolicy": obj.get("pullPolicy") if obj.get("pullPolicy") is not None else ImagePullPolicy.NUMBER_PullIfNotPresent
         })
         return _obj

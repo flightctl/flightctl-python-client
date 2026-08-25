@@ -1,4 +1,4 @@
-VERSION = 1.2.1
+VERSION = 1.3.0
 GENERATOR_VERSION = 7.17.0
 COMMON_PROPS = packageName=flightctl,useOneOfDiscriminatorLookup=true,packageVersion=$(VERSION)
 GIT_USER = flightctl
