@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.1"
+__version__ = "1.3.0"
 
 # Define package exports
 __all__ = [
@@ -38,6 +38,9 @@ __all__ = [
     "CatalogItemArtifactType",
     "CatalogItemCategory",
     "CatalogItemConfigurable",
+    "CatalogItemDeployment",
+    "CatalogItemDeploymentDeployedTo",
+    "CatalogItemDeploymentList",
     "CatalogItemDeprecation",
     "CatalogItemList",
     "CatalogItemMeta",
@@ -95,6 +98,9 @@ from flightctl.v1alpha1.models.catalog_item_artifact import CatalogItemArtifact 
 from flightctl.v1alpha1.models.catalog_item_artifact_type import CatalogItemArtifactType as CatalogItemArtifactType
 from flightctl.v1alpha1.models.catalog_item_category import CatalogItemCategory as CatalogItemCategory
 from flightctl.v1alpha1.models.catalog_item_configurable import CatalogItemConfigurable as CatalogItemConfigurable
+from flightctl.v1alpha1.models.catalog_item_deployment import CatalogItemDeployment as CatalogItemDeployment
+from flightctl.v1alpha1.models.catalog_item_deployment_deployed_to import CatalogItemDeploymentDeployedTo as CatalogItemDeploymentDeployedTo
+from flightctl.v1alpha1.models.catalog_item_deployment_list import CatalogItemDeploymentList as CatalogItemDeploymentList
 from flightctl.v1alpha1.models.catalog_item_deprecation import CatalogItemDeprecation as CatalogItemDeprecation
 from flightctl.v1alpha1.models.catalog_item_list import CatalogItemList as CatalogItemList
 from flightctl.v1alpha1.models.catalog_item_meta import CatalogItemMeta as CatalogItemMeta

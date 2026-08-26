@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.devices_summary_capabilities import DevicesSummaryCapabilities
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +32,8 @@ class DevicesSummary(BaseModel):
     application_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"application\" status.", alias="applicationStatus")
     summary_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"summary\" status.", alias="summaryStatus")
     update_status: Dict[str, StrictInt] = Field(description="A breakdown of the devices in the fleet by \"updated\" status.", alias="updateStatus")
-    __properties: ClassVar[List[str]] = ["total", "applicationStatus", "summaryStatus", "updateStatus"]
+    capabilities: Optional[DevicesSummaryCapabilities] = None
+    __properties: ClassVar[List[str]] = ["total", "applicationStatus", "summaryStatus", "updateStatus", "capabilities"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,6 +74,9 @@ class DevicesSummary(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of capabilities
+        if self.capabilities:
+            _dict['capabilities'] = self.capabilities.to_dict()
         return _dict
 
     @classmethod
@@ -87,7 +92,8 @@ class DevicesSummary(BaseModel):
             "total": obj.get("total"),
             "applicationStatus": obj.get("applicationStatus"),
             "summaryStatus": obj.get("summaryStatus"),
-            "updateStatus": obj.get("updateStatus")
+            "updateStatus": obj.get("updateStatus"),
+            "capabilities": DevicesSummaryCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None
         })
         return _obj
 

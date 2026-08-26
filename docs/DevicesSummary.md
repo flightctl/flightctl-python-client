@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **application_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;application\&quot; status. | 
 **summary_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;summary\&quot; status. | 
 **update_status** | **Dict[str, int]** | A breakdown of the devices in the fleet by \&quot;updated\&quot; status. | 
+**capabilities** | [**DevicesSummaryCapabilities**](DevicesSummaryCapabilities.md) |  | [optional] 
 
 ## Example
 

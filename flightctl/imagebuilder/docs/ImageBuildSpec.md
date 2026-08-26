@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **destination** | [**ImageBuildDestination**](ImageBuildDestination.md) |  | 
 **binding** | [**ImageBuildBinding**](ImageBuildBinding.md) |  | 
 **user_configuration** | [**ImageBuildUserConfiguration**](ImageBuildUserConfiguration.md) |  | [optional] 
+**onboarding** | **bool** | When true, installs the flightctl-onboarding RPM and enables flightctl-onboarding-setup.service for first-boot device configuration via a Cockpit-based onboarding wizard. Compatible with both early and late binding. Defaults to false. | [optional] 
 
 ## Example
 

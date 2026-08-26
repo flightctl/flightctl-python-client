@@ -24,9 +24,9 @@ from flightctl.models.application_provider_spec import ApplicationProviderSpec
 from flightctl.models.config_provider_spec import ConfigProviderSpec
 from flightctl.models.device_console import DeviceConsole
 from flightctl.models.device_decommission import DeviceDecommission
-from flightctl.models.device_os_spec import DeviceOsSpec
 from flightctl.models.device_spec_systemd import DeviceSpecSystemd
 from flightctl.models.device_update_policy_spec import DeviceUpdatePolicySpec
+from flightctl.models.image_or_catalog_item_ref_spec import ImageOrCatalogItemRefSpec
 from flightctl.models.resource_monitor import ResourceMonitor
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,7 +36,7 @@ class DeviceSpec(BaseModel):
     DeviceSpec describes a device.
     """ # noqa: E501
     update_policy: Optional[DeviceUpdatePolicySpec] = Field(default=None, alias="updatePolicy")
-    os: Optional[DeviceOsSpec] = None
+    os: Optional[ImageOrCatalogItemRefSpec] = None
     config: Optional[List[ConfigProviderSpec]] = Field(default=None, description="List of config providers.")
     applications: Optional[List[ApplicationProviderSpec]] = Field(default=None, description="List of application providers.")
     systemd: Optional[DeviceSpecSystemd] = None
@@ -137,7 +137,7 @@ class DeviceSpec(BaseModel):
 
         _obj = cls.model_validate({
             "updatePolicy": DeviceUpdatePolicySpec.from_dict(obj["updatePolicy"]) if obj.get("updatePolicy") is not None else None,
-            "os": DeviceOsSpec.from_dict(obj["os"]) if obj.get("os") is not None else None,
+            "os": ImageOrCatalogItemRefSpec.from_dict(obj["os"]) if obj.get("os") is not None else None,
             "config": [ConfigProviderSpec.from_dict(_item) for _item in obj["config"]] if obj.get("config") is not None else None,
             "applications": [ApplicationProviderSpec.from_dict(_item) for _item in obj["applications"]] if obj.get("applications") is not None else None,
             "systemd": DeviceSpecSystemd.from_dict(obj["systemd"]) if obj.get("systemd") is not None else None,

@@ -1,12 +1,13 @@
 # ImageVolumeSource
 
-Describes the source of an OCI-compliant image or artifact.
+Describes the source of an OCI-compliant image or artifact. Exactly one of 'reference' or 'catalogItemRef' must be specified.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reference** | **str** | Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification. | 
+**reference** | **str** | Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification. | [optional] 
+**catalog_item_ref** | [**CatalogItemRefSpec**](CatalogItemRefSpec.md) |  | [optional] 
 **pull_policy** | [**ImagePullPolicy**](ImagePullPolicy.md) |  | [optional] [default to ImagePullPolicy.NUMBER_PullIfNotPresent]
 
 ## Example

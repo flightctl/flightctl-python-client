@@ -42,6 +42,7 @@ tags:
     description: Operations for receiving service version.
 paths:
   /version:
+    x-resource: version
     get:
       tags:
         - version
@@ -1851,6 +1852,240 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
+  /devices/{name}/applications/{appname}/actions/stop:
+    x-resource: devices/applications/lifecycle
+    post:
+      tags:
+        - device
+      description: >
+        Stop an application on this device. Sets a device-level lifecycle override
+        (independent of the application's declarative spec, fleet template or standalone
+        device) that is applied on top of the rendered application spec at render time and
+        survives fleet template rollouts, since it is never stored as part of the device's
+        spec.
+      operationId: stopDeviceApplication
+      x-rbac:
+        resource: devices/applications/lifecycle
+        action: update
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+        - name: appname
+          in: path
+          description: The name of the application, as defined in the device's rendered application spec.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "503":
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /devices/{name}/applications/{appname}/actions/start:
+    x-resource: devices/applications/lifecycle
+    post:
+      tags:
+        - device
+      description: >
+        Start an application on this device. Sets a device-level lifecycle override
+        (independent of the application's declarative spec, fleet template or standalone
+        device) that is applied on top of the rendered application spec at render time and
+        survives fleet template rollouts, since it is never stored as part of the device's
+        spec. If the application is also owned by a fleet with its own stop/start default for
+        this application, whichever of the two actions was issued most recently takes effect.
+      operationId: startDeviceApplication
+      x-rbac:
+        resource: devices/applications/lifecycle
+        action: update
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+        - name: appname
+          in: path
+          description: The name of the application, as defined in the device's rendered application spec.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "503":
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /devices/{name}/applications/{appname}/actions/restart:
+    x-resource: devices/applications/lifecycle
+    post:
+      tags:
+        - device
+      description: >
+        Restart an application on this device. Sets a device-level restartGeneration override
+        (independent of the application's declarative spec, fleet template or standalone
+        device); the control plane computes the next generation, and the agent restarts the
+        application using the type-appropriate restart operation when it observes the change.
+        The override is applied on top of the rendered application spec at render time and
+        survives fleet template rollouts, since it is never stored as part of the device's
+        spec. Only meaningful while the application's desired state is "running".
+      operationId: restartDeviceApplication
+      x-rbac:
+        resource: devices/applications/lifecycle
+        action: update
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+        - name: appname
+          in: path
+          description: The name of the application, as defined in the device's rendered application spec.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "503":
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
   /devices/{name}/rendered:
     x-resource: devices/rendered
     get:
@@ -1983,6 +2218,101 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
+  /ws/v1/devices/{name}/console:
+    x-resource: devices/console
+    get:
+      tags:
+        - device
+      description: Open a WebSocket console session to the Device.
+      operationId: getDeviceConsole
+      x-rbac:
+        resource: devices/console
+        action: get
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+      responses:
+        "101":
+          description: Switching Protocols
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "429":
+          description: Too Many Requests
+        "500":
+          description: Internal Server Error
+        "504":
+          description: Gateway Timeout
+  /ws/v1/devices/{name}/applications/{appname}/console:
+    x-resource: devices/applications/console
+    get:
+      tags:
+        - device
+      description: Open a WebSocket console session to an application running on the Device.
+      operationId: getDeviceApplicationConsole
+      x-rbac:
+        resource: devices/applications/console
+        action: get
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+        - name: appname
+          in: path
+          description: The name of the application to connect to.
+          required: true
+          schema:
+            type: string
+        - name: consoleType
+          in: query
+          required: true
+          description: The type of console session to open. "serial" opens a text terminal; "vnc" opens a VNC proxy tunnel.
+          schema:
+            type: string
+            enum:
+              - serial
+              - vnc
+            x-enum-varnames:
+              - ConsoleTypeSerial
+              - ConsoleTypeVnc
+        - name: force
+          in: query
+          required: false
+          description: If true, take over an already-active console session of the same type for this application instead of failing with a 409 Conflict. The replaced session is disconnected and told why.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "101":
+          description: Switching Protocols
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "429":
+          description: Too Many Requests
+        "500":
+          description: Internal Server Error
+        "504":
+          description: Gateway Timeout
   /deviceactions/resume:
     x-resource: devices/resume
     post:
@@ -2037,6 +2367,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Status'
   /enrollmentconfig:
+    x-resource: enrollmentconfig
     get:
       tags:
         - enrollmentrequest
@@ -3803,6 +4134,164 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
+  /fleets/{name}/applications/{appname}/actions/stop:
+    x-resource: fleets/applications/lifecycle
+    post:
+      tags:
+        - fleet
+      description: >
+        Stop an application across every device currently owned by this fleet. Sets a
+        fleet-level lifecycle default (independent of the application's declarative spec)
+        that is applied on top of the rendered application spec of each member device at
+        render time, and is automatically inherited by devices that join the fleet later. If a
+        specific device also has its own override for this application (see
+        /devices/{name}/applications/{appname}/actions/stop or .../start), whichever of the two
+        actions was issued most recently takes effect for that device.
+      operationId: stopFleetApplication
+      x-rbac:
+        resource: fleets/applications/lifecycle
+        action: update
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Fleet resource.
+          required: true
+          schema:
+            type: string
+        - name: appname
+          in: path
+          description: The name of the application, as defined in the fleet's device template.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "503":
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /fleets/{name}/applications/{appname}/actions/start:
+    x-resource: fleets/applications/lifecycle
+    post:
+      tags:
+        - fleet
+      description: >
+        Start an application across every device currently owned by this fleet. Sets a
+        fleet-level lifecycle default (independent of the application's declarative spec)
+        that is applied on top of the rendered application spec of each member device at
+        render time, and is automatically inherited by devices that join the fleet later. If a
+        specific device also has its own override for this application (see
+        /devices/{name}/applications/{appname}/actions/stop or .../start), whichever of the two
+        actions was issued most recently takes effect for that device.
+      operationId: startFleetApplication
+      x-rbac:
+        resource: fleets/applications/lifecycle
+        action: update
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Fleet resource.
+          required: true
+          schema:
+            type: string
+        - name: appname
+          in: path
+          description: The name of the application, as defined in the fleet's device template.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "503":
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
   /fleets/{fleet}/templateversions:
     x-resource: fleets/templateversions
     get:
@@ -5199,6 +5688,7 @@ components:
         - $ref: '#/components/schemas/QuadletApplication'
         - $ref: '#/components/schemas/ContainerApplication'
         - $ref: '#/components/schemas/HelmApplication'
+        - $ref: '#/components/schemas/VmApplication'
       discriminator:
         propertyName: appType
         mapping:
@@ -5206,6 +5696,17 @@ components:
           quadlet: '#/components/schemas/QuadletApplication'
           container: '#/components/schemas/ContainerApplication'
           helm: '#/components/schemas/HelmApplication'
+          vm: '#/components/schemas/VmApplication'
+
+    ApplicationDesiredState:
+      type: string
+      description: Desired lifecycle state for an application.
+      enum:
+        - "running"
+        - "stopped"
+      x-enum-varnames:
+        - "ApplicationDesiredStateRunning"
+        - "ApplicationDesiredStateStopped"
 
     ApplicationProviderBase:
       type: object
@@ -5216,8 +5717,31 @@ components:
           description: The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.
         appType:
           $ref: '#/components/schemas/AppType'
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          readOnly: true
+          description: "Arbitrary metadata annotations. Used internally by the control plane (e.g., flightctl.io/workload-type) when transforming application types at render time."
+        desiredState:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDesiredState'
+          readOnly: true
+          description: "Desired lifecycle state for this application, as most recently set by the stop/start device APIs. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent."
+        restartGeneration:
+          type: integer
+          readOnly: true
+          description: "Counter incremented by the restart device API each time the application is restarted. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent."
       required:
         - appType
+
+    CatalogItemRefApplicationProviderSpec:
+      type: object
+      properties:
+        catalogItemRef:
+          $ref: '#/components/schemas/CatalogItemRefSpec'
+      required:
+        - catalogItemRef
 
     ComposeApplication:
       type: object
@@ -5227,6 +5751,7 @@ components:
         - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
         - oneOf:
             - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+            - $ref: '#/components/schemas/CatalogItemRefApplicationProviderSpec'
             - $ref: '#/components/schemas/InlineApplicationProviderSpec'
 
     QuadletApplication:
@@ -5238,6 +5763,7 @@ components:
         - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
         - oneOf:
             - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+            - $ref: '#/components/schemas/CatalogItemRefApplicationProviderSpec'
             - $ref: '#/components/schemas/InlineApplicationProviderSpec'
 
     ContainerApplication:
@@ -5247,11 +5773,11 @@ components:
         - $ref: '#/components/schemas/ApplicationEnvVars'
         - $ref: '#/components/schemas/ApplicationUser'
         - $ref: '#/components/schemas/ApplicationVolumeProviderSpec'
+        - oneOf:
+            - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+            - $ref: '#/components/schemas/CatalogItemRefApplicationProviderSpec'
         - type: object
           properties:
-            image:
-              type: string
-              description: Reference to the image for this container.
             ports:
               type: array
               description: Port mappings.
@@ -5259,18 +5785,16 @@ components:
                 $ref: '#/components/schemas/ApplicationPort'
             resources:
               $ref: '#/components/schemas/ApplicationResources'
-          required:
-            - image
 
     HelmApplication:
       type: object
       allOf:
         - $ref: '#/components/schemas/ApplicationProviderBase'
+        - oneOf:
+          - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+          - $ref: '#/components/schemas/CatalogItemRefApplicationProviderSpec'
         - type: object
           properties:
-            image:
-              type: string
-              description: Reference to the chart for this helm application.
             namespace:
               type: string
               description: The target namespace for the application deployment.
@@ -5304,6 +5828,31 @@ components:
                 - "values-overrides.yml"
           required:
             - image
+
+    VmApplication:
+      type: object
+      description: >-
+        A VM workload managed by the FlightCtl agent. The VM definition may be
+        delivered either as an OCI image/artifact or as inline application content.
+        For inline providers, the package must contain a KubeVirt VirtualMachine YAML
+        file named vm.yaml.
+      allOf:
+        - $ref: '#/components/schemas/ApplicationProviderBase'
+        - type: object
+          properties:
+            publishPorts:
+              type: array
+              description: >-
+                List of host-to-guest port mappings for the VM. Each entry must follow
+                the format "hostPort:guestPort" or "hostPort:guestPort/protocol"
+                (e.g. "8080:80" or "8080:80/tcp").
+              items:
+                type: string
+                pattern: '^[0-9]+:[0-9]+(/(tcp|udp|sctp))?$'
+        - oneOf:
+            - $ref: '#/components/schemas/ImageApplicationProviderSpec'
+            - $ref: '#/components/schemas/InlineApplicationProviderSpec'
+
     ApplicationUser:
       type: object
       properties:
@@ -5323,16 +5872,23 @@ components:
             $ref: '#/components/schemas/ApplicationPort'
         resources:
           $ref: '#/components/schemas/ApplicationResources'
-    ImageApplicationProviderSpec:
-      type: object
+    ImageOrCatalogItemRefSpec:
+      description: Either a specific OCI image reference, or a reference to a catalog item version that can be resolved to an OCI image ref.
       allOf:
         - type: object
+          description: Reference to an OCI image or artifact with tag.
           properties:
             image:
               type: string
-              description: Reference to the OCI image or artifact for the application package.
-          required:
-            - image
+              description: Reference to an OCI image or artifact with tag.
+              x-go-type-skip-optional-pointer: true
+        - type: object
+          description: Reference to a catalog item version.
+          properties:
+            catalogItemRef:
+              $ref: '#/components/schemas/CatalogItemRefSpec'
+    ImageApplicationProviderSpec:
+      $ref: '#/components/schemas/ImageSpec'
     InlineApplicationProviderSpec:
       type: object
       allOf:
@@ -5396,15 +5952,16 @@ components:
         required: [mount]
     ImageVolumeSource:
       type: object
-      description: Describes the source of an OCI-compliant image or artifact.
+      description: Describes the source of an OCI-compliant image or artifact. Exactly one of 'reference' or 'catalogItemRef' must be specified.
       properties:
         reference:
           type: string
           description: Reference to an OCI-compliant image or artifact in a registry. This may be a container image or another type of OCI artifact, as long as it conforms to the OCI image specification.
+          x-go-type-skip-optional-pointer: true
+        catalogItemRef:
+          $ref: '#/components/schemas/CatalogItemRefSpec'
         pullPolicy:
           $ref: '#/components/schemas/ImagePullPolicy'
-      required:
-        - reference
     MountVolumeProviderSpec:
       type: object
       description: Named volume mount configuration.
@@ -5472,11 +6029,13 @@ components:
         - "quadlet"
         - "container"
         - "helm"
+        - "vm"
       x-enum-varnames:
         - "AppTypeCompose"
         - "AppTypeQuadlet"
         - "AppTypeContainer"
         - "AppTypeHelm"
+        - "AppTypeVm"
     ResourceMonitor:
       oneOf:
         - $ref: '#/components/schemas/CpuResourceMonitorSpec'
@@ -5730,14 +6289,7 @@ components:
         - metadata
         - items
     DeviceOsSpec:
-      type: object
-      description: DeviceOsSpec describes the target OS for the device.
-      properties:
-        image:
-          type: string
-          description: The target OS image name or URL.
-      required:
-        - image
+      $ref: '#/components/schemas/ImageOrCatalogItemRefSpec'
     DeviceStatus:
       type: object
       description: DeviceStatus represents information about the status of a device. Status may trail the actual state of a device.
@@ -5794,6 +6346,8 @@ components:
           $ref: '#/components/schemas/DeviceLifecycleStatus'
         dependencySync:
           $ref: '#/components/schemas/DependencySyncStatus'
+        capabilities:
+          $ref: '#/components/schemas/DeviceCapabilities'
       additionalProperties: false
     DeviceLastSeen:
       type: object
@@ -6034,6 +6588,8 @@ components:
         - "Error"
         - "Unknown"
         - "Completed"
+        - "Stopped"
+        - "Stopping"
       x-enum-varnames:
         - "ApplicationStatusPreparing"
         - "ApplicationStatusStarting"
@@ -6041,6 +6597,27 @@ components:
         - "ApplicationStatusError"
         - "ApplicationStatusUnknown"
         - "ApplicationStatusCompleted"
+        - "ApplicationStatusStopped"
+        - "ApplicationStatusStopping"
+    OsModeType:
+      type: string
+      description: >-
+        OS management mode. "image" indicates the OS is managed via
+        bootc or rpm-ostree image updates. "package" indicates no
+        image-based OS management is available.
+      enum:
+        - image
+        - package
+      x-enum-varnames:
+        - OsModeImage
+        - OsModePackage
+    DeviceCapabilities:
+      type: object
+      description: Capabilities reported by the device agent.
+      properties:
+        osMode:
+          $ref: '#/components/schemas/OsModeType'
+      additionalProperties: false
     DeviceOsStatus:
       type: object
       description: Current status of the device OS.
@@ -6386,6 +6963,8 @@ components:
         knownRenderedVersion:
           type: string
           description: 'The rendered version of the device from desired.json (optional).'
+        osMode:
+          $ref: '#/components/schemas/OsModeType'
       description: EnrollmentRequestSpec is a description of a EnrollmentRequest's target state.
     EnrollmentRequestStatus:
       type: object
@@ -6662,7 +7241,7 @@ components:
     DeviceSpec:
       type: object
       description: DeviceSpec describes a device.
-      properties:
+      properties: &deviceSpecProps
         updatePolicy:
           $ref: '#/components/schemas/DeviceUpdatePolicySpec'
         os:
@@ -6789,6 +7368,20 @@ components:
             type: integer
             format: int64
           description: A breakdown of the devices in the fleet by "updated" status.
+        capabilities:
+          $ref: '#/components/schemas/DevicesSummaryCapabilities'
+    DevicesSummaryCapabilities:
+      type: object
+      description: Breakdowns of devices by status.capabilities fields.
+      properties:
+        osMode:
+          type: object
+          default: {}
+          additionalProperties:
+            type: integer
+            format: int64
+          description: Counts by status.capabilities.osMode (e.g. image, package). The key "unknown" counts devices that have not reported the capability.
+      additionalProperties: false
     TemplateVersion:
       type: object
       properties:
@@ -7373,6 +7966,9 @@ components:
             - DependencyChangeDetected
             - DependencySyncProbeFailed
             - SystemRestored
+            - EncryptionMigrationStarted
+            - EncryptionMigrationCompleted
+            - ApplicationLifecycleChanged
         message:
           type: string
           description: A human-readable description of the status of this operation.
@@ -7457,6 +8053,7 @@ components:
           DeviceVulnerabilityCVE: "#/components/schemas/DeviceVulnerabilityCveDetails"
           DependencyChangeDetected: "#/components/schemas/DependencyChangeDetectedDetails"
           DependencySyncProbeFailed: "#/components/schemas/DependencySyncProbeFailedDetails"
+          ApplicationLifecycleChanged: "#/components/schemas/ApplicationLifecycleChangedDetails"
       oneOf:
         - $ref: "#/components/schemas/ResourceUpdatedDetails"
         - $ref: "#/components/schemas/DeviceOwnershipChangedDetails"
@@ -7475,6 +8072,7 @@ components:
         - $ref: "#/components/schemas/DeviceVulnerabilityCveDetails"
         - $ref: "#/components/schemas/DependencyChangeDetectedDetails"
         - $ref: "#/components/schemas/DependencySyncProbeFailedDetails"
+        - $ref: "#/components/schemas/ApplicationLifecycleChangedDetails"
     DeviceVulnerabilityCveDetails:
       type: object
       description: Structured details for per-device CVE vulnerability events.
@@ -7672,6 +8270,33 @@ components:
         templateVersion:
           type: string
           description: The name of the TemplateVersion that the device is being selected to render.
+    ApplicationLifecycleChangedDetails:
+      type: object
+      required:
+        - detailType
+        - appName
+        - action
+      properties:
+        detailType:
+          type: string
+          enum: [ApplicationLifecycleChanged]
+          x-enum-varnames:
+            - ApplicationLifecycleChangedDetailType
+          description: The type of detail for discriminator purposes.
+        appName:
+          type: string
+          description: The name of the application whose device-level lifecycle override changed.
+        action:
+          type: string
+          description: The lifecycle action that was requested.
+          enum:
+            - stop
+            - start
+            - restart
+          x-enum-varnames:
+            - ApplicationLifecycleActionStop
+            - ApplicationLifecycleActionStart
+            - ApplicationLifecycleActionRestart
     FleetRolloutFailedDetails:
       type: object
       required:
@@ -8401,4 +9026,33 @@ components:
       required:
         - imageName
       additionalProperties: false
-
+    ImageSpec:
+      type: object
+      description: Reference to an OCI image or artifact with tag.
+      properties:
+        image:
+          description: Reference to an OCI image or artifact with tag.
+          type: string
+      required:
+        - image
+    CatalogItemRefSpec:
+      type: object
+      description: A reference to a catalog item, along with its configuration.
+      properties:
+        catalog:
+          type: string
+          description: The catalog name that the item is part of.
+        item:
+          type: string
+          description: The name of the catalog item itself.
+        version:
+          type: string
+          description: A valid version that currently exists in the catalog item.
+        channel:
+          type: string
+          description: An optional update channel which will be used to provide update cues when available.
+      required:
+        - catalog
+        - item
+        - version
+      additionalProperties: false

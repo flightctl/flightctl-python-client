@@ -16,6 +16,10 @@ Status of a single application on the device.
 
 * `ApplicationStatusCompleted` (value: `'Completed'`)
 
+* `ApplicationStatusStopped` (value: `'Stopped'`)
+
+* `ApplicationStatusStopping` (value: `'Stopping'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
