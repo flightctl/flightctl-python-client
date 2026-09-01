@@ -18,9 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.app_type import AppType
+from flightctl.models.application_desired_state import ApplicationDesiredState
+from flightctl.models.catalog_item_ref_spec import CatalogItemRefSpec
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,11 +32,15 @@ class HelmApplication(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.")
     app_type: AppType = Field(alias="appType")
-    image: StrictStr = Field(description="Reference to the chart for this helm application.")
+    annotations: Optional[Dict[str, StrictStr]] = Field(default=None, description="Arbitrary metadata annotations. Used internally by the control plane (e.g., flightctl.io/workload-type) when transforming application types at render time.")
+    desired_state: Optional[ApplicationDesiredState] = Field(default=None, description="Desired lifecycle state for this application, as most recently set by the stop/start device APIs. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent.", alias="desiredState")
+    restart_generation: Optional[StrictInt] = Field(default=None, description="Counter incremented by the restart device API each time the application is restarted. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent.", alias="restartGeneration")
+    image: StrictStr = Field(description="Reference to an OCI image or artifact with tag.")
+    catalog_item_ref: CatalogItemRefSpec = Field(alias="catalogItemRef")
     namespace: Optional[StrictStr] = Field(default=None, description="The target namespace for the application deployment.")
     values: Optional[Dict[str, Any]] = Field(default=None, description="Configuration values for the application. Supports arbitrarily nested structures.")
     values_files: Optional[List[StrictStr]] = Field(default=None, description="List of values files to apply during deployment. Files are relative paths and applied in array order before user-provided values.", alias="valuesFiles")
-    __properties: ClassVar[List[str]] = ["name", "appType", "image", "namespace", "values", "valuesFiles"]
+    __properties: ClassVar[List[str]] = ["name", "appType", "annotations", "desiredState", "restartGeneration", "image", "catalogItemRef", "namespace", "values", "valuesFiles"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,8 +72,14 @@ class HelmApplication(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "annotations",
+            "desired_state",
+            "restart_generation",
         ])
 
         _dict = self.model_dump(
@@ -75,6 +87,9 @@ class HelmApplication(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of catalog_item_ref
+        if self.catalog_item_ref:
+            _dict['catalogItemRef'] = self.catalog_item_ref.to_dict()
         return _dict
 
     @classmethod
@@ -89,7 +104,11 @@ class HelmApplication(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "appType": obj.get("appType"),
+            "annotations": obj.get("annotations"),
+            "desiredState": obj.get("desiredState"),
+            "restartGeneration": obj.get("restartGeneration"),
             "image": obj.get("image"),
+            "catalogItemRef": CatalogItemRefSpec.from_dict(obj["catalogItemRef"]) if obj.get("catalogItemRef") is not None else None,
             "namespace": obj.get("namespace"),
             "values": obj.get("values"),
             "valuesFiles": obj.get("valuesFiles")

@@ -8,6 +8,8 @@ Method | HTTP request | Description
 [**decommission_device**](DeviceApi.md#decommission_device) | **PUT** /devices/{name}/decommission | 
 [**delete_device**](DeviceApi.md#delete_device) | **DELETE** /devices/{name} | 
 [**get_device**](DeviceApi.md#get_device) | **GET** /devices/{name} | 
+[**get_device_application_console**](DeviceApi.md#get_device_application_console) | **GET** /ws/v1/devices/{name}/applications/{appname}/console | 
+[**get_device_console**](DeviceApi.md#get_device_console) | **GET** /ws/v1/devices/{name}/console | 
 [**get_device_last_seen**](DeviceApi.md#get_device_last_seen) | **GET** /devices/{name}/lastseen | 
 [**get_device_status**](DeviceApi.md#get_device_status) | **GET** /devices/{name}/status | 
 [**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /devices/{name}/rendered | 
@@ -16,6 +18,9 @@ Method | HTTP request | Description
 [**patch_device_status**](DeviceApi.md#patch_device_status) | **PATCH** /devices/{name}/status | 
 [**replace_device**](DeviceApi.md#replace_device) | **PUT** /devices/{name} | 
 [**replace_device_status**](DeviceApi.md#replace_device_status) | **PUT** /devices/{name}/status | 
+[**restart_device_application**](DeviceApi.md#restart_device_application) | **POST** /devices/{name}/applications/{appname}/actions/restart | 
+[**start_device_application**](DeviceApi.md#start_device_application) | **POST** /devices/{name}/applications/{appname}/actions/start | 
+[**stop_device_application**](DeviceApi.md#stop_device_application) | **POST** /devices/{name}/applications/{appname}/actions/stop | 
 
 
 # **create_device**
@@ -303,6 +308,151 @@ No authorization required
 **404** | Not Found |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_device_application_console**
+> get_device_application_console(name, appname, console_type, force=force)
+
+Open a WebSocket console session to an application running on the Device.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+    appname = 'appname_example' # str | The name of the application to connect to.
+    console_type = 'console_type_example' # str | The type of console session to open. \"serial\" opens a text terminal; \"vnc\" opens a VNC proxy tunnel.
+    force = False # bool | If true, take over an already-active console session of the same type for this application instead of failing with a 409 Conflict. The replaced session is disconnected and told why. (optional) (default to False)
+
+    try:
+        api_instance.get_device_application_console(name, appname, console_type, force=force)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_application_console: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. | 
+ **appname** | **str**| The name of the application to connect to. | 
+ **console_type** | **str**| The type of console session to open. \&quot;serial\&quot; opens a text terminal; \&quot;vnc\&quot; opens a VNC proxy tunnel. | 
+ **force** | **bool**| If true, take over an already-active console session of the same type for this application instead of failing with a 409 Conflict. The replaced session is disconnected and told why. | [optional] [default to False]
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**101** | Switching Protocols |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**500** | Internal Server Error |  -  |
+**504** | Gateway Timeout |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_device_console**
+> get_device_console(name)
+
+Open a WebSocket console session to the Device.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+
+    try:
+        api_instance.get_device_console(name)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_console: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**101** | Switching Protocols |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**500** | Internal Server Error |  -  |
+**504** | Gateway Timeout |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -885,6 +1035,231 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **restart_device_application**
+> Device restart_device_application(name, appname)
+
+Restart an application on this device. Sets a device-level restartGeneration override (independent of the application's declarative spec, fleet template or standalone device); the control plane computes the next generation, and the agent restarts the application using the type-appropriate restart operation when it observes the change. The override is applied on top of the rendered application spec at render time and survives fleet template rollouts, since it is never stored as part of the device's spec. Only meaningful while the application's desired state is "running".
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device import Device
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+    appname = 'appname_example' # str | The name of the application, as defined in the device's rendered application spec.
+
+    try:
+        api_response = api_instance.restart_device_application(name, appname)
+        print("The response of DeviceApi->restart_device_application:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->restart_device_application: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. | 
+ **appname** | **str**| The name of the application, as defined in the device&#39;s rendered application spec. | 
+
+### Return type
+
+[**Device**](Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **start_device_application**
+> Device start_device_application(name, appname)
+
+Start an application on this device. Sets a device-level lifecycle override (independent of the application's declarative spec, fleet template or standalone device) that is applied on top of the rendered application spec at render time and survives fleet template rollouts, since it is never stored as part of the device's spec. If the application is also owned by a fleet with its own stop/start default for this application, whichever of the two actions was issued most recently takes effect.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device import Device
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+    appname = 'appname_example' # str | The name of the application, as defined in the device's rendered application spec.
+
+    try:
+        api_response = api_instance.start_device_application(name, appname)
+        print("The response of DeviceApi->start_device_application:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->start_device_application: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. | 
+ **appname** | **str**| The name of the application, as defined in the device&#39;s rendered application spec. | 
+
+### Return type
+
+[**Device**](Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **stop_device_application**
+> Device stop_device_application(name, appname)
+
+Stop an application on this device. Sets a device-level lifecycle override (independent of the application's declarative spec, fleet template or standalone device) that is applied on top of the rendered application spec at render time and survives fleet template rollouts, since it is never stored as part of the device's spec.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device import Device
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+    appname = 'appname_example' # str | The name of the application, as defined in the device's rendered application spec.
+
+    try:
+        api_response = api_instance.stop_device_application(name, appname)
+        print("The response of DeviceApi->stop_device_application:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->stop_device_application: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. | 
+ **appname** | **str**| The name of the application, as defined in the device&#39;s rendered application spec. | 
+
+### Return type
+
+[**Device**](Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details

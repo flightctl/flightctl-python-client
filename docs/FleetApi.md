@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**patch_fleet_status**](FleetApi.md#patch_fleet_status) | **PATCH** /fleets/{name}/status | 
 [**replace_fleet**](FleetApi.md#replace_fleet) | **PUT** /fleets/{name} | 
 [**replace_fleet_status**](FleetApi.md#replace_fleet_status) | **PUT** /fleets/{name}/status | 
+[**start_fleet_application**](FleetApi.md#start_fleet_application) | **POST** /fleets/{name}/applications/{appname}/actions/start | 
+[**stop_fleet_application**](FleetApi.md#stop_fleet_application) | **POST** /fleets/{name}/applications/{appname}/actions/stop | 
 
 
 # **create_fleet**
@@ -898,6 +900,156 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **start_fleet_application**
+> Fleet start_fleet_application(name, appname)
+
+Start an application across every device currently owned by this fleet. Sets a fleet-level lifecycle default (independent of the application's declarative spec) that is applied on top of the rendered application spec of each member device at render time, and is automatically inherited by devices that join the fleet later. If a specific device also has its own override for this application (see /devices/{name}/applications/{appname}/actions/stop or .../start), whichever of the two actions was issued most recently takes effect for that device.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.fleet import Fleet
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.FleetApi(api_client)
+    name = 'name_example' # str | The name of the Fleet resource.
+    appname = 'appname_example' # str | The name of the application, as defined in the fleet's device template.
+
+    try:
+        api_response = api_instance.start_fleet_application(name, appname)
+        print("The response of FleetApi->start_fleet_application:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FleetApi->start_fleet_application: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Fleet resource. | 
+ **appname** | **str**| The name of the application, as defined in the fleet&#39;s device template. | 
+
+### Return type
+
+[**Fleet**](Fleet.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **stop_fleet_application**
+> Fleet stop_fleet_application(name, appname)
+
+Stop an application across every device currently owned by this fleet. Sets a fleet-level lifecycle default (independent of the application's declarative spec) that is applied on top of the rendered application spec of each member device at render time, and is automatically inherited by devices that join the fleet later. If a specific device also has its own override for this application (see /devices/{name}/applications/{appname}/actions/stop or .../start), whichever of the two actions was issued most recently takes effect for that device.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.fleet import Fleet
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.FleetApi(api_client)
+    name = 'name_example' # str | The name of the Fleet resource.
+    appname = 'appname_example' # str | The name of the application, as defined in the fleet's device template.
+
+    try:
+        api_response = api_instance.stop_fleet_application(name, appname)
+        print("The response of FleetApi->stop_fleet_application:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FleetApi->stop_fleet_application: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Fleet resource. | 
+ **appname** | **str**| The name of the application, as defined in the fleet&#39;s device template. | 
+
+### Return type
+
+[**Fleet**](Fleet.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 **503** | Service Unavailable |  -  |
 

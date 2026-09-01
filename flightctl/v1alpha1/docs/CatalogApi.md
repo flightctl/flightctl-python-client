@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**delete_catalog_item**](CatalogApi.md#delete_catalog_item) | **DELETE** /catalogs/{catalog}/items/{name} | 
 [**get_catalog**](CatalogApi.md#get_catalog) | **GET** /catalogs/{name} | 
 [**get_catalog_item**](CatalogApi.md#get_catalog_item) | **GET** /catalogs/{catalog}/items/{name} | 
+[**get_catalog_item_deployments**](CatalogApi.md#get_catalog_item_deployments) | **GET** /catalogs/{catalog}/items/{name}/deployments | 
 [**get_catalog_status**](CatalogApi.md#get_catalog_status) | **GET** /catalogs/{name}/status | 
 [**list_all_catalog_items**](CatalogApi.md#list_all_catalog_items) | **GET** /catalogitems | 
 [**list_catalog_items**](CatalogApi.md#list_catalog_items) | **GET** /catalogs/{catalog}/items | 
@@ -430,6 +431,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CatalogItem**](CatalogItem.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_catalog_item_deployments**
+> CatalogItemDeploymentList get_catalog_item_deployments(catalog, name, var_continue=var_continue, limit=limit)
+
+Get the CatalogItemDeployments for a particular Catalog Item
+
+### Example
+
+
+```python
+import flightctl.v1alpha1
+from flightctl.v1alpha1.models.catalog_item_deployment_list import CatalogItemDeploymentList
+from flightctl.v1alpha1.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.v1alpha1.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.v1alpha1.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.v1alpha1.CatalogApi(api_client)
+    catalog = 'edge-apps' # str | The name of the Catalog resource.
+    name = 'name_example' # str | The name of the CatalogItem resource.
+    var_continue = 'var_continue_example' # str | An optional parameter to query more results from the server. The value of the parameter must match the value of the 'continue' field in the previous list response. (optional)
+    limit = 56 # int | The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. (optional)
+
+    try:
+        api_response = api_instance.get_catalog_item_deployments(catalog, name, var_continue=var_continue, limit=limit)
+        print("The response of CatalogApi->get_catalog_item_deployments:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CatalogApi->get_catalog_item_deployments: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **catalog** | **str**| The name of the Catalog resource. | 
+ **name** | **str**| The name of the CatalogItem resource. | 
+ **var_continue** | **str**| An optional parameter to query more results from the server. The value of the parameter must match the value of the &#39;continue&#39; field in the previous list response. | [optional] 
+ **limit** | **int**| The maximum number of results returned in the list response. The server will set the &#39;continue&#39; field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query. | [optional] 
+
+### Return type
+
+[**CatalogItemDeploymentList**](CatalogItemDeploymentList.md)
 
 ### Authorization
 

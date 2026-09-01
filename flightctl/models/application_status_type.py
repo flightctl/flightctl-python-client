@@ -33,6 +33,8 @@ class ApplicationStatusType(str, Enum):
     ApplicationStatusError = 'Error'
     ApplicationStatusUnknown = 'Unknown'
     ApplicationStatusCompleted = 'Completed'
+    ApplicationStatusStopped = 'Stopped'
+    ApplicationStatusStopping = 'Stopping'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

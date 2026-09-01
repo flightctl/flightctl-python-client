@@ -7,7 +7,7 @@ TemplateVersionStatus represents information about the status of a template vers
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **update_policy** | [**DeviceUpdatePolicySpec**](DeviceUpdatePolicySpec.md) |  | [optional] 
-**os** | [**DeviceOsSpec**](DeviceOsSpec.md) |  | [optional] 
+**os** | [**ImageOrCatalogItemRefSpec**](ImageOrCatalogItemRefSpec.md) |  | [optional] 
 **config** | [**List[ConfigProviderSpec]**](ConfigProviderSpec.md) | List of config providers. | [optional] 
 **applications** | [**List[ApplicationProviderSpec]**](ApplicationProviderSpec.md) | List of application providers. | [optional] 
 **systemd** | [**DeviceSpecSystemd**](DeviceSpecSystemd.md) |  | [optional] 

@@ -18,12 +18,14 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from flightctl.models.app_type import AppType
+from flightctl.models.application_desired_state import ApplicationDesiredState
 from flightctl.models.application_resources import ApplicationResources
 from flightctl.models.application_volume import ApplicationVolume
+from flightctl.models.catalog_item_ref_spec import CatalogItemRefSpec
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,13 +35,17 @@ class ContainerApplication(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The application name must be 1–253 characters long, start with a letter or number, and contain no whitespace.")
     app_type: AppType = Field(alias="appType")
+    annotations: Optional[Dict[str, StrictStr]] = Field(default=None, description="Arbitrary metadata annotations. Used internally by the control plane (e.g., flightctl.io/workload-type) when transforming application types at render time.")
+    desired_state: Optional[ApplicationDesiredState] = Field(default=None, description="Desired lifecycle state for this application, as most recently set by the stop/start device APIs. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent.", alias="desiredState")
+    restart_generation: Optional[StrictInt] = Field(default=None, description="Counter incremented by the restart device API each time the application is restarted. Read-only: cannot be set directly by apply; only present in the rendered application spec delivered to the agent.", alias="restartGeneration")
     env_vars: Optional[Dict[str, StrictStr]] = Field(default=None, description="Environment variable key-value pairs, injected during runtime. The key and value each must be between 1 and 253 characters.", alias="envVars")
     run_as: Optional[StrictStr] = Field(default=None, description="The username of the system user this application should be run under. This is not the same as the user within any containers of the application (if applicable). Defaults to the user that the agent runs as (generally root) if not specified.", alias="runAs")
     volumes: Optional[List[ApplicationVolume]] = Field(default=None, description="List of application volumes.")
-    image: StrictStr = Field(description="Reference to the image for this container.")
+    image: StrictStr = Field(description="Reference to an OCI image or artifact with tag.")
+    catalog_item_ref: CatalogItemRefSpec = Field(alias="catalogItemRef")
     ports: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, description="Port mappings.")
     resources: Optional[ApplicationResources] = None
-    __properties: ClassVar[List[str]] = ["name", "appType", "envVars", "runAs", "volumes", "image", "ports", "resources"]
+    __properties: ClassVar[List[str]] = ["name", "appType", "annotations", "desiredState", "restartGeneration", "envVars", "runAs", "volumes", "image", "catalogItemRef", "ports", "resources"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,8 +77,14 @@ class ContainerApplication(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "annotations",
+            "desired_state",
+            "restart_generation",
         ])
 
         _dict = self.model_dump(
@@ -87,6 +99,9 @@ class ContainerApplication(BaseModel):
                 if _item_volumes:
                     _items.append(_item_volumes.to_dict())
             _dict['volumes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of catalog_item_ref
+        if self.catalog_item_ref:
+            _dict['catalogItemRef'] = self.catalog_item_ref.to_dict()
         # override the default output from pydantic by calling `to_dict()` of resources
         if self.resources:
             _dict['resources'] = self.resources.to_dict()
@@ -104,10 +119,14 @@ class ContainerApplication(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "appType": obj.get("appType"),
+            "annotations": obj.get("annotations"),
+            "desiredState": obj.get("desiredState"),
+            "restartGeneration": obj.get("restartGeneration"),
             "envVars": obj.get("envVars"),
             "runAs": obj.get("runAs"),
             "volumes": [ApplicationVolume.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None,
             "image": obj.get("image"),
+            "catalogItemRef": CatalogItemRefSpec.from_dict(obj["catalogItemRef"]) if obj.get("catalogItemRef") is not None else None,
             "ports": obj.get("ports"),
             "resources": ApplicationResources.from_dict(obj["resources"]) if obj.get("resources") is not None else None
         })
