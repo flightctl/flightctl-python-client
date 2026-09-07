@@ -1,0 +1,99 @@
+name: Publish Python package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build distributions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build tools
+        run: python -m pip install --upgrade build twine
+
+      - name: Build distributions
+        run: python -m build
+
+      - name: Verify distribution metadata
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          from email import message_from_bytes
+          from pathlib import Path
+          from tarfile import open as open_tarfile
+          from zipfile import ZipFile
+          import os
+
+          release_tag = os.environ["RELEASE_TAG"]
+          if not release_tag.startswith("v"):
+              raise SystemExit(f"Release tag must start with 'v': {release_tag}")
+
+          expected = {"Name": "flightctl-client", "Version": release_tag[1:]}
+          distributions = sorted(Path("dist").glob("*"))
+          if not distributions:
+              raise SystemExit("No distributions were built")
+
+          for distribution in distributions:
+              if distribution.suffix == ".whl":
+                  with ZipFile(distribution) as archive:
+                      metadata_path = next(
+                          path for path in archive.namelist() if path.endswith(".dist-info/METADATA")
+                      )
+                      metadata = message_from_bytes(archive.read(metadata_path))
+              elif distribution.suffixes[-2:] == [".tar", ".gz"]:
+                  with open_tarfile(distribution) as archive:
+                      metadata_member = next(
+                          member for member in archive.getmembers() if member.name.endswith("/PKG-INFO")
+                      )
+                      metadata = message_from_bytes(archive.extractfile(metadata_member).read())
+              else:
+                  raise SystemExit(f"Unexpected distribution: {distribution}")
+
+              actual = {key: metadata[key] for key in expected}
+              if actual != expected:
+                  raise SystemExit(f"{distribution}: expected {expected}, got {actual}")
+          PY
+
+      - name: Check distributions
+        run: twine check dist/*
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/*
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/flightctl-client
+    permissions:
+      id-token: write
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-distributions
+          path: dist
+
+      - name: Publish distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
