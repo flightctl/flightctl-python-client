@@ -23,11 +23,11 @@ from setuptools import setup, find_packages  # noqa: H301
 # http://pypi.python.org/pypi/setuptools
 NAME = "flightctl-client"
 VERSION = "1.3.0"
-PYTHON_REQUIRES = ">= 3.9"
+PYTHON_REQUIRES = ">= 3.10"
 REQUIRES = [
-    "urllib3 >= 2.1.0, < 3.0.0",
+    "urllib3 >= 2.7.0, < 3.0.0",
     "python-dateutil >= 2.8.2",
-    "pydantic >= 2",
+    "pydantic >= 2.4.0",
     "typing-extensions >= 4.7.1",
 ]
 
