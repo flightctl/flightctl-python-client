@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **oci_auth** | [**DockerAuth**](DockerAuth.md) |  | [optional] 
 **ca_crt** | **str** | Base64 encoded root CA. | [optional] 
 **skip_server_verification** | **bool** | Skip remote server verification. | [optional] 
+**repository** | **str** | Optional OCI repository path under spec.registry (e.g. my-org/diffs). When set, this object is that repo (&#x60;my-registry.com/my-org/diffs&#x60;), not only a registry. Mutually exclusive with namespace. ImageBuild destination imageName must equal this value. | [optional]
+**namespace** | **str** | Optional org/subpath under spec.registry (e.g. my-org). Concrete names are spec.registry/namespace/&lt;name&gt;. Mutually exclusive with repository. Used by delta push (&#x60;{registry}/{namespace}/{imageName}&#x60;). Invalid on an ImageBuild or ImageExport destination Repository. | [optional]
+**delta_storage_target** | **bool** | When true, generated deltas are pushed to this object (at most one per org). Auth is the existing ociAuth / accessMode. Placement follows repository / namespace / registry-only as above. | [optional]
 **base_images** | [**List[BaseImageEntry]**](BaseImageEntry.md) | Curated list of trusted base images available in this registry. When present, the Image Builder source picker surfaces these entries as selectable options. | [optional] 
 
 ## Example

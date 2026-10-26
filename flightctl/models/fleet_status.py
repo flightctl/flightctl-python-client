@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.condition import Condition
+from flightctl.models.delta_generation_status import DeltaGenerationStatus
 from flightctl.models.devices_summary import DevicesSummary
 from flightctl.models.fleet_rollout_status import FleetRolloutStatus
 from typing import Optional, Set
@@ -33,7 +34,8 @@ class FleetStatus(BaseModel):
     rollout: Optional[FleetRolloutStatus] = None
     conditions: List[Condition] = Field(description="Current state of the fleet.")
     devices_summary: Optional[DevicesSummary] = Field(default=None, alias="devicesSummary")
-    __properties: ClassVar[List[str]] = ["rollout", "conditions", "devicesSummary"]
+    delta_generation: Optional[DeltaGenerationStatus] = Field(default=None, alias="deltaGeneration")
+    __properties: ClassVar[List[str]] = ["rollout", "conditions", "devicesSummary", "deltaGeneration"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +89,9 @@ class FleetStatus(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of devices_summary
         if self.devices_summary:
             _dict['devicesSummary'] = self.devices_summary.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of delta_generation
+        if self.delta_generation:
+            _dict['deltaGeneration'] = self.delta_generation.to_dict()
         return _dict
 
     @classmethod
@@ -101,7 +106,8 @@ class FleetStatus(BaseModel):
         _obj = cls.model_validate({
             "rollout": FleetRolloutStatus.from_dict(obj["rollout"]) if obj.get("rollout") is not None else None,
             "conditions": [Condition.from_dict(_item) for _item in obj["conditions"]] if obj.get("conditions") is not None else None,
-            "devicesSummary": DevicesSummary.from_dict(obj["devicesSummary"]) if obj.get("devicesSummary") is not None else None
+            "devicesSummary": DevicesSummary.from_dict(obj["devicesSummary"]) if obj.get("devicesSummary") is not None else None,
+            "deltaGeneration": DeltaGenerationStatus.from_dict(obj["deltaGeneration"]) if obj.get("deltaGeneration") is not None else None
         })
         return _obj
 

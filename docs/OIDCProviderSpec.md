@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **client_secret** | **str** | The OIDC client secret. | 
 **enabled** | **bool** | Whether this OIDC provider is enabled. | [optional] [default to True]
 **scopes** | **List[str]** | List of OIDC scopes to request. | [optional] 
+**prompt** | **str** | Space-separated, case-sensitive authorization prompt values, such as login, consent, select_account, none, or provider-specific values. Omitted and null values are preserved in AuthProvider resources and exposed as select_account in public authentication configuration. An empty string instructs clients to omit the prompt parameter. Values must be printable ASCII separated by spaces; none cannot accompany a different value. Accepted values are preserved, including extra spaces and duplicates. | [optional]
 **organization_assignment** | [**AuthOrganizationAssignment**](AuthOrganizationAssignment.md) |  | 
 **username_claim** | **List[str]** | JSON path to the username claim in the JWT token as an array of path segments (e.g., [\&quot;preferred_username\&quot;], [\&quot;email\&quot;], [\&quot;sub\&quot;]). | [optional] [default to ["preferred_username"]]
 **role_assignment** | [**AuthRoleAssignment**](AuthRoleAssignment.md) |  | 

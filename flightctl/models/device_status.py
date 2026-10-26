@@ -22,17 +22,20 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.condition import Condition
+from flightctl.models.delta_generation_status import DeltaGenerationStatus
 from flightctl.models.dependency_sync_status import DependencySyncStatus
 from flightctl.models.device_application_status import DeviceApplicationStatus
 from flightctl.models.device_applications_summary_status import DeviceApplicationsSummaryStatus
 from flightctl.models.device_capabilities import DeviceCapabilities
 from flightctl.models.device_config_status import DeviceConfigStatus
+from flightctl.models.device_enrollment_hooks_status import DeviceEnrollmentHooksStatus
 from flightctl.models.device_integrity_status import DeviceIntegrityStatus
 from flightctl.models.device_lifecycle_status import DeviceLifecycleStatus
 from flightctl.models.device_os_status import DeviceOsStatus
 from flightctl.models.device_resource_status import DeviceResourceStatus
 from flightctl.models.device_summary_status import DeviceSummaryStatus
 from flightctl.models.device_system_info import DeviceSystemInfo
+from flightctl.models.device_system_info_status import DeviceSystemInfoStatus
 from flightctl.models.device_updated_status import DeviceUpdatedStatus
 from flightctl.models.systemd_unit_status import SystemdUnitStatus
 from typing import Optional, Set
@@ -57,7 +60,10 @@ class DeviceStatus(BaseModel):
     lifecycle: DeviceLifecycleStatus
     dependency_sync: Optional[DependencySyncStatus] = Field(default=None, alias="dependencySync")
     capabilities: Optional[DeviceCapabilities] = None
-    __properties: ClassVar[List[str]] = ["conditions", "systemInfo", "systemd", "applications", "applicationsSummary", "resources", "integrity", "config", "os", "updated", "summary", "lastSeen", "lifecycle", "dependencySync", "capabilities"]
+    delta_generation: Optional[DeltaGenerationStatus] = Field(default=None, alias="deltaGeneration")
+    enrollment_hooks: Optional[DeviceEnrollmentHooksStatus] = Field(default=None, alias="enrollmentHooks")
+    system_info_status: Optional[DeviceSystemInfoStatus] = Field(default=None, alias="systemInfoStatus")
+    __properties: ClassVar[List[str]] = ["conditions", "systemInfo", "systemd", "applications", "applicationsSummary", "resources", "integrity", "config", "os", "updated", "summary", "lastSeen", "lifecycle", "dependencySync", "capabilities", "deltaGeneration", "enrollmentHooks", "systemInfoStatus"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -152,6 +158,15 @@ class DeviceStatus(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of capabilities
         if self.capabilities:
             _dict['capabilities'] = self.capabilities.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of delta_generation
+        if self.delta_generation:
+            _dict['deltaGeneration'] = self.delta_generation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of enrollment_hooks
+        if self.enrollment_hooks:
+            _dict['enrollmentHooks'] = self.enrollment_hooks.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of system_info_status
+        if self.system_info_status:
+            _dict['systemInfoStatus'] = self.system_info_status.to_dict()
         return _dict
 
     @classmethod
@@ -178,7 +193,10 @@ class DeviceStatus(BaseModel):
             "lastSeen": obj.get("lastSeen"),
             "lifecycle": DeviceLifecycleStatus.from_dict(obj["lifecycle"]) if obj.get("lifecycle") is not None else None,
             "dependencySync": DependencySyncStatus.from_dict(obj["dependencySync"]) if obj.get("dependencySync") is not None else None,
-            "capabilities": DeviceCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None
+            "capabilities": DeviceCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
+            "deltaGeneration": DeltaGenerationStatus.from_dict(obj["deltaGeneration"]) if obj.get("deltaGeneration") is not None else None,
+            "enrollmentHooks": DeviceEnrollmentHooksStatus.from_dict(obj["enrollmentHooks"]) if obj.get("enrollmentHooks") is not None else None,
+            "systemInfoStatus": DeviceSystemInfoStatus.from_dict(obj["systemInfoStatus"]) if obj.get("systemInfoStatus") is not None else None
         })
         return _obj
 

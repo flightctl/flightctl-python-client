@@ -10,10 +10,12 @@ Method | HTTP request | Description
 [**get_device**](DeviceApi.md#get_device) | **GET** /devices/{name} | 
 [**get_device_application_console**](DeviceApi.md#get_device_application_console) | **GET** /ws/v1/devices/{name}/applications/{appname}/console | 
 [**get_device_console**](DeviceApi.md#get_device_console) | **GET** /ws/v1/devices/{name}/console | 
+[**get_device_label_sync_provenance**](DeviceApi.md#get_device_label_sync_provenance) | **GET** /devices/{name}/labelsyncprovenance |
 [**get_device_last_seen**](DeviceApi.md#get_device_last_seen) | **GET** /devices/{name}/lastseen | 
 [**get_device_status**](DeviceApi.md#get_device_status) | **GET** /devices/{name}/status | 
 [**get_rendered_device**](DeviceApi.md#get_rendered_device) | **GET** /devices/{name}/rendered | 
 [**list_devices**](DeviceApi.md#list_devices) | **GET** /devices | 
+[**override_device_enrollment_hook**](DeviceApi.md#override_device_enrollment_hook) | **POST** /devices/{name}/enrollmenthooks/override |
 [**patch_device**](DeviceApi.md#patch_device) | **PATCH** /devices/{name} | 
 [**patch_device_status**](DeviceApi.md#patch_device_status) | **PATCH** /devices/{name}/status | 
 [**replace_device**](DeviceApi.md#replace_device) | **PUT** /devices/{name} | 
@@ -456,6 +458,77 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_device_label_sync_provenance**
+> LabelSyncProvenanceList get_device_label_sync_provenance(name)
+
+Get current LabelSyncMapping ownership for a Device. Return only keys with current DeviceLabel ownership by active mappings, sorted by key. An existing Device with no currently owned keys returns an empty items array. Label values are not returned.
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.label_sync_provenance_list import LabelSyncProvenanceList
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+
+    try:
+        api_response = api_instance.get_device_label_sync_provenance(name)
+        print("The response of DeviceApi->get_device_label_sync_provenance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_label_sync_provenance: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. |
+
+### Return type
+
+[**LabelSyncProvenanceList**](LabelSyncProvenanceList.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_device_last_seen**
 > DeviceLastSeen get_device_last_seen(name)
 
@@ -750,6 +823,80 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **429** | Too Many Requests |  -  |
+**503** | Service Unavailable |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **override_device_enrollment_hook**
+> Device override_device_enrollment_hook(name)
+
+Manually override a failed enrollment hook condition. Only admin and operator roles may perform this action. Sets the EnrollmentHooks condition to True with reason ManualOverride, clearing the Failed state and unblocking fleet match and rendered GET. Does NOT re-approve, rotate management cert, or re-run notify.
+
+
+### Example
+
+
+```python
+import flightctl
+from flightctl.models.device import Device
+from flightctl.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = flightctl.Configuration(
+    host = "/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with flightctl.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = flightctl.DeviceApi(api_client)
+    name = 'name_example' # str | The name of the Device resource.
+
+    try:
+        api_response = api_instance.override_device_enrollment_hook(name)
+        print("The response of DeviceApi->override_device_enrollment_hook:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->override_device_enrollment_hook: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the Device resource. |
+
+### Return type
+
+[**Device**](Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+**500** | Internal Server Error |  -  |
 **503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

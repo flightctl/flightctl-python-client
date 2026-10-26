@@ -31,6 +31,8 @@ class DeviceLifecycleHookType(str, Enum):
     DeviceLifecycleHookAfterUpdating = 'AfterUpdating'
     DeviceLifecycleHookBeforeRebooting = 'BeforeRebooting'
     DeviceLifecycleHookAfterRebooting = 'AfterRebooting'
+    DeviceLifecycleHookBeforeEnrolling = 'BeforeEnrolling'
+    DeviceLifecycleHookAfterEnrolling = 'AfterEnrolling'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

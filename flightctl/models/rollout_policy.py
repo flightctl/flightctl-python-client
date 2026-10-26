@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from flightctl.models.batch_sequence import BatchSequence
 from flightctl.models.disruption_budget import DisruptionBudget
+from flightctl.models.rollout_policy_delta_generation import RolloutPolicyDeltaGeneration
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +35,8 @@ class RolloutPolicy(BaseModel):
     device_selection: Optional[BatchSequence] = Field(default=None, alias="deviceSelection")
     success_threshold: Optional[StrictStr] = Field(default=None, description="Percentage is the string format representing percentage string.", alias="successThreshold")
     default_update_timeout: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The maximum duration allowed for the action to complete. The duration should be specified as a positive integer followed by a time unit. Supported time units are: `s` for seconds, `m` for minutes, `h` for hours.", alias="defaultUpdateTimeout")
-    __properties: ClassVar[List[str]] = ["disruptionBudget", "deviceSelection", "successThreshold", "defaultUpdateTimeout"]
+    delta_generation: Optional[RolloutPolicyDeltaGeneration] = Field(default=None, alias="deltaGeneration")
+    __properties: ClassVar[List[str]] = ["disruptionBudget", "deviceSelection", "successThreshold", "defaultUpdateTimeout", "deltaGeneration"]
 
     @field_validator('default_update_timeout')
     def default_update_timeout_validate_regular_expression(cls, value):
@@ -91,6 +93,9 @@ class RolloutPolicy(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of device_selection
         if self.device_selection:
             _dict['deviceSelection'] = self.device_selection.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of delta_generation
+        if self.delta_generation:
+            _dict['deltaGeneration'] = self.delta_generation.to_dict()
         return _dict
 
     @classmethod
@@ -106,7 +111,8 @@ class RolloutPolicy(BaseModel):
             "disruptionBudget": DisruptionBudget.from_dict(obj["disruptionBudget"]) if obj.get("disruptionBudget") is not None else None,
             "deviceSelection": BatchSequence.from_dict(obj["deviceSelection"]) if obj.get("deviceSelection") is not None else None,
             "successThreshold": obj.get("successThreshold"),
-            "defaultUpdateTimeout": obj.get("defaultUpdateTimeout")
+            "defaultUpdateTimeout": obj.get("defaultUpdateTimeout"),
+            "deltaGeneration": RolloutPolicyDeltaGeneration.from_dict(obj["deltaGeneration"]) if obj.get("deltaGeneration") is not None else None
         })
         return _obj
 

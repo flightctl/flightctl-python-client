@@ -40,11 +40,14 @@ from flightctl.v1alpha1.models.condition_status import ConditionStatus
 from flightctl.v1alpha1.models.condition_type import ConditionType
 from flightctl.v1alpha1.models.cve_counts_by_severity import CveCountsBySeverity
 from flightctl.v1alpha1.models.device_counts_by_severity import DeviceCountsBySeverity
+from flightctl.v1alpha1.models.device_feature_boolean import DeviceFeatureBoolean
+from flightctl.v1alpha1.models.device_features import DeviceFeatures
 from flightctl.v1alpha1.models.device_vulnerability_summary_response import DeviceVulnerabilitySummaryResponse
 from flightctl.v1alpha1.models.fleet_vulnerability_summary import FleetVulnerabilitySummary
 from flightctl.v1alpha1.models.fleet_vulnerability_summary_response import FleetVulnerabilitySummaryResponse
 from flightctl.v1alpha1.models.list_meta import ListMeta
 from flightctl.v1alpha1.models.object_meta import ObjectMeta
+from flightctl.v1alpha1.models.os_mode_type import OsModeType
 from flightctl.v1alpha1.models.patch_request_inner import PatchRequestInner
 from flightctl.v1alpha1.models.status import Status
 from flightctl.v1alpha1.models.vulnerability import Vulnerability
@@ -55,5 +58,6 @@ from flightctl.v1alpha1.models.vulnerability_image_ref import VulnerabilityImage
 from flightctl.v1alpha1.models.vulnerability_impact import VulnerabilityImpact
 from flightctl.v1alpha1.models.vulnerability_list import VulnerabilityList
 from flightctl.v1alpha1.models.vulnerability_severity_summary import VulnerabilitySeveritySummary
+from flightctl.v1alpha1.models.vulnerability_source import VulnerabilitySource
 from flightctl.v1alpha1.models.vulnerability_summary_response import VulnerabilitySummaryResponse
 

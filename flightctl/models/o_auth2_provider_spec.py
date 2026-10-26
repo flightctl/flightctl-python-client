@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from flightctl.models.auth_organization_assignment import AuthOrganizationAssignment
 from flightctl.models.auth_role_assignment import AuthRoleAssignment
 from flightctl.models.o_auth2_introspection import OAuth2Introspection
@@ -40,17 +41,28 @@ class OAuth2ProviderSpec(BaseModel):
     client_secret: StrictStr = Field(description="The OAuth2 client secret.", alias="clientSecret")
     enabled: Optional[StrictBool] = Field(default=True, description="Whether this OAuth2 provider is enabled.")
     scopes: Optional[List[StrictStr]] = Field(default=None, description="List of OAuth2 scopes to request.")
+    prompt: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Space-separated, case-sensitive authorization prompt values, such as login, consent, select_account, none, or provider-specific values. Omitted and null values are preserved in AuthProvider resources and exposed as select_account in public authentication configuration. An empty string instructs clients to omit the prompt parameter. Values must be printable ASCII separated by spaces; none cannot accompany a different value. Accepted values are preserved, including extra spaces and duplicates.")
     organization_assignment: AuthOrganizationAssignment = Field(alias="organizationAssignment")
     username_claim: Optional[List[StrictStr]] = Field(default=None, description="JSON path to the username claim in the userinfo response as an array of path segments (e.g., [\"preferred_username\"], [\"email\"], [\"sub\"]).", alias="usernameClaim")
     role_assignment: AuthRoleAssignment = Field(alias="roleAssignment")
     introspection: Optional[OAuth2Introspection] = None
-    __properties: ClassVar[List[str]] = ["providerType", "displayName", "issuer", "authorizationUrl", "tokenUrl", "userinfoUrl", "clientId", "clientSecret", "enabled", "scopes", "organizationAssignment", "usernameClaim", "roleAssignment", "introspection"]
+    __properties: ClassVar[List[str]] = ["providerType", "displayName", "issuer", "authorizationUrl", "tokenUrl", "userinfoUrl", "clientId", "clientSecret", "enabled", "scopes", "prompt", "organizationAssignment", "usernameClaim", "roleAssignment", "introspection"]
 
     @field_validator('provider_type')
     def provider_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['oauth2']):
             raise ValueError("must be one of enum values ('oauth2')")
+        return value
+
+    @field_validator('prompt')
+    def prompt_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^(| *[!-~]+( +[!-~]+)* *)$", value):
+            raise ValueError(r"must validate the regular expression /^(| *[!-~]+( +[!-~]+)* *)$/")
         return value
 
     model_config = ConfigDict(
@@ -101,6 +113,11 @@ class OAuth2ProviderSpec(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of introspection
         if self.introspection:
             _dict['introspection'] = self.introspection.to_dict()
+        # set to None if prompt (nullable) is None
+        # and model_fields_set contains the field
+        if self.prompt is None and "prompt" in self.model_fields_set:
+            _dict['prompt'] = None
+
         return _dict
 
     @classmethod
@@ -123,6 +140,7 @@ class OAuth2ProviderSpec(BaseModel):
             "clientSecret": obj.get("clientSecret"),
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
             "scopes": obj.get("scopes"),
+            "prompt": obj.get("prompt"),
             "organizationAssignment": AuthOrganizationAssignment.from_dict(obj["organizationAssignment"]) if obj.get("organizationAssignment") is not None else None,
             "usernameClaim": obj.get("usernameClaim"),
             "roleAssignment": AuthRoleAssignment.from_dict(obj["roleAssignment"]) if obj.get("roleAssignment") is not None else None,

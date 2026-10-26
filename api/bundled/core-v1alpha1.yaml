@@ -1747,8 +1747,8 @@ components:
     SemVerRange:
       type: string
       x-go-type: string
-      description: Semver range constraint (e.g., >=1.0.0 <2.0.0). Space-separated terms, each with optional operator (>=, <=, >, <, =, ~, ^) followed by a version.
-      pattern: ^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*$
+      description: Semver range constraint (e.g., >=1.0.0 <2.0.0 or 1.0.0 || 3.0.0). Each alternative is a space-separated list of terms, with optional operators (>=, <=, >, <, =, ~, ^) before each version.
+      pattern: ^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*( *\|\| *[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*)*$
       example: '>=1.0.0 <2.0.0'
     Catalog:
       type: object
@@ -2049,6 +2049,10 @@ components:
               example: '>=1.0.0 <1.3.0'
             deprecation:
               $ref: '#/components/schemas/CatalogItemDeprecation'
+            deviceFeatures:
+              allOf:
+                - $ref: '#/components/schemas/DeviceFeatures'
+              description: Device feature requirements that a target device must satisfy for this version to be considered compatible.
           required:
             - version
             - channels
@@ -2186,6 +2190,32 @@ components:
       required:
         - message
       additionalProperties: false
+    DeviceFeatureBoolean:
+      type: string
+      description: Value of a boolean device feature requirement, expressed as the string "true" or "false".
+      enum:
+        - 'true'
+        - 'false'
+      x-enum-varnames:
+        - DeviceFeatureBooleanTrue
+        - DeviceFeatureBooleanFalse
+    DeviceFeatures:
+      type: object
+      description: Device feature requirements declared by a catalog item version. Each field names a device feature that a target device must provide with a matching value for this version to be considered compatible.
+      properties:
+        gpu.present:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFeatureBoolean'
+          description: Whether the target device is required to have a GPU present.
+        kvm.enabled:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFeatureBoolean'
+          description: Whether the target device is required to have KVM enabled.
+        os.mode:
+          allOf:
+            - $ref: '#/components/schemas/OsModeType'
+          description: The OS management mode the target device is required to run.
+      additionalProperties: true
     Status:
       type: object
       properties:
@@ -2314,9 +2344,18 @@ components:
           type: integer
           format: int64
           description: Count of distinct CVEs with unknown or unscored severity.
+    VulnerabilitySource:
+      type: string
+      description: The vulnerability backend that produced the finding.
+      enum:
+        - trustify
+        - quay
+      x-enum-varnames:
+        - Trustify
+        - Quay
     Vulnerability:
       type: object
-      description: A single vulnerability (CVE) finding. Vulnerabilities are global CVE records from Trustify; they are not tenant-owned resources. Tenancy is determined by the device or fleet context through which they are queried.
+      description: A single vulnerability (CVE) finding. Vulnerabilities are global CVE records produced by the configured vulnerability scanner; they are not tenant-owned resources. Tenancy is determined by the device or fleet context through which they are queried.
       additionalProperties: false
       required:
         - apiVersion
@@ -2362,6 +2401,8 @@ components:
           type: string
           format: date-time
           description: Advisory publish time when known.
+        source:
+          $ref: '#/components/schemas/VulnerabilitySource'
         image:
           type: string
           description: Image reference (name or URL) from the device context.
@@ -2439,6 +2480,8 @@ components:
             - Low
             - None
             - Unknown
+        source:
+          $ref: '#/components/schemas/VulnerabilitySource'
         cvssScore:
           type: number
           format: float
@@ -2752,6 +2795,15 @@ components:
           type: string
           description: An opaque string that identifies the server's internal version of an object.
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    OsModeType:
+      type: string
+      description: OS management mode. "image" indicates the OS is managed via bootc or rpm-ostree image updates. "package" indicates no image-based OS management is available.
+      enum:
+        - image
+        - package
+      x-enum-varnames:
+        - OsModeImage
+        - OsModePackage
     ConditionStatus:
       type: string
       description: Status of the condition, one of True, False, Unknown.
@@ -2784,10 +2836,10 @@ components:
           description: The last time the condition transitioned from one status to another.
         message:
           type: string
-          description: Human readable message indicating details about last transition.
+          description: A human-readable message describing the condition, including details or progress. Consumers should not parse this field.
         reason:
           type: string
-          description: A (brief) reason for the condition's last transition.
+          description: A brief, machine-readable reason for the condition's last transition. Use a stable CamelCase identifier and put human-readable details in message.
     ConditionType:
       type: string
       description: Type of condition in CamelCase.
@@ -2802,12 +2854,17 @@ components:
         - Accessible
         - ResourceParsed
         - Synced
+        - Ready
         - Valid
         - RolloutInProgress
         - Updating
         - SpecValid
         - MultipleOwners
+        - LabelsSynced
         - DeviceDecommissioning
+        - FleetDeltaPreparing
+        - DeviceDeltaPreparing
+        - EnrollmentHooks
       x-enum-varnames:
         - EnrollmentRequestApproved
         - EnrollmentRequestTPMVerified
@@ -2819,12 +2876,17 @@ components:
         - ResourceSyncAccessible
         - ResourceSyncResourceParsed
         - ResourceSyncSynced
+        - LabelSyncMappingReady
         - FleetValid
         - FleetRolloutInProgress
         - DeviceUpdating
         - DeviceSpecValid
         - DeviceMultipleOwners
+        - DeviceLabelsSynced
         - DeviceDecommissioning
+        - FleetDeltaPreparing
+        - DeviceDeltaPreparing
+        - DeviceEnrollmentHooks
     Condition:
       description: Condition contains details for one aspect of the current state of this API Resource.
       allOf:

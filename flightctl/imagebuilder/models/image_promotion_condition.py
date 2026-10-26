@@ -33,8 +33,8 @@ class ImagePromotionCondition(BaseModel):
     status: ConditionStatus
     observed_generation: Optional[StrictInt] = Field(default=None, description="The .metadata.generation that the condition was set based upon.", alias="observedGeneration")
     last_transition_time: datetime = Field(description="The last time the condition transitioned from one status to another.", alias="lastTransitionTime")
-    message: StrictStr = Field(description="Human readable message indicating details about last transition.")
-    reason: StrictStr = Field(description="A (brief) reason for the condition's last transition.")
+    message: StrictStr = Field(description="A human-readable message describing the condition, including details or progress. Consumers should not parse this field.")
+    reason: StrictStr = Field(description="A brief, machine-readable reason for the condition's last transition. Use a stable CamelCase identifier and put human-readable details in message.")
     type: ImagePromotionConditionType
     __properties: ClassVar[List[str]] = ["status", "observedGeneration", "lastTransitionTime", "message", "reason", "type"]
 

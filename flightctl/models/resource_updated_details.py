@@ -44,8 +44,8 @@ class ResourceUpdatedDetails(BaseModel):
     def updated_fields_validate_enum(cls, value):
         """Validates the enum"""
         for i in value:
-            if i not in set(['owner', 'labels', 'spec', 'spec.selector', 'spec.template']):
-                raise ValueError("each list item must be one of ('owner', 'labels', 'spec', 'spec.selector', 'spec.template')")
+            if i not in set(['owner', 'labels', 'spec', 'spec.selector', 'spec.template', 'status.conditions.EnrollmentHooks']):
+                raise ValueError("each list item must be one of ('owner', 'labels', 'spec', 'spec.selector', 'spec.template', 'status.conditions.EnrollmentHooks')")
         return value
 
     model_config = ConfigDict(

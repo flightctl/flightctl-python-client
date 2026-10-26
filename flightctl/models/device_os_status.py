@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.device_delta_apply_status import DeviceDeltaApplyStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,9 @@ class DeviceOsStatus(BaseModel):
     """ # noqa: E501
     image: StrictStr = Field(description="Version of the OS image.")
     image_digest: StrictStr = Field(description="The digest of the OS image (e.g. sha256:a0...).", alias="imageDigest")
-    __properties: ClassVar[List[str]] = ["image", "imageDigest"]
+    delta_size: Optional[StrictStr] = Field(default=None, description="Size of the control-plane generated OS delta image in IEC units (e.g. \"245.3 MiB\", \"1 GiB\"). Absent when no delta image was generated or its size is unknown.", alias="deltaSize")
+    last_delta: Optional[DeviceDeltaApplyStatus] = Field(default=None, alias="lastDelta")
+    __properties: ClassVar[List[str]] = ["image", "imageDigest", "deltaSize", "lastDelta"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,6 +73,9 @@ class DeviceOsStatus(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of last_delta
+        if self.last_delta:
+            _dict['lastDelta'] = self.last_delta.to_dict()
         return _dict
 
     @classmethod
@@ -83,7 +89,9 @@ class DeviceOsStatus(BaseModel):
 
         _obj = cls.model_validate({
             "image": obj.get("image"),
-            "imageDigest": obj.get("imageDigest")
+            "imageDigest": obj.get("imageDigest"),
+            "deltaSize": obj.get("deltaSize"),
+            "lastDelta": DeviceDeltaApplyStatus.from_dict(obj["lastDelta"]) if obj.get("lastDelta") is not None else None
         })
         return _obj
 

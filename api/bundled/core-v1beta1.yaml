@@ -24,6 +24,8 @@ tags:
     description: Operations on Device resources.
   - name: deviceactions
     description: Operations for device actions.
+  - name: enrollmenthookpolicy
+    description: Operations on EnrollmentHookPolicy resources.
   - name: enrollmentrequest
     description: Operations on EnrollmentRequest resources.
   - name: event
@@ -32,6 +34,8 @@ tags:
     description: Operations on Fleet resources.
   - name: label
     description: Operations for retrieving labels across different resources.
+  - name: labelsyncmapping
+    description: Operations on LabelSyncMapping resources.
   - name: organization
     description: Operations for retrieving Organization resources.
   - name: repository
@@ -1850,6 +1854,79 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
+  /devices/{name}/enrollmenthooks/override:
+    x-resource: devices/enrollmenthooks/override
+    post:
+      tags:
+        - device
+      description: |
+        Manually override a failed enrollment hook condition. Only admin and operator roles may perform this action. Sets the EnrollmentHooks condition to True with reason ManualOverride, clearing the Failed state and unblocking fleet match and rendered GET. Does NOT re-approve, rotate management cert, or re-run notify.
+      operationId: overrideDeviceEnrollmentHook
+      x-rbac:
+        resource: devices/enrollmenthooks/override
+        action: update
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
   /devices/{name}/applications/{appname}/actions/stop:
     x-resource: devices/applications/lifecycle
     post:
@@ -2125,6 +2202,63 @@ paths:
                 $ref: '#/components/schemas/Status'
         '409':
           description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /devices/{name}/labelsyncprovenance:
+    x-resource: devices
+    get:
+      tags:
+        - device
+      description: Get current LabelSyncMapping ownership for a Device. Return only keys with current DeviceLabel ownership by active mappings, sorted by key. An existing Device with no currently owned keys returns an empty items array. Label values are not returned.
+      operationId: getDeviceLabelSyncProvenance
+      parameters:
+        - name: name
+          in: path
+          description: The name of the Device resource.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncProvenanceList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
           content:
             application/json:
               schema:
@@ -3045,6 +3179,395 @@ paths:
                 $ref: '#/components/schemas/Status'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /enrollmenthookpolicies:
+    x-resource: enrollmenthookpolicies
+    get:
+      tags:
+        - enrollmenthookpolicy
+      description: List EnrollmentHookPolicy resources.
+      operationId: listEnrollmentHookPolicies
+      parameters:
+        - name: continue
+          in: query
+          description: An optional parameter to query more results from the server. The value of the paramter must match the value of the 'continue' field in the previous list response.
+          required: false
+          schema:
+            type: string
+        - name: labelSelector
+          in: query
+          description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+          schema:
+            type: string
+        - name: fieldSelector
+          in: query
+          description: A selector to restrict the list of returned objects by their fields, supporting operators like '=', '==', and '!=' (e.g., "key1=value1,key2!=value2").
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: The maximum number of results returned in the list response. The server will set the 'continue' field in the list response if more results exist. The continue value may then be specified as parameter in a subsequent query.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentHookPolicyList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    post:
+      tags:
+        - enrollmenthookpolicy
+      description: Create an EnrollmentHookPolicy resource.
+      operationId: createEnrollmentHookPolicy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentHookPolicy'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentHookPolicy'
+          links:
+            GetEnrollmentHookPolicy:
+              operationId: getEnrollmentHookPolicy
+              parameters:
+                name: $response.body#/metadata/name
+            DeleteEnrollmentHookPolicy:
+              operationId: deleteEnrollmentHookPolicy
+              parameters:
+                name: $response.body#/metadata/name
+            ReplaceEnrollmentHookPolicy:
+              operationId: replaceEnrollmentHookPolicy
+              parameters:
+                name: $response.body#/metadata/name
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /enrollmenthookpolicies/{name}:
+    x-resource: enrollmenthookpolicies
+    get:
+      tags:
+        - enrollmenthookpolicy
+      description: Get an EnrollmentHookPolicy resource.
+      operationId: getEnrollmentHookPolicy
+      parameters:
+        - name: name
+          in: path
+          description: The name of the EnrollmentHookPolicy resource to get.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentHookPolicy'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    put:
+      tags:
+        - enrollmenthookpolicy
+      description: Update an EnrollmentHookPolicy resource.
+      operationId: replaceEnrollmentHookPolicy
+      parameters:
+        - name: name
+          in: path
+          description: The name of the EnrollmentHookPolicy resource to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentHookPolicy'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentHookPolicy'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentHookPolicy'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    delete:
+      tags:
+        - enrollmenthookpolicy
+      description: Delete an EnrollmentHookPolicy resource.
+      operationId: deleteEnrollmentHookPolicy
+      parameters:
+        - name: name
+          in: path
+          description: The name of the EnrollmentHookPolicy resource to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    patch:
+      tags:
+        - enrollmenthookpolicy
+      description: Patch an EnrollmentHookPolicy resource.
+      operationId: patchEnrollmentHookPolicy
+      parameters:
+        - name: name
+          in: path
+          description: The name of the EnrollmentHookPolicy resource to patch.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentHookPolicy'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
           content:
             application/json:
               schema:
@@ -4667,6 +5190,453 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
+  /labelsyncprovenance:
+    x-resource: labelsyncmappings
+    get:
+      tags:
+        - labelsyncmapping
+      description: Resolve exact label keys to their current owning LabelSyncMapping names in the request organization. Return one item per supplied key in request order, including repeated keys. Keys with no current mapping owner have an empty owners array. Label values are not returned.
+      operationId: getLabelSyncProvenance
+      parameters:
+        - name: labelKeys
+          in: query
+          description: Exact label keys to resolve. Supply between 1 and 50 repeated labelKeys parameters. Repeated key values are preserved as repeated response items in request order.
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: array
+            minItems: 1
+            maxItems: 50
+            items:
+              type: string
+              minLength: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncProvenanceList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /labelsyncmappings:
+    x-resource: labelsyncmappings
+    get:
+      tags:
+        - labelsyncmapping
+      description: List LabelSyncMapping resources.
+      operationId: listLabelSyncMappings
+      parameters:
+        - name: continue
+          in: query
+          description: An optional parameter to query more results from the server. The value of the parameter must match the value of the 'continue' field in the previous list response.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: The maximum number of results returned in the list response.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncMappingList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    post:
+      tags:
+        - labelsyncmapping
+      description: Create a LabelSyncMapping resource.
+      operationId: createLabelSyncMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelSyncMapping'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncMapping'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /labelsyncmappings/{name}:
+    x-resource: labelsyncmappings
+    get:
+      tags:
+        - labelsyncmapping
+      description: Get a LabelSyncMapping resource.
+      operationId: getLabelSyncMapping
+      parameters:
+        - name: name
+          in: path
+          description: The name of the LabelSyncMapping resource to get.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncMapping'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    put:
+      tags:
+        - labelsyncmapping
+      description: Update a LabelSyncMapping resource.
+      operationId: replaceLabelSyncMapping
+      parameters:
+        - name: name
+          in: path
+          description: The name of the LabelSyncMapping resource to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelSyncMapping'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncMapping'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncMapping'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    delete:
+      tags:
+        - labelsyncmapping
+      description: Delete a LabelSyncMapping resource.
+      operationId: deleteLabelSyncMapping
+      parameters:
+        - name: name
+          in: path
+          description: The name of the LabelSyncMapping resource to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    patch:
+      tags:
+        - labelsyncmapping
+      description: Patch a LabelSyncMapping resource.
+      operationId: patchLabelSyncMapping
+      parameters:
+        - name: name
+          in: path
+          description: The name of the LabelSyncMapping resource to patch.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSyncMapping'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
   /authproviders:
     x-resource: authproviders
     get:
@@ -5385,6 +6355,15 @@ components:
         skipServerVerification:
           type: boolean
           description: Skip remote server verification.
+        repository:
+          type: string
+          description: Optional OCI repository path under spec.registry (e.g. my-org/diffs). When set, this object is that repo (`my-registry.com/my-org/diffs`), not only a registry. Mutually exclusive with namespace. ImageBuild destination imageName must equal this value.
+        namespace:
+          type: string
+          description: Optional org/subpath under spec.registry (e.g. my-org). Concrete names are spec.registry/namespace/<name>. Mutually exclusive with repository. Used by delta push (`{registry}/{namespace}/{imageName}`). Invalid on an ImageBuild or ImageExport destination Repository.
+        deltaStorageTarget:
+          type: boolean
+          description: When true, generated deltas are pushed to this object (at most one per org). Auth is the existing ociAuth / accessMode. Placement follows repository / namespace / registry-only as above.
         baseImages:
           type: array
           description: Curated list of trusted base images available in this registry. When present, the Image Builder source picker surfaces these entries as selectable options.
@@ -5792,13 +6771,12 @@ components:
               example:
                 - values-production.yaml
                 - values-overrides.yml
-          required:
-            - image
     VmApplication:
       type: object
       description: A VM workload managed by the FlightCtl agent. The VM definition may be delivered either as an OCI image/artifact or as inline application content. For inline providers, the package must contain a KubeVirt VirtualMachine YAML file named vm.yaml.
       allOf:
         - $ref: '#/components/schemas/ApplicationProviderBase'
+        - $ref: '#/components/schemas/ApplicationUser'
         - type: object
           properties:
             publishPorts:
@@ -5856,6 +6834,12 @@ components:
               description: A list of application content.
               items:
                 $ref: '#/components/schemas/ApplicationContent'
+            deltaImages:
+              type: array
+              readOnly: true
+              description: 'Optional hints for nested OCI images referenced by this inline application. Each entry identifies a target image reference and digest and names its delta artifact. Read-only: generated by the control plane and only present in the rendered application spec delivered to the agent.'
+              items:
+                $ref: '#/components/schemas/ImageDeltaHint'
           required:
             - inline
     ApplicationVolumeProviderSpec:
@@ -6101,11 +7085,15 @@ components:
         - AfterUpdating
         - BeforeRebooting
         - AfterRebooting
+        - BeforeEnrolling
+        - AfterEnrolling
       x-enum-varnames:
         - DeviceLifecycleHookBeforeUpdating
         - DeviceLifecycleHookAfterUpdating
         - DeviceLifecycleHookBeforeRebooting
         - DeviceLifecycleHookAfterRebooting
+        - DeviceLifecycleHookBeforeEnrolling
+        - DeviceLifecycleHookAfterEnrolling
     HookAction:
       allOf:
         - type: object
@@ -6237,7 +7225,15 @@ components:
         - metadata
         - items
     DeviceOsSpec:
-      $ref: '#/components/schemas/ImageOrCatalogItemRefSpec'
+      description: Either a specific OCI image reference, or a reference to a catalog item version that can be resolved to an OCI image ref.
+      allOf:
+        - $ref: '#/components/schemas/ImageOrCatalogItemRefSpec'
+        - type: object
+          properties:
+            deltaImage:
+              type: string
+              readOnly: true
+              description: 'Optional hint: a reference to a delta artifact the control plane''s generation records indicate may be applicable to reach `image` from this device''s current image. Absent does not imply no delta exists — the device independently discovers candidate delta artifacts (e.g. deltas published by a customer''s own CI) regardless of this field, and falls back to a full pull only if none is usable. Read-only: generated by the control plane and only present in the rendered device spec delivered to the agent.'
     DeviceStatus:
       type: object
       description: DeviceStatus represents information about the status of a device. Status may trail the actual state of a device.
@@ -6296,6 +7292,12 @@ components:
           $ref: '#/components/schemas/DependencySyncStatus'
         capabilities:
           $ref: '#/components/schemas/DeviceCapabilities'
+        deltaGeneration:
+          $ref: '#/components/schemas/DeltaGenerationStatus'
+        enrollmentHooks:
+          $ref: '#/components/schemas/DeviceEnrollmentHooksStatus'
+        systemInfoStatus:
+          $ref: '#/components/schemas/DeviceSystemInfoStatus'
       additionalProperties: false
     DeviceLastSeen:
       type: object
@@ -6328,19 +7330,165 @@ components:
         agentVersion:
           type: string
           description: The Agent version.
+        bootcVersion:
+          type: string
+          description: Version reported by `bootc --version`. Absent when bootc is not installed or the version command fails.
+        ociDeltaVersion:
+          type: string
+          description: Version reported by `oci-delta --version`, or from Go module build information when that flag is unsupported. Absent when oci-delta is not installed or its version cannot be determined.
+        deltaEligible:
+          type: boolean
+          description: Whether this device can consume OCI deltas. True when the oci-delta binary is present. False when it is not. Omitted when an older agent does not report the field.
         customInfo:
           $ref: '#/components/schemas/CustomDeviceInfo'
+        gpus:
+          type: array
+          description: List of GPU devices discovered on the device.
+          items:
+            $ref: '#/components/schemas/DeviceGpu'
+        kvm:
+          $ref: '#/components/schemas/DeviceKvm'
+        osMode:
+          $ref: '#/components/schemas/OsModeType'
       additionalProperties:
         type: string
         description: |
           Optional system attributes exposed by the agent.
           Each key corresponds to a configurable internal capability.
+    DeviceGpu:
+      type: object
+      description: Information about a GPU device discovered on the device.
+      required:
+        - index
+      properties:
+        index:
+          type: integer
+          format: int32
+          description: Zero-based enumeration index of the GPU on the system, assigned in PCI bus discovery order.
+        vendor:
+          type: string
+          description: The GPU vendor name (e.g., "NVIDIA", "AMD", "Intel").
+        model:
+          type: string
+          description: The GPU model name (e.g., "RTX 4090", "GA10B").
+        pciDeviceId:
+          type: string
+          description: PCI device ID of the GPU, as read from the PCI configuration register (e.g., "0x2717").
+        pciAddress:
+          type: string
+          description: PCI bus address in BDF notation (e.g., "0000:01:00.0").
+        pciRevisionId:
+          type: string
+          description: PCI revision ID of the GPU (e.g., "0xa1").
+        pciVendorId:
+          type: string
+          description: PCI vendor ID of the GPU (e.g., "0x10de" for NVIDIA).
+        memoryBytes:
+          type: integer
+          format: int64
+          description: The amount of GPU memory in bytes.
+        arch:
+          type: string
+          description: GPU microarchitecture generation name as defined in the hardware map or platform lookup table (e.g., "Ada", "Ampere", "Volta", "Maxwell" for NVIDIA; "RDNA3", "CDNA3" for AMD). This is the vendor marketing name for the GPU microarchitecture, not the host CPU ISA or a compute-capability version string.
+        features:
+          type: array
+          description: Vendor-specific GPU capability identifiers sourced from the hardware map. Values are lowercase tokens describing supported compute or display features (e.g., "cuda", "rocm", "opencl", "sriov", "mig"). The vocabulary is extensible and determined by the hardware map; no fixed enum is enforced.
+          items:
+            type: string
+    DeviceKvm:
+      type: object
+      description: KVM virtualization information reported by the device.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether KVM virtualization is active and available on the device.
     CustomDeviceInfo:
       type: object
       description: User-defined information about the device.
       additionalProperties:
         type: string
         description: A user-defined custom property value.
+    DeviceSystemInfoStatus:
+      type: object
+      description: Status of the system information collection sources for a device.
+      required:
+        - summary
+        - statuses
+      properties:
+        summary:
+          $ref: '#/components/schemas/DeviceSystemInfoSummaryStatus'
+        statuses:
+          $ref: '#/components/schemas/DeviceSystemInfoStatuses'
+      additionalProperties: false
+    DeviceSystemInfoStatuses:
+      type: object
+      description: Collection statuses for built-in and custom information sources.
+      required:
+        - systemInfo
+        - customInfo
+      properties:
+        systemInfo:
+          type: object
+          description: Per-source collection status for built-in system information.
+          additionalProperties:
+            $ref: '#/components/schemas/SystemInfoSourceStatus'
+        customInfo:
+          type: object
+          description: Per-source collection status for custom device information.
+          additionalProperties:
+            $ref: '#/components/schemas/SystemInfoSourceStatus'
+      additionalProperties: false
+    DeviceSystemInfoSummaryStatus:
+      type: object
+      description: Aggregate summary of the system information collection health.
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/SystemInfoSummaryStatusType'
+      additionalProperties: false
+    SystemInfoSummaryStatusType:
+      type: string
+      description: Aggregate health of the system information collection.
+      enum:
+        - Healthy
+        - Degraded
+        - Error
+        - Unknown
+      x-enum-varnames:
+        - SystemInfoSummaryStatusHealthy
+        - SystemInfoSummaryStatusDegraded
+        - SystemInfoSummaryStatusError
+        - SystemInfoSummaryStatusUnknown
+    SystemInfoSourceStatus:
+      type: object
+      description: Collection status for a single system information source.
+      required:
+        - status
+        - lastTransitionTime
+      properties:
+        status:
+          $ref: '#/components/schemas/SystemInfoSourceStatusType'
+        lastTransitionTime:
+          type: string
+          format: date-time
+          description: The last time the collection status of this source changed.
+        message:
+          type: string
+          maxLength: 260
+          description: Human readable message providing details about the source status.
+      additionalProperties: false
+    SystemInfoSourceStatusType:
+      type: string
+      description: Collection health of a single system information source.
+      enum:
+        - Healthy
+        - Error
+        - Unknown
+      x-enum-varnames:
+        - SystemInfoSourceStatusHealthy
+        - SystemInfoSourceStatusError
+        - SystemInfoSourceStatusUnknown
     SystemdUnitStatus:
       type: object
       required:
@@ -6487,6 +7635,29 @@ components:
           description: Status of volumes used by this application.
           items:
             $ref: '#/components/schemas/ApplicationVolumeStatus'
+        lastDelta:
+          $ref: '#/components/schemas/DeviceDeltaApplyStatus'
+        imageDigests:
+          type: array
+          description: Image references this application uses and the registry digest associated with each image. image is the ref from the current rendered spec (tag or digest). For a multi-platform index, digest is the platform-specific manifest selected by the runtime when available; if the runtime exposes only an opaque ID, an immutable image reference's digest may be reported. digest is omitted when no registry digest is known.
+          items:
+            $ref: '#/components/schemas/ApplicationImageDigest'
+        deltaSize:
+          type: string
+          description: Expected total size of control-plane generated delta images for this application update in IEC units (e.g. "245.3 MiB", "1 GiB"). Computed as the sum of generated delta image sizes across the application. Absent when no delta image was generated or any generated delta image size is unknown. Full image sizes are not included.
+    ApplicationImageDigest:
+      type: object
+      description: An image reference and its known registry image digest.
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: Image reference as it appears in the rendered application spec.
+        digest:
+          type: string
+          description: Registry digest associated with this image. If the runtime identifies a platform-specific image, this may differ from the digest in the image reference. Omitted when unavailable.
+          x-go-type-skip-optional-pointer: true
     ApplicationVolumeStatus:
       type: object
       description: Status of a volume used by an application.
@@ -6561,8 +7732,39 @@ components:
       description: Capabilities reported by the device agent.
       properties:
         osMode:
-          $ref: '#/components/schemas/OsModeType'
+          allOf:
+            - $ref: '#/components/schemas/OsModeType'
+          deprecated: true
+          x-deprecated-reason: Deprecated since v1.4 and will be removed in a future release. Use status.systemInfo.osMode instead.
+          description: Deprecated since v1.4 and will be removed in a future release. Use status.systemInfo.osMode instead. The service reads status.systemInfo.osMode and only falls back to this field for devices reported by older agents that do not populate systemInfo.
       additionalProperties: false
+    DeviceDeltaApplyStatus:
+      type: object
+      description: Agent-reported result for delta apply attempts for this update target. For an application with multiple image targets, the outcome is aggregated across image targets. The lastDelta field is omitted until the agent reports an outcome; server-side delta preparation is reported separately.
+      additionalProperties: false
+      required:
+        - outcome
+      properties:
+        outcome:
+          $ref: '#/components/schemas/DeviceDeltaApplyOutcomeType'
+        fallbackReason:
+          type: string
+          description: Set when one or more delta attempts failed and the agent attempted a full image pull. For an application with multiple image targets, this reports one representative failure reason.
+    DeviceDeltaApplyOutcomeType:
+      type: string
+      description: Result reported by the agent for an update target. NotRequired means the existing target image satisfies the agent's image pull rules, so no delta or pull was needed. NotUsed means the agent skipped delta application without a delta-apply failure; it may still use a full image pull. Applied means all delta work for the target succeeded. Fallback means a delta attempt failed and the agent attempted a full image pull. Partial means an application applied at least one delta while another image target used a full image pull or skipped delta application.
+      enum:
+        - NotUsed
+        - NotRequired
+        - Applied
+        - Fallback
+        - Partial
+      x-enum-varnames:
+        - DeviceDeltaApplyOutcomeNotUsed
+        - DeviceDeltaApplyOutcomeNotRequired
+        - DeviceDeltaApplyOutcomeApplied
+        - DeviceDeltaApplyOutcomeFallback
+        - DeviceDeltaApplyOutcomePartial
     DeviceOsStatus:
       type: object
       description: Current status of the device OS.
@@ -6576,6 +7778,11 @@ components:
         imageDigest:
           type: string
           description: The digest of the OS image (e.g. sha256:a0...).
+        deltaSize:
+          type: string
+          description: Size of the control-plane generated OS delta image in IEC units (e.g. "245.3 MiB", "1 GiB"). Absent when no delta image was generated or its size is unknown.
+        lastDelta:
+          $ref: '#/components/schemas/DeviceDeltaApplyStatus'
     DeviceConfigStatus:
       type: object
       description: Current status of the device config.
@@ -6909,6 +8116,8 @@ components:
           description: The rendered version of the device from desired.json (optional).
         osMode:
           $ref: '#/components/schemas/OsModeType'
+        preEnrollment:
+          $ref: '#/components/schemas/PreEnrollmentResult'
       description: EnrollmentRequestSpec is a description of a EnrollmentRequest's target state.
     EnrollmentRequestStatus:
       type: object
@@ -6926,6 +8135,36 @@ components:
       required:
         - conditions
       description: EnrollmentRequestStatus represents information about the status of a EnrollmentRequest.
+    PreEnrollmentActionResult:
+      type: object
+      description: Result of a single executed pre-enrollment hook action, agent-populated.
+      required:
+        - source
+        - exitCode
+      properties:
+        source:
+          type: string
+          description: Path to the hook definition YAML that contained this action (for example /etc/flightctl/hooks.d/beforeenrolling/10-network.yaml).
+        exitCode:
+          type: integer
+          description: Process exit code from the hook action.
+        output:
+          type: string
+          description: Redacted stdout/stderr from this action. The total size across all actions is capped at 4KiB. Secret patterns (PEM blocks, Bearer prefixes, known token env names) are redacted before persistence.
+    PreEnrollmentResult:
+      type: object
+      description: Result of pre-enrollment hook execution, agent-populated.
+      required:
+        - success
+      properties:
+        success:
+          type: boolean
+          description: Whether all pre-enrollment hooks completed with exit code 0.
+        actions:
+          type: array
+          description: Per-action results in execution order.
+          items:
+            $ref: '#/components/schemas/PreEnrollmentActionResult'
     ResourceSync:
       type: object
       description: ResourceSync represents a reference to one or more files in a repository to sync to resource definitions.
@@ -7140,6 +8379,21 @@ components:
         propertyName: strategy
         mapping:
           BatchSequence: '#/components/schemas/BatchSequence'
+    RolloutPolicyDeltaGeneration:
+      type: object
+      description: Controls OS delta generation for this fleet rollout.
+      properties:
+        generateDelta:
+          type: boolean
+          description: When false, skip control-plane OS delta generation for this fleet. Omitted means true.
+        maxWaitForDelta:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+          description: How long a prepare may wait before periodic resume. Omitted uses DeltaGeneration.maxWaitForDelta. Ignored when generateDelta is false. 0s still generates then resumes immediately.
+        deltaGenerationTimeout:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+          description: Context deadline for each generation job. Omitted uses DeltaGeneration.timeout.
     RolloutPolicy:
       type: object
       properties:
@@ -7151,6 +8405,8 @@ components:
           $ref: '#/components/schemas/Percentage'
         defaultUpdateTimeout:
           $ref: '#/components/schemas/Duration'
+        deltaGeneration:
+          $ref: '#/components/schemas/RolloutPolicyDeltaGeneration'
       description: RolloutPolicy is the rollout policy of the fleet.
     FleetSpec:
       type: object
@@ -7264,8 +8520,45 @@ components:
             $ref: '#/components/schemas/Condition'
         devicesSummary:
           $ref: '#/components/schemas/DevicesSummary'
+        deltaGeneration:
+          $ref: '#/components/schemas/DeltaGenerationStatus'
       required:
         - conditions
+      additionalProperties: false
+    DeltaGenerationPhase:
+      type: string
+      description: Current step of control-plane delta generation for the in-flight pair.
+      enum:
+        - checkingExisting
+        - pullSource
+        - pullTarget
+        - createDelta
+        - push
+      x-enum-varnames:
+        - DeltaGenerationPhaseCheckingExisting
+        - DeltaGenerationPhasePullSource
+        - DeltaGenerationPhasePullTarget
+        - DeltaGenerationPhaseCreateDelta
+        - DeltaGenerationPhasePush
+    DeltaGenerationStatus:
+      type: object
+      description: Pair counts (completed/total) for a prepare in flight. Per-pair phase is one DeltaGenerationProgress event per step, not a percent heartbeat. Condition messages carry the same completed/total counts.
+      properties:
+        completed:
+          type: integer
+          format: int64
+          description: Number of joined generation pairs that are already terminal.
+        total:
+          type: integer
+          format: int64
+          description: Number of unique generation pairs in this prepare.
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Time of the last completed/total write for this prepare.
+      required:
+        - completed
+        - total
       additionalProperties: false
     DevicesSummary:
       type: object
@@ -7305,7 +8598,7 @@ components:
           $ref: '#/components/schemas/DevicesSummaryCapabilities'
     DevicesSummaryCapabilities:
       type: object
-      description: Breakdowns of devices by status.capabilities fields.
+      description: Breakdowns of devices by status.systemInfo fields, falling back to the deprecated status.capabilities fields when unavailable.
       properties:
         osMode:
           type: object
@@ -7313,7 +8606,7 @@ components:
           additionalProperties:
             type: integer
             format: int64
-          description: Counts by status.capabilities.osMode (e.g. image, package). The key "unknown" counts devices that have not reported the capability.
+          description: Counts by device OS mode (e.g. image, package), taken from status.systemInfo.osMode with fallback to the deprecated status.capabilities.osMode. The key "unknown" counts devices that have not reported an OS mode.
       additionalProperties: false
     TemplateVersion:
       type: object
@@ -7423,30 +8716,35 @@ components:
         refresh_token:
           type: string
           nullable: true
+          x-omitempty: false
           description: Refresh token for refresh_token grant.
           x-oapi-codegen-extra-tags:
             form: refresh_token,omitempty
         code:
           type: string
           nullable: true
+          x-omitempty: false
           description: Authorization code for authorization_code grant.
           x-oapi-codegen-extra-tags:
             form: code,omitempty
         scope:
           type: string
           nullable: true
+          x-omitempty: false
           description: OAuth2 scope.
           x-oapi-codegen-extra-tags:
             form: scope,omitempty
         code_verifier:
           type: string
           nullable: true
+          x-omitempty: false
           description: PKCE code verifier.
           x-oapi-codegen-extra-tags:
             form: code_verifier,omitempty
         redirect_uri:
           type: string
           nullable: true
+          x-omitempty: false
           description: OAuth2 redirect URI (required for authorization_code grant if included in authorization request).
           x-oapi-codegen-extra-tags:
             form: redirect_uri,omitempty
@@ -7649,10 +8947,10 @@ components:
           description: The last time the condition transitioned from one status to another.
         message:
           type: string
-          description: Human readable message indicating details about last transition.
+          description: A human-readable message describing the condition, including details or progress. Consumers should not parse this field.
         reason:
           type: string
-          description: A (brief) reason for the condition's last transition.
+          description: A brief, machine-readable reason for the condition's last transition. Use a stable CamelCase identifier and put human-readable details in message.
     Condition:
       description: Condition contains details for one aspect of the current state of this API Resource.
       allOf:
@@ -7677,12 +8975,17 @@ components:
         - Accessible
         - ResourceParsed
         - Synced
+        - Ready
         - Valid
         - RolloutInProgress
         - Updating
         - SpecValid
         - MultipleOwners
+        - LabelsSynced
         - DeviceDecommissioning
+        - FleetDeltaPreparing
+        - DeviceDeltaPreparing
+        - EnrollmentHooks
       x-enum-varnames:
         - EnrollmentRequestApproved
         - EnrollmentRequestTPMVerified
@@ -7694,12 +8997,17 @@ components:
         - ResourceSyncAccessible
         - ResourceSyncResourceParsed
         - ResourceSyncSynced
+        - LabelSyncMappingReady
         - FleetValid
         - FleetRolloutInProgress
         - DeviceUpdating
         - DeviceSpecValid
         - DeviceMultipleOwners
+        - DeviceLabelsSynced
         - DeviceDecommissioning
+        - FleetDeltaPreparing
+        - DeviceDeltaPreparing
+        - DeviceEnrollmentHooks
     ConditionStatus:
       type: string
       description: Status of the condition, one of True, False, Unknown.
@@ -7905,6 +9213,13 @@ components:
             - EncryptionMigrationStarted
             - EncryptionMigrationCompleted
             - ApplicationLifecycleChanged
+            - PrepareDeltas
+            - DeltaGenerationProgress
+            - DeltaGenerationCompleted
+            - EnrollmentHookSucceeded
+            - EnrollmentHookFailed
+            - EnrollmentHookNotifyFailed
+            - EnrollmentHookManualOverride
         message:
           type: string
           description: A human-readable description of the status of this operation.
@@ -7990,6 +9305,8 @@ components:
           DependencyChangeDetected: '#/components/schemas/DependencyChangeDetectedDetails'
           DependencySyncProbeFailed: '#/components/schemas/DependencySyncProbeFailedDetails'
           ApplicationLifecycleChanged: '#/components/schemas/ApplicationLifecycleChangedDetails'
+          PrepareDeltas: '#/components/schemas/PrepareDeltasDetails'
+          DeltaGenerationProgress: '#/components/schemas/DeltaGenerationProgressDetails'
       oneOf:
         - $ref: '#/components/schemas/ResourceUpdatedDetails'
         - $ref: '#/components/schemas/DeviceOwnershipChangedDetails'
@@ -8009,6 +9326,8 @@ components:
         - $ref: '#/components/schemas/DependencyChangeDetectedDetails'
         - $ref: '#/components/schemas/DependencySyncProbeFailedDetails'
         - $ref: '#/components/schemas/ApplicationLifecycleChangedDetails'
+        - $ref: '#/components/schemas/PrepareDeltasDetails'
+        - $ref: '#/components/schemas/DeltaGenerationProgressDetails'
     DeviceVulnerabilityCveDetails:
       type: object
       description: Structured details for per-device CVE vulnerability events.
@@ -8053,14 +9372,17 @@ components:
               - spec
               - spec.selector
               - spec.template
+              - status.conditions.EnrollmentHooks
           description: List of fields that were updated in the resource.
         previousOwner:
           type: string
           nullable: true
+          x-omitempty: false
           description: The previous owner (if applicable).
         newOwner:
           type: string
           nullable: true
+          x-omitempty: false
           description: The new owner (if applicable).
     DeviceOwnershipChangedDetails:
       type: object
@@ -8075,10 +9397,12 @@ components:
         previousOwner:
           type: string
           nullable: true
+          x-omitempty: false
           description: The previous owner fleet (null if none).
         newOwner:
           type: string
           nullable: true
+          x-omitempty: false
           description: The new owner fleet (null if removed).
     DeviceMultipleOwnersDetectedDetails:
       type: object
@@ -8117,6 +9441,7 @@ components:
         assignedOwner:
           type: string
           nullable: true
+          x-omitempty: false
           description: The fleet assigned as owner (null if no owner).
         previousMatchingFleets:
           type: array
@@ -8186,6 +9511,80 @@ components:
         errorCount:
           type: integer
           description: Number of errors encountered by this ResourceSync update.
+    PrepareDeltasDetails:
+      type: object
+      description: Structured details for PrepareDeltas events.
+      required:
+        - detailType
+      properties:
+        detailType:
+          type: string
+          enum:
+            - PrepareDeltas
+          x-enum-varnames:
+            - PrepareDeltas
+          description: The type of detail for discriminator purposes.
+        templateVersion:
+          type: string
+          description: Fleet only. The TemplateVersion this prepare is for. Required when involvedObject.kind is Fleet; omitted for Device.
+        generation:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Device only. The desired spec generation this prepare is for. Required when involvedObject.kind is Device; omitted for Fleet.
+        resourceVersion:
+          type: string
+          description: The resource version of the involved Fleet or Device when this prepare event was created. Used to ignore stale prepare events. May be omitted for retained events created before this field was introduced.
+    DeltaGenerationProgressDetails:
+      type: object
+      description: Structured details for DeltaGenerationProgress events. One event when a pair enters a phase or becomes terminal, fanned out to each waiting Fleet or standalone Device. Not a percent heartbeat.
+      additionalProperties: false
+      required:
+        - detailType
+        - imageRepository
+        - sourceDigest
+        - targetDigest
+        - generationStatus
+      properties:
+        detailType:
+          type: string
+          enum:
+            - DeltaGenerationProgress
+          x-enum-varnames:
+            - DeltaGenerationProgress
+          description: The type of detail for discriminator purposes.
+        imageRepository:
+          type: string
+          description: Image repository (host/namespace/name) for this pair.
+        sourceDigest:
+          type: string
+          description: Current image digest.
+        targetDigest:
+          type: string
+          description: Target image digest.
+        generationStatus:
+          type: string
+          description: Generation row status for this pair.
+          enum:
+            - in_progress
+            - succeeded
+            - failed
+            - rejected
+          x-enum-varnames:
+            - DeltaGenerationProgressInProgress
+            - DeltaGenerationProgressSucceeded
+            - DeltaGenerationProgressFailed
+            - DeltaGenerationProgressRejected
+        phase:
+          $ref: '#/components/schemas/DeltaGenerationPhase'
+        templateVersion:
+          type: string
+          description: Fleet only. The TemplateVersion this prepare is for.
+        generation:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Device only. The desired spec generation this prepare is for.
     FleetRolloutStartedDetails:
       type: object
       required:
@@ -8504,6 +9903,11 @@ components:
           items:
             type: string
           description: List of OIDC scopes to request.
+        prompt:
+          type: string
+          nullable: true
+          pattern: ^(| *[!-~]+( +[!-~]+)* *)$
+          description: Space-separated, case-sensitive authorization prompt values, such as login, consent, select_account, none, or provider-specific values. Omitted and null values are preserved in AuthProvider resources and exposed as select_account in public authentication configuration. An empty string instructs clients to omit the prompt parameter. Values must be printable ASCII separated by spaces; none cannot accompany a different value. Accepted values are preserved, including extra spaces and duplicates.
         organizationAssignment:
           $ref: '#/components/schemas/AuthOrganizationAssignment'
         usernameClaim:
@@ -8561,6 +9965,11 @@ components:
           items:
             type: string
           description: List of OAuth2 scopes to request.
+        prompt:
+          type: string
+          nullable: true
+          pattern: ^(| *[!-~]+( +[!-~]+)* *)$
+          description: Space-separated, case-sensitive authorization prompt values, such as login, consent, select_account, none, or provider-specific values. Omitted and null values are preserved in AuthProvider resources and exposed as select_account in public authentication configuration. An empty string instructs clients to omit the prompt parameter. Values must be printable ASCII separated by spaces; none cannot accompany a different value. Accepted values are preserved, including extra spaces and duplicates.
         organizationAssignment:
           $ref: '#/components/schemas/AuthOrganizationAssignment'
         usernameClaim:
@@ -8923,6 +10332,271 @@ components:
         - metadata
         - items
       description: AuthProviderList is a list of auth providers.
+    EnrollmentHookPolicy:
+      type: object
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/ApiVersion'
+        kind:
+          type: string
+          description: Kind is a string value representing the REST resource this object represents.
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/EnrollmentHookPolicySpec'
+        status:
+          $ref: '#/components/schemas/EnrollmentHookPolicyStatus'
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - spec
+      description: EnrollmentHookPolicy defines an org-scoped enrollment hook policy.
+    EnrollmentHookPolicySpec:
+      type: object
+      description: Specification for an enrollment hook policy.
+      properties:
+        afterEnrolling:
+          $ref: '#/components/schemas/EnrollmentHookStageSpec'
+      required:
+        - afterEnrolling
+    EnrollmentHookStageSpec:
+      type: object
+      description: Configuration for a stage of enrollment hooks.
+      properties:
+        failurePolicy:
+          $ref: '#/components/schemas/FailurePolicyType'
+        controlPlaneActions:
+          type: array
+          description: List of HTTP actions to execute during this enrollment stage.
+          items:
+            $ref: '#/components/schemas/EnrollmentHookHttpAction'
+    FailurePolicyType:
+      type: string
+      description: Determines behavior when a hook action fails.
+      enum:
+        - Block
+        - Continue
+      x-enum-varnames:
+        - FailurePolicyBlock
+        - FailurePolicyContinue
+    EnrollmentHookHttpAction:
+      type: object
+      description: An HTTP action to execute as part of an enrollment hook.
+      properties:
+        url:
+          type: string
+          description: The HTTPS URL to call.
+          minLength: 1
+        timeout:
+          type: string
+          description: Timeout duration (e.g. "30s"). Defaults to 30s, max 5m.
+        retry:
+          $ref: '#/components/schemas/EnrollmentHookRetryPolicy'
+        auth:
+          $ref: '#/components/schemas/EnrollmentHookAuth'
+      required:
+        - url
+    EnrollmentHookRetryPolicy:
+      type: object
+      description: Retry policy for an enrollment hook action.
+      properties:
+        maxAttempts:
+          type: integer
+          description: Maximum number of retry attempts. Defaults to 5, max 20.
+          minimum: 1
+          maximum: 20
+        backoffPolicy:
+          type: string
+          description: Backoff strategy (e.g. "exponential"). Defaults to "exponential".
+        backoffDelay:
+          type: string
+          description: Initial backoff delay duration (e.g. "2s"). Defaults to "2s".
+        maxBackoff:
+          type: string
+          description: Maximum backoff duration (e.g. "2m"). Defaults to "2m".
+        deadline:
+          type: string
+          description: Overall deadline for all retry attempts (e.g. "10m"). Defaults to "10m".
+    EnrollmentHookAuth:
+      type: object
+      description: Authentication configuration for an enrollment hook action.
+      properties:
+        bearerToken:
+          type: string
+          description: Bearer token for HTTP authentication.
+          format: password
+    DeviceEnrollmentHooksStatus:
+      type: object
+      description: Enrollment hooks state for a device.
+      properties:
+        snapshot:
+          $ref: '#/components/schemas/EnrollmentHookSnapshot'
+    EnrollmentHookSnapshot:
+      type: object
+      description: Immutable non-secret copy of EnrollmentHookPolicy fields captured at approval time.
+      required:
+        - failurePolicy
+      properties:
+        failurePolicy:
+          $ref: '#/components/schemas/FailurePolicyType'
+        controlPlaneActions:
+          type: array
+          description: Non-secret copies of control-plane actions from the policy at approval time.
+          items:
+            $ref: '#/components/schemas/EnrollmentHookSnapshotAction'
+    EnrollmentHookSnapshotAction:
+      type: object
+      description: Non-secret copy of an enrollment hook HTTP action. Excludes auth/bearerToken.
+      required:
+        - index
+        - url
+      properties:
+        index:
+          type: integer
+          description: Original action index in the policy.
+        url:
+          type: string
+          description: The HTTPS URL to call.
+        timeout:
+          type: string
+          description: Timeout duration (e.g. "30s").
+        retry:
+          $ref: '#/components/schemas/EnrollmentHookRetryPolicy'
+    EnrollmentHookPolicyStatus:
+      type: object
+      description: Status of an enrollment hook policy.
+      properties:
+        conditions:
+          type: array
+          description: Current conditions of the enrollment hook policy.
+          items:
+            $ref: '#/components/schemas/Condition'
+    EnrollmentHookPolicyList:
+      type: object
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/ApiVersion'
+        kind:
+          type: string
+          description: Kind is a string value representing the REST resource this object represents.
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          description: List of enrollment hook policies.
+          items:
+            $ref: '#/components/schemas/EnrollmentHookPolicy'
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - items
+      description: EnrollmentHookPolicyList is a list of EnrollmentHookPolicy resources.
+    LabelSyncMapping:
+      type: object
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/ApiVersion'
+        kind:
+          type: string
+          enum:
+            - LabelSyncMapping
+          x-enum-varnames:
+            - LabelSyncMappingKindLabelSyncMapping
+          description: Kind is a string value representing this resource type.
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/LabelSyncMappingSpec'
+        status:
+          $ref: '#/components/schemas/LabelSyncMappingStatus'
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - spec
+      description: LabelSyncMapping defines an organization-scoped device label mapping.
+    LabelSyncMappingSpec:
+      type: object
+      description: Desired state for a label synchronization mapping.
+      properties:
+        resourceType:
+          type: string
+          enum:
+            - Device
+          x-enum-varnames:
+            - LabelSyncMappingSpecResourceTypeDevice
+          description: Immutable resource type evaluated by the mapping.
+        key:
+          type: string
+          nullable: true
+          maxLength: 317
+          pattern: ^(?:[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\.[a-z0-9](?:[-a-z0-9]*[a-z0-9])?)*/)?[A-Za-z0-9](?:[-A-Za-z0-9_.]*[A-Za-z0-9])?$
+          description: Complete destination label key for scalar mode. Omitted or null selects map mode; no prefix is added.
+        expression:
+          type: string
+          minLength: 1
+          description: CEL expression evaluated for the selected resource type.
+      required:
+        - resourceType
+        - expression
+    LabelSyncMappingStatus:
+      type: object
+      description: Current propagation state for a label synchronization mapping.
+      properties:
+        conditions:
+          type: array
+          description: The Ready condition reports Pending, Degraded, or Success state.
+          items:
+            $ref: '#/components/schemas/Condition'
+    LabelSyncMappingList:
+      type: object
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/ApiVersion'
+        kind:
+          type: string
+          description: Kind is a string value representing the REST resource this object represents.
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          description: List of LabelSyncMapping resources.
+          items:
+            $ref: '#/components/schemas/LabelSyncMapping'
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - items
+      description: LabelSyncMappingList is a list of LabelSyncMapping resources.
+    LabelSyncProvenanceList:
+      type: object
+      description: Current LabelSyncMapping ownership grouped by exact label key.
+      properties:
+        items:
+          type: array
+          description: For organization queries, one item per supplied key in request order, including duplicates. For Device queries, one item per currently owned key, sorted by key.
+          items:
+            $ref: '#/components/schemas/LabelSyncProvenanceItem'
+      required:
+        - items
+    LabelSyncProvenanceItem:
+      type: object
+      description: Current owning LabelSyncMapping names for one exact label key.
+      properties:
+        key:
+          type: string
+          description: Exact label key.
+        owners:
+          type: array
+          description: Names of current owning LabelSyncMapping resources. An empty array means the key has no current mapping owner.
+          items:
+            type: string
+      required:
+        - key
+        - owners
     PermissionList:
       type: object
       description: List of available permissions for a user.
@@ -9003,8 +10677,36 @@ components:
         image:
           description: Reference to an OCI image or artifact with tag.
           type: string
+        deltaImage:
+          readOnly: true
+          description: 'Optional hint: a reference to a delta artifact for the main image. Set by the control plane when a successful delta generation record exists for the current-to-target digest transition. Read-only: generated by the control plane and only present in the rendered application spec delivered to the agent.'
+          type: string
+        deltaImages:
+          readOnly: true
+          description: 'Optional hints for nested images within this application (e.g. service images in a compose app, OCI volume images). Each entry identifies a target image reference and digest and names its delta artifact reference. Read-only: generated by the control plane and only present in the rendered application spec delivered to the agent.'
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageDeltaHint'
       required:
         - image
+    ImageDeltaHint:
+      type: object
+      description: A control-plane-generated delta hint for a nested image within an application. Present only in rendered application specs delivered to the agent.
+      properties:
+        targetImage:
+          description: The target image reference this delta applies to.
+          type: string
+        targetDigest:
+          description: The content digest of the target image.
+          type: string
+        deltaImage:
+          description: Reference to the delta artifact for this nested image.
+          type: string
+      required:
+        - targetImage
+        - targetDigest
+        - deltaImage
+      additionalProperties: false
     CatalogItemRefSpec:
       type: object
       description: A reference to a catalog item, along with its configuration.
