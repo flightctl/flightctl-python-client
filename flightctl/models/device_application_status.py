@@ -21,8 +21,10 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.app_type import AppType
+from flightctl.models.application_image_digest import ApplicationImageDigest
 from flightctl.models.application_status_type import ApplicationStatusType
 from flightctl.models.application_volume_status import ApplicationVolumeStatus
+from flightctl.models.device_delta_apply_status import DeviceDeltaApplyStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -38,7 +40,10 @@ class DeviceApplicationStatus(BaseModel):
     app_type: AppType = Field(alias="appType")
     run_as: Optional[StrictStr] = Field(default=None, description="The username of the system user this application is runing under. If blank, the application is run as the same user as the agent (generally root).", alias="runAs")
     volumes: Optional[List[ApplicationVolumeStatus]] = Field(default=None, description="Status of volumes used by this application.")
-    __properties: ClassVar[List[str]] = ["name", "ready", "restarts", "status", "embedded", "appType", "runAs", "volumes"]
+    last_delta: Optional[DeviceDeltaApplyStatus] = Field(default=None, alias="lastDelta")
+    image_digests: Optional[List[ApplicationImageDigest]] = Field(default=None, description="Image references this application uses and the registry digest associated with each image. image is the ref from the current rendered spec (tag or digest). For a multi-platform index, digest is the platform-specific manifest selected by the runtime when available; if the runtime exposes only an opaque ID, an immutable image reference's digest may be reported. digest is omitted when no registry digest is known.", alias="imageDigests")
+    delta_size: Optional[StrictStr] = Field(default=None, description="Expected total size of control-plane generated delta images for this application update in IEC units (e.g. \"245.3 MiB\", \"1 GiB\"). Computed as the sum of generated delta image sizes across the application. Absent when no delta image was generated or any generated delta image size is unknown. Full image sizes are not included.", alias="deltaSize")
+    __properties: ClassVar[List[str]] = ["name", "ready", "restarts", "status", "embedded", "appType", "runAs", "volumes", "lastDelta", "imageDigests", "deltaSize"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +91,16 @@ class DeviceApplicationStatus(BaseModel):
                 if _item_volumes:
                     _items.append(_item_volumes.to_dict())
             _dict['volumes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of last_delta
+        if self.last_delta:
+            _dict['lastDelta'] = self.last_delta.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in image_digests (list)
+        _items = []
+        if self.image_digests:
+            for _item_image_digests in self.image_digests:
+                if _item_image_digests:
+                    _items.append(_item_image_digests.to_dict())
+            _dict['imageDigests'] = _items
         return _dict
 
     @classmethod
@@ -105,7 +120,10 @@ class DeviceApplicationStatus(BaseModel):
             "embedded": obj.get("embedded"),
             "appType": obj.get("appType"),
             "runAs": obj.get("runAs"),
-            "volumes": [ApplicationVolumeStatus.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None
+            "volumes": [ApplicationVolumeStatus.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None,
+            "lastDelta": DeviceDeltaApplyStatus.from_dict(obj["lastDelta"]) if obj.get("lastDelta") is not None else None,
+            "imageDigests": [ApplicationImageDigest.from_dict(_item) for _item in obj["imageDigests"]] if obj.get("imageDigests") is not None else None,
+            "deltaSize": obj.get("deltaSize")
         })
         return _obj
 

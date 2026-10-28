@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **skips** | **List[str]** | Additional versions that can upgrade directly to this one. Use when stable channel skips intermediate fast-only versions. | [optional] 
 **skip_range** | **str** | Semver range of versions that can upgrade directly to this one. Use for z-stream updates or hotfixes. | [optional] 
 **deprecation** | [**CatalogItemDeprecation**](CatalogItemDeprecation.md) |  | [optional] 
+**device_features** | [**DeviceFeatures**](DeviceFeatures.md) | Device feature requirements that a target device must satisfy for this version to be considered compatible. | [optional]
 
 ## Example
 

@@ -1,12 +1,12 @@
 # DevicesSummaryCapabilities
 
-Breakdowns of devices by status.capabilities fields.
+Breakdowns of devices by status.systemInfo fields, falling back to the deprecated status.capabilities fields when unavailable.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**os_mode** | **Dict[str, int]** | Counts by status.capabilities.osMode (e.g. image, package). The key \&quot;unknown\&quot; counts devices that have not reported the capability. | [optional] 
+**os_mode** | **Dict[str, int]** | Counts by device OS mode (e.g. image, package), taken from status.systemInfo.osMode with fallback to the deprecated status.capabilities.osMode. The key \&quot;unknown\&quot; counts devices that have not reported an OS mode. | [optional]
 
 ## Example
 

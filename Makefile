@@ -1,12 +1,12 @@
 # Python package version. Override on generate:
-#   make generate-client VERSION=1.3.0
-VERSION ?= 1.3.0
+#   make generate-client VERSION=1.4.0
+VERSION ?= 1.4.0
 GENERATOR_VERSION = 7.17.0
 COMMON_PROPS = packageName=flightctl,useOneOfDiscriminatorLookup=true,packageVersion=$(VERSION),removeEnumValuePrefix=false
 GIT_USER = flightctl
 GIT_REPO = python-client
 # Required: flightctl/flightctl release tag.
-# Example: make fetch-specs FLIGHTCTL_VERSION=v1.3.0
+# Example: make fetch-specs FLIGHTCTL_VERSION=v1.4.0
 FLIGHTCTL_REPO = https://raw.githubusercontent.com/flightctl/flightctl
 FLIGHTCTL_VERSION ?=
 SPEC_FILES = \
@@ -20,7 +20,7 @@ SPEC_FILES = \
 fetch-specs:
 	@if [ -z "$(FLIGHTCTL_VERSION)" ]; then \
 		echo "FLIGHTCTL_VERSION is required (flightctl/flightctl release tag)."; \
-		echo "Example: make fetch-specs FLIGHTCTL_VERSION=v1.3.0"; \
+		echo "Example: make fetch-specs FLIGHTCTL_VERSION=v1.4.0"; \
 		exit 1; \
 	fi
 	@for f in $(SPEC_FILES); do \

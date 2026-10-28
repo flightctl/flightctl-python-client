@@ -6,10 +6,12 @@ from flightctl.api.authprovider_api import AuthproviderApi
 from flightctl.api.certificatesigningrequest_api import CertificatesigningrequestApi
 from flightctl.api.device_api import DeviceApi
 from flightctl.api.deviceactions_api import DeviceactionsApi
+from flightctl.api.enrollmenthookpolicy_api import EnrollmenthookpolicyApi
 from flightctl.api.enrollmentrequest_api import EnrollmentrequestApi
 from flightctl.api.event_api import EventApi
 from flightctl.api.fleet_api import FleetApi
 from flightctl.api.label_api import LabelApi
+from flightctl.api.labelsyncmapping_api import LabelsyncmappingApi
 from flightctl.api.organization_api import OrganizationApi
 from flightctl.api.repository_api import RepositoryApi
 from flightctl.api.resourcesync_api import ResourcesyncApi

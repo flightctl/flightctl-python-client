@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **change_count** | **int** | Number of changes introduced by this ResourceSync update. | 
 **error_count** | **int** | Number of errors encountered by this ResourceSync update. | 
 **repository** | **str** | The name of the repository that was updated. | 
-**template_version** | **str** | The name of the TemplateVersion that the device is being selected to render. | 
+**template_version** | **str** | Fleet only. The TemplateVersion this prepare is for. |
 **rollout_strategy** | **str** | Rollout strategy type. | 
 **batch** | **str** | The batch within the fleet rollout. | 
 **success_percentage** | **int** | The success percentage of the batch. | 
@@ -38,6 +38,13 @@ Name | Type | Description | Notes
 **error** | **str** | The error message from the failed probe. | 
 **app_name** | **str** | The name of the application whose device-level lifecycle override changed. | 
 **action** | **str** | The lifecycle action that was requested. | 
+**generation** | **int** | Device only. The desired spec generation this prepare is for. | [optional]
+**resource_version** | **str** | The resource version of the involved Fleet or Device when this prepare event was created. Used to ignore stale prepare events. May be omitted for retained events created before this field was introduced. | [optional]
+**image_repository** | **str** | Image repository (host/namespace/name) for this pair. |
+**source_digest** | **str** | Current image digest. |
+**target_digest** | **str** | Target image digest. |
+**generation_status** | **str** | Generation row status for this pair. |
+**phase** | [**DeltaGenerationPhase**](DeltaGenerationPhase.md) |  | [optional]
 
 ## Example
 

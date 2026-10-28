@@ -19,6 +19,7 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from flightctl.models.application_lifecycle_changed_details import ApplicationLifecycleChangedDetails
+from flightctl.models.delta_generation_progress_details import DeltaGenerationProgressDetails
 from flightctl.models.dependency_change_detected_details import DependencyChangeDetectedDetails
 from flightctl.models.dependency_sync_probe_failed_details import DependencySyncProbeFailedDetails
 from flightctl.models.device_multiple_owners_detected_details import DeviceMultipleOwnersDetectedDetails
@@ -31,6 +32,7 @@ from flightctl.models.fleet_rollout_completed_details import FleetRolloutComplet
 from flightctl.models.fleet_rollout_device_selected_details import FleetRolloutDeviceSelectedDetails
 from flightctl.models.fleet_rollout_failed_details import FleetRolloutFailedDetails
 from flightctl.models.fleet_rollout_started_details import FleetRolloutStartedDetails
+from flightctl.models.prepare_deltas_details import PrepareDeltasDetails
 from flightctl.models.referenced_repository_updated_details import ReferencedRepositoryUpdatedDetails
 from flightctl.models.resource_sync_completed_details import ResourceSyncCompletedDetails
 from flightctl.models.resource_updated_details import ResourceUpdatedDetails
@@ -38,7 +40,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-EVENTDETAILS_ONE_OF_SCHEMAS = ["ApplicationLifecycleChangedDetails", "DependencyChangeDetectedDetails", "DependencySyncProbeFailedDetails", "DeviceMultipleOwnersDetectedDetails", "DeviceMultipleOwnersResolvedDetails", "DeviceOwnershipChangedDetails", "DeviceVulnerabilityCveDetails", "FleetRolloutBatchCompletedDetails", "FleetRolloutBatchDispatchedDetails", "FleetRolloutCompletedDetails", "FleetRolloutDeviceSelectedDetails", "FleetRolloutFailedDetails", "FleetRolloutStartedDetails", "InternalTaskFailedDetails", "InternalTaskPermanentlyFailedDetails", "ReferencedRepositoryUpdatedDetails", "ResourceSyncCompletedDetails", "ResourceUpdatedDetails"]
+EVENTDETAILS_ONE_OF_SCHEMAS = ["ApplicationLifecycleChangedDetails", "DeltaGenerationProgressDetails", "DependencyChangeDetectedDetails", "DependencySyncProbeFailedDetails", "DeviceMultipleOwnersDetectedDetails", "DeviceMultipleOwnersResolvedDetails", "DeviceOwnershipChangedDetails", "DeviceVulnerabilityCveDetails", "FleetRolloutBatchCompletedDetails", "FleetRolloutBatchDispatchedDetails", "FleetRolloutCompletedDetails", "FleetRolloutDeviceSelectedDetails", "FleetRolloutFailedDetails", "FleetRolloutStartedDetails", "InternalTaskFailedDetails", "InternalTaskPermanentlyFailedDetails", "PrepareDeltasDetails", "ReferencedRepositoryUpdatedDetails", "ResourceSyncCompletedDetails", "ResourceUpdatedDetails"]
 
 class EventDetails(BaseModel):
     """
@@ -80,8 +82,12 @@ class EventDetails(BaseModel):
     oneof_schema_17_validator: Optional[DependencySyncProbeFailedDetails] = None
     # data type: ApplicationLifecycleChangedDetails
     oneof_schema_18_validator: Optional[ApplicationLifecycleChangedDetails] = None
-    actual_instance: Optional[Union[ApplicationLifecycleChangedDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails]] = None
-    one_of_schemas: Set[str] = { "ApplicationLifecycleChangedDetails", "DependencyChangeDetectedDetails", "DependencySyncProbeFailedDetails", "DeviceMultipleOwnersDetectedDetails", "DeviceMultipleOwnersResolvedDetails", "DeviceOwnershipChangedDetails", "DeviceVulnerabilityCveDetails", "FleetRolloutBatchCompletedDetails", "FleetRolloutBatchDispatchedDetails", "FleetRolloutCompletedDetails", "FleetRolloutDeviceSelectedDetails", "FleetRolloutFailedDetails", "FleetRolloutStartedDetails", "InternalTaskFailedDetails", "InternalTaskPermanentlyFailedDetails", "ReferencedRepositoryUpdatedDetails", "ResourceSyncCompletedDetails", "ResourceUpdatedDetails" }
+    # data type: PrepareDeltasDetails
+    oneof_schema_19_validator: Optional[PrepareDeltasDetails] = None
+    # data type: DeltaGenerationProgressDetails
+    oneof_schema_20_validator: Optional[DeltaGenerationProgressDetails] = None
+    actual_instance: Optional[Union[ApplicationLifecycleChangedDetails, DeltaGenerationProgressDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, PrepareDeltasDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails]] = None
+    one_of_schemas: Set[str] = { "ApplicationLifecycleChangedDetails", "DeltaGenerationProgressDetails", "DependencyChangeDetectedDetails", "DependencySyncProbeFailedDetails", "DeviceMultipleOwnersDetectedDetails", "DeviceMultipleOwnersResolvedDetails", "DeviceOwnershipChangedDetails", "DeviceVulnerabilityCveDetails", "FleetRolloutBatchCompletedDetails", "FleetRolloutBatchDispatchedDetails", "FleetRolloutCompletedDetails", "FleetRolloutDeviceSelectedDetails", "FleetRolloutFailedDetails", "FleetRolloutStartedDetails", "InternalTaskFailedDetails", "InternalTaskPermanentlyFailedDetails", "PrepareDeltasDetails", "ReferencedRepositoryUpdatedDetails", "ResourceSyncCompletedDetails", "ResourceUpdatedDetails" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -197,12 +203,22 @@ class EventDetails(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `ApplicationLifecycleChangedDetails`")
         else:
             match += 1
+        # validate data type: PrepareDeltasDetails
+        if not isinstance(v, PrepareDeltasDetails):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PrepareDeltasDetails`")
+        else:
+            match += 1
+        # validate data type: DeltaGenerationProgressDetails
+        if not isinstance(v, DeltaGenerationProgressDetails):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DeltaGenerationProgressDetails`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DeltaGenerationProgressDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, PrepareDeltasDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DeltaGenerationProgressDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, PrepareDeltasDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -225,6 +241,11 @@ class EventDetails(BaseModel):
         # check if data type is `ApplicationLifecycleChangedDetails`
         if _data_type == "ApplicationLifecycleChanged":
             instance.actual_instance = ApplicationLifecycleChangedDetails.from_json(json_str)
+            return instance
+
+        # check if data type is `DeltaGenerationProgressDetails`
+        if _data_type == "DeltaGenerationProgress":
+            instance.actual_instance = DeltaGenerationProgressDetails.from_json(json_str)
             return instance
 
         # check if data type is `DependencyChangeDetectedDetails`
@@ -295,6 +316,11 @@ class EventDetails(BaseModel):
         # check if data type is `InternalTaskPermanentlyFailedDetails`
         if _data_type == "InternalTaskPermanentlyFailed":
             instance.actual_instance = InternalTaskPermanentlyFailedDetails.from_json(json_str)
+            return instance
+
+        # check if data type is `PrepareDeltasDetails`
+        if _data_type == "PrepareDeltas":
+            instance.actual_instance = PrepareDeltasDetails.from_json(json_str)
             return instance
 
         # check if data type is `ReferencedRepositoryUpdatedDetails`
@@ -420,13 +446,25 @@ class EventDetails(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into PrepareDeltasDetails
+        try:
+            instance.actual_instance = PrepareDeltasDetails.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into DeltaGenerationProgressDetails
+        try:
+            instance.actual_instance = DeltaGenerationProgressDetails.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DeltaGenerationProgressDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, PrepareDeltasDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into EventDetails with oneOf schemas: ApplicationLifecycleChangedDetails, DeltaGenerationProgressDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, PrepareDeltasDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -440,7 +478,7 @@ class EventDetails(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], ApplicationLifecycleChangedDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ApplicationLifecycleChangedDetails, DeltaGenerationProgressDetails, DependencyChangeDetectedDetails, DependencySyncProbeFailedDetails, DeviceMultipleOwnersDetectedDetails, DeviceMultipleOwnersResolvedDetails, DeviceOwnershipChangedDetails, DeviceVulnerabilityCveDetails, FleetRolloutBatchCompletedDetails, FleetRolloutBatchDispatchedDetails, FleetRolloutCompletedDetails, FleetRolloutDeviceSelectedDetails, FleetRolloutFailedDetails, FleetRolloutStartedDetails, InternalTaskFailedDetails, InternalTaskPermanentlyFailedDetails, PrepareDeltasDetails, ReferencedRepositoryUpdatedDetails, ResourceSyncCompletedDetails, ResourceUpdatedDetails]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

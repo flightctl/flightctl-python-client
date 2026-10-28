@@ -37,12 +37,17 @@ class ConditionType(str, Enum):
     ResourceSyncAccessible = 'Accessible'
     ResourceSyncResourceParsed = 'ResourceParsed'
     ResourceSyncSynced = 'Synced'
+    LabelSyncMappingReady = 'Ready'
     FleetValid = 'Valid'
     FleetRolloutInProgress = 'RolloutInProgress'
     DeviceUpdating = 'Updating'
     DeviceSpecValid = 'SpecValid'
     DeviceMultipleOwners = 'MultipleOwners'
+    DeviceLabelsSynced = 'LabelsSynced'
     DeviceDecommissioning = 'DeviceDecommissioning'
+    FleetDeltaPreparing = 'FleetDeltaPreparing'
+    DeviceDeltaPreparing = 'DeviceDeltaPreparing'
+    DeviceEnrollmentHooks = 'EnrollmentHooks'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

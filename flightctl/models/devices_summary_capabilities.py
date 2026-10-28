@@ -25,9 +25,9 @@ from typing_extensions import Self
 
 class DevicesSummaryCapabilities(BaseModel):
     """
-    Breakdowns of devices by status.capabilities fields.
+    Breakdowns of devices by status.systemInfo fields, falling back to the deprecated status.capabilities fields when unavailable.
     """ # noqa: E501
-    os_mode: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts by status.capabilities.osMode (e.g. image, package). The key \"unknown\" counts devices that have not reported the capability.", alias="osMode")
+    os_mode: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts by device OS mode (e.g. image, package), taken from status.systemInfo.osMode with fallback to the deprecated status.capabilities.osMode. The key \"unknown\" counts devices that have not reported an OS mode.", alias="osMode")
     __properties: ClassVar[List[str]] = ["osMode"]
 
     model_config = ConfigDict(

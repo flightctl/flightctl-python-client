@@ -24,6 +24,8 @@ Type of condition in CamelCase.
 
 * `ResourceSyncSynced` (value: `'Synced'`)
 
+* `LabelSyncMappingReady` (value: `'Ready'`)
+
 * `FleetValid` (value: `'Valid'`)
 
 * `FleetRolloutInProgress` (value: `'RolloutInProgress'`)
@@ -34,7 +36,15 @@ Type of condition in CamelCase.
 
 * `DeviceMultipleOwners` (value: `'MultipleOwners'`)
 
+* `DeviceLabelsSynced` (value: `'LabelsSynced'`)
+
 * `DeviceDecommissioning` (value: `'DeviceDecommissioning'`)
+
+* `FleetDeltaPreparing` (value: `'FleetDeltaPreparing'`)
+
+* `DeviceDeltaPreparing` (value: `'DeviceDeltaPreparing'`)
+
+* `DeviceEnrollmentHooks` (value: `'EnrollmentHooks'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -36,8 +36,11 @@ class OciRepoSpec(BaseModel):
     oci_auth: Optional[DockerAuth] = Field(default=None, alias="ociAuth")
     ca_crt: Optional[StrictStr] = Field(default=None, description="Base64 encoded root CA.", alias="ca.crt")
     skip_server_verification: Optional[StrictBool] = Field(default=None, description="Skip remote server verification.", alias="skipServerVerification")
+    repository: Optional[StrictStr] = Field(default=None, description="Optional OCI repository path under spec.registry (e.g. my-org/diffs). When set, this object is that repo (`my-registry.com/my-org/diffs`), not only a registry. Mutually exclusive with namespace. ImageBuild destination imageName must equal this value.")
+    namespace: Optional[StrictStr] = Field(default=None, description="Optional org/subpath under spec.registry (e.g. my-org). Concrete names are spec.registry/namespace/<name>. Mutually exclusive with repository. Used by delta push (`{registry}/{namespace}/{imageName}`). Invalid on an ImageBuild or ImageExport destination Repository.")
+    delta_storage_target: Optional[StrictBool] = Field(default=None, description="When true, generated deltas are pushed to this object (at most one per org). Auth is the existing ociAuth / accessMode. Placement follows repository / namespace / registry-only as above.", alias="deltaStorageTarget")
     base_images: Optional[List[BaseImageEntry]] = Field(default=None, description="Curated list of trusted base images available in this registry. When present, the Image Builder source picker surfaces these entries as selectable options.", alias="baseImages")
-    __properties: ClassVar[List[str]] = ["registry", "scheme", "type", "accessMode", "ociAuth", "ca.crt", "skipServerVerification", "baseImages"]
+    __properties: ClassVar[List[str]] = ["registry", "scheme", "type", "accessMode", "ociAuth", "ca.crt", "skipServerVerification", "repository", "namespace", "deltaStorageTarget", "baseImages"]
 
     @field_validator('scheme')
     def scheme_validate_enum(cls, value):
@@ -134,6 +137,9 @@ class OciRepoSpec(BaseModel):
             "ociAuth": DockerAuth.from_dict(obj["ociAuth"]) if obj.get("ociAuth") is not None else None,
             "ca.crt": obj.get("ca.crt"),
             "skipServerVerification": obj.get("skipServerVerification"),
+            "repository": obj.get("repository"),
+            "namespace": obj.get("namespace"),
+            "deltaStorageTarget": obj.get("deltaStorageTarget"),
             "baseImages": [BaseImageEntry.from_dict(_item) for _item in obj["baseImages"]] if obj.get("baseImages") is not None else None
         })
         return _obj

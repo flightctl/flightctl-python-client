@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from flightctl.models.device_status import DeviceStatus
 from flightctl.models.os_mode_type import OsModeType
+from flightctl.models.pre_enrollment_result import PreEnrollmentResult
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +35,8 @@ class EnrollmentRequestSpec(BaseModel):
     labels: Optional[Dict[str, StrictStr]] = Field(default=None, description="A set of labels that the service will apply to this device when its enrollment is approved.")
     known_rendered_version: Optional[StrictStr] = Field(default=None, description="The rendered version of the device from desired.json (optional).", alias="knownRenderedVersion")
     os_mode: Optional[OsModeType] = Field(default=None, alias="osMode")
-    __properties: ClassVar[List[str]] = ["csr", "deviceStatus", "labels", "knownRenderedVersion", "osMode"]
+    pre_enrollment: Optional[PreEnrollmentResult] = Field(default=None, alias="preEnrollment")
+    __properties: ClassVar[List[str]] = ["csr", "deviceStatus", "labels", "knownRenderedVersion", "osMode", "preEnrollment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,9 @@ class EnrollmentRequestSpec(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of device_status
         if self.device_status:
             _dict['deviceStatus'] = self.device_status.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pre_enrollment
+        if self.pre_enrollment:
+            _dict['preEnrollment'] = self.pre_enrollment.to_dict()
         return _dict
 
     @classmethod
@@ -94,7 +99,8 @@ class EnrollmentRequestSpec(BaseModel):
             "deviceStatus": DeviceStatus.from_dict(obj["deviceStatus"]) if obj.get("deviceStatus") is not None else None,
             "labels": obj.get("labels"),
             "knownRenderedVersion": obj.get("knownRenderedVersion"),
-            "osMode": obj.get("osMode")
+            "osMode": obj.get("osMode"),
+            "preEnrollment": PreEnrollmentResult.from_dict(obj["preEnrollment"]) if obj.get("preEnrollment") is not None else None
         })
         return _obj
 

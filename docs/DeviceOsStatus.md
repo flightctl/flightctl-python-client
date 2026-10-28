@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image** | **str** | Version of the OS image. | 
 **image_digest** | **str** | The digest of the OS image (e.g. sha256:a0...). | 
+**delta_size** | **str** | Size of the control-plane generated OS delta image in IEC units (e.g. \&quot;245.3 MiB\&quot;, \&quot;1 GiB\&quot;). Absent when no delta image was generated or its size is unknown. | [optional]
+**last_delta** | [**DeviceDeltaApplyStatus**](DeviceDeltaApplyStatus.md) |  | [optional]
 
 ## Example
 

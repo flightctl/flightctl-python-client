@@ -1543,7 +1543,7 @@ components:
           type: string
           enum: [early]
           description: The type of binding.
-   
+
     LateBinding:
       type: object
       description: Late binding configuration - device binds at first boot.
@@ -2140,4 +2140,3 @@ components:
       x-enum-varnames:
         - ImagePromotionTargetTypeNewCatalogItem
         - ImagePromotionTargetTypeExistingCatalogItem
-

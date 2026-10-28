@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **rollout** | [**FleetRolloutStatus**](FleetRolloutStatus.md) |  | [optional] 
 **conditions** | [**List[Condition]**](Condition.md) | Current state of the fleet. | 
 **devices_summary** | [**DevicesSummary**](DevicesSummary.md) |  | [optional] 
+**delta_generation** | [**DeltaGenerationStatus**](DeltaGenerationStatus.md) |  | [optional]
 
 ## Example
 

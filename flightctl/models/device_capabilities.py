@@ -28,7 +28,7 @@ class DeviceCapabilities(BaseModel):
     """
     Capabilities reported by the device agent.
     """ # noqa: E501
-    os_mode: Optional[OsModeType] = Field(default=None, alias="osMode")
+    os_mode: Optional[OsModeType] = Field(default=None, description="Deprecated since v1.4 and will be removed in a future release. Use status.systemInfo.osMode instead. The service reads status.systemInfo.osMode and only falls back to this field for devices reported by older agents that do not populate systemInfo.", alias="osMode")
     __properties: ClassVar[List[str]] = ["osMode"]
 
     model_config = ConfigDict(

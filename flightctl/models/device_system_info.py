@@ -18,8 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from flightctl.models.device_gpu import DeviceGpu
+from flightctl.models.device_kvm import DeviceKvm
+from flightctl.models.os_mode_type import OsModeType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,9 +34,15 @@ class DeviceSystemInfo(BaseModel):
     boot_id: StrictStr = Field(description="Boot ID reported by the device.", alias="bootID")
     operating_system: StrictStr = Field(description="The Operating System reported by the device.", alias="operatingSystem")
     agent_version: StrictStr = Field(description="The Agent version.", alias="agentVersion")
+    bootc_version: Optional[StrictStr] = Field(default=None, description="Version reported by `bootc --version`. Absent when bootc is not installed or the version command fails.", alias="bootcVersion")
+    oci_delta_version: Optional[StrictStr] = Field(default=None, description="Version reported by `oci-delta --version`, or from Go module build information when that flag is unsupported. Absent when oci-delta is not installed or its version cannot be determined.", alias="ociDeltaVersion")
+    delta_eligible: Optional[StrictBool] = Field(default=None, description="Whether this device can consume OCI deltas. True when the oci-delta binary is present. False when it is not. Omitted when an older agent does not report the field.", alias="deltaEligible")
     custom_info: Optional[Dict[str, StrictStr]] = Field(default=None, description="User-defined information about the device.", alias="customInfo")
+    gpus: Optional[List[DeviceGpu]] = Field(default=None, description="List of GPU devices discovered on the device.")
+    kvm: Optional[DeviceKvm] = None
+    os_mode: Optional[OsModeType] = Field(default=None, alias="osMode")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["architecture", "bootID", "operatingSystem", "agentVersion", "customInfo"]
+    __properties: ClassVar[List[str]] = ["architecture", "bootID", "operatingSystem", "agentVersion", "bootcVersion", "ociDeltaVersion", "deltaEligible", "customInfo", "gpus", "kvm", "osMode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +85,16 @@ class DeviceSystemInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in gpus (list)
+        _items = []
+        if self.gpus:
+            for _item_gpus in self.gpus:
+                if _item_gpus:
+                    _items.append(_item_gpus.to_dict())
+            _dict['gpus'] = _items
+        # override the default output from pydantic by calling `to_dict()` of kvm
+        if self.kvm:
+            _dict['kvm'] = self.kvm.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -97,7 +116,13 @@ class DeviceSystemInfo(BaseModel):
             "bootID": obj.get("bootID"),
             "operatingSystem": obj.get("operatingSystem"),
             "agentVersion": obj.get("agentVersion"),
-            "customInfo": obj.get("customInfo")
+            "bootcVersion": obj.get("bootcVersion"),
+            "ociDeltaVersion": obj.get("ociDeltaVersion"),
+            "deltaEligible": obj.get("deltaEligible"),
+            "customInfo": obj.get("customInfo"),
+            "gpus": [DeviceGpu.from_dict(_item) for _item in obj["gpus"]] if obj.get("gpus") is not None else None,
+            "kvm": DeviceKvm.from_dict(obj["kvm"]) if obj.get("kvm") is not None else None,
+            "osMode": obj.get("osMode")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

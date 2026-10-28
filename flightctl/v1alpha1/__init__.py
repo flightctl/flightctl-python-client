@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 # Define package exports
 __all__ = [
@@ -56,11 +56,14 @@ __all__ = [
     "ConditionType",
     "CveCountsBySeverity",
     "DeviceCountsBySeverity",
+    "DeviceFeatureBoolean",
+    "DeviceFeatures",
     "DeviceVulnerabilitySummaryResponse",
     "FleetVulnerabilitySummary",
     "FleetVulnerabilitySummaryResponse",
     "ListMeta",
     "ObjectMeta",
+    "OsModeType",
     "PatchRequestInner",
     "Status",
     "Vulnerability",
@@ -71,6 +74,7 @@ __all__ = [
     "VulnerabilityImpact",
     "VulnerabilityList",
     "VulnerabilitySeveritySummary",
+    "VulnerabilitySource",
     "VulnerabilitySummaryResponse",
 ]
 
@@ -116,11 +120,14 @@ from flightctl.v1alpha1.models.condition_status import ConditionStatus as Condit
 from flightctl.v1alpha1.models.condition_type import ConditionType as ConditionType
 from flightctl.v1alpha1.models.cve_counts_by_severity import CveCountsBySeverity as CveCountsBySeverity
 from flightctl.v1alpha1.models.device_counts_by_severity import DeviceCountsBySeverity as DeviceCountsBySeverity
+from flightctl.v1alpha1.models.device_feature_boolean import DeviceFeatureBoolean as DeviceFeatureBoolean
+from flightctl.v1alpha1.models.device_features import DeviceFeatures as DeviceFeatures
 from flightctl.v1alpha1.models.device_vulnerability_summary_response import DeviceVulnerabilitySummaryResponse as DeviceVulnerabilitySummaryResponse
 from flightctl.v1alpha1.models.fleet_vulnerability_summary import FleetVulnerabilitySummary as FleetVulnerabilitySummary
 from flightctl.v1alpha1.models.fleet_vulnerability_summary_response import FleetVulnerabilitySummaryResponse as FleetVulnerabilitySummaryResponse
 from flightctl.v1alpha1.models.list_meta import ListMeta as ListMeta
 from flightctl.v1alpha1.models.object_meta import ObjectMeta as ObjectMeta
+from flightctl.v1alpha1.models.os_mode_type import OsModeType as OsModeType
 from flightctl.v1alpha1.models.patch_request_inner import PatchRequestInner as PatchRequestInner
 from flightctl.v1alpha1.models.status import Status as Status
 from flightctl.v1alpha1.models.vulnerability import Vulnerability as Vulnerability
@@ -131,5 +138,6 @@ from flightctl.v1alpha1.models.vulnerability_image_ref import VulnerabilityImage
 from flightctl.v1alpha1.models.vulnerability_impact import VulnerabilityImpact as VulnerabilityImpact
 from flightctl.v1alpha1.models.vulnerability_list import VulnerabilityList as VulnerabilityList
 from flightctl.v1alpha1.models.vulnerability_severity_summary import VulnerabilitySeveritySummary as VulnerabilitySeveritySummary
+from flightctl.v1alpha1.models.vulnerability_source import VulnerabilitySource as VulnerabilitySource
 from flightctl.v1alpha1.models.vulnerability_summary_response import VulnerabilitySummaryResponse as VulnerabilitySummaryResponse
 

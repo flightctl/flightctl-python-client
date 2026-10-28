@@ -21,6 +21,9 @@ Name | Type | Description | Notes
 **lifecycle** | [**DeviceLifecycleStatus**](DeviceLifecycleStatus.md) |  | 
 **dependency_sync** | [**DependencySyncStatus**](DependencySyncStatus.md) |  | [optional] 
 **capabilities** | [**DeviceCapabilities**](DeviceCapabilities.md) |  | [optional] 
+**delta_generation** | [**DeltaGenerationStatus**](DeltaGenerationStatus.md) |  | [optional]
+**enrollment_hooks** | [**DeviceEnrollmentHooksStatus**](DeviceEnrollmentHooksStatus.md) |  | [optional]
+**system_info_status** | [**DeviceSystemInfoStatus**](DeviceSystemInfoStatus.md) |  | [optional]
 
 ## Example
 

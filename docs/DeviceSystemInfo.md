@@ -10,7 +10,13 @@ Name | Type | Description | Notes
 **boot_id** | **str** | Boot ID reported by the device. | 
 **operating_system** | **str** | The Operating System reported by the device. | 
 **agent_version** | **str** | The Agent version. | 
+**bootc_version** | **str** | Version reported by &#x60;bootc --version&#x60;. Absent when bootc is not installed or the version command fails. | [optional]
+**oci_delta_version** | **str** | Version reported by &#x60;oci-delta --version&#x60;, or from Go module build information when that flag is unsupported. Absent when oci-delta is not installed or its version cannot be determined. | [optional]
+**delta_eligible** | **bool** | Whether this device can consume OCI deltas. True when the oci-delta binary is present. False when it is not. Omitted when an older agent does not report the field. | [optional]
 **custom_info** | **Dict[str, str]** | User-defined information about the device. | [optional] 
+**gpus** | [**List[DeviceGpu]**](DeviceGpu.md) | List of GPU devices discovered on the device. | [optional]
+**kvm** | [**DeviceKvm**](DeviceKvm.md) |  | [optional]
+**os_mode** | [**OsModeType**](OsModeType.md) |  | [optional]
 
 ## Example
 

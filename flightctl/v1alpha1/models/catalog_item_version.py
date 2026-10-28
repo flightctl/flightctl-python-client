@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from flightctl.v1alpha1.models.catalog_item_deprecation import CatalogItemDeprecation
+from flightctl.v1alpha1.models.device_features import DeviceFeatures
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -39,7 +40,8 @@ class CatalogItemVersion(BaseModel):
     skips: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, description="Additional versions that can upgrade directly to this one. Use when stable channel skips intermediate fast-only versions.")
     skip_range: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Semver range of versions that can upgrade directly to this one. Use for z-stream updates or hotfixes.", alias="skipRange")
     deprecation: Optional[CatalogItemDeprecation] = None
-    __properties: ClassVar[List[str]] = ["config", "configSchema", "readme", "version", "references", "channels", "replaces", "skips", "skipRange", "deprecation"]
+    device_features: Optional[DeviceFeatures] = Field(default=None, description="Device feature requirements that a target device must satisfy for this version to be considered compatible.", alias="deviceFeatures")
+    __properties: ClassVar[List[str]] = ["config", "configSchema", "readme", "version", "references", "channels", "replaces", "skips", "skipRange", "deprecation", "deviceFeatures"]
 
     @field_validator('version')
     def version_validate_regular_expression(cls, value):
@@ -64,8 +66,8 @@ class CatalogItemVersion(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*$", value):
-            raise ValueError(r"must validate the regular expression /^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*$/")
+        if not re.match(r"^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*( *\|\| *[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*)*$", value):
+            raise ValueError(r"must validate the regular expression /^[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*( *\|\| *[>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?( [>=<~^]*[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9a-zA-Z.-]+)?(\+[0-9a-zA-Z.-]+)?)*)*$/")
         return value
 
     model_config = ConfigDict(
@@ -110,6 +112,9 @@ class CatalogItemVersion(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of deprecation
         if self.deprecation:
             _dict['deprecation'] = self.deprecation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of device_features
+        if self.device_features:
+            _dict['deviceFeatures'] = self.device_features.to_dict()
         return _dict
 
     @classmethod
@@ -131,7 +136,8 @@ class CatalogItemVersion(BaseModel):
             "replaces": obj.get("replaces"),
             "skips": obj.get("skips"),
             "skipRange": obj.get("skipRange"),
-            "deprecation": CatalogItemDeprecation.from_dict(obj["deprecation"]) if obj.get("deprecation") is not None else None
+            "deprecation": CatalogItemDeprecation.from_dict(obj["deprecation"]) if obj.get("deprecation") is not None else None,
+            "deviceFeatures": DeviceFeatures.from_dict(obj["deviceFeatures"]) if obj.get("deviceFeatures") is not None else None
         })
         return _obj
 
