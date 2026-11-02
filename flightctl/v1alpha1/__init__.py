@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 
 # Define package exports
 __all__ = [
@@ -140,4 +140,3 @@ from flightctl.v1alpha1.models.vulnerability_list import VulnerabilityList as Vu
 from flightctl.v1alpha1.models.vulnerability_severity_summary import VulnerabilitySeveritySummary as VulnerabilitySeveritySummary
 from flightctl.v1alpha1.models.vulnerability_source import VulnerabilitySource as VulnerabilitySource
 from flightctl.v1alpha1.models.vulnerability_summary_response import VulnerabilitySummaryResponse as VulnerabilitySummaryResponse
-

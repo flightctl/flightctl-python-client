@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 
 # Define package exports
 __all__ = [
@@ -146,4 +146,3 @@ from flightctl.imagebuilder.models.object_meta import ObjectMeta as ObjectMeta
 from flightctl.imagebuilder.models.patch_request_inner import PatchRequestInner as PatchRequestInner
 from flightctl.imagebuilder.models.resource_kind import ResourceKind as ResourceKind
 from flightctl.imagebuilder.models.status import Status as Status
-

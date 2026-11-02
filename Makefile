@@ -1,6 +1,6 @@
 # Python package version. Override on generate:
-#   make generate-client VERSION=1.4.0
-VERSION ?= 1.4.0
+#   make generate-client VERSION=1.4.1
+VERSION ?= 1.4.1
 GENERATOR_VERSION = 7.17.0
 COMMON_PROPS = packageName=flightctl,useOneOfDiscriminatorLookup=true,packageVersion=$(VERSION),removeEnumValuePrefix=false
 GIT_USER = flightctl
